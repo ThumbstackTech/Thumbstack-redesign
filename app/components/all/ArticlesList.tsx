@@ -134,7 +134,7 @@ export default function ArticlesList() {
           </div>
 
           {/* Top decorative line */}
-          <div className="absolute top-0 right-0 w-[35%] h-[1px] bg-black hidden lg:block" />
+          <div className="absolute -top-10 right-0 w-[35%] h-[1px] bg-black hidden lg:block" />
         </div>
 
         {/* ── Interactive List + Image ── */}

@@ -16,6 +16,9 @@ import ArticlesList from "./components/all/ArticlesList";
 import HeroWork from "./components/all/HeroWork";
 import AboutHero from "./components/all/AboutHero";
 import WorkInfo from "./components/all/WorkInfo";
+import Team from "./components/all/Team";
+import CTASection from "./components/all/CTASection";
+import FooterCTA from "./components/all/FooterCTA";
 
 import { fetchStrapi } from "./lib/strapi";
 
@@ -39,6 +42,9 @@ export default async function Home() {
       <Info />
       <WorkInfo />
       <AboutHero />
+      <Team />
+      <CTASection />
+      <FooterCTA />
       <LetsTalk />
       <Footer />
     </div>
