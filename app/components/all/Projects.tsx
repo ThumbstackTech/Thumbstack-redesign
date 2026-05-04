@@ -128,9 +128,10 @@ function ProjectCard({
         </AnimatePresence>
 
         <div
-          className={`flex-1 min-h-0 relative flex gap-4 md:gap-8 pl-5 md:pl-[120px] pr-5 md:pr-10 pt-4 md:pt-6 pb-4 overflow-hidden ${hovering && !modal ? "cursor-none" : ""}`}
+          className={`flex-1 min-h-0 relative flex flex-col md:flex-row gap-6 md:gap-12 px-4 md:px-8 lg:pl-[110px] lg:pr-12 pt-4 md:pt-8 pb-4 overflow-hidden ${hovering && !modal ? "cursor-none" : ""}`}
         >
-          <div className="relative w-[48%] h-[115%] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] border border-white/5 z-20 pointer-events-none">
+          {/* Main Mockup Container - Scales better for all screens */}
+          <div className="relative w-full md:w-[50%] lg:w-[55%] h-[45vh] md:h-full lg:h-[110%] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] border border-white/5 z-20 pointer-events-none self-center md:self-auto">
             <Image
               src={project.images.main}
               alt={project.images.mainAlt}
@@ -141,7 +142,8 @@ function ProjectCard({
             />
           </div>
 
-          <div className="flex gap-4 md:gap-6 flex-1 min-w-0 h-[115%] relative overflow-hidden pointer-events-none justify-center">
+          {/* Side Mockups Container - Better scaling and alignment */}
+          <div className="flex gap-4 md:gap-6 flex-1 min-w-0 h-[30vh] md:h-full lg:h-[110%] relative overflow-hidden pointer-events-none justify-center">
             {(() => {
               const displayImages = project.images.sideImages ||
                 [project.images.sideTop, project.images.sideBot].filter((img): img is SideImage => !!img);
@@ -160,7 +162,7 @@ function ProjectCard({
                         </div>
                       ))}
                     </div>
-                    <div className="flex flex-col gap-4 md:gap-6 animate-[marquee-y-down_30s_linear_infinite] w-1/2 mt-[-100px]">
+                    <div className="flex flex-col gap-4 md:gap-6 animate-[marquee-y-down_30s_linear_infinite] w-1/2 mt-[-100px] md:mt-[-150px]">
                       {col2.concat(col2).map((img, idx) => (
                         <div key={`col2-${idx}`} className="relative w-full aspect-[4/5] flex-shrink-0">
                           <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />
@@ -172,7 +174,7 @@ function ProjectCard({
               }
 
               return (
-                <div className="flex flex-col gap-4 md:gap-6 animate-[marquee-y-up_30s_linear_infinite] w-full">
+                <div className="flex flex-col gap-4 md:gap-6 animate-[marquee-y-up_30s_linear_infinite] w-full max-w-[400px]">
                   {displayImages.concat(displayImages).map((img, idx) => (
                     <div key={idx} className="relative w-full aspect-[4/5] md:aspect-square flex-shrink-0 pointer-events-none">
                       <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />
@@ -189,7 +191,7 @@ function ProjectCard({
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0, opacity: 0 }}
-                className="fixed pointer-events-none z-[100] w-16 h-16 md:w-24 md:h-24 rounded-full flex items-center justify-center font-medium text-[12px] md:text-[16px] shadow-2xl select-none will-change-transform"
+                className="fixed pointer-events-none z-[100] md:w-24 md:h-24 rounded-full flex items-center justify-center font-medium text-[16px] shadow-2xl select-none will-change-transform hidden md:flex"
                 style={{
                   left: smoothX,
                   top: smoothY,
@@ -206,8 +208,9 @@ function ProjectCard({
           </AnimatePresence>
         </div>
 
+        {/* Info Bar - Optimized for ALL screen sizes */}
         <div
-          className="flex-shrink-0 z-40 cursor-auto ml-0 md:ml-[90px] mr-0 md:mr-12 mb-8 px-4 md:px-6 py-6 md:h-[173px] w-full max-w-[1394px] md:rounded-t-[24px] md:rounded-b-none border-t border-white/10 flex items-center justify-center overflow-hidden"
+          className="flex-shrink-0 z-40 cursor-auto mx-4 md:ml-[90px] md:mr-8 lg:mr-12 mb-6 md:mb-10 px-4 md:px-8 py-5 md:py-8 md:h-auto min-h-[140px] md:min-h-[160px] w-[calc(100%-2rem)] md:w-[calc(100%-120px)] lg:w-[calc(100%-150px)] max-w-[1400px] rounded-2xl md:rounded-t-[32px] md:rounded-b-none border border-white/10 flex items-center justify-center overflow-hidden self-center md:self-auto"
           style={{
             backgroundColor:
               project.id === "bft"
@@ -218,14 +221,14 @@ function ProjectCard({
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="w-full max-w-[1472px] md:h-[110px] flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-[48px]">
-            <div className="w-full min-w-0 md:max-w-[1016px] md:h-[110px] flex flex-col items-start gap-4">
-              <div className="flex items-start gap-3 md:gap-6">
+          <div className="w-full max-w-[1300px] flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-12">
+            <div className="flex flex-col items-start gap-2 md:gap-4">
+              <div className="flex flex-wrap items-start gap-2 md:gap-4">
                 {project.tags.map((t) => (
                   <span
                     key={t}
-                    className="h-[42px] px-[18px] border border-white rounded-[12px] text-white text-[14px] font-medium leading-[30px] tracking-[-0.02em] flex items-center justify-center"
-                    style={{ fontFamily: "var(--font-delight)" }}
+                    className="h-[32px] md:h-[40px] px-3 md:px-5 border border-white/40 rounded-full text-white text-[11px] md:text-[14px] font-medium flex items-center justify-center whitespace-nowrap"
+                    style={{ fontFamily: "var(--font-satoshi)" }}
                   >
                     {t}
                   </span>
@@ -233,17 +236,17 @@ function ProjectCard({
               </div>
 
               <h3
-                className="text-white tracking-[-0.02em] text-[28px] md:text-[32px] leading-[1.2] md:leading-[52px] font-medium"
+                className="text-white tracking-[-0.01em] text-[24px] md:text-[32px] lg:text-[40px] leading-tight font-medium"
                 style={{ fontFamily: "var(--font-delight)" }}
               >
                 {project.name}
               </h3>
             </div>
 
-            <div className="w-full md:w-auto md:max-w-[460px] md:h-[72px] flex items-center gap-3 md:gap-[2px] justify-start md:justify-end flex-wrap md:flex-nowrap">
+            <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto">
               <Link
                 href={project.caseStudyUrl}
-                className="w-[184px] h-[50px] bg-white rounded-[14px] px-5 flex items-center justify-center text-[14px] leading-[1] font-medium text-[#0F1D07] whitespace-nowrap shrink-0"
+                className="flex-1 md:flex-none h-[48px] md:h-[56px] md:w-[180px] bg-white rounded-xl flex items-center justify-center text-[13px] md:text-[14px] font-bold text-[#0F1D07] hover:bg-white/90 transition-all shadow-xl"
               >
                 Read Case Study
               </Link>
@@ -251,11 +254,11 @@ function ProjectCard({
               <Link
                 href={project.websiteUrl}
                 target="_blank"
-                className="w-[204px] h-[56px] rounded-[20px] px-3 flex items-center justify-center gap-2 text-white text-[14px] leading-[1] font-bold whitespace-nowrap hover:opacity-80 transition-opacity shrink-0"
+                className="flex-1 md:flex-none h-[48px] md:h-[56px] md:w-[180px] rounded-xl flex items-center justify-center gap-2 text-white text-[13px] md:text-[14px] font-bold hover:bg-white/10 transition-all border border-white/20"
               >
-                Visit Website
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 19L19 5M19 5V19M19 5H5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                Visit Site
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 19L19 5M19 5V19M19 5H5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
             </div>

@@ -11,10 +11,13 @@ export default function Sidebar() {
     <>
       {/* Desktop Sidebar - Hidden on mobile */}
       <aside 
-        className="hidden sm:flex fixed top-0 left-0 h-full w-[53px] bg-[#0F1D07] border-r border-[rgba(82,80,80,0.32)] hover:bg-sidebar-hover transition-colors duration-300 z-40 flex-col justify-between items-center py-8 group/sidebar"
+        onClick={() => setMenuOpen(true)}
+        className={`hidden sm:flex fixed top-0 left-0 h-full w-[53px] hover:w-[75px] transition-all duration-300 ease-out z-40 flex-col justify-between items-center py-8 group/sidebar cursor-pointer ${
+          menuOpen ? 'bg-transparent border-none' : 'bg-[#0F1D07] border-r border-[rgba(82,80,80,0.32)] hover:bg-[#3145DD]'
+        }`}
       >
-        <div className="flex-1 flex flex-col items-center justify-start mt-8 gap-[300px]">
-          <Link href="/" className="mt-8">
+        <div className={`flex-1 flex flex-col items-center justify-start mt-8 gap-[300px] w-full pointer-events-none transition-opacity duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`}>
+          <Link href="/" className="mt-8 pointer-events-auto">
             <h1 
               className="text-[#95E7D3] tracking-[-0.02em] rotate-90 whitespace-nowrap cursor-pointer hover:text-white transition-colors duration-300 flex items-end text-center"
               style={{
@@ -29,7 +32,7 @@ export default function Sidebar() {
           </Link>
           
           <a href="mailto:hello@thumbstack.co" 
-             className="text-white rotate-90 whitespace-nowrap opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 underline"
+             className="text-white rotate-90 whitespace-nowrap opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 underline pointer-events-auto"
              style={{
                fontFamily: "var(--font-satoshi)",
                fontWeight: 400,
@@ -41,9 +44,9 @@ export default function Sidebar() {
           </a>
         </div>
 
-        <div className="flex-none mb-8">
+        <div className={`flex-none mb-8 transition-opacity duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`}>
           <button
-            onClick={() => setMenuOpen(true)}
+            onClick={(e) => { e.stopPropagation(); setMenuOpen(true); }}
             className="relative w-[25px] h-[25px] cursor-pointer focus:outline-none group block"
             suppressHydrationWarning
           >
@@ -73,8 +76,20 @@ export default function Sidebar() {
 
         {/* Left Pane - Navigation */}
         <div className="bg-sidebar h-full w-full flex flex-col p-4 sm:p-6 md:p-8 lg:p-10 relative overflow-y-auto scrollbar-hide" onClick={(e) => e.stopPropagation()}>
-          {/* Top Logo - Pushed to top-left corner */}
-          <div className="absolute top-4 sm:top-8 left-4 sm:left-8">
+          
+          {/* Close Button - Matches the open buttons' zones */}
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-4 sm:top-auto sm:bottom-12 left-4 sm:left-4 text-white hover:text-mint p-2 transition-colors cursor-pointer z-50"
+            suppressHydrationWarning
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {/* Top Logo */}
+          <div className="absolute top-6 sm:top-10 left-4 sm:left-10">
             <Link href="/">
               <h2 className="text-mint font-bold text-lg sm:text-xl tracking-tight cursor-pointer hover:text-white transition-colors">
                 Thumbstack.
@@ -83,7 +98,7 @@ export default function Sidebar() {
           </div>
 
           {/* Center Links - Typography matching Nohemi spec */}
-          <nav className="flex flex-col gap-2 mt-16 sm:mt-20 mb-auto pl-4 sm:pl-8 md:pl-24">
+          <nav className="flex flex-col gap-2 mt-20 sm:mt-24 mb-auto pl-4 sm:pl-8 md:pl-24">
             {[
               { name: "Fields Of Play", href: "/#fields-of-play" },
               { name: "Our Work", href: "/our-work" },
@@ -106,17 +121,7 @@ export default function Sidebar() {
           </nav>
 
           {/* Bottom Controls */}
-          <div className="flex justify-between items-end w-full mt-auto relative h-12 gap-4">
-            {/* Close Button - Pushed to bottom-left corner */}
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="text-white hover:text-mint p-2 transition-colors cursor-pointer absolute bottom-2 left-2"
-              suppressHydrationWarning
-            >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+          <div className="flex justify-end items-end w-full mt-auto relative h-12 gap-4">
 
             {/* Socials - Pushed to bottom-right corner */}
             <div className="flex gap-2 sm:gap-4 text-white absolute bottom-2 right-2">
