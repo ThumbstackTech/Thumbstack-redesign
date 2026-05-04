@@ -19,6 +19,28 @@ export default function Info() {
         }}
       />
 
+      {/* Central White Glow Effect - "In between" */}
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-40"
+        style={{
+          width: "1200px",
+          height: "1200px",
+          background: "radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%)",
+          filter: "blur(150px)",
+          zIndex: 0
+        }}
+      />
+
+      {/* Atmospheric Blur Layer - Figma spec */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[1]"
+        style={{
+          background: "rgba(255, 255, 255, 0.02)",
+          backdropFilter: "blur(249.04428100585938px)",
+          WebkitBackdropFilter: "blur(249.04428100585938px)",
+        }}
+      />
+
       <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 h-full flex items-center">
         {/* Text Container - Frame 2087326471 */}
         <div className="flex flex-col items-start gap-[12px] w-full max-w-[899px]">
