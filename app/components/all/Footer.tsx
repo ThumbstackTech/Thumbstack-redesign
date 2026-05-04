@@ -84,7 +84,7 @@ export default function Footer() {
               <div key={office.city} className="flex flex-col gap-2">
                 <p className="text-white text-sm font-bold">{office.city}</p>
                 <a href={`tel:${office.phone}`} className="text-white text-sm font-bold underline underline-offset-4 decoration-white/30 hover:decoration-white">{office.phone}</a>
-                <p className="text-white text-[11px] font-bold leading-relaxed max-w-[280px] mt-1">{office.address}</p>
+                <p className="text-white text-[11px] leading-relaxed max-w-[280px] mt-1">{office.address}</p>
                 <a href={`mailto:${office.email}`} className="text-white text-[11px] font-bold hover:text-white transition-colors">{office.email}</a>
               </div>
             ))}

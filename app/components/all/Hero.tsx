@@ -19,12 +19,12 @@ export default function Hero() {
           Our Services
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6227_82053)">
-              <path d="M7.49985 22.5L22.4998 7.5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10.3123 7.5H22.4998V19.6875" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M7.49985 22.5L22.4998 7.5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M10.3123 7.5H22.4998V19.6875" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </g>
             <defs>
               <clipPath id="clip0_6227_82053">
-                <rect width="30" height="30" fill="white"/>
+                <rect width="30" height="30" fill="white" />
               </clipPath>
             </defs>
           </svg>
@@ -38,7 +38,7 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 600,
-            fontSize: "clamp(2.5rem, 9.5vw, 7rem)",
+            fontSize: "clamp(2.5rem, 8.5vw, 8rem)",
             letterSpacing: "-0.01em", // -1% spacing as requested
             color: "#3145DD"
           }}
@@ -114,12 +114,12 @@ export default function Hero() {
           View Our Work
           <svg width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6227_82077)">
-              <path d="M21.2124 10.6068V31.82" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M29.8307 23.2017L21.2128 31.8195L12.595 23.2017" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M21.2124 10.6068V31.82" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M29.8307 23.2017L21.2128 31.8195L12.595 23.2017" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </g>
             <defs>
               <clipPath id="clip0_6227_82077">
-                <rect width="30" height="30" fill="white" transform="translate(42.4264 21.2134) rotate(135)"/>
+                <rect width="30" height="30" fill="white" transform="translate(42.4264 21.2134) rotate(135)" />
               </clipPath>
             </defs>
           </svg>

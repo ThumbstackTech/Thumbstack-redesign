@@ -109,12 +109,12 @@ export default function FieldsOfPlay() {
             </span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_6227_81067)">
-                <path d="M5 15L15 5" stroke="#0F1D07" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6.875 5H15V13.125" stroke="#0F1D07" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M5 15L15 5" stroke="#0F1D07" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6.875 5H15V13.125" stroke="#0F1D07" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </g>
               <defs>
                 <clipPath id="clip0_6227_81067">
-                  <rect width="20" height="20" fill="white"/>
+                  <rect width="20" height="20" fill="white" />
                 </clipPath>
               </defs>
             </svg>
@@ -144,102 +144,109 @@ export default function FieldsOfPlay() {
 
         {/* Interactive List (Restored Layout Behavior) */}
         <div
-          className="lg:absolute lg:left-[calc(50%_-_1391px/2_+_0.5px)] lg:top-[420px] w-full max-w-[1391px] flex flex-col border-t border-black isolation-isolate"
+          className="lg:absolute lg:left-[calc(50%_-_1391px/2_+_0.5px)] lg:top-[420px] w-full max-w-[1391px] flex flex-col isolation-isolate"
         >
-          {fields.map((field) => (
-            <div
-              key={field.id}
-              onMouseEnter={() => handleMouseEnter(field.id)}
-              onMouseLeave={handleMouseLeave}
-              className={`w-full group cursor-pointer transition-all duration-500 ease-in-out relative flex flex-col md:flex-row items-center ${activeItem === field.id
-                ? 'py-8 sm:py-12 md:py-14 before:content-[""] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] z-20'
-                : 'bg-transparent py-6 md:py-8 border-b border-black'
-                }`}
-            >
-              <div className="flex flex-col gap-2 w-full md:w-1/2 md:pl-[104px]">
-                <h3
-                  className={`transition-colors duration-300 ${activeItem === field.id ? 'text-white' : 'text-[#0F1D07]'}`}
-                  style={{
-                    fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
-                    fontWeight: 400,
-                    fontSize: "28px",
-                    lineHeight: "44px",
-                    letterSpacing: "-0.02em"
-                  }}
-                >
-                  {field.title}
-                </h3>
+          {/* Top border — Figma Vector 5 */}
+          <div style={{ width: "100%", height: 0, borderTop: "1px solid #000000", flexShrink: 0 }} />
 
-                <AnimatePresence>
-                  {activeItem === field.id && (
-                    <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="text-white overflow-hidden whitespace-nowrap"
+          {fields.map((field, index) => {
+            return (
+              <div key={field.id}>
+                <div
+                  onMouseEnter={() => handleMouseEnter(field.id)}
+                  onMouseLeave={handleMouseLeave}
+                  className={`w-full group cursor-pointer transition-all duration-500 ease-in-out relative flex flex-col md:flex-row items-center ${activeItem === field.id
+                    ? 'py-8 sm:py-12 md:py-14 before:content-[""] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] border-none shadow-2xl z-20'
+                    : 'bg-transparent py-6 md:py-8'
+                    }`}
+                >
+                  <div className="flex flex-col gap-2 w-full md:w-1/2 md:pl-[104px]">
+                    <h3
+                      className={`transition-colors duration-300 ${activeItem === field.id ? 'text-white' : 'text-[#0F1D07]'}`}
                       style={{
-                        fontFamily: "var(--font-satoshi)",
+                        fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
                         fontWeight: 400,
-                        fontSize: "16px",
-                        lineHeight: "39px"
+                        fontSize: "28px",
+                        lineHeight: "44px",
+                        letterSpacing: "-0.02em"
                       }}
                     >
-                      {field.subtitle}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
+                      {field.title}
+                    </h3>
 
-              {/* Image Reveal (Visible when active, positioned like original) */}
-              <AnimatePresence>
-                {activeItem === field.id && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 50, scale: 0.9 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: 30, scale: 0.95 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="md:absolute right-4 lg:right-0 top-1/2 md:-translate-y-1/2 w-full md:w-[45%] flex justify-end mt-8 md:mt-0 pointer-events-none"
-                  >
-                    <div
-                      className="relative w-full aspect-[4/5] max-w-[491px] max-h-[610px] rounded-[16px] overflow-hidden shadow-2xl pointer-events-auto"
-                      style={{ left: "-10px", top: "-3px" }}
-                      onMouseMove={handleMouseMove}
-                    >
-                      <Image
-                        src={field.image}
-                        alt={field.title}
-                        fill
-                        className="object-cover"
-                        priority
-                      />
+                    <AnimatePresence>
+                      {activeItem === field.id && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="text-white/70 overflow-hidden whitespace-nowrap"
+                          style={{
+                            fontFamily: "var(--font-satoshi)",
+                            fontWeight: 400,
+                            fontSize: "16px",
+                            lineHeight: "39px"
+                          }}
+                        >
+                          {field.subtitle}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
 
-                      {/* View Badge */}
+                  {/* Image Reveal */}
+                  <AnimatePresence>
+                    {activeItem === field.id && (
                       <motion.div
-                        className="absolute w-[89px] h-[89px] bg-[#95E7D3]/87 rounded-full flex items-center justify-center shadow-lg pointer-events-none"
-                        style={{
-                          x: smoothX,
-                          y: smoothY,
-                          left: 0,
-                          top: 0,
-                          translateX: "-50%",
-                          translateY: "-50%",
-                          fontFamily: "var(--font-nohemi)",
-                          color: "#0F1D07"
-                        }}
+                        initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: 30, scale: 0.95 }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        className="md:absolute right-4 lg:right-0 top-1/2 md:-translate-y-1/2 w-full md:w-[45%] flex justify-end mt-8 md:mt-0 pointer-events-none"
                       >
-                        <span style={{ fontSize: "16.4px", fontWeight: 400 }}>View</span>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                        <div
+                          className="relative w-full aspect-[4/5] max-w-[491px] max-h-[610px] rounded-[16px] overflow-hidden shadow-2xl pointer-events-auto"
+                          style={{ left: "-10px", top: "-3px" }}
+                          onMouseMove={handleMouseMove}
+                        >
+                          <Image
+                            src={field.image}
+                            alt={field.title}
+                            fill
+                            className="object-cover"
+                            priority
+                          />
 
-              {/* Bottom Line (Vector 5) - Bolder */}
-              <div
-                className={`absolute bottom-0 left-0 w-full border-t-2 border-black transition-opacity ${activeItem === field.id ? 'opacity-0' : 'opacity-100'}`}
-              />
-            </div>
-          ))}
+                          {/* View Badge */}
+                          <motion.div
+                            className="absolute w-[89px] h-[89px] bg-[#95E7D3]/87 rounded-full flex items-center justify-center shadow-lg pointer-events-none"
+                            style={{
+                              x: smoothX,
+                              y: smoothY,
+                              left: 0,
+                              top: 0,
+                              translateX: "-50%",
+                              translateY: "-50%",
+                              fontFamily: "var(--font-nohemi)",
+                              color: "#0F1D07"
+                            }}
+                          >
+                            <span style={{ fontSize: "16.4px", fontWeight: 400 }}>View</span>
+                          </motion.div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Bottom Line (Vector 5) */}
+                  <div
+                    style={{ width: "100%", height: 0, borderTop: "1px solid #000000", flexShrink: 0 }}
+                    className={`absolute bottom-0 left-0 transition-opacity ${activeItem === field.id ? 'opacity-0' : 'opacity-100'}`}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
