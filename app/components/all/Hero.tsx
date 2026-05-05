@@ -6,11 +6,11 @@ import Sidebar from "../layout/Sidebar";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen w-full flex flex-col justify-between pt-24 md:pt-40 pb-12 px-6 md:px-12 lg:px-24 snap-start relative bg-white md:pl-[90px] overflow-hidden">
+    <section className="min-h-screen w-full flex flex-col justify-center pt-24 md:pt-32 pb-12 px-6 md:px-12 lg:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-hidden gap-12 md:gap-24">
       <Sidebar />
 
       {/* Top row */}
-      <div className="flex justify-between items-start w-full max-w-[1400px] mx-auto pt-0 relative z-10">
+      <div className="flex justify-between items-start w-full max-w-[1600px] mx-auto pt-0 relative z-10">
         <Link
           href="/services"
           className="text-[#0F1D07] font-semibold text-[14px] md:text-[18px] flex items-center gap-2 hover:opacity-70 transition-opacity"
@@ -32,13 +32,13 @@ export default function Hero() {
       </div>
 
       {/* Main typography */}
-      <div className="w-full max-w-[1400px] mx-auto flex-1 flex flex-col justify-start relative py-6 mt-4">
+      <div className="w-full max-w-[1600px] mx-auto flex flex-col justify-center relative py-6 mt-4">
         <h1
           className="leading-[1.1] max-w-[1300px] select-none"
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 600,
-            fontSize: "clamp(2rem, 8vw, 6em)",
+            fontSize: "clamp(2rem, 9vw, 6.97em)",
             letterSpacing: "-0.01em",
             color: "#3145DD"
           }}
@@ -99,7 +99,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom CTA (View Our Work) */}
-      <div className="w-full max-w-[1400px] mx-auto flex justify-center pb-4 md:pb-12 relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto flex justify-center pb-4 md:pb-12 relative z-10">
         <a
           href="#work"
           className="text-[#0F1D07] flex items-center gap-4 hover:opacity-70 transition-opacity"

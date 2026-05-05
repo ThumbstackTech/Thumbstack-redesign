@@ -361,7 +361,7 @@ export default function NewsAndInsightsGrid() {
 
   return (
     <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-[105px]">
-      <div className="max-w-[1400px] mx-auto flex flex-col gap-[68px]">
+      <div className="max-w-[1600px] mx-auto flex flex-col gap-[68px]">
 
         {/* Filter Tabs */}
         <div className="flex flex-col gap-[45px]">

@@ -5,7 +5,7 @@ export default function FooterCTA() {
     <footer className="min-h-[100svh] w-full flex flex-col snap-start relative">
       {/* Top Half: Mint Green */}
       <div className="flex-1 w-full bg-mint flex items-center justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 lg:px-24">
-        <div className="w-full max-w-[1400px] flex flex-col items-center">
+        <div className="w-full max-w-[1600px] flex flex-col items-center">
           <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[8.5vw] font-bold tracking-tighter text-sidebar text-center leading-[0.9]">
             Build Your Stack.
           </h2>
@@ -27,7 +27,7 @@ export default function FooterCTA() {
         <div className="absolute w-[60vw] h-[60vw] rounded-full bg-white/[0.02] -bottom-[30vw] -right-[20vw] pointer-events-none"></div>
         <div className="absolute w-[40vw] h-[40vw] rounded-full bg-white/[0.02] -top-[20vw] -left-[10vw] pointer-events-none"></div>
 
-        <div className="w-full max-w-[1400px] flex flex-col items-center z-10">
+        <div className="w-full max-w-[1600px] flex flex-col items-center z-10">
           <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] font-bold tracking-tighter text-white text-center leading-[0.9]">
             Lets Create<span className="text-mint">.</span>
           </h2>

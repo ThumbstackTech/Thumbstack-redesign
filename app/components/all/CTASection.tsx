@@ -34,7 +34,8 @@ export default function CTASection() {
               fontWeight: 400,
               fontSize: "16px",
               lineHeight: "30px",
-              width: '426px'
+              maxWidth: '426px',
+              width: '100%'
             }}
           >
             Let&apos;s chat about your idea, your product, or your next launch.

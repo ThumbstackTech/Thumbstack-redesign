@@ -50,6 +50,7 @@ const articles = [
 
 export default function ArticlesList() {
   const [activeItem, setActiveItem] = useState<number | null>(null);
+  const [hoveringImageId, setHoveringImageId] = useState<number | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const mouseX = useMotionValue(0);
@@ -60,7 +61,7 @@ export default function ArticlesList() {
 
   const handleMouseEnter = (id: number) => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-    hoverTimeoutRef.current = setTimeout(() => setActiveItem(id), 200);
+    hoverTimeoutRef.current = setTimeout(() => setActiveItem(id), 50);
   };
 
   const handleMouseLeave = () => {
@@ -76,8 +77,8 @@ export default function ArticlesList() {
   // activeArticle used for future extensions
 
   return (
-    <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
+    <section onMouseLeave={() => setActiveItem(null)} className="w-full bg-white py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto">
 
         {/* ── Header ── */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end w-full mb-16 relative gap-6">
@@ -140,15 +141,20 @@ export default function ArticlesList() {
         {/* ── Interactive List + Image ── */}
         <div className="relative w-full flex flex-col border-t border-black">
           {articles.map((article) => (
-            <div
+            <motion.div
               key={article.id}
               onMouseEnter={() => handleMouseEnter(article.id)}
               onMouseLeave={handleMouseLeave}
               onClick={() => setActiveItem(article.id)}
-              className={`w-full group cursor-pointer transition-all duration-500 ease-in-out relative ${
+              animate={{
+                paddingTop: activeItem === article.id ? "32px" : "24px",
+                paddingBottom: activeItem === article.id ? "32px" : "24px",
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className={`w-full group cursor-pointer relative ${
                 activeItem === article.id
-                  ? "py-8 md:py-12 before:content-[''] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] border-none shadow-2xl z-20"
-                  : "bg-transparent py-6 md:py-8 border-b border-black"
+                  ? "before:content-[''] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] border-none shadow-2xl z-20"
+                  : "bg-transparent border-b border-black"
               }`}
             >
               <div className="flex flex-col items-start w-full md:w-1/2 gap-1">
@@ -204,6 +210,8 @@ export default function ArticlesList() {
                     <div
                       className="relative w-full md:w-[491px] aspect-[4/5] md:h-[400px] flex-shrink-0 pointer-events-auto rounded-2xl overflow-hidden"
                       onMouseMove={handleMouseMove}
+                      onMouseEnter={() => setHoveringImageId(article.id)}
+                      onMouseLeave={() => setHoveringImageId(null)}
                     >
                       {/* Image */}
                       <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 z-20">
@@ -265,25 +273,32 @@ export default function ArticlesList() {
                       </div>
 
                       {/* View Badge — mouse follow */}
-                      <motion.div
-                        className="absolute left-0 top-0 w-[89px] h-[89px] rounded-full flex justify-center items-center font-bold text-[#0F1D07] text-base cursor-pointer shadow-2xl z-50 pointer-events-none will-change-transform"
-                        style={{
-                          fontFamily: "var(--font-nohemi)",
-                          background: "rgba(149, 231, 211, 0.87)",
-                          boxShadow: "-32px -22px 16px rgba(0,0,0,0.01), -18px -13px 13px rgba(0,0,0,0.03), -8px -6px 10px rgba(0,0,0,0.06), -2px -1px 5px rgba(0,0,0,0.06)",
-                          x: smoothX,
-                          y: smoothY,
-                          translateX: "-50%",
-                          translateY: "-50%",
-                        }}
-                      >
-                        View
-                      </motion.div>
+                      <AnimatePresence>
+                        {hoveringImageId === article.id && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            className="absolute left-0 top-0 w-[89px] h-[89px] rounded-full flex justify-center items-center font-bold text-[#0F1D07] text-base cursor-pointer shadow-2xl z-50 pointer-events-none will-change-transform"
+                            style={{
+                              fontFamily: "var(--font-nohemi)",
+                              background: "rgba(149, 231, 211, 0.87)",
+                              boxShadow: "-32px -22px 16px rgba(0,0,0,0.01), -18px -13px 13px rgba(0,0,0,0.03), -8px -6px 10px rgba(0,0,0,0.06), -2px -1px 5px rgba(0,0,0,0.06)",
+                              x: smoothX,
+                              y: smoothY,
+                              translateX: "-50%",
+                              translateY: "-50%",
+                            }}
+                          >
+                            View
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

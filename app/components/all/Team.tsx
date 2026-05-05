@@ -25,13 +25,13 @@ const teamMembers = [
 export default function Team() {
   return (
     <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-[100px]">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1600px] mx-auto">
         {/* Header */}
         <div
           className="flex flex-col md:flex-row items-end gap-8 md:gap-[218px] mb-24"
           style={{
             width: "100%",
-            maxWidth: "1203px",
+            maxWidth: "1400px",
             height: "auto",
             minHeight: "150px",
             margin: "0 auto 6rem auto"

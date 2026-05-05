@@ -128,7 +128,7 @@ function ProjectCard({
         </AnimatePresence>
 
         <div
-          className={`flex-1 min-h-0 relative flex flex-col md:flex-row gap-6 md:gap-12 px-4 md:px-8 lg:pl-[110px] lg:pr-12 pt-4 md:pt-8 pb-4 overflow-hidden ${hovering && !modal ? "cursor-none" : ""}`}
+          className={`flex-1 min-h-0 relative flex flex-col md:flex-row gap-6 md:gap-12 px-4 md:px-8 lg:pl-[110px] lg:pr-12 pt-4 md:pt-8 pb-4 overflow-hidden w-full max-w-[1600px] mx-auto ${hovering && !modal ? "cursor-none" : ""}`}
         >
           {/* Main Mockup Container - Scales better for all screens */}
           <div className="relative w-full md:w-[50%] lg:w-[55%] h-[45vh] md:h-full lg:h-[110%] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] border border-white/5 z-20 pointer-events-none self-center md:self-auto">
@@ -210,7 +210,7 @@ function ProjectCard({
 
         {/* Info Bar - Optimized for ALL screen sizes */}
         <div
-          className="flex-shrink-0 z-40 cursor-auto mx-4 md:ml-[90px] md:mr-8 lg:mr-12 mb-6 md:mb-10 px-4 md:px-8 py-5 md:py-8 md:h-auto min-h-[140px] md:min-h-[160px] w-[calc(100%-2rem)] md:w-[calc(100%-120px)] lg:w-[calc(100%-150px)] max-w-[1400px] rounded-2xl md:rounded-t-[32px] md:rounded-b-none border border-white/10 flex items-center justify-center overflow-hidden self-center md:self-auto"
+          className="flex-shrink-0 z-40 cursor-auto mx-4 md:ml-[90px] md:mr-8 lg:mr-12 mb-6 md:mb-10 px-4 md:px-8 py-5 md:py-8 md:h-auto min-h-[140px] md:min-h-[160px] w-[calc(100%-2rem)] md:w-[calc(100%-120px)] lg:w-[calc(100%-150px)] max-w-[1600px] rounded-2xl md:rounded-t-[32px] md:rounded-b-none border border-white/10 flex items-center justify-center overflow-hidden self-center md:mx-auto"
           style={{
             backgroundColor:
               project.id === "bft"

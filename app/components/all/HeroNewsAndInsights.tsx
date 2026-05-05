@@ -5,19 +5,19 @@ import Sidebar from "../layout/Sidebar";
 
 export default function HeroNewsAndInsights() {
   return (
-    <section className="min-h-[100svh] w-full flex flex-col justify-start items-center pt-[159px] md:pt-[255px] pb-20 md:pb-32 px-8 lg:px-24 snap-start relative bg-[#3145DD] overflow-hidden">
+    <section className="min-h-[100svh] w-full flex flex-col justify-start items-center pt-[200px] md:pt-[350px] pb-20 md:pb-32 px-8 lg:px-24 snap-start relative bg-[#3145DD] md:pl-[90px] md:pr-[90px] overflow-hidden">
       <Sidebar />
 
       {/* Background Decoration - Glowing Oval */}
       <div className="absolute top-1/2 -translate-y-1/2 right-0 md:right-[5%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-white opacity-40 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
-      <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-12 sm:gap-16 relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto flex flex-col gap-12 sm:gap-16 relative z-10">
         {/* Main typography */}
-        <div className="flex flex-col relative z-10 mt-12 md:mt-20">
+        <div className="flex flex-col relative z-10 mt-20 md:mt-32">
           <Link
             href="#"
             className="text-white font-medium flex items-center gap-2 hover:opacity-75 transition-opacity mb-8 md:mb-12"
-            style={{ fontFamily: "var(--font-satoshi)", fontSize: "15px", transform: 'translateY(-1px)' }}
+            style={{ fontFamily: "var(--font-satoshi)", fontSize: "clamp(14px, 1.2vw, 16px)" }}
           >
             Let&apos;s Build Together
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,13 +33,13 @@ export default function HeroNewsAndInsights() {
             </svg>
           </Link>
 
-          <div className="flex flex-col gap-[60px] md:gap-[80px]">
+          <div className="flex flex-col gap-8 md:gap-12">
             <h1
               className="text-white tracking-[-0.04em] max-w-[1200px]"
               style={{
                 fontFamily: "var(--font-delight)",
                 fontWeight: 600,
-                fontSize: "clamp(3rem, 10vw, 130px)",
+                fontSize: "clamp(2.5rem, 8vw, 110px)",
                 lineHeight: "1.1",
                 verticalAlign: "middle"
               }}
@@ -49,16 +49,17 @@ export default function HeroNewsAndInsights() {
             </h1>
 
             <p
-              className="text-white leading-[28px]"
+              className="text-white/90"
               style={{
                 fontFamily: "var(--font-satoshi)",
-                fontWeight: 700,
-                fontSize: "14px",
-                maxWidth: "465px"
+                fontWeight: 500,
+                fontSize: "clamp(14px, 1.2vw, 16px)",
+                lineHeight: "1.6",
+                maxWidth: "600px"
               }}
             >
               We document what we learn — from design sprints to engineering breakthroughs,
-              new project launches, experiments, and <br /> small discoveries that move our work forward.
+              new project launches, experiments, and <br className="hidden md:block" /> small discoveries that move our work forward.
             </p>
           </div>
         </div>

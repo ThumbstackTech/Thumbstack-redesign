@@ -5,10 +5,10 @@ import Sidebar from "../layout/Sidebar";
 
 export default function AboutHero() {
   return (
-    <section className="relative w-full min-h-screen bg-white pt-[140px] pb-24 overflow-hidden md:pl-[90px]">
+    <section className="relative w-full min-h-screen bg-white pt-[140px] pb-24 overflow-hidden md:pl-[90px] md:pr-[90px]">
       <Sidebar />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-[100px] relative">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-[100px] relative">
 
         {/* Subtext - Top Right aligned - Using absolute/flex to match placement */}
         <div className="flex justify-end mb-4">

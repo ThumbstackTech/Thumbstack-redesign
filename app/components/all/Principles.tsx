@@ -110,9 +110,9 @@ export default function Principles() {
   return (
     <section
       ref={containerRef}
-      className="min-h-screen w-full flex flex-col items-center justify-start snap-start relative bg-[#0F1D07] text-white overflow-hidden pt-16 sm:pt-20 pb-0"
+      className="w-full flex flex-col items-center justify-start snap-start relative bg-[#0F1D07] text-white overflow-hidden pt-16 sm:pt-20 pb-0"
     >
-      <div className="w-full max-w-[1400px] px-4 sm:px-6 md:px-8 lg:pl-24 lg:pr-24 flex flex-col z-10 relative">
+      <div className="w-full max-w-[1600px] px-4 sm:px-6 md:px-8 lg:pl-24 lg:pr-24 flex flex-col z-10 relative">
 
         {/* Label */}
         <motion.span
@@ -167,7 +167,7 @@ export default function Principles() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
-          className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 lg:gap-y-16 mb-8"
+          className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 lg:gap-y-16 mb-12"
         >
           {principles.map((p, i) => (
             <motion.div
@@ -213,7 +213,7 @@ export default function Principles() {
       </div>
 
       {/* Enhanced Marquee Banner */}
-      <div className="mt-0 w-full py-4 lg:py-6 bg-sidebar/50 backdrop-blur-sm relative z-20 overflow-hidden">
+      <div className="mt-0 w-full py-4 lg:py-6 bg-transparent relative z-20 overflow-hidden">
         <div className="flex overflow-hidden w-full">
           <motion.div
             animate={{ x: ["0%", "-50%"] }}

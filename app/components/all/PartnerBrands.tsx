@@ -33,72 +33,50 @@ const BRAND_LOGOS = [
 ];
 
 export default function PartnerBrands() {
-  const rowPattern = [8, 7, 6, 5, 3]; // Added 3 just in case there are more
-  const brandRows: string[][] = [];
-  let currentIndex = 0;
-  let patternIndex = 0;
-
-  while (currentIndex < BRAND_LOGOS.length) {
-    const rowSize = rowPattern[patternIndex % rowPattern.length];
-    brandRows.push(BRAND_LOGOS.slice(currentIndex, currentIndex + rowSize));
-    currentIndex += rowSize;
-    patternIndex += 1;
-  }
-
   return (
-    <section className="min-h-[100svh] w-full flex flex-col justify-center items-center py-20 px-8 lg:px-24 snap-start relative bg-white border-t border-gray-100">
-      <div className="w-full max-w-7xl flex flex-col items-center">
+    <section className="w-full flex flex-col items-center py-[100px] px-8 lg:px-24 snap-start relative bg-white overflow-hidden">
+      <div className="w-full max-w-[1602px] flex flex-col items-center">
         
         <h2 
-          className="text-center capitalize mb-24"
+          className="text-center capitalize mb-[40px] md:mb-[64px]"
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 500,
-            fontStyle: 'normal',
-            fontSize: 'clamp(3rem, 8vw, 100.37px)',
-            lineHeight: '147.21px',
-            letterSpacing: '0%',
-            textAlign: 'center',
-            verticalAlign: 'middle',
-            textTransform: 'capitalize',
+            fontSize: 'clamp(32px, 8vw, 100.37px)',
+            lineHeight: '1.2',
+            color: '#0F1D07',
           }}
         >
           Partnered Brands.
         </h2>
 
-        {/* Grid rows: 8, 7, 6, 5 */}
-        <div className="w-full flex flex-col items-center gap-[10px]">
-          {brandRows.map((row, rowIndex) => (
-            <div
-              key={`row-${rowIndex}`}
-              className="w-fit max-w-full flex flex-nowrap justify-center gap-[10px]"
-            >
-              {row.map((logo, index) => {
-                return (
-                  <div
-                    key={`${rowIndex}-${index}`}
-                    className="flex items-center justify-center transition-all duration-300 hover:bg-[#EFEFEF] hover:scale-105 cursor-pointer shadow-sm"
-                    style={{
-                      width: "213px",
-                      height: "109px",
-                      padding: "28px 26px",
-                      background: "#F9F9F9",
-                      borderRadius: "24px"
-                    }}
-                  >
-                    <Image
-                      src={`/TSP/${logo}`}
-                      alt="Partner Brand Logo"
-                      width={120}
-                      height={80}
-                      className="max-h-full max-w-full object-contain"
-                      priority={false}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          ))}
+        {/* 6-column Grid (Desktop), 3-column Grid (Mobile) */}
+        <div className="w-full grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px] md:gap-[24px]">
+          {BRAND_LOGOS.map((logo, index) => {
+            return (
+              <div
+                key={index}
+                className="flex items-center justify-center transition-all duration-300 hover:bg-[#EFEFEF] hover:scale-105 cursor-pointer shadow-sm"
+                style={{
+                  width: "100%",
+                  height: "111px",
+                  padding: "28px 26px",
+                  background: "#F9F9F9",
+                  borderRadius: "24px"
+                }}
+              >
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src={`/TSP/${logo}`}
+                    alt="Partner Brand Logo"
+                    fill
+                    className="object-contain"
+                    priority={index < 12}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

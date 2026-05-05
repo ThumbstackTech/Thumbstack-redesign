@@ -8,20 +8,10 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 function StackCard({ item, idx }: { item: any; idx: number }) {
   return (
     <div
-      className={`flex flex-col gap-4 sm:gap-6 shrink-0 relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group/item
-        ${idx % 2 === 0
-          ? 'w-[280px] sm:w-[400px] md:w-[639px]'
-          : 'w-[240px] sm:w-[320px] md:w-[480px] hover:w-[280px] sm:hover:w-[400px] md:hover:w-[639px]'
-        }
-      `}
+      className="flex flex-col gap-4 sm:gap-6 shrink-0 relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group/item w-[280px] sm:w-[400px] md:w-[639px]"
     >
       {/* Card Image Container */}
-      <div className={`relative rounded-lg sm:rounded-2xl md:rounded-[2rem] overflow-hidden group/card shadow-lg
-        ${idx % 2 === 0
-          ? 'w-[280px] sm:w-[400px] md:w-[639px] h-[200px] sm:h-[300px] md:h-[488px]'
-          : 'w-[240px] sm:w-[320px] md:w-[480px] h-[180px] sm:h-[240px] md:h-[366px] hover:w-[280px] sm:hover:w-[400px] md:hover:w-[639px] hover:h-[200px] sm:hover:h-[300px] md:hover:h-[488px]'
-        }
-      `}>
+      <div className="relative rounded-lg sm:rounded-2xl md:rounded-[2rem] overflow-hidden group/card shadow-lg w-[280px] sm:w-[400px] md:w-[639px] h-[200px] sm:h-[300px] md:h-[488px]">
         <Image
           src={item.image}
           alt={item.title}
@@ -138,7 +128,7 @@ export default function FromTheStack() {
       onMouseLeave={() => setIsHovering(false)}
       className="min-h-screen w-full flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-24 snap-start relative bg-white border-t border-gray-100 overflow-hidden cursor-none"
     >
-      <div className="w-full max-w-[1400px] flex flex-col mb-8 sm:mb-12">
+      <div className="w-full max-w-[1600px] flex flex-col mb-8 sm:mb-12">
         <div className="flex flex-col md:flex-row justify-between items-start w-full gap-6 sm:gap-8">
           <div className="flex flex-col gap-3 sm:gap-4">
             <h2

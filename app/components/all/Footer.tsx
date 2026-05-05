@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-blue snap-start">
       {/* Main Footer Content */}
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-16 pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 md:pb-12 flex flex-col gap-12 md:gap-16">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-16 pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 md:pb-12 flex flex-col gap-12 md:gap-16">
 
         {/* Main 3-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_0.8fr] gap-12 md:gap-16 lg:gap-24">

@@ -92,7 +92,8 @@ export default function ProductDriven() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              onClick={() => setActiveId(isActive ? null : i)}
+              onMouseEnter={() => setActiveId(i)}
+              onMouseLeave={() => setActiveId(null)}
             >
               <div className={`w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-white rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex items-center justify-center p-2 sm:p-3 md:p-4 border border-gray-100 transition-all duration-300 ${isActive ? 'scale-125 shadow-2xl border-blue/20 ring-4 ring-blue/5' : 'hover:scale-110 hover:shadow-xl'}`}>
                 <Image 
@@ -104,17 +105,17 @@ export default function ProductDriven() {
                 />
               </div>
               
-              {isActive && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 12, scale: 1 }}
-                  className="absolute top-full mt-1 sm:mt-2 whitespace-nowrap"
-                >
-                  <span className="text-[8px] sm:text-xs font-bold text-sidebar bg-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-lg border border-gray-100">
-                    {item.name}
-                  </span>
-                </motion.div>
-              )}
+                {isActive && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                    animate={{ opacity: 1, y: 12, scale: 1 }}
+                    className="absolute top-full mt-1 sm:mt-2 whitespace-nowrap z-30"
+                  >
+                    <span className="text-[8px] sm:text-xs font-bold text-sidebar bg-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-lg border border-gray-100">
+                      {item.name}
+                    </span>
+                  </motion.div>
+                )}
             </motion.div>
           );
         })}

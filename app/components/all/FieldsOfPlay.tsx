@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motio
 
 export default function FieldsOfPlay() {
   const [activeItem, setActiveItem] = useState<number | null>(null);
+  const [hoveringImageId, setHoveringImageId] = useState<number | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Motion values for smooth cursor tracking
@@ -54,7 +55,7 @@ export default function FieldsOfPlay() {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     hoverTimeoutRef.current = setTimeout(() => {
       setActiveItem(id);
-    }, 100);
+    }, 50);
   };
 
   const handleMouseLeave = () => {
@@ -68,12 +69,57 @@ export default function FieldsOfPlay() {
   };
 
   return (
-    <section id="fields-of-play" className="min-h-[1137px] w-full flex flex-col items-center bg-white overflow-hidden relative py-20 lg:py-0">
-      {/* Design Frame (1602px width) */}
-      <div className="w-full max-w-[1602px] h-full lg:h-[1137px] relative mx-auto px-6 lg:px-0">
+    <section id="fields-of-play" onMouseLeave={() => setActiveItem(null)} className="min-h-fit lg:min-h-[1137px] w-full flex flex-col items-center bg-white overflow-hidden relative py-12 md:py-20 lg:py-0">
+      
+      {/* ==========================================
+          MOBILE UI (Matches Design Reference)
+          ========================================== */}
+      <div className="lg:hidden w-full px-6 flex flex-col">
+        {/* Top: Let's Build Together */}
+        <div className="flex justify-end w-full mb-4">
+          <div className="flex flex-row items-center gap-[6px]">
+            <span className="text-[#0F1D07] font-bold text-[14px] font-satoshi">Let&apos;s Build Together</span>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+              <path d="M5 15L15 5" stroke="#0F1D07" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M6.875 5H15V13.125" stroke="#0F1D07" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </div>
 
-        {/* We build the remarkable, not the routine */}
-        <div className="lg:absolute lg:left-[104px] lg:top-[247px] mb-8 lg:mb-0">
+        {/* Separator Line */}
+        <div className="w-[110%] -ml-6 h-[1px] bg-black/20 mb-12" />
+
+        {/* Header Block */}
+        <div className="mb-8 flex flex-col gap-4">
+          <h2 className="text-[#0F1D07] font-medium text-[48px] leading-[1.1] font-delight">Fields Of Play</h2>
+          <p className="text-[#0F1D07] font-medium text-[16px] font-satoshi">We build the remarkable, not the routine</p>
+        </div>
+
+        {/* Separator Line */}
+        <div className="w-[110%] -ml-6 h-[1.5px] bg-black mb-0" />
+
+        {/* List */}
+        <div className="flex flex-col">
+          {fields.map((field) => (
+            <div key={field.id} className="w-full py-6 border-b border-black/20 relative flex flex-col gap-2">
+              <h3 className="text-[#0F1D07] font-semibold text-[24px] leading-tight font-delight">{field.title}</h3>
+              <p className="text-black/60 text-[14px] leading-relaxed font-satoshi pr-10">{field.subtitle}</p>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 15L15 5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M6.875 5H15V13.125" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ==========================================
+          DESKTOP UI (Original Version)
+          ========================================== */}
+      <div className="hidden lg:block w-full max-w-[1602px] h-[1137px] relative mx-auto">
+        <div className="absolute left-[104px] top-[247px]">
           <p
             className="text-[#0F1D07] font-normal uppercase"
             style={{
@@ -91,11 +137,8 @@ export default function FieldsOfPlay() {
           </p>
         </div>
 
-        {/* Let's Build Together Link */}
-        <div className="lg:absolute lg:left-[859px] lg:top-[164px] mb-8 lg:mb-0">
-          <div
-            className="flex flex-row items-center gap-[6px] cursor-pointer hover:opacity-60 transition-opacity"
-          >
+        <div className="absolute left-[859px] top-[164px]">
+          <div className="flex flex-row items-center gap-[6px] cursor-pointer hover:opacity-60 transition-opacity">
             <span
               className="text-[#0F1D07]"
               style={{
@@ -121,14 +164,12 @@ export default function FieldsOfPlay() {
           </div>
         </div>
 
-        {/* Vector 215 (Horizontal Line) */}
         <div
-          className="hidden lg:block absolute left-[1105px] top-[128px] border-t border-black"
+          className="absolute left-[1105px] top-[128px] border-t border-black"
           style={{ width: "493px" }}
         />
 
-        {/* Fields of Play Header */}
-        <div className="lg:absolute lg:left-[859px] lg:top-[calc(50%_-_148px/2_-_272.5px)] mb-12 lg:mb-0">
+        <div className="absolute left-[859px] top-[calc(50%_-_148px/2_-_272.5px)]">
           <h2
             className="text-[#0F1D07] capitalize"
             style={{
@@ -142,111 +183,100 @@ export default function FieldsOfPlay() {
           </h2>
         </div>
 
-        {/* Interactive List (Restored Layout Behavior) */}
-        <div
-          className="lg:absolute lg:left-[calc(50%_-_1391px/2_+_0.5px)] lg:top-[420px] w-full max-w-[1391px] flex flex-col isolation-isolate"
-        >
-          {/* Top border — Figma Vector 5 */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-[420px] w-full max-w-[1600px] flex flex-col isolation-isolate">
           <div style={{ width: "100%", height: 0, borderTop: "1px solid #000000", flexShrink: 0 }} />
 
-          {fields.map((field, index) => {
-            return (
-              <div key={field.id}>
-                <div
-                  onMouseEnter={() => handleMouseEnter(field.id)}
-                  onMouseLeave={handleMouseLeave}
-                  className={`w-full group cursor-pointer transition-all duration-500 ease-in-out relative flex flex-col md:flex-row items-center ${activeItem === field.id
-                    ? 'py-8 sm:py-12 md:py-14 before:content-[""] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] border-none shadow-2xl z-20'
-                    : 'bg-transparent py-6 md:py-8'
-                    }`}
-                >
-                  <div className="flex flex-col gap-2 w-full md:w-1/2 md:pl-[104px]">
-                    <h3
-                      className={`transition-colors duration-300 ${activeItem === field.id ? 'text-white' : 'text-[#0F1D07]'}`}
-                      style={{
-                        fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
-                        fontWeight: 400,
-                        fontSize: "28px",
-                        lineHeight: "44px",
-                        letterSpacing: "-0.02em"
-                      }}
-                    >
-                      {field.title}
-                    </h3>
+          {fields.map((field) => (
+            <div key={field.id}>
+              <motion.div
+                onMouseEnter={() => handleMouseEnter(field.id)}
+                onMouseLeave={handleMouseLeave}
+                animate={{
+                  paddingTop: activeItem === field.id ? "32px" : "24px",
+                  paddingBottom: activeItem === field.id ? "32px" : "24px",
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className={`w-full group cursor-pointer relative flex items-center ${activeItem === field.id
+                  ? 'before:content-[""] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] border-none shadow-2xl z-20'
+                  : 'bg-transparent'
+                  }`}
+              >
+                <div className="flex flex-col gap-2 w-1/2 pl-[104px]">
+                  <h3
+                    className={`transition-colors duration-300 ${activeItem === field.id ? 'text-white' : 'text-[#0F1D07]'}`}
+                    style={{
+                      fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
+                      fontWeight: 400,
+                      fontSize: "28px",
+                      lineHeight: "44px",
+                      letterSpacing: "-0.02em"
+                    }}
+                  >
+                    {field.title}
+                  </h3>
 
-                    <AnimatePresence>
-                      {activeItem === field.id && (
-                        <motion.p
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          className="text-white/70 overflow-hidden whitespace-nowrap"
-                          style={{
-                            fontFamily: "var(--font-satoshi)",
-                            fontWeight: 400,
-                            fontSize: "16px",
-                            lineHeight: "39px"
-                          }}
-                        >
-                          {field.subtitle}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Image Reveal */}
                   <AnimatePresence>
                     {activeItem === field.id && (
-                      <motion.div
-                        initial={{ opacity: 0, x: 50, scale: 0.9 }}
-                        animate={{ opacity: 1, x: 0, scale: 1 }}
-                        exit={{ opacity: 0, x: 30, scale: 0.95 }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        className="md:absolute right-4 lg:right-0 top-1/2 md:-translate-y-1/2 w-full md:w-[45%] flex justify-end mt-8 md:mt-0 pointer-events-none"
+                      <motion.p
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="text-white/70 overflow-hidden whitespace-nowrap"
+                        style={{
+                          fontFamily: "var(--font-satoshi)",
+                          fontWeight: 400,
+                          fontSize: "16px",
+                          lineHeight: "39px"
+                        }}
                       >
-                        <div
-                          className="relative w-full aspect-[4/5] max-w-[491px] max-h-[610px] rounded-[16px] overflow-hidden shadow-2xl pointer-events-auto"
-                          style={{ left: "-10px", top: "-3px" }}
-                          onMouseMove={handleMouseMove}
-                        >
-                          <Image
-                            src={field.image}
-                            alt={field.title}
-                            fill
-                            className="object-cover"
-                            priority
-                          />
-
-                          {/* View Badge */}
-                          <motion.div
-                            className="absolute w-[89px] h-[89px] bg-[#95E7D3]/87 rounded-full flex items-center justify-center shadow-lg pointer-events-none"
-                            style={{
-                              x: smoothX,
-                              y: smoothY,
-                              left: 0,
-                              top: 0,
-                              translateX: "-50%",
-                              translateY: "-50%",
-                              fontFamily: "var(--font-nohemi)",
-                              color: "#0F1D07"
-                            }}
-                          >
-                            <span style={{ fontSize: "16.4px", fontWeight: 400 }}>View</span>
-                          </motion.div>
-                        </div>
-                      </motion.div>
+                        {field.subtitle}
+                      </motion.p>
                     )}
                   </AnimatePresence>
-
-                  {/* Bottom Line (Vector 5) */}
-                  <div
-                    style={{ width: "100%", height: 0, borderTop: "1px solid #000000", flexShrink: 0 }}
-                    className={`absolute bottom-0 left-0 transition-opacity ${activeItem === field.id ? 'opacity-0' : 'opacity-100'}`}
-                  />
                 </div>
-              </div>
-            );
-          })}
+
+                <AnimatePresence>
+                  {activeItem === field.id && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      exit={{ opacity: 0, x: 30, scale: 0.95 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 w-[45%] flex justify-end pointer-events-none"
+                    >
+                      <div
+                        className="relative w-full aspect-[4/5] max-w-[491px] max-h-[610px] rounded-[16px] overflow-hidden shadow-2xl pointer-events-auto"
+                        style={{ left: "-10px", top: "-3px" }}
+                        onMouseMove={handleMouseMove}
+                        onMouseEnter={() => setHoveringImageId(field.id)}
+                        onMouseLeave={() => setHoveringImageId(null)}
+                      >
+                        <Image src={field.image} alt={field.title} fill className="object-cover" priority />
+                        <AnimatePresence>
+                          {hoveringImageId === field.id && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.5 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.5 }}
+                              className="absolute w-[89px] h-[89px] bg-[#95E7D3]/87 rounded-full flex items-center justify-center shadow-lg pointer-events-none z-50"
+                              style={{ x: smoothX, y: smoothY, left: 0, top: 0, translateX: "-50%", translateY: "-50%", fontFamily: "var(--font-nohemi)", color: "#0F1D07" }}
+                            >
+                              <span style={{ fontSize: "16.4px", fontWeight: 400 }}>View</span>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div
+                  style={{ width: "100%", height: 0, borderTop: "1px solid #000000", flexShrink: 0 }}
+                  className={`absolute bottom-0 left-0 transition-opacity ${activeItem === field.id ? 'opacity-0' : 'opacity-100'}`}
+                />
+              </motion.div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

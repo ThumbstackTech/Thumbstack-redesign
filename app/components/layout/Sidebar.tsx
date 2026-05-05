@@ -10,15 +10,14 @@ export default function Sidebar() {
   return (
     <>
       {/* Desktop Sidebar - Hidden on mobile */}
-      <aside 
+      <aside
         onClick={() => setMenuOpen(true)}
-        className={`hidden sm:flex fixed top-0 left-0 h-full w-[53px] hover:w-[75px] transition-all duration-300 ease-out z-40 flex-col justify-between items-center py-8 group/sidebar cursor-pointer ${
-          menuOpen ? 'bg-transparent border-none' : 'bg-[#0F1D07] border-r border-[rgba(82,80,80,0.32)] hover:bg-[#3145DD]'
-        }`}
+        className={`hidden sm:flex fixed top-0 left-0 h-full w-[53px] hover:w-[75px] transition-all duration-300 ease-out z-40 flex-col justify-between items-center py-8 group/sidebar cursor-pointer ${menuOpen ? 'bg-transparent border-none' : 'bg-[#0F1D07] border-r border-[rgba(82,80,80,0.32)] hover:bg-[#3145DD]'
+          }`}
       >
         <div className={`flex-1 flex flex-col items-center justify-start mt-8 gap-[300px] w-full pointer-events-none transition-opacity duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`}>
           <Link href="/" className="mt-8 pointer-events-auto">
-            <h1 
+            <h1
               className="text-[#95E7D3] tracking-[-0.02em] rotate-90 whitespace-nowrap cursor-pointer hover:text-white transition-colors duration-300 flex items-end text-center"
               style={{
                 fontFamily: "var(--font-nohemi)",
@@ -30,17 +29,17 @@ export default function Sidebar() {
               Thumbstack.
             </h1>
           </Link>
-          
-          <a href="mailto:hello@thumbstack.co" 
-             className="text-white rotate-90 whitespace-nowrap opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 underline pointer-events-auto"
-             style={{
-               fontFamily: "var(--font-satoshi)",
-               fontWeight: 400,
-               fontSize: "14px",
-               lineHeight: "24px"
-             }}
+
+          <a href="mailto:hello@thumbstack.co"
+            className="text-white rotate-90 whitespace-nowrap opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 underline pointer-events-auto"
+            style={{
+              fontFamily: "var(--font-satoshi)",
+              fontWeight: 400,
+              fontSize: "14px",
+              lineHeight: "24px"
+            }}
           >
-            hello@thumbstack.co
+            hey@thumbstack.co
           </a>
         </div>
 
@@ -50,23 +49,39 @@ export default function Sidebar() {
             className="relative w-[25px] h-[25px] cursor-pointer focus:outline-none group block"
             suppressHydrationWarning
           >
-             <div className="absolute left-[15.62%] right-[31.25%] top-[50%] h-[1.5px] bg-white group-hover:bg-[#95E7D3] transition-colors"></div>
-             <div className="absolute left-[15.62%] right-[15.62%] top-[25%] h-[1.5px] bg-white group-hover:bg-[#95E7D3] transition-colors"></div>
-             <div className="absolute left-[15.62%] right-[15.62%] top-[75%] h-[1.5px] bg-white group-hover:bg-[#95E7D3] transition-colors"></div>
+            <div className="absolute left-[15.62%] right-[31.25%] top-[50%] h-[1.5px] bg-white group-hover:bg-[#95E7D3] transition-colors"></div>
+            <div className="absolute left-[15.62%] right-[15.62%] top-[25%] h-[1.5px] bg-white group-hover:bg-[#95E7D3] transition-colors"></div>
+            <div className="absolute left-[15.62%] right-[15.62%] top-[75%] h-[1.5px] bg-white group-hover:bg-[#95E7D3] transition-colors"></div>
           </button>
         </div>
       </aside>
 
-      {/* Mobile Menu Button - Fixed at top left on mobile */}
-      <button
-        onClick={() => setMenuOpen(true)}
-        className="fixed top-4 left-4 sm:hidden flex flex-col gap-1.5 p-3 cursor-pointer focus:outline-none group items-start bg-white rounded-lg shadow-lg z-50 hover:shadow-xl transition-shadow"
-        suppressHydrationWarning
-      >
-        <span className="block w-5 h-[2.5px] bg-sidebar group-hover:bg-blue transition-colors duration-300"></span>
-        <span className="block w-5 h-[2.5px] bg-sidebar group-hover:bg-blue transition-colors duration-300"></span>
-        <span className="block w-3 h-[2.5px] bg-sidebar group-hover:bg-blue transition-colors duration-300"></span>
-      </button>
+      {/* Mobile Top Header - Visible only on mobile */}
+      <header className="fixed top-0 left-0 w-full h-[64px] bg-[#0F1D07] sm:hidden flex items-center justify-between px-6 z-50 border-b border-white/10">
+        <Link href="/">
+          <h1
+            className="text-[#95E7D3] tracking-[-0.02em]"
+            style={{
+              fontFamily: "var(--font-nohemi)",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "1"
+            }}
+          >
+            Thumbstack.
+          </h1>
+        </Link>
+        
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="flex flex-col gap-[5px] cursor-pointer focus:outline-none group items-end p-2"
+          suppressHydrationWarning
+        >
+          <span className="block w-6 h-[1.5px] bg-white transition-all duration-300"></span>
+          <span className="block w-6 h-[1.5px] bg-white transition-all duration-300"></span>
+          <span className="block w-4 h-[1.5px] bg-white transition-all duration-300"></span>
+        </button>
+      </header>
 
       {/* Menu Overlay */}
       <div
@@ -76,7 +91,7 @@ export default function Sidebar() {
 
         {/* Left Pane - Navigation */}
         <div className="bg-sidebar h-full w-full flex flex-col p-4 sm:p-6 md:p-8 lg:p-10 relative overflow-y-auto scrollbar-hide" onClick={(e) => e.stopPropagation()}>
-          
+
           {/* Close Button - Matches the open buttons' zones */}
           <button
             onClick={() => setMenuOpen(false)}
