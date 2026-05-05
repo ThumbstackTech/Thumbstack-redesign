@@ -61,12 +61,17 @@ export default function Sidebar() {
       </aside>
 
       {/* Mobile Top Header - Visible only on mobile */}
-      <header className="fixed top-0 left-0 w-full h-[70px] bg-[#0F1D07] sm:hidden flex items-center justify-between px-6 z-[50] border-b border-white/5">
+      <header className="fixed top-0 left-0 w-full h-[70px] bg-[#0F1D07] sm:hidden flex items-center justify-between px-8 z-[50] border-b border-white/5">
         <Link href="/">
           <h1 className="text-[#95E7D3] font-medium text-[22px] tracking-tight">Thumbstack.</h1>
         </Link>
 
-        <button onClick={() => setMenuOpen(true)} className="p-2" aria-label="Open Menu">
+        {/* Added mr-4 to push the button further left from the right edge */}
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="p-2 mr-4 hover:opacity-70 transition-opacity"
+          aria-label="Open Menu"
+        >
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
             <line x1="4" y1="12" x2="20" y2="12"></line>
             <line x1="4" y1="6" x2="20" y2="6"></line>
@@ -88,7 +93,7 @@ export default function Sidebar() {
             {/* Close Button - Positioned top right on mobile, fixed bottom left on desktop */}
             <button
               onClick={() => setMenuOpen(false)}
-              className="sm:fixed sm:bottom-[64px] sm:left-[10.5px] text-white hover:text-[#95E7D3] transition-colors z-[10000]"
+              className="sm:fixed sm:bottom-[60.5px] sm:left-[10.5px] text-white hover:text-[#95E7D3] transition-colors z-[10000]"
               aria-label="Close Menu"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -135,11 +140,21 @@ export default function Sidebar() {
 
         {/* Right Pane - Marquee (Desktop Only) */}
         <div className="bg-[#7A73E4] h-full w-full hidden md:flex items-center justify-center overflow-hidden relative border-l border-white/5">
-          <div className="flex gap-2 h-full">
-            <div className="flex flex-col gap-2 animate-[marquee-y-up_50s_linear_infinite] w-[220px]">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl shrink-0">
+          <div className="flex gap-4 lg:gap-6 h-full pt-10">
+            {/* Column 1 - Moving Up */}
+            <div className="flex flex-col gap-4 lg:gap-6 animate-[marquee-y-up_50s_linear_infinite] w-[180px] lg:w-[240px]">
+              {[...Array(8)].map((_, i) => (
+                <div key={`col1-${i}`} className="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl shrink-0">
                   <Image src={i % 2 === 0 ? "/Frame 2085663160.png" : "/Home.png"} alt="UI" fill className="object-cover" />
+                </div>
+              ))}
+            </div>
+            
+            {/* Column 2 - Moving Down */}
+            <div className="flex flex-col gap-4 lg:gap-6 animate-[marquee-y-down_50s_linear_infinite] w-[180px] lg:w-[240px]">
+              {[...Array(8)].map((_, i) => (
+                <div key={`col2-${i}`} className="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl shrink-0">
+                  <Image src={i % 2 === 0 ? "/Home.png" : "/Frame 2085663160.png"} alt="UI" fill className="object-cover" />
                 </div>
               ))}
             </div>
