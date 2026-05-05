@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from "./components/layout/SmoothScroll";
+import Sidebar from "./components/layout/Sidebar";
 
 export default function RootLayout({
   children,
@@ -27,6 +28,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white overflow-x-hidden" suppressHydrationWarning>
         <SmoothScroll>
+          <Sidebar />
           <main className="flex-1 flex flex-col bg-white">
             {children}
           </main>

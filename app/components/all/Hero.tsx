@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import Sidebar from "../layout/Sidebar";
-
 export default function Hero() {
   return (
     <section className="min-h-screen w-full flex flex-col justify-center pt-24 md:pt-32 pb-12 px-6 md:px-12 lg:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-hidden gap-12 md:gap-24">
-      <Sidebar />
 
       {/* Top row */}
       <div className="flex justify-between items-start w-full max-w-[1600px] mx-auto pt-0 relative z-10">

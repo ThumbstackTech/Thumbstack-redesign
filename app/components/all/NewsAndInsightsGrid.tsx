@@ -136,8 +136,8 @@ function RedDesignVisual() {
         style={{
           fontFamily: "var(--font-nohemi)",
           fontWeight: 500,
-          fontSize: "clamp(48px, 6vw, 79px)",
-          lineHeight: "101px",
+          fontSize: "clamp(28px, 6vw, 79px)",
+          lineHeight: "1.2",
           letterSpacing: "-0.02em",
           left: 38, top: 104, width: "80%",
         }}
@@ -160,8 +160,8 @@ function PurpleClarityVisual() {
         style={{
           fontFamily: "var(--font-nohemi)",
           fontWeight: 500,
-          fontSize: "clamp(40px, 5vw, 62px)",
-          lineHeight: "79px",
+          fontSize: "clamp(24px, 5vw, 62px)",
+          lineHeight: "1.2",
           letterSpacing: "-0.02em",
           left: "50%", top: "50%",
           transform: "translate(-50%, -50%)",
@@ -186,8 +186,8 @@ function BlueSpeedVisual() {
         style={{
           fontFamily: "var(--font-nohemi)",
           fontWeight: 400,
-          fontSize: "clamp(72px, 10vw, 117px)",
-          lineHeight: "208px",
+          fontSize: "clamp(48px, 10vw, 117px)",
+          lineHeight: "1",
           letterSpacing: "-0.02em",
           left: 52, bottom: 0,
         }}
@@ -210,8 +210,8 @@ function GreenStrategyVisual() {
         style={{
           fontFamily: "var(--font-nohemi)",
           fontWeight: 500,
-          fontSize: "clamp(60px, 8vw, 83px)",
-          lineHeight: "118px",
+          fontSize: "clamp(36px, 8vw, 83px)",
+          lineHeight: "1.2",
           letterSpacing: "-0.02em",
           left: "50%", top: "50%",
           transform: "translate(-50%, -50%)",
@@ -263,15 +263,15 @@ function Card({ card }: { card: CardType }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px" }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.35 }}
       className="flex flex-col gap-6 flex-1"
       style={{ minWidth: 0 }}
     >
-      {/* Visual */}
-      <div className="relative w-full rounded-xl overflow-hidden flex-shrink-0" style={{ height: 445 }}>
+      <div className="relative w-full rounded-xl overflow-hidden flex-shrink-0 h-[240px] md:h-[445px]">
         {card.visual === "red-design" && <RedDesignVisual />}
         {card.visual === "purple-clarity" && <PurpleClarityVisual />}
         {card.visual === "blue-speed" && <BlueSpeedVisual />}
@@ -353,30 +353,24 @@ export default function NewsAndInsightsGrid() {
     ? cards
     : cards.filter((c) => c.category === activeCategory);
 
-  // Group into rows of 3
-  const rows: CardType[][] = [];
-  for (let i = 0; i < filtered.length; i += 3) {
-    rows.push(filtered.slice(i, i + 3));
-  }
-
   return (
     <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-[105px]">
       <div className="max-w-[1600px] mx-auto flex flex-col gap-[68px]">
 
         {/* Filter Tabs */}
         <div className="flex flex-col gap-[45px]">
-          <div className="flex flex-row items-center gap-[47px]">
+          <div className="flex flex-row items-center gap-6 md:gap-[47px] overflow-x-auto scrollbar-hide pb-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 suppressHydrationWarning
-                className="transition-opacity"
+                className="transition-opacity whitespace-nowrap"
                 style={{
                   fontFamily: "var(--font-nohemi)",
                   fontWeight: 500,
-                  fontSize: 30,
-                  lineHeight: "30px",
+                  fontSize: "clamp(20px, 4vw, 30px)",
+                  lineHeight: "1",
                   letterSpacing: "-0.02em",
                   color: "#0F1D07",
                   opacity: activeCategory === cat ? 1 : 0.4,
@@ -392,26 +386,13 @@ export default function NewsAndInsightsGrid() {
           </div>
         </div>
 
-        {/* Grid Rows */}
-        <div className="flex flex-col gap-[80px]">
-          <AnimatePresence mode="popLayout">
-            {rows.map((row, rowIdx) => (
-              <motion.div
-                key={rowIdx}
-                layout
-                className="flex flex-row items-start gap-6"
-              >
-                {row.map((card) => (
-                  <Card key={card.id} card={card} />
-                ))}
-                {/* Fill empty columns in last row */}
-                {row.length < 3 && Array.from({ length: 3 - row.length }).map((_, i) => (
-                  <div key={`empty-${i}`} className="flex-1" />
-                ))}
-              </motion.div>
+        <motion.div layout className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-12 md:gap-y-[80px]">
+          <AnimatePresence>
+            {filtered.map((card) => (
+              <Card key={card.id} card={card} />
             ))}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

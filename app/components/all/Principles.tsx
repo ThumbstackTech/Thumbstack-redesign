@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 export default function Principles() {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" });
+  const isInView = useInView(containerRef, { once: true, margin: "0px" });
 
   const principles = [
     {
@@ -166,7 +166,7 @@ export default function Principles() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-10%" }}
+          viewport={{ once: true, margin: "0px" }}
           className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 lg:gap-y-16 mb-12"
         >
           {principles.map((p, i) => (
@@ -175,7 +175,7 @@ export default function Principles() {
               variants={itemVariants}
               whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.04)" }}
               whileTap={{ scale: 0.98 }}
-              className="flex flex-col items-start gap-4 p-8 rounded-2xl transition-colors duration-300 cursor-pointer"
+              className="flex flex-col items-start gap-4 p-6 md:p-8 rounded-2xl transition-colors duration-300 cursor-pointer"
             >
               {/* Icon Container */}
               <div className="w-[32px] h-[32px] flex items-center justify-center text-white mb-4">
@@ -188,8 +188,8 @@ export default function Principles() {
                   style={{
                     fontFamily: "var(--font-satoshi)",
                     fontWeight: 700,
-                    fontSize: "34px",
-                    lineHeight: "46px"
+                    fontSize: "clamp(24px, 5vw, 34px)",
+                    lineHeight: "1.2"
                   }}
                 >
                   {p.title}

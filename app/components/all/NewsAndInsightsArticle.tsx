@@ -9,7 +9,7 @@ export default function NewsAndInsightsArticle() {
       <Sidebar />
       
       {/* Hero Image - Full Width */}
-      <div className="w-full h-[60vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-24 shrink-0 bg-[#BDBDBD]">
+      <div className="w-full h-[40vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-24 shrink-0 bg-[#BDBDBD]">
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.1)] z-10 pointer-events-none"></div>
         <Image 
           src="/grid1.jpg"
@@ -43,7 +43,7 @@ export default function NewsAndInsightsArticle() {
           <div className="w-full max-w-[1048px] flex flex-col items-start gap-[16px]">
             <span 
               className="text-[#000000] leading-[36px]"
-              style={{ fontFamily: 'var(--font-satoshi)', fontWeight: 400, fontSize: '10px' }}
+              style={{ fontFamily: 'var(--font-satoshi)', fontWeight: 400, fontSize: '12px' }}
             >
               12 min read · Mar 28, 2026
             </span>
@@ -54,8 +54,8 @@ export default function NewsAndInsightsArticle() {
                 style={{ 
                   fontFamily: 'var(--font-delight)', 
                   fontWeight: 500, 
-                  fontSize: '76px', 
-                  lineHeight: '102px', 
+                  fontSize: 'clamp(40px, 8vw, 76px)', 
+                  lineHeight: '1.2', 
                   letterSpacing: '-0.02em' 
                 }}
               >
@@ -95,8 +95,8 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: '38px', 
-                lineHeight: '1.67', 
+                fontSize: 'clamp(28px, 6vw, 38px)', 
+                lineHeight: '1.4', 
                 letterSpacing: '-0.02em' 
               }}
             >
@@ -118,7 +118,7 @@ export default function NewsAndInsightsArticle() {
       </div>
 
       {/* Middle Image 1 - Full Width */}
-      <div className="w-full h-[60vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
+      <div className="w-full h-[40vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.1)] z-10 pointer-events-none"></div>
         <Image 
           src="/grid1.jpg"
@@ -148,8 +148,8 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: '38px', 
-                lineHeight: '1.67', 
+                fontSize: 'clamp(28px, 6vw, 38px)', 
+                lineHeight: '1.4', 
                 letterSpacing: '-0.02em' 
               }}
             >
@@ -171,7 +171,7 @@ export default function NewsAndInsightsArticle() {
       </div>
 
       {/* Middle Image 2 - Full Width */}
-      <div className="w-full h-[60vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
+      <div className="w-full h-[40vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.1)] z-10 pointer-events-none"></div>
         <Image 
           src="/grid1.jpg"
@@ -202,8 +202,8 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: '38px', 
-                lineHeight: '1.43', 
+                fontSize: 'clamp(28px, 6vw, 38px)', 
+                lineHeight: '1.4', 
                 letterSpacing: '-0.02em' 
               }}
             >
@@ -229,8 +229,8 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: '38px', 
-                lineHeight: '1.43', 
+                fontSize: 'clamp(28px, 6vw, 38px)', 
+                lineHeight: '1.4', 
                 letterSpacing: '-0.02em' 
               }}
             >

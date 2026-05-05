@@ -138,11 +138,11 @@ export default function ArticlesList() {
           <div className="absolute -top-10 right-0 w-[35%] h-[1px] bg-black hidden lg:block" />
         </div>
 
-        {/* ── Interactive List + Image ── */}
-        <div className="relative w-full flex flex-col border-t border-black">
+        {/* ── Interactive List + Image (Desktop) ── */}
+        <div className="relative w-full hidden lg:flex flex-col border-t border-black">
           {articles.map((article) => (
             <motion.div
-              key={article.id}
+              key={`desktop-${article.id}`}
               onMouseEnter={() => handleMouseEnter(article.id)}
               onMouseLeave={handleMouseLeave}
               onClick={() => setActiveItem(article.id)}
@@ -299,6 +299,73 @@ export default function ArticlesList() {
                 )}
               </AnimatePresence>
             </motion.div>
+          ))}
+        </div>
+
+        {/* ── Static List (Mobile) ── */}
+        <div className="relative w-full flex lg:hidden flex-col gap-12 mt-8">
+          {articles.map((article) => (
+            <div key={`mobile-${article.id}`} className="flex flex-col gap-6">
+              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 shadow-lg">
+                <Image src={article.image} alt={article.title} fill className="object-cover" />
+                <div className="absolute inset-0 bg-black/20" />
+                
+                {/* Delight brand title overlay */}
+                <div className="absolute top-8 left-0 right-0 flex flex-col items-center gap-3 z-30 px-4">
+                  <span
+                    className="text-white text-center"
+                    style={{
+                      fontFamily: "var(--font-delight)",
+                      fontWeight: 500,
+                      fontSize: "48px",
+                      lineHeight: "1.2",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {article.title}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <h3
+                  className="text-[#0F1D07]"
+                  style={{
+                    fontFamily: "var(--font-delight)",
+                    fontWeight: 500,
+                    fontSize: "28px",
+                    lineHeight: "1.2",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {article.title}
+                </h3>
+                {article.subtitle && (
+                  <p
+                    className="text-[#0F1D07]/70"
+                    style={{
+                      fontFamily: "var(--font-satoshi)",
+                      fontWeight: 400,
+                      fontSize: "16px",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    {article.subtitle}
+                  </p>
+                )}
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {article.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-gray-100 text-[#0F1D07] rounded-full text-xs font-medium"
+                      style={{ fontFamily: "var(--font-satoshi)" }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

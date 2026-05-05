@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import Sidebar from "../layout/Sidebar";
 
 export default function HeroWork() {
   return (
     <section className="min-h-[120vh] w-full flex flex-col justify-start py-12 px-6 md:px-12 lg:px-24 snap-start relative bg-[#3145DD] md:pl-[90px] md:pr-[90px] overflow-hidden pt-[240px] md:pt-[45vh]">
-      <Sidebar />
 
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-white/10 to-transparent pointer-events-none z-0" />

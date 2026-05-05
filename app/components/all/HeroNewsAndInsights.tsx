@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Sidebar from "../layout/Sidebar";
 
 export default function HeroNewsAndInsights() {
   return (
     <section className="min-h-[100svh] w-full flex flex-col justify-start items-center pt-[200px] md:pt-[350px] pb-20 md:pb-32 px-8 lg:px-24 snap-start relative bg-[#3145DD] md:pl-[90px] md:pr-[90px] overflow-hidden">
-      <Sidebar />
 
       {/* Background Decoration - Glowing Oval */}
       <div className="absolute top-1/2 -translate-y-1/2 right-0 md:right-[5%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-white opacity-40 blur-[120px] rounded-full pointer-events-none z-0"></div>

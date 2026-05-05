@@ -1,19 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import Sidebar from "../layout/Sidebar";
 
 export default function AboutHero() {
   return (
-    <section className="relative w-full min-h-screen bg-white pt-[140px] pb-24 overflow-hidden md:pl-[90px] md:pr-[90px]">
-      <Sidebar />
+    <section className="min-h-screen w-full bg-white relative flex flex-col items-center justify-center pt-20 px-6 md:px-12 lg:px-[100px] snap-start overflow-hidden">
 
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-[100px] relative">
+      <div className="w-full max-w-[1600px] mx-auto relative">
 
-        {/* Subtext - Top Right aligned - Using absolute/flex to match placement */}
-        <div className="flex justify-end mb-4">
+        {/* Subtext - Top Right aligned on desktop, left on mobile */}
+        <div className="flex justify-start md:justify-end mb-4">
           <div
-            className="w-full max-w-[465px] text-right"
+            className="w-full max-w-[465px] text-left md:text-right"
             style={{
               fontFamily: "var(--font-satoshi)",
               fontWeight: 700,
@@ -26,10 +24,10 @@ export default function AboutHero() {
           </div>
         </div>
 
-        {/* Main Heading - Large and Right aligned */}
-        <div className="w-full flex justify-end mb-24">
+        {/* Main Heading - Large and Right aligned on desktop */}
+        <div className="w-full flex justify-start md:justify-end mb-12 md:mb-24">
           <h1
-            className="text-right max-w-[1098px]"
+            className="text-left md:text-right max-w-[1098px]"
             style={{
               fontFamily: "var(--font-delight)",
               fontWeight: 500,

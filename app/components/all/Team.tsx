@@ -55,7 +55,7 @@ export default function Team() {
               style={{
                 fontFamily: "var(--font-satoshi)",
                 fontWeight: 400,
-                fontSize: "10px",
+                fontSize: "12px",
                 lineHeight: "1.6",
                 color: "#0F1D07"
               }}

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Info() {
   return (
-    <section className="relative w-full h-[551px] bg-[#3145DD] overflow-hidden flex items-center snap-start">
+    <section className="relative w-full min-h-[551px] bg-[#3145DD] overflow-hidden flex items-center snap-start py-16 md:py-0">
 
       {/* Ellipse 456 - The background glow effect */}
       <div
@@ -60,8 +60,8 @@ export default function Info() {
             style={{
               fontFamily: "var(--font-delight)",
               fontWeight: 500,
-              fontSize: "38px",
-              lineHeight: "58px",
+              fontSize: "clamp(24px, 5vw, 38px)",
+              lineHeight: "1.4",
               maxWidth: "868px",
               textTransform: "capitalize",
             }}
@@ -75,14 +75,7 @@ export default function Info() {
 
       {/* Image Container - Component 141 */}
       <div
-        className="absolute pointer-events-none z-20"
-        style={{
-          width: "520px",
-          height: "520px",
-          // Positioned to the right as per the visual reference
-          right: "0px",
-          bottom: "-60px",
-        }}
+        className="absolute pointer-events-none z-20 right-[-50px] md:right-[0px] bottom-[-20px] md:bottom-[-60px] w-[300px] h-[300px] md:w-[520px] md:h-[520px] opacity-30 md:opacity-100"
       >
         <div
           className="relative w-full h-full"
