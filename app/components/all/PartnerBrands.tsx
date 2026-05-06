@@ -43,7 +43,7 @@ export default function PartnerBrands() {
             fontFamily: "var(--font-delight)",
             fontWeight: 500,
             fontSize: 'clamp(32px, 8vw, 100.37px)',
-            letterSpacing: "-0.05em",
+            letterSpacing: "-0.01em",
             lineHeight: '1.2',
             color: '#0F1D07',
           }}

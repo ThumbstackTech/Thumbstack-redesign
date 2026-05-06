@@ -165,26 +165,29 @@ export default function FieldsOfPlay() {
         </div>
 
         <div
-          className="absolute left-[1105px] top-[128px] border-t border-black"
-          style={{ width: "493px" }}
+          className="absolute top-[128px] border-t border-black"
+          style={{ left: "730px", width: "872px" }}
         />
 
-        <div className="absolute left-[859px] top-[calc(50%_-_148px/2_-_272.5px)]">
+        <div className="absolute left-[859px] top-[222px]">
           <h2
-            className="text-[#0F1D07] capitalize"
+            className="text-[#0F1D07] capitalize font-delight"
             style={{
               fontFamily: "var(--font-delight)",
-              fontWeight: 600,
+              fontStyle: "normal",
+              fontWeight: 500,
               fontSize: "100.369px",
               lineHeight: "147px",
-              width: "613px",
+              width: "538px",
               height: "148px",
               display: "flex",
               alignItems: "center",
-              whiteSpace: "nowrap"
+              textTransform: "capitalize",
+              whiteSpace: "nowrap",
+              color: "#0F1D07"
             }}
           >
-            Fields Of Play
+            Capabilities
           </h2>
         </div>
 

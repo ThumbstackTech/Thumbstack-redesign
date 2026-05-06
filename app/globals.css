@@ -27,7 +27,6 @@
   --font-delight: var(--font-delight);
   --font-nohemi: var(--font-nohemi);
   --font-satoshi: var(--font-satoshi);
-  --font-Clash_Display: var(--font-Clash_Display);
 
   --animate-spin-pause: spin-pause-reverse 6s ease-in-out infinite;
   @keyframes spin-pause-reverse {
