@@ -289,7 +289,7 @@ function Card({ card }: { card: CardType }) {
             style={{
               fontFamily: "var(--font-delight)",
               fontWeight: 400,
-              fontSize: 16,
+              fontSize: 18,
               lineHeight: "24px",
               letterSpacing: "-0.02em",
             }}
@@ -318,7 +318,7 @@ function Card({ card }: { card: CardType }) {
             style={{
               fontFamily: "var(--font-satoshi)",
               fontWeight: 500,
-              fontSize: 12,
+              fontSize: 14,
               lineHeight: "18px",
             }}
           >

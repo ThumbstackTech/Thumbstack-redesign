@@ -7,7 +7,7 @@ export default function WorkItem() {
     <section className="w-full min-h-[auto] lg:min-h-[967px] flex flex-col items-center justify-start lg:justify-center bg-white overflow-hidden md:pl-[90px] md:pr-[90px] py-12 lg:py-0">
       <div className="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center">
         {/* Left Side: Featured Image (Frame 2085663066) */}
-        <div className="relative w-full lg:w-[55%] h-[400px] md:h-[600px] lg:h-[967px] flex-shrink-0 rounded-none md:rounded-[24px] overflow-hidden">
+        <div className="relative w-full lg:w-[55%] h-[400px] md:h-[600px] lg:h-[967px] flex-shrink-0 rounded-none overflow-hidden">
           <Image
             src="/stack2.jpg" // Ensure this maps to your ASV06202-2.jpg
             alt="Case study featured project"

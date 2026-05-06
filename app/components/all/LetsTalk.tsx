@@ -16,7 +16,7 @@ export default function LetsTalk() {
 
         {/* Left Side - Headline */}
         <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:w-2/5 pt-4 sm:pt-6 md:pt-8">
-          <span className="text-gray-400 text-xs sm:text-sm font-medium tracking-wide uppercase">Get in touch</span>
+          <span className="text-white text-xs sm:text-sm font-medium tracking-wide">Get in touch</span>
           <h2
             className="text-white font-medium tracking-tighter capitalize"
             style={{
@@ -29,7 +29,7 @@ export default function LetsTalk() {
             Lets<br />Create
           </h2>
           <p
-            className="text-gray-400 text-xs sm:text-[13px] leading-relaxed max-w-sm"
+            className="text-white text-xs sm:text-[13px] leading-relaxed max-w-sm"
             style={{ fontFamily: "var(--font-satoshi)" }}
           >
             Great products begin with simple conversations. Tell us what you&apos;re envisioning — the goals, the gaps, the sparks — and we&apos;ll come back with ideas, clarity, and a way forward that actually moves the needle.
@@ -41,7 +41,7 @@ export default function LetsTalk() {
           {/* Row 1: First Name + Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             <div className="flex flex-col gap-3">
-              <label className="text-gray-500 text-[10px] font-medium uppercase tracking-wider">First Name</label>
+              <label className="text-white text-[10px] font-medium uppercase tracking-wider">First Name</label>
               <input
                 type="text"
                 placeholder="Anna"
@@ -50,7 +50,7 @@ export default function LetsTalk() {
               />
             </div>
             <div className="flex flex-col gap-3">
-              <label className="text-gray-500 text-[10px] font-medium uppercase tracking-wider">Last Name</label>
+              <label className="text-white text-[10px] font-medium uppercase tracking-wider">Last Name</label>
               <input
                 type="text"
                 placeholder="Louis"
@@ -63,7 +63,7 @@ export default function LetsTalk() {
           {/* Row 2: Email + Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             <div className="flex flex-col gap-3">
-              <label className="text-gray-500 text-[10px] font-medium uppercase tracking-wider">Email Address</label>
+              <label className="text-white text-[10px] font-medium uppercase tracking-wider">Email Address</label>
               <input
                 type="email"
                 placeholder="Anna.Louis@Email.Com"
@@ -72,7 +72,7 @@ export default function LetsTalk() {
               />
             </div>
             <div className="flex flex-col gap-3">
-              <label className="text-gray-500 text-[10px] font-medium uppercase tracking-wider">Phone Number</label>
+              <label className="text-white text-[10px] font-medium uppercase tracking-wider">Phone Number</label>
               <input
                 type="tel"
                 placeholder="+91"
@@ -84,7 +84,7 @@ export default function LetsTalk() {
 
           {/* Row 3: Project Details */}
           <div className="flex flex-col gap-3">
-            <label className="text-gray-500 text-[10px] font-medium uppercase tracking-wider">Project Details</label>
+            <label className="text-white text-[10px] font-medium uppercase tracking-wider">Project Details</label>
             <input
               type="text"
               placeholder="Tell Us About Your Project..."
@@ -95,7 +95,7 @@ export default function LetsTalk() {
 
           {/* Submit Button */}
           <button
-            className="self-start mt-2 md:mt-4 px-5 sm:px-6 py-2.5 sm:py-3 bg-blue hover:bg-blue/90 text-white rounded-full font-semibold flex items-center gap-2 sm:gap-3 transition-all hover:scale-105 shadow-lg text-xs sm:text-sm"
+            className="self-start mt-2 md:mt-4 px-8 py-3.5 bg-[#3145DD] hover:bg-[#3145DD]/90 text-white rounded-full font-semibold flex items-center gap-3 transition-all hover:scale-105 shadow-lg text-sm"
             suppressHydrationWarning
           >
             Talk to us

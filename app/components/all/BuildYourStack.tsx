@@ -118,7 +118,7 @@ export default function BuildYourStack() {
                 style={{
                   fontFamily: "var(--font-nohemi)",
                   fontWeight: 500,
-                  fontSize: "clamp(40px, 8vw, 72px)",
+                  fontSize: "clamp(48px, 5vw, 114px)",
                   lineHeight: "1",
                 }}
               >
@@ -129,7 +129,7 @@ export default function BuildYourStack() {
                 style={{
                   fontFamily: "var(--font-satoshi)",
                   fontWeight: 700,
-                  fontSize: "12px",
+                  fontSize: "14px",
                   lineHeight: "30px",
                 }}
               >

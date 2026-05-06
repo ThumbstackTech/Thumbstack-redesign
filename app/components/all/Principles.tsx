@@ -51,9 +51,10 @@ export default function Principles() {
       title: "Build",
       desc: "We develop the website, store, app, platform, CMS, integrations, or backend system.",
       icon: (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="16 18 22 12 16 6" />
-          <polyline points="8 6 2 12 8 18" />
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.9993 29.3346C23.3631 29.3346 29.3327 23.3651 29.3327 16.0013C29.3327 8.63751 23.3631 2.66797 15.9993 2.66797C8.63555 2.66797 2.66602 8.63751 2.66602 16.0013C2.66602 23.3651 8.63555 29.3346 15.9993 29.3346Z" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M12.6673 12.668L10.6231 14.43C9.76369 15.1706 9.33398 15.541 9.33398 16.0013C9.33398 16.4616 9.76368 16.832 10.6231 17.5726L12.6673 19.3346" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M19.334 12.668L21.3783 14.43C22.2376 15.1706 22.6673 15.541 22.6673 16.0013C22.6673 16.4616 22.2376 16.832 21.3783 17.5726L19.334 19.3346" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       )
     },

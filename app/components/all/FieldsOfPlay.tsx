@@ -96,14 +96,14 @@ export default function FieldsOfPlay() {
         </div>
 
         {/* Separator Line */}
-        <div className="w-[110%] -ml-6 h-[1.5px] bg-black mb-0" />
+        <div className="w-[110%] -ml-6 h-[1px] bg-black/20 mb-0" />
 
         {/* List */}
         <div className="flex flex-col">
           {fields.map((field) => (
-            <div key={field.id} className="w-full py-6 border-b border-black/20 relative flex flex-col gap-2">
-              <h3 className="text-[#0F1D07] font-semibold text-[24px] leading-tight font-delight">{field.title}</h3>
-              <p className="text-black/60 text-[14px] leading-relaxed font-satoshi pr-10">{field.subtitle}</p>
+            <div key={field.id} className="w-full py-8 border-b border-black/10 relative flex flex-col gap-2">
+              <h3 className="text-[#0F1D07] font-semibold text-[24px] tracking-[-0.01em] leading-tight font-delight">{field.title}</h3>
+              <p className="text-black/60 text-[14px] font-bold leading-relaxed font-satoshi pr-10">{field.subtitle}</p>
               <div className="absolute right-0 top-1/2 -translate-y-1/2">
                 <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
                   <path d="M5 15L15 5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -121,12 +121,12 @@ export default function FieldsOfPlay() {
       <div className="hidden lg:block w-full max-w-[1602px] h-[1137px] relative mx-auto">
         <div className="absolute left-[104px] top-[247px]">
           <p
-            className="text-[#0F1D07] font-normal uppercase"
+            className="text-[#0F1D07] font-normal"
             style={{
               fontFamily: "var(--font-satoshi)",
               fontWeight: 700,
-              fontSize: "11px",
-              lineHeight: "16px",
+              fontSize: "16px",
+              lineHeight: "28px",
               width: "179px",
               letterSpacing: "0.05em"
             }}
@@ -144,7 +144,7 @@ export default function FieldsOfPlay() {
               style={{
                 fontFamily: "var(--font-satoshi)",
                 fontWeight: 700,
-                fontSize: "14px",
+                fontSize: "16px",
                 lineHeight: "28px"
               }}
             >
@@ -175,7 +175,7 @@ export default function FieldsOfPlay() {
             style={{
               fontFamily: "var(--font-delight)",
               fontWeight: 500,
-              fontSize: "100px",
+              fontSize: "100.369px",
               lineHeight: "147px"
             }}
           >
@@ -183,8 +183,8 @@ export default function FieldsOfPlay() {
           </h2>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 top-[420px] w-full max-w-[1600px] flex flex-col isolation-isolate">
-          <div style={{ width: "100%", height: 0, borderTop: "1px solid #000000", flexShrink: 0 }} />
+        <div className="absolute left-1/2 -translate-x-1/2 top-[420px] w-full max-w-[1600px] flex flex-col gap-[55px] isolation-isolate">
+          <div style={{ width: "100%", height: 0, borderTop: "2px solid #000000", flexShrink: 0 }} />
 
           {fields.map((field) => (
             <div key={field.id}>
@@ -192,8 +192,8 @@ export default function FieldsOfPlay() {
                 onMouseEnter={() => handleMouseEnter(field.id)}
                 onMouseLeave={handleMouseLeave}
                 animate={{
-                  paddingTop: activeItem === field.id ? "32px" : "24px",
-                  paddingBottom: activeItem === field.id ? "32px" : "24px",
+                  paddingTop: activeItem === field.id ? "21.5px" : "16.5px",
+                  paddingBottom: activeItem === field.id ? "21.5px" : "16.5px",
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className={`w-full group cursor-pointer relative flex items-center ${activeItem === field.id
@@ -204,13 +204,13 @@ export default function FieldsOfPlay() {
                 <div className="flex flex-col gap-2 w-1/2 pl-[104px]">
                   <h3
                     className={`transition-colors duration-300 ${activeItem === field.id ? 'text-white' : 'text-[#0F1D07]'}`}
-                    style={{
-                      fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
-                      fontWeight: 400,
-                      fontSize: "28px",
-                      lineHeight: "44px",
-                      letterSpacing: "-0.02em"
-                    }}
+                      style={{
+                        fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
+                        fontWeight: activeItem === field.id ? 500 : 400,
+                        fontSize: "28px",
+                        lineHeight: "44px",
+                        letterSpacing: "-0.02em"
+                      }}
                   >
                     {field.title}
                   </h3>
@@ -222,12 +222,12 @@ export default function FieldsOfPlay() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         className="text-white/70 overflow-hidden whitespace-nowrap"
-                        style={{
-                          fontFamily: "var(--font-satoshi)",
-                          fontWeight: 400,
-                          fontSize: "16px",
-                          lineHeight: "39px"
-                        }}
+                          style={{
+                            fontFamily: "var(--font-satoshi)",
+                            fontWeight: 700,
+                            fontSize: "16px",
+                            lineHeight: "39px"
+                          }}
                       >
                         {field.subtitle}
                       </motion.p>
@@ -271,8 +271,8 @@ export default function FieldsOfPlay() {
                 </AnimatePresence>
 
                 <div
-                  style={{ width: "100%", height: 0, borderTop: "1px solid #000000", flexShrink: 0 }}
-                  className={`absolute bottom-0 left-0 transition-opacity ${activeItem === field.id ? 'opacity-0' : 'opacity-100'}`}
+                  style={{ width: "100%", height: 0, borderTop: "2px solid #000000", flexShrink: 0 }}
+                  className={`absolute bottom-[-28px] left-0 transition-opacity ${activeItem === field.id ? 'opacity-0' : 'opacity-100'}`}
                 />
               </motion.div>
             </div>

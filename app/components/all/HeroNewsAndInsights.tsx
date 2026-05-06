@@ -37,7 +37,7 @@ export default function HeroNewsAndInsights() {
               style={{
                 fontFamily: "var(--font-delight)",
                 fontWeight: 600,
-                fontSize: "clamp(2.5rem, 8vw, 110px)",
+                fontSize: "clamp(2.5rem, 8vw, 114px)",
                 lineHeight: "1.1",
                 verticalAlign: "middle"
               }}

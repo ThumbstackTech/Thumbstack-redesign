@@ -56,7 +56,7 @@ export default function PartnerBrands() {
             return (
               <div
                 key={index}
-                className="flex items-center justify-center transition-all duration-300 hover:bg-[#EFEFEF] hover:scale-105 cursor-pointer shadow-sm"
+                className="flex items-center justify-center transition-all duration-300 hover:bg-[#EFEFEF] hover:scale-105 cursor-pointer"
                 style={{
                   width: "100%",
                   height: "111px",

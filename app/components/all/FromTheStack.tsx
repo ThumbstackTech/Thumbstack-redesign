@@ -35,7 +35,7 @@ function StackCard({ item, idx }: { item: any; idx: number }) {
       </div>
 
       {/* Card Content */}
-      <div className="flex flex-col gap-2 sm:gap-3">
+      <div className="flex flex-col gap-4 md:gap-5">
         <div className="flex justify-between items-start gap-2">
           <h3
             className="text-[10px] sm:text-xs md:text-[18px] lg:text-[20px] tracking-tight text-sidebar"
@@ -50,10 +50,13 @@ function StackCard({ item, idx }: { item: any; idx: number }) {
             {item.tag}
           </span>
         </div>
-        <p className="text-black text-[10px] sm:text-xs md:text-sm lg:text-base font-medium line-clamp-2">
+        <p 
+          className="text-black font-medium line-clamp-2"
+          style={{ fontSize: "14px", letterSpacing: "0%" }}
+        >
           {item.description}
         </p>
-        <Link href="#" className="flex items-center gap-1 sm:gap-2 text-black font-medium text-[10px] sm:text-xs md:text-sm hover:underline w-fit">
+        <Link href="#" className="flex items-center gap-1 sm:gap-2 text-black font-medium text-[14px] hover:underline w-fit mt-1">
           Read Case Study
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6227_81831)">
@@ -126,7 +129,7 @@ export default function FromTheStack() {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      className="min-h-screen w-full flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-24 snap-start relative bg-white border-t border-gray-100 overflow-hidden cursor-none"
+      className="min-h-screen w-full flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-24 snap-start relative bg-white overflow-hidden cursor-none"
     >
       <div className="w-full max-w-[1600px] flex flex-col mb-8 sm:mb-12">
         <div className="flex flex-col md:flex-row justify-between items-start w-full gap-6 sm:gap-8">
@@ -144,10 +147,11 @@ export default function FromTheStack() {
               From The Stack
             </h2>
             <p
-              className="text-sidebar max-w-5xl text-xs sm:text-[11px] whitespace-nowrap"
+              className="text-sidebar max-w-5xl"
               style={{
                 fontFamily: "var(--font-satoshi)",
                 fontWeight: 700,
+                fontSize: "16px",
                 letterSpacing: "0%",
               }}
             >

@@ -31,24 +31,24 @@ export default function Hero() {
       {/* Main typography */}
       <div className="w-full max-w-[1600px] mx-auto flex flex-col justify-center relative py-6 mt-4">
         <h1
-          className="leading-[1.1] max-w-[1300px] select-none"
+          className="leading-[1.1] max-w-full select-none"
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 600,
-            fontSize: "clamp(2rem, 9vw, 6.97em)",
+            fontSize: "clamp(40px, 8vw, 135px)",
             letterSpacing: "-0.01em",
             color: "#3145DD"
           }}
         >
           {/* Locked row for "Designing and building" */}
-          <span className="flex flex-wrap items-center gap-x-2 md:gap-x-6">
+          <span className="flex flex-nowrap whitespace-nowrap items-center gap-x-2 md:gap-x-6">
             <span className="bg-mint px-2 pb-0.5 md:px-6 md:pb-3 inline-block">Designing</span>
             <span>and</span>
             <span className="bg-[#3145DD] text-mint px-2 pb-0.5 md:px-6 md:pb-3 inline-block">building</span>
           </span>
 
           <span className="block mt-1 md:mt-4">meaningful digital</span>
-          <span className="block">experiences.</span>
+          <span className="block mt-1 md:mt-4">experiences.</span>
         </h1>
 
         {/* Sub-text and Decorative Circle */}

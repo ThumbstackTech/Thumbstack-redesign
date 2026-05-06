@@ -227,7 +227,7 @@ function ProjectCard({
                 {project.tags.map((t) => (
                   <span
                     key={t}
-                    className="h-[32px] md:h-[40px] px-3 md:px-5 border border-white/40 rounded-full text-white text-[11px] md:text-[14px] font-medium flex items-center justify-center whitespace-nowrap"
+                    className="h-[32px] md:h-[40px] px-3 md:px-5 border border-white/40 rounded-[12px] text-white text-[11px] md:text-[14px] font-medium flex items-center justify-center whitespace-nowrap"
                     style={{ fontFamily: "var(--font-satoshi)" }}
                   >
                     {t}
@@ -246,7 +246,7 @@ function ProjectCard({
             <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto">
               <Link
                 href={project.caseStudyUrl}
-                className="flex-1 md:flex-none h-[48px] md:h-[56px] md:w-[180px] bg-white rounded-xl flex items-center justify-center text-[13px] md:text-[14px] font-bold text-[#0F1D07] hover:bg-white/90 transition-all shadow-xl"
+                className="flex-1 md:flex-none h-[48px] md:h-[56px] md:w-[180px] bg-white rounded-xl flex items-center justify-center text-[13px] md:text-[14px] font-bold text-[#0F1D07] hover:bg-white/90 transition-all"
               >
                 Read Case Study
               </Link>
@@ -254,9 +254,9 @@ function ProjectCard({
               <Link
                 href={project.websiteUrl}
                 target="_blank"
-                className="flex-1 md:flex-none h-[48px] md:h-[56px] md:w-[180px] rounded-xl flex items-center justify-center gap-2 text-white text-[13px] md:text-[14px] font-bold hover:bg-white/10 transition-all border border-white/20"
+                className="flex-1 md:flex-none h-[48px] md:h-[56px] md:w-[180px] rounded-xl flex items-center justify-center gap-2 text-white text-[13px] md:text-[14px] font-bold hover:bg-white/10 transition-all"
               >
-                Visit Site
+                Visit Website
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M5 19L19 5M19 5V19M19 5H5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

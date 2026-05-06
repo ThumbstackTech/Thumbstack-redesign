@@ -42,8 +42,8 @@ export default function NewsAndInsightsArticle() {
           {/* Top Intro Section */}
           <div className="w-full max-w-[1048px] flex flex-col items-start gap-[16px]">
             <span 
-              className="text-[#000000] leading-[36px]"
-              style={{ fontFamily: 'var(--font-satoshi)', fontWeight: 400, fontSize: '12px' }}
+              className="text-[#000000]"
+              style={{ fontFamily: 'var(--font-satoshi)', fontWeight: 400, fontSize: '14px', lineHeight: '36px' }}
             >
               12 min read · Mar 28, 2026
             </span>
@@ -54,8 +54,8 @@ export default function NewsAndInsightsArticle() {
                 style={{ 
                   fontFamily: 'var(--font-delight)', 
                   fontWeight: 500, 
-                  fontSize: 'clamp(40px, 8vw, 76px)', 
-                  lineHeight: '1.2', 
+                  fontSize: '80px', 
+                  lineHeight: '102px', 
                   letterSpacing: '-0.02em' 
                 }}
               >
@@ -67,7 +67,7 @@ export default function NewsAndInsightsArticle() {
                 style={{ 
                   fontFamily: 'var(--font-satoshi)', 
                   fontWeight: 500, 
-                  fontSize: '18px', 
+                  fontSize: '22px', 
                   lineHeight: '36px' 
                 }}
               >
@@ -79,7 +79,7 @@ export default function NewsAndInsightsArticle() {
                 style={{ 
                   fontFamily: 'var(--font-satoshi)', 
                   fontWeight: 400, 
-                  fontSize: '16px', 
+                  fontSize: '20px', 
                   lineHeight: '32px' 
                 }}
               >
@@ -89,14 +89,14 @@ export default function NewsAndInsightsArticle() {
           </div>
 
           {/* Sub Section 1 */}
-          <div className="w-full max-w-[1044px] flex flex-col items-start gap-5 md:gap-[16px]">
+          <div className="w-full max-w-[1044px] flex flex-col items-start gap-[20px]">
             <h2 
               className="text-[#0F1D07] w-full"
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: 'clamp(28px, 6vw, 38px)', 
-                lineHeight: '1.4', 
+                fontSize: '42px', 
+                lineHeight: '70px', 
                 letterSpacing: '-0.02em' 
               }}
             >
@@ -107,7 +107,7 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-satoshi)', 
                 fontWeight: 400, 
-                fontSize: '16px', 
+                fontSize: '20px', 
                 lineHeight: '32px' 
               }}
             >
@@ -118,8 +118,8 @@ export default function NewsAndInsightsArticle() {
       </div>
 
       {/* Middle Image 1 - Full Width */}
-      <div className="w-full h-[40vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
-        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.1)] z-10 pointer-events-none"></div>
+      <div className="w-full h-[738px] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
+        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.2)] z-10 pointer-events-none"></div>
         <Image 
           src="/grid1.jpg"
           alt="Article Mid Image"
@@ -129,7 +129,7 @@ export default function NewsAndInsightsArticle() {
         />
         
         {/* Centered Logo Card for consistency */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-[172px] md:h-[172px] bg-white rounded-2xl md:rounded-[2rem] shadow-[0px_48px_80px_-16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[204px] h-[185.79px] bg-white rounded-[32.7857px] shadow-[0px_48px_80px_-16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20">
           <div className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center">
              <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
                 <path d="M16 4L26 22H6L16 4Z" fill="#3145DD" />
@@ -142,14 +142,14 @@ export default function NewsAndInsightsArticle() {
       <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-[100px] md:pl-[190px] flex flex-col items-start gap-[22px]">
         {/* Sub Section 2 */}
         <div className="w-full max-w-[1248px] flex flex-col items-start mb-16 md:mb-[100px]">
-          <div className="w-full max-w-[1044px] flex flex-col items-start gap-[16px]">
+          <div className="w-full max-w-[1044px] flex flex-col items-start gap-[20px]">
             <h2 
               className="text-[#0F1D07] w-full"
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: 'clamp(28px, 6vw, 38px)', 
-                lineHeight: '1.4', 
+                fontSize: '42px', 
+                lineHeight: '70px', 
                 letterSpacing: '-0.02em' 
               }}
             >
@@ -160,7 +160,7 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-satoshi)', 
                 fontWeight: 400, 
-                fontSize: '16px', 
+                fontSize: '20px', 
                 lineHeight: '32px' 
               }}
             >
@@ -171,8 +171,8 @@ export default function NewsAndInsightsArticle() {
       </div>
 
       {/* Middle Image 2 - Full Width */}
-      <div className="w-full h-[40vh] md:h-[80vh] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
-        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.1)] z-10 pointer-events-none"></div>
+      <div className="w-full h-[738px] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
+        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.2)] z-10 pointer-events-none"></div>
         <Image 
           src="/grid1.jpg"
           alt="Article Bottom Image"
@@ -182,7 +182,7 @@ export default function NewsAndInsightsArticle() {
         />
         
         {/* Centered Logo Card for consistency */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-[172px] md:h-[172px] bg-white rounded-2xl md:rounded-[2rem] shadow-[0px_48px_80px_-16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[204px] h-[185.79px] bg-white rounded-[32.7857px] shadow-[0px_48px_80px_-16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20">
           <div className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center">
              <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
                 <path d="M16 4L26 22H6L16 4Z" fill="#3145DD" />
@@ -194,16 +194,16 @@ export default function NewsAndInsightsArticle() {
 
       <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-[100px] md:pl-[190px] flex flex-col items-start">
         {/* Two Column Section */}
-        <div className="w-full max-w-[1248px] flex flex-col md:flex-row items-start gap-10 md:gap-[40px]">
+        <div className="w-full max-w-[1044px] flex flex-col md:flex-row items-start gap-10 md:gap-[40px] mb-20 md:mb-[100px]">
           {/* Column 1 */}
-          <div className="flex-1 flex flex-col items-start gap-5">
+          <div className="flex-1 flex flex-col items-start gap-5 max-w-[502px]">
             <h2 
               className="text-[#0F1D07] w-full"
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: 'clamp(28px, 6vw, 38px)', 
-                lineHeight: '1.4', 
+                fontSize: '42px', 
+                lineHeight: '60px', 
                 letterSpacing: '-0.02em' 
               }}
             >
@@ -214,8 +214,8 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-satoshi)', 
                 fontWeight: 400, 
-                fontSize: '16px', 
-                lineHeight: '1.6' 
+                fontSize: '20px', 
+                lineHeight: '32px' 
               }}
             >
               Lorem ipsum dolor sit amet consectetur. Augue sem at commodo viverra platea sed arcu. Nisl malesuada odio vivamus massa praesent malesuada urna vitae vehicula. Amet viverra tellus facilisi pharetra dui eget. Ultrices augue cursus morbi amet ut id dignissim. Non at in tristique mattis libero bibendum massa massa. Urna diam lorem tincidunt vulputate duis lectus. Lobortis massa at mattis magna euismod sed elementum imperdiet nibh. Viverra gravida mi gravida viverra turpis pretium.
@@ -223,14 +223,14 @@ export default function NewsAndInsightsArticle() {
           </div>
 
           {/* Column 2 */}
-          <div className="flex-1 flex flex-col items-start gap-5">
+          <div className="flex-1 flex flex-col items-start gap-5 max-w-[502px]">
             <h2 
               className="text-[#0F1D07] w-full"
               style={{ 
                 fontFamily: 'var(--font-delight)', 
                 fontWeight: 500, 
-                fontSize: 'clamp(28px, 6vw, 38px)', 
-                lineHeight: '1.4', 
+                fontSize: '42px', 
+                lineHeight: '60px', 
                 letterSpacing: '-0.02em' 
               }}
             >
@@ -241,8 +241,8 @@ export default function NewsAndInsightsArticle() {
               style={{ 
                 fontFamily: 'var(--font-satoshi)', 
                 fontWeight: 400, 
-                fontSize: '16px', 
-                lineHeight: '1.6' 
+                fontSize: '20px', 
+                lineHeight: '32px' 
               }}
             >
               Lorem ipsum dolor sit amet consectetur. Augue sem at commodo viverra platea sed arcu. Nisl malesuada odio vivamus massa praesent malesuada urna vitae vehicula. Amet viverra tellus facilisi pharetra dui eget. Ultrices augue cursus morbi amet ut id dignissim. Non at in tristique mattis libero bibendum massa massa. Urna diam lorem tincidunt vulputate duis lectus. Lobortis massa at mattis magna euismod sed elementum imperdiet nibh. Viverra gravida mi gravida viverra turpis pretium.
