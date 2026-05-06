@@ -6,7 +6,6 @@ import Image from "next/image";
 
 const TECH_TOOLS = [
   { name: "8th Wall", logo: "8b1802af-8th-Wall-Horizontal-Logo-Purple 1.png" },
-  { name: "ReactJS", logo: "ReactJS.png" },
   { name: "WordPress", logo: "bi_wordpress.png" },
   { name: "Android", logo: "devicon_android.png" },
   { name: "Next.js", logo: "devicon_nextjs-wordmark.png" },
@@ -18,14 +17,14 @@ const TECH_TOOLS = [
   { name: "Shopify", logo: "logos_shopify.png" },
   { name: "Node.js", logo: "material-icon-theme_nodejs.png" },
   { name: "Ollama", logo: "ollama 1.png" },
-  { name: "Figma", logo: "skill-icons_figma-light.png" },
+  { name: "Fspace", logo: "skill-icons_figma-light.png" },
   { name: "Group 49", logo: "6808f9ca7883e7d17a64a7b8_Group 49 1.png" },
   { name: "Vector", logo: "Vector.png" },
   { name: "Vector 1", logo: "Vector-1.png" },
   { name: "Group", logo: "Group.png" },
   { name: "Group 1", logo: "Group-1.png" },
-  { name: "Ellipse 456", logo: "Ellipse 456.png" },
-  { name: "Ellipse 457", logo: "Ellipse 457.png" },
+  { name: "GraphQL", logo: "logos_graphql.png" },
+  { name: "OpenAI", logo: "OpenAI_Logo.svg 2.png" },
   { name: "Logo 53", logo: "image 53.png" },
   { name: "Group 594", logo: "Group 1321314594.png" },
   { name: "Group 597", logo: "Group 1321314597.png" },
@@ -102,6 +101,7 @@ export default function ProductDriven() {
                   width={48} 
                   height={48} 
                   className="object-contain w-full h-full"
+                  unoptimized
                 />
               </div>
               
