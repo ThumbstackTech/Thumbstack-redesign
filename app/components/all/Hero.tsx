@@ -4,10 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 export default function Hero() {
   return (
-    <section className="min-h-screen w-full flex flex-col justify-center pt-24 md:pt-32 pb-12 px-6 md:px-12 lg:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-hidden gap-12 md:gap-24">
+    <section className="min-h-screen w-full flex flex-col justify-center pt-18 md:pt-24 pb-12 px-6 md:px-12 lg:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-hidden gap-4 md:gap-6">
 
       {/* Top row */}
-      <div className="flex justify-between items-start w-full max-w-[1600px] mx-auto pt-0 relative z-10">
+      <div className="flex justify-between items-start w-full max-w-[1600px] mx-auto pt-4 md:pt-8 pb-1 relative z-10">
         <Link
           href="/services"
           className="text-[#0F1D07] font-semibold text-[14px] md:text-[18px] flex items-center gap-2 hover:opacity-70 transition-opacity"
@@ -29,14 +29,14 @@ export default function Hero() {
       </div>
 
       {/* Main typography */}
-      <div className="w-full max-w-[1600px] mx-auto flex flex-col justify-center relative py-6 mt-4">
+      <div className="w-full max-w-[1600px] mx-auto flex flex-col justify-center relative pb-6">
         <h1
           className="leading-[1.1] max-w-full select-none"
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 600,
             fontSize: "clamp(40px, 8vw, 135px)",
-            letterSpacing: "-0.01em",
+            letterSpacing: "-0.05em",
             color: "#3145DD"
           }}
         >
@@ -48,7 +48,7 @@ export default function Hero() {
           </span>
 
           <span className="block mt-1 md:mt-4">meaningful digital</span>
-          <span className="block mt-1 md:mt-4">experiences.</span>
+          <span className="block mt-1 md:mt-4">experiences</span>
         </h1>
 
         {/* Sub-text and Decorative Circle */}
@@ -58,7 +58,7 @@ export default function Hero() {
               className="capitalize"
               style={{
                 fontFamily: "var(--font-satoshi)",
-                fontWeight: 500,
+                fontWeight: 600,
                 fontSize: "clamp(16px, 2vw, 20px)",
                 lineHeight: "1.6",
                 color: "#0F1D07",
@@ -70,7 +70,7 @@ export default function Hero() {
               className="capitalize"
               style={{
                 fontFamily: "var(--font-satoshi)",
-                fontWeight: 500,
+                fontWeight: 600,
                 fontSize: "clamp(16px, 2vw, 20px)",
                 lineHeight: "1.6",
                 color: "#0F1D07",

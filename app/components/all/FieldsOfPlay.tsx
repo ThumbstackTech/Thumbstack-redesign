@@ -70,7 +70,7 @@ export default function FieldsOfPlay() {
 
   return (
     <section id="fields-of-play" onMouseLeave={() => setActiveItem(null)} className="min-h-fit lg:min-h-[1137px] w-full flex flex-col items-center bg-white overflow-hidden relative py-12 md:py-20 lg:py-0">
-      
+
       {/* ==========================================
           MOBILE UI (Matches Design Reference)
           ========================================== */}
@@ -91,7 +91,7 @@ export default function FieldsOfPlay() {
 
         {/* Header Block */}
         <div className="mb-8 flex flex-col gap-4">
-          <h2 className="text-[#0F1D07] font-medium text-[48px] leading-[1.1] font-delight">Fields Of Play</h2>
+          <h2 className="text-[#0F1D07] font-semibold text-[48px] leading-[1.1] font-delight">Fields Of Play</h2>
           <p className="text-[#0F1D07] font-medium text-[16px] font-satoshi">We build the remarkable, not the routine</p>
         </div>
 
@@ -174,9 +174,14 @@ export default function FieldsOfPlay() {
             className="text-[#0F1D07] capitalize"
             style={{
               fontFamily: "var(--font-delight)",
-              fontWeight: 500,
+              fontWeight: 600,
               fontSize: "100.369px",
-              lineHeight: "147px"
+              lineHeight: "147px",
+              width: "613px",
+              height: "148px",
+              display: "flex",
+              alignItems: "center",
+              whiteSpace: "nowrap"
             }}
           >
             Fields Of Play
@@ -204,13 +209,13 @@ export default function FieldsOfPlay() {
                 <div className="flex flex-col gap-2 w-1/2 pl-[104px]">
                   <h3
                     className={`transition-colors duration-300 ${activeItem === field.id ? 'text-white' : 'text-[#0F1D07]'}`}
-                      style={{
-                        fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
-                        fontWeight: activeItem === field.id ? 500 : 400,
-                        fontSize: "28px",
-                        lineHeight: "44px",
-                        letterSpacing: "-0.02em"
-                      }}
+                    style={{
+                      fontFamily: activeItem === field.id ? "var(--font-nohemi)" : "var(--font-delight)",
+                      fontWeight: activeItem === field.id ? 500 : 400,
+                      fontSize: "28px",
+                      lineHeight: "44px",
+                      letterSpacing: "-0.02em"
+                    }}
                   >
                     {field.title}
                   </h3>
@@ -222,12 +227,12 @@ export default function FieldsOfPlay() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         className="text-white/70 overflow-hidden whitespace-nowrap"
-                          style={{
-                            fontFamily: "var(--font-satoshi)",
-                            fontWeight: 700,
-                            fontSize: "16px",
-                            lineHeight: "39px"
-                          }}
+                        style={{
+                          fontFamily: "var(--font-satoshi)",
+                          fontWeight: 700,
+                          fontSize: "16px",
+                          lineHeight: "39px"
+                        }}
                       >
                         {field.subtitle}
                       </motion.p>

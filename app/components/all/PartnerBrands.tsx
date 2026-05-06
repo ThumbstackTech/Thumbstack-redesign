@@ -36,13 +36,14 @@ export default function PartnerBrands() {
   return (
     <section className="w-full flex flex-col items-center py-[100px] px-8 lg:px-24 snap-start relative bg-white overflow-hidden">
       <div className="w-full max-w-[1602px] flex flex-col items-center">
-        
-        <h2 
+
+        <h2
           className="text-center capitalize mb-[40px] md:mb-[64px]"
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 500,
             fontSize: 'clamp(32px, 8vw, 100.37px)',
+            letterSpacing: "-0.05em",
             lineHeight: '1.2',
             color: '#0F1D07',
           }}
