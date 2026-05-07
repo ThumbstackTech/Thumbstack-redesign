@@ -14,8 +14,14 @@ export default function HeroNewsAndInsights() {
         <div className="flex flex-col relative z-10 mt-20 md:mt-32">
           <Link
             href="#"
-            className="text-white font-medium flex items-center gap-2 hover:opacity-75 transition-opacity mb-8 md:mb-12"
-            style={{ fontFamily: "var(--font-satoshi)", fontSize: "clamp(14px, 1.2vw, 16px)" }}
+            className="text-white flex items-center gap-2 hover:opacity-75 transition-opacity mb-8 md:mb-12"
+            style={{ 
+              fontFamily: "var(--font-satoshi)", 
+              fontWeight: 700,
+              fontSize: "14px",
+              lineHeight: "28px",
+              letterSpacing: "0%"
+            }}
           >
             Let&apos;s Build Together
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,8 +43,9 @@ export default function HeroNewsAndInsights() {
               style={{
                 fontFamily: "var(--font-delight)",
                 fontWeight: 600,
-                fontSize: "clamp(2.5rem, 8vw, 114px)",
-                lineHeight: "1.1",
+                fontSize: "clamp(48px, 8vw, 114.45px)",
+                lineHeight: "143.07px",
+                letterSpacing: "-0.02em",
                 verticalAlign: "middle"
               }}
             >
@@ -50,14 +57,16 @@ export default function HeroNewsAndInsights() {
               className="text-white/90"
               style={{
                 fontFamily: "var(--font-satoshi)",
-                fontWeight: 500,
-                fontSize: "clamp(14px, 1.2vw, 16px)",
-                lineHeight: "1.6",
+                fontWeight: 700,
+                fontSize: "14px",
+                lineHeight: "28px",
+                letterSpacing: "0%",
                 maxWidth: "600px"
               }}
             >
-              We document what we learn — from design sprints to engineering breakthroughs,
-              new project launches, experiments, and <br className="hidden md:block" /> small discoveries that move our work forward.
+              We document what we learn — from design sprints to engineering<br />
+              breakthroughs, new project launches, experiments, and small<br />
+              discoveries that move our work forward.
             </p>
           </div>
         </div>

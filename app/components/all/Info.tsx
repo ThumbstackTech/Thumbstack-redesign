@@ -15,19 +15,7 @@ export default function Info() {
           left: "489px",
           top: "-58px",
           background: "rgba(228, 249, 244, 0.18)",
-          filter: "blur(124.52px)",
-        }}
-      />
-
-      {/* Central White Glow Effect - "In between" */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-40"
-        style={{
-          width: "1200px",
-          height: "1200px",
-          background: "radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%)",
-          filter: "blur(150px)",
-          zIndex: 0
+          filter: "blur(124.522px)",
         }}
       />
 
@@ -48,7 +36,7 @@ export default function Info() {
             className="text-white opacity-90"
             style={{
               fontFamily: "var(--font-satoshi)",
-              fontSize: "14px",
+              fontSize: "16px",
               lineHeight: "30px",
               fontWeight: 400,
             }}
@@ -60,8 +48,8 @@ export default function Info() {
             style={{
               fontFamily: "var(--font-delight)",
               fontWeight: 500,
-              fontSize: "clamp(24px, 5vw, 38px)",
-              lineHeight: "1.4",
+              fontSize: "40px",
+              lineHeight: "60px",
               maxWidth: "868px",
               textTransform: "capitalize",
             }}
@@ -75,17 +63,23 @@ export default function Info() {
 
       {/* Image Container - Component 141 */}
       <div
-        className="absolute pointer-events-none z-20 right-[-50px] md:right-[0px] bottom-[-20px] md:bottom-[-60px] w-[300px] h-[300px] md:w-[520px] md:h-[520px] opacity-30 md:opacity-100"
+        className="absolute pointer-events-none z-20"
+        style={{
+          width: "520px",
+          height: "520px",
+          left: "calc(50% - 520px/2 + 484px)",
+          top: "198px",
+        }}
       >
         <div
-          className="relative w-full h-full"
+          className="relative"
           style={{
-            // This is the effect that makes it match the image glow
+            width: "367.15px",
+            height: "366.37px",
+            left: "calc(50% - 367.15px/2 - 37.62px)",
+            top: "calc(50% - 237.37px/2 - 37.98px)",
             mixBlendMode: "plus-lighter",
-            // Corrected rotation: The CSS -76deg often flips it wrong in browsers
-            // -15deg to -20deg matches the 'flow' in your screenshot
-            transform: "rotate(-15deg)",
-            filter: "drop-shadow(0 20px 50px rgba(0,0,0,0.2))",
+            transform: "rotate(-0.48deg)",
           }}
         >
           <Image

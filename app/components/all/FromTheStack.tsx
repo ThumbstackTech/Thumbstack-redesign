@@ -135,11 +135,11 @@ export default function FromTheStack() {
         <div className="flex flex-col md:flex-row justify-between items-start w-full gap-6 sm:gap-8">
           <div className="flex flex-col gap-3 sm:gap-4">
             <h2
-              className="text-sidebar font-medium"
+              className="text-[#0F1D07] font-medium"
               style={{
-                fontFamily: "var(--font-nohemi)",
-                fontSize: "clamp(2rem, 6vw, 84px)",
-                lineHeight: "1.2",
+                fontFamily: "var(--font-delight)",
+                fontSize: "clamp(48px, 8vw, 100.369px)",
+                lineHeight: "134px",
                 letterSpacing: "-2%",
                 textTransform: "capitalize",
               }}

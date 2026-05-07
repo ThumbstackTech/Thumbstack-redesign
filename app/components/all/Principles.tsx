@@ -136,10 +136,12 @@ export default function Principles() {
             style={{
               fontFamily: "var(--font-delight)",
               fontWeight: 500,
-              fontSize: "clamp(24px, 5vw, 54px)",
-              lineHeight: "1.1",
+              fontSize: "clamp(32px, 5vw, 60px)",
+              lineHeight: "1.47", // 88px / 60px
               color: "#FFFFFF",
-              maxWidth: "800px"
+              maxWidth: "916px",
+              display: "flex",
+              alignItems: "center"
             }}
           >
             Every Capability Runs Through The Same System.

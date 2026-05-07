@@ -87,7 +87,7 @@ export default function FieldsOfPlay() {
         </div>
 
         {/* Separator Line */}
-        <div className="w-[110%] -ml-6 h-[1px] bg-black/20 mb-12" />
+        <div className="w-[calc(110%-4px)] -ml-[12px] h-[1px] bg-black/20 mb-12" />
 
         {/* Header Block */}
         <div className="mb-8 flex flex-col gap-4">
@@ -96,7 +96,7 @@ export default function FieldsOfPlay() {
         </div>
 
         {/* Separator Line */}
-        <div className="w-[110%] -ml-6 h-[1px] bg-black/20 mb-0" />
+        <div className="w-[calc(110%-4px)] -ml-[22px] h-[1px] bg-black/20 mb-0" />
 
         {/* List */}
         <div className="flex flex-col">
@@ -128,7 +128,7 @@ export default function FieldsOfPlay() {
               fontSize: "16px",
               lineHeight: "28px",
               width: "179px",
-              letterSpacing: "0.05em"
+              letterSpacing: "0%"
             }}
           >
             We build the <br />
@@ -166,7 +166,7 @@ export default function FieldsOfPlay() {
 
         <div
           className="absolute top-[128px] border-t border-black"
-          style={{ left: "730px", width: "872px" }}
+          style={{ left: "959px", width: "545px" }}
         />
 
         <div className="absolute left-[859px] top-[222px]">
@@ -192,7 +192,7 @@ export default function FieldsOfPlay() {
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 top-[420px] w-full max-w-[1600px] flex flex-col gap-[55px] isolation-isolate">
-          <div style={{ width: "100%", height: 0, borderTop: "2px solid #000000", flexShrink: 0 }} />
+          <div style={{ width: "calc(100% - 208px)", marginLeft: "104px", height: 0, borderTop: "2px solid #000000", flexShrink: 0 }} />
 
           {fields.map((field) => (
             <div key={field.id}>
@@ -279,7 +279,7 @@ export default function FieldsOfPlay() {
                 </AnimatePresence>
 
                 <div
-                  style={{ width: "100%", height: 0, borderTop: "2px solid #000000", flexShrink: 0 }}
+                  style={{ width: "calc(100% - 208px)", marginLeft: "104px", height: 0, borderTop: "2px solid #000000", flexShrink: 0 }}
                   className={`absolute bottom-[-28px] left-0 transition-opacity ${activeItem === field.id ? 'opacity-0' : 'opacity-100'}`}
                 />
               </motion.div>

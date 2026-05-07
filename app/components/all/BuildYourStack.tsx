@@ -116,21 +116,21 @@ export default function BuildYourStack() {
               <h2
                 className="text-[#0F1D07] capitalize tracking-tight"
                 style={{
-                  fontFamily: "var(--font-nohemi)",
+                  fontFamily: "var(--font-delight)",
                   fontWeight: 500,
-                  fontSize: "clamp(48px, 5vw, 114px)",
-                  lineHeight: "1",
+                  fontSize: "clamp(48px, 5vw, 100.369px)",
+                  lineHeight: "134px",
                 }}
               >
                 Build Your Stack.
               </h2>
               <p
-                className="text-[#0F1D07] max-w-[696px]"
+                className="text-[#0F1D07] max-w-[742px]"
                 style={{
                   fontFamily: "var(--font-satoshi)",
                   fontWeight: 700,
                   fontSize: "14px",
-                  lineHeight: "30px",
+                  lineHeight: "26px",
                 }}
               >
                 A fun little estimator to help you imagine what it&apos;ll take to bring your idea to life. One block at a time.

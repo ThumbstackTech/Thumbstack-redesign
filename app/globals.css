@@ -10,7 +10,7 @@
   --sidebar-hover: #3145DD;
   --mint-green: #A8F2D1;
   --vibrant-blue: #3B5EDB;
-  --font-delight: "Clash Display", "Nohemi", var(--font-inter), sans-serif;
+  --font-delight: var(--font-delight-local), "Clash Display", "Nohemi", var(--font-inter), sans-serif;
   --font-nohemi: "Nohemi", var(--font-inter), sans-serif;
   --font-satoshi: "Satoshi Variable", "Satoshi", var(--font-inter), sans-serif;
 }

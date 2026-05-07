@@ -106,7 +106,7 @@ export default function Sidebar() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex flex-col gap-4 sm:gap-2 mt-4 sm:mt-24 md:pl-24">
+          <nav className="flex flex-col gap-4 sm:gap-4 mt-4 sm:mt-24 md:pl-24">
             {[
               { name: "Capabilities", href: "/#fields-of-play" },
               { name: "Our Work", href: "/our-work" },
@@ -120,7 +120,7 @@ export default function Sidebar() {
                 onClick={() => setMenuOpen(false)}
                 className="text-white font-medium hover:text-[#95E7D3] transition-colors w-fit leading-[1.1]"
                 style={{
-                  fontSize: "clamp(38px, 9vw, 84px)",
+                  fontSize: "clamp(48px, 10vw, 84px)",
                 }}
               >
                 {item.name}

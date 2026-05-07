@@ -139,7 +139,13 @@ export default function ArticlesList() {
         </div>
 
         {/* ── Interactive List + Image (Desktop) ── */}
-        <div className="relative w-full hidden lg:flex flex-col border-t border-black">
+        {/* Top line matching Fields of Play style */}
+        <div 
+          style={{ width: "calc(100% - 100px)", marginLeft: "50px", height: 0, borderTop: "1px solid #000000" }} 
+          className="hidden lg:block mb-[-1px]"
+        />
+
+        <div className="relative w-full hidden lg:flex flex-col gap-[55px] isolation-isolate">
           {articles.map((article) => (
             <motion.div
               key={`desktop-${article.id}`}
@@ -147,17 +153,17 @@ export default function ArticlesList() {
               onMouseLeave={handleMouseLeave}
               onClick={() => setActiveItem(article.id)}
               animate={{
-                paddingTop: activeItem === article.id ? "32px" : "24px",
-                paddingBottom: activeItem === article.id ? "32px" : "24px",
+                paddingTop: activeItem === article.id ? "21.5px" : "16.5px",
+                paddingBottom: activeItem === article.id ? "21.5px" : "16.5px",
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className={`w-full group cursor-pointer relative ${
                 activeItem === article.id
                   ? "before:content-[''] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] border-none shadow-2xl z-20"
-                  : "bg-transparent border-b border-black"
+                  : "bg-transparent"
               }`}
             >
-              <div className="flex flex-col items-start w-full md:w-1/2 gap-1">
+              <div className="flex flex-col items-start w-full md:w-1/2 gap-1 pl-[50px]">
                 {/* Title */}
                 <h3
                   className={`transition-colors duration-300 ${
@@ -297,8 +303,14 @@ export default function ArticlesList() {
                     </div>
                   </motion.div>
                 )}
-              </AnimatePresence>
-            </motion.div>
+                </AnimatePresence>
+
+                {/* Separator line matching Fields of Play style */}
+                <div
+                  style={{ width: "calc(100% - 100px)", marginLeft: "50px", height: 0, borderTop: "2px solid #000000", flexShrink: 0 }}
+                  className={`absolute bottom-[-28px] left-0 transition-opacity ${activeItem === article.id ? 'opacity-0' : 'opacity-100'}`}
+                />
+              </motion.div>
           ))}
         </div>
 

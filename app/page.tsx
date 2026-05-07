@@ -29,7 +29,6 @@ export default async function Home() {
       <PartnerBrands />
       <Principles />
       <WorkItem />
-      <div className="h-20 bg-white" />
       <ProductDriven />
       <FromTheStack />
       <BuildYourStack />

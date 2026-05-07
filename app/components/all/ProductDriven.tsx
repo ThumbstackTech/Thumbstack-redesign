@@ -127,15 +127,16 @@ export default function ProductDriven() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-[#1A1A1A] flex flex-col text-center"
+          className="text-[#0F1D07] flex flex-col text-center"
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 500,
-            fontSize: "clamp(2rem, 7vw, 100.37px)",
-            lineHeight: "147.21px",
+            fontSize: "clamp(48px, 8vw, 105px)",
+            lineHeight: "147px",
             letterSpacing: "0%",
             verticalAlign: "middle",
             textTransform: "capitalize",
+            textAlign: "center"
           }}
         >
           <span>Product-Smart.</span>
@@ -152,4 +153,3 @@ export default function ProductDriven() {
     </section>
   );
 }
-

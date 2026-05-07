@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function WorkItem() {
   return (
-    <section className="w-full min-h-[auto] lg:min-h-[967px] flex flex-col items-center justify-start lg:justify-center bg-white overflow-hidden md:pl-[52px] md:pr-[90px] py-12 lg:py-0">
+    <section className="w-full min-h-[auto] lg:min-h-[967px] flex flex-col items-center justify-start lg:justify-center bg-white overflow-hidden md:pl-[0px] md:pr-[90px] py-12 lg:py-0">
       <div className="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center">
         {/* Left Side: Featured Image (Frame 2085663066) */}
         <div className="relative w-full lg:w-[55%] h-[400px] md:h-[600px] lg:h-[967px] flex-shrink-0 rounded-none overflow-hidden">
@@ -30,11 +30,11 @@ export default function WorkItem() {
         </div>
 
         {/* Right Side: Content (Frame 2087326363) */}
-        <div className="flex flex-col flex-1 items-start justify-center px-8 lg:px-0 lg:pl-[50px] py-12 lg:py-0">
+        <div className="flex flex-col flex-1 items-start justify-center px-8 lg:px-0 lg:pl-[20px] py-12 lg:py-0">
           <div className="flex flex-col max-w-[664px] gap-[104px]">
 
             {/* Top Content (Frame 2087326716) */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-[18px]">
               {/* Tags (Frame 2087326541) */}
               <div className="flex flex-wrap gap-6">
                 {["Design", "E-Commerce", "AI"].map((tag) => (
@@ -52,19 +52,20 @@ export default function WorkItem() {
               <h2
                 className="font-medium capitalize"
                 style={{
-                  fontFamily: "var(--font-nohemi)",
-                  fontSize: "clamp(36px, 8vw, 52px)",
-                  lineHeight: "1.2",
+                  fontFamily: "var(--font-delight)",
+                  fontWeight: 500,
+                  fontSize: "clamp(32px, 8vw, 56px)",
+                  lineHeight: "72px",
                   color: "#0F1D07",
-                  maxWidth: "623px",
+                  maxWidth: "700px",
                   width: "100%",
                   display: "flex",
                   alignItems: "center"
                 }}
               >
                 Redefining How Luxury<br />
-                Clothing Connects<br />
-                With The World
+                Clothing Connects With<br />
+                The World
               </h2>
             </div>
 

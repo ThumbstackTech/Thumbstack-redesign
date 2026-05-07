@@ -35,7 +35,7 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 600,
-            fontSize: "clamp(32px, 8vw, 125px)",
+            fontSize: "clamp(32px, 8vw, 135px)",
             letterSpacing: "-0.01em",
             color: "#3145DD",
           }}
