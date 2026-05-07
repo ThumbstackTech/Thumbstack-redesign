@@ -132,7 +132,7 @@ export default function ProductDriven() {
             fontFamily: "var(--font-delight)",
             fontWeight: 500,
             fontSize: "clamp(48px, 8vw, 105px)",
-            lineHeight: "147px",
+            lineHeight: "clamp(60px, 10vw, 147px)",
             letterSpacing: "0%",
             verticalAlign: "middle",
             textTransform: "capitalize",

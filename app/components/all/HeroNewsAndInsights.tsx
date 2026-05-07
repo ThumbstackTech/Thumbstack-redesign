@@ -44,12 +44,12 @@ export default function HeroNewsAndInsights() {
                 fontFamily: "var(--font-delight)",
                 fontWeight: 600,
                 fontSize: "clamp(48px, 8vw, 114.45px)",
-                lineHeight: "143.07px",
+                lineHeight: "clamp(60px, 10vw, 143.07px)",
                 letterSpacing: "-0.02em",
                 verticalAlign: "middle"
               }}
             >
-              Ideas, News & Notes<br />
+              Ideas, News & Notes<br className="hidden md:block" />
               From The Studio.
             </h1>
 
@@ -64,8 +64,8 @@ export default function HeroNewsAndInsights() {
                 maxWidth: "600px"
               }}
             >
-              We document what we learn — from design sprints to engineering<br />
-              breakthroughs, new project launches, experiments, and small<br />
+              We document what we learn — from design sprints to engineering<br className="hidden md:block" />
+              breakthroughs, new project launches, experiments, and small<br className="hidden md:block" />
               discoveries that move our work forward.
             </p>
           </div>

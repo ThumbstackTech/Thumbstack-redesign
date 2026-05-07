@@ -55,7 +55,7 @@ export default function WorkItem() {
                   fontFamily: "var(--font-delight)",
                   fontWeight: 500,
                   fontSize: "clamp(32px, 8vw, 56px)",
-                  lineHeight: "72px",
+                  lineHeight: "clamp(40px, 8vw, 72px)",
                   color: "#0F1D07",
                   maxWidth: "700px",
                   width: "100%",
@@ -63,8 +63,8 @@ export default function WorkItem() {
                   alignItems: "center"
                 }}
               >
-                Redefining How Luxury<br />
-                Clothing Connects With<br />
+                Redefining How Luxury<br className="hidden lg:block" />
+                Clothing Connects With<br className="hidden lg:block" />
                 The World
               </h2>
             </div>
