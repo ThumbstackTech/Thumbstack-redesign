@@ -25,7 +25,7 @@ export const projects = [
     accentColor: "#2C2BAA",
     cursorColor: "#A8F2D1",
     websiteUrl: "#",
-    caseStudyUrl: "#",
+    caseStudyUrl: "/case-study/squlio",
     layout: "mobile",
     images: {
       main: "/Home.png",
@@ -49,7 +49,7 @@ export const projects = [
     accentColor: "#2C3E35",
     cursorColor: "#7ECBB5",
     websiteUrl: "https://bharatflooringandtiles.com",
-    caseStudyUrl: "#",
+    caseStudyUrl: "/case-study/bft",
     layout: "desktop",
     images: {
       main: "/BFT2.jpg",
@@ -73,7 +73,7 @@ export const projects = [
     accentColor: "#C4291C",
     cursorColor: "#F5D5D0",
     websiteUrl: "#",
-    caseStudyUrl: "#",
+    caseStudyUrl: "/case-study/siorai",
     layout: "desktop",
     images: {
       main: "/siorai.png",
