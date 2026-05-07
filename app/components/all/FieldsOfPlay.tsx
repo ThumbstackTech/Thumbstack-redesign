@@ -87,16 +87,16 @@ export default function FieldsOfPlay() {
         </div>
 
         {/* Separator Line */}
-        <div className="w-[calc(110%-4px)] -ml-[12px] h-[1px] bg-black/20 mb-12" />
+        <div className="w-[calc(100%+48px)] -ml-6 h-[1px] bg-black/20 mb-12" />
 
         {/* Header Block */}
         <div className="mb-8 flex flex-col gap-4">
-          <h2 className="text-[#0F1D07] font-semibold text-[48px] leading-[1.1] font-delight">Fields Of Play</h2>
+          <h2 className="text-[#0F1D07] font-semibold text-[48px] leading-[1.1] font-delight">Capabilities</h2>
           <p className="text-[#0F1D07] font-medium text-[16px] font-satoshi">We build the remarkable, not the routine</p>
         </div>
 
         {/* Separator Line */}
-        <div className="w-[calc(110%-4px)] -ml-[22px] h-[1px] bg-black/20 mb-0" />
+        <div className="w-[calc(100%+48px)] -ml-6 h-[1px] bg-black/20 mb-0" />
 
         {/* List */}
         <div className="flex flex-col">

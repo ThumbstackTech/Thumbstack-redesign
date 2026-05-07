@@ -29,13 +29,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${delight.variable} h-full antialiased overflow-x-hidden w-full`}
+      className={`${inter.variable} ${delight.variable} h-full antialiased w-full`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-white overflow-x-hidden" suppressHydrationWarning>
         <SmoothScroll>
           <Sidebar />
-          <main className="flex-1 flex flex-col bg-white w-full overflow-x-hidden">
+          <main className="flex-1 flex flex-col bg-white w-full">
             {children}
           </main>
         </SmoothScroll>
