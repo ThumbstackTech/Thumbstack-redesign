@@ -89,11 +89,8 @@ export default function FromTheStack() {
   const smoothY = useSpring(mouseY, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      mouseX.set(e.clientX - rect.left);
-      mouseY.set(e.clientY - rect.top);
-    }
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
   };
 
   const stackItems = [
@@ -125,11 +122,7 @@ export default function FromTheStack() {
 
   return (
     <section
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-      className="min-h-screen w-full flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-24 snap-start relative bg-white overflow-hidden cursor-none"
+      className="min-h-screen w-full flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-24 snap-start relative bg-white overflow-hidden"
     >
       <div className="w-full max-w-[1600px] flex flex-col mb-8 sm:mb-12">
         <div className="flex flex-col md:flex-row justify-between items-start w-full gap-6 sm:gap-8">
@@ -175,12 +168,24 @@ export default function FromTheStack() {
         </div>
       </div>
 
-      {/* Auto-moving Carousel (Marquee) */}
-      <div className="w-full relative flex overflow-hidden group">
-        <div className="flex gap-4 sm:gap-6 md:gap-8 animate-[marquee-x_30s_linear_infinite] group-hover:[animation-play-state:paused] py-3 sm:py-4 items-stretch">
-          {[...stackItems, ...stackItems].map((item, idx) => (
-            <StackCard key={`${item.id}-${idx}`} item={item} idx={idx} />
-          ))}
+      {/* Draggable Carousel */}
+      <div 
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        className="w-full relative flex overflow-hidden group cursor-none py-4"
+      >
+        <div className="flex animate-[marquee-x_30s_linear_infinite] group-hover:[animation-play-state:paused]">
+          <motion.div 
+            drag="x"
+            dragConstraints={{ left: -1000, right: 1000 }}
+            className="flex gap-4 sm:gap-6 md:gap-8 items-stretch w-max"
+          >
+            {[...stackItems, ...stackItems].map((item, idx) => (
+              <StackCard key={`${item.id}-${idx}`} item={item} idx={idx} />
+            ))}
+          </motion.div>
         </div>
       </div>
 

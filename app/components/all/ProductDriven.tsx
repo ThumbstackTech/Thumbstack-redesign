@@ -37,25 +37,25 @@ export default function ProductDriven() {
   // Positions arranged around the periphery, keeping center clear for text
   const positions = [
     // Top row
-    { top: "4%", left: "3%" },       // Flutter (top-left corner)
-    { top: "2%", left: "16%" },      // Shopify
+    { top: "4%", left: "10%" },       // Flutter (top-left corner)
+    { top: "2%", left: "22%" },      // Shopify
     { top: "1%", left: "35%" },      // Meta
     { top: "8%", left: "55%" },      // 8thWall logo area
     { top: "3%", left: "73%" },      // Segment
     // Upper sides
-    { top: "14%", left: "9%" },      // 8thWall
+    { top: "14%", left: "14%" },      // 8thWall
     { top: "12%", left: "25%" },     // Figma
     { top: "10%", right: "3%" },     // Android
     { top: "15%", right: "12%" },    // Group icon
     { top: "20%", right: "25%" },    // ReactJS
     // Middle sides (far left & right only)
-    { top: "38%", left: "1%" },      // Apple
-    { top: "32%", left: "10%" },     // Ollama
+    { top: "38%", left: "9%" },      // Apple
+    { top: "32%", left: "18%" },     // Ollama
     { top: "42%", right: "2%" },     // Next.js
     { top: "28%", right: "5%" },     // Bitcoin/Group
     // Lower sides
-    { top: "55%", left: "2%" },      // Ellipse
-    { top: "60%", left: "15%" },     // Midjourney
+    { top: "55%", left: "11%" },      // Ellipse
+    { top: "60%", left: "20%" },     // Midjourney
     { top: "58%", right: "4%" },     // Nuxt
     { top: "52%", right: "15%" },    // Vue/Mint
     // Bottom row
@@ -63,7 +63,7 @@ export default function ProductDriven() {
     { top: "70%", left: "35%" },     // Segment alt
     { top: "75%", right: "30%" },    // Ghost
     { top: "78%", right: "15%" },    // Node
-    { top: "85%", left: "5%" },      // WordPress
+    { top: "85%", left: "12%" },      // WordPress
     { top: "82%", left: "28%" },     // Group 594
     { top: "88%", right: "3%" },     // Group 598
   ];
