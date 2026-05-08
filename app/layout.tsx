@@ -13,6 +13,11 @@ const delight = localFont({
   variable: "--font-delight-local",
 });
 
+const satoshi = localFont({
+  src: "../public/fonts/Satoshi-Variable.ttf",
+  variable: "--font-satoshi-local",
+});
+
 export const metadata: Metadata = {
   title: "Thumbstack.",
   description: "Designing and building meaningful digital experiences.",
@@ -29,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${delight.variable} h-full antialiased w-full`}
+      className={`${inter.variable} ${delight.variable} ${satoshi.variable} h-full antialiased w-full`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-white overflow-x-hidden" suppressHydrationWarning>

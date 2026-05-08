@@ -17,6 +17,7 @@ import HeroWork from "./components/all/HeroWork";
 import AboutHero from "./components/all/AboutHero";
 import WorkInfo from "./components/all/WorkInfo";
 import Team from "./components/all/Team";
+import CapabilitiesHero from "./components/all/CapabilitiesHero";
 
 import { fetchStrapi } from "./lib/strapi";
 
@@ -36,13 +37,17 @@ export default async function Home() {
       <NewsAndInsightsGrid />
       <ArticlesList />
       <HeroWork />
-      <Info />
       <WorkInfo />
       <AboutHero />
+      <Info />
       <Team />
+      <CapabilitiesHero />
       <LetsTalk />
       <Footer />
     </div>
   );
 }
+
+
+
 

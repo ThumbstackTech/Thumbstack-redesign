@@ -75,8 +75,8 @@ export default function Info() {
             style={{
               width: "367.15px",
               height: "366.37px",
-              left: "calc(50% - 367.15px/2 - 37.62px)",
-              top: "calc(50% - 237.37px/2 - 37.98px)",
+              left: "calc(30% - 367.15px/2 - 37.62px)",
+              top: "calc(50% - 537.37px/2 - 37.98px)",
               mixBlendMode: "plus-lighter",
               transform: "rotate(-0.48deg)",
             }}
