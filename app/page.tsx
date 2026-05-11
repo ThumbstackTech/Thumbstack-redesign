@@ -22,6 +22,9 @@ import ServiceHero from "./components/all/ServiceHero";
 import CapabilitiesInfo from "./components/all/capabilitiesinfo";
 import WhatWeBuild from "./components/all/WhatWeBuild";
 import CapabilitiesFeatures from "./components/all/CapabilitiesFeatures";
+import RightStack from "./components/all/RightStack";
+import CapabilitiesFAQ from "./components/all/CapabilitiesFAQ";
+import BestFit from "./components/all/BestFit";
 
 import { fetchStrapi } from "./lib/strapi";
 
@@ -50,6 +53,9 @@ export default async function Home() {
       <CapabilitiesInfo />
       <CapabilitiesFeatures />
       <WhatWeBuild />
+      <RightStack />
+      <BestFit />
+      <CapabilitiesFAQ />
       <LetsTalk />
       <Footer />
     </div>
