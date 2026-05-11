@@ -22,4 +22,5 @@ export interface CaseStudyData {
   gallery: GalleryImage[];
   projectUrl: string;
   accentColor?: string;
+  backgroundColor?: string;
 }

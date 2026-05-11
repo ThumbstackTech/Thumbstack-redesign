@@ -37,6 +37,7 @@ export const caseStudies: Record<string, CaseStudyData> = {
     ],
     projectUrl: "#",
     accentColor: "#C4291C",
+    backgroundColor: "#111111",
   },
 
   squlio: {
@@ -80,6 +81,7 @@ export const caseStudies: Record<string, CaseStudyData> = {
     ],
     projectUrl: "#",
     accentColor: "#6462E7",
+    backgroundColor: "#665EE3",
   },
 
   bft: {
@@ -118,5 +120,6 @@ export const caseStudies: Record<string, CaseStudyData> = {
     ],
     projectUrl: "https://bharatflooringandtiles.com",
     accentColor: "#2C3E35",
+    backgroundColor: "#68807B",
   },
 };

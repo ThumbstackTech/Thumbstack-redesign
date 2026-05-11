@@ -34,6 +34,9 @@ const FadeUp = ({
 /* ── Main Component ──────────────────────────────────────────────────── */
 export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
   const accent = data.accentColor ?? "#3145DD";
+  const bg = data.backgroundColor ?? "#141417";
+  // Add 80% opacity to the hex color (CC is 80% in hex alpha)
+  const subtleBg = data.backgroundColor ? `${bg}CC` : "#212124";
   const experienceRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -44,7 +47,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
       ════════════════════════════════════════════════════════════════ */}
       <section
         className="relative w-full overflow-hidden"
-        style={{ background: "#141417" }}
+        style={{ background: bg }}
       >
         {/* Inner container — centred 1400px */}
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 pt-12 pb-16 md:pt-16 md:pb-20 flex flex-col gap-[54px]">
@@ -153,7 +156,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
       {/* ════════════════════════════════════════════════════════════════
           2. HERO IMAGE — #212124 dark panel
       ════════════════════════════════════════════════════════════════ */}
-      <section style={{ background: "#212124" }}>
+      <section style={{ background: subtleBg }}>
         <FadeUp>
           <div className="max-w-[1600px] mx-auto relative w-full aspect-[2/1] overflow-hidden">
             <Image
@@ -212,7 +215,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
           3.5. CHALLENGE IMAGES — Dark section
       ════════════════════════════════════════════════════════════════ */}
       {data.challengeImages && data.challengeImages.length > 0 && (
-        <section className="py-20 md:py-28" style={{ background: "#212124" }}>
+        <section className="py-20 md:py-28" style={{ background: subtleBg }}>
           <div className="max-w-[1408px] mx-auto px-6 md:px-16 lg:px-24">
             <FadeUp>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -306,7 +309,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
             {/* Right: Brand logo block */}
             {data.approachBrandText && (
               <FadeUp delay={0.15}>
-                <div className="flex items-center justify-center rounded-xl aspect-square w-full max-w-[500px] ml-auto bg-[#141417]">
+                <div className="flex items-center justify-center rounded-xl aspect-square w-full max-w-[500px] ml-auto" style={{ background: bg }}>
                   <span
                     className="tracking-[0.15em] uppercase"
                     style={{
@@ -328,7 +331,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
       {/* ════════════════════════════════════════════════════════════════
           5. QUOTE BLOCK — Light grey
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-[#F7F7F7]">
+      <section className="py-20 md:py-28" style={{ background: data.backgroundColor ? bg : "#F7F7F7" }}>
         <div className="max-w-[1408px] mx-auto px-6 md:px-16 lg:px-24">
           <FadeUp>
             <span
@@ -337,7 +340,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
                 fontFamily: "var(--font-delight)",
                 fontSize: "clamp(64px, 8vw, 96px)",
                 fontWeight: 700,
-                color: accent,
+                color: data.backgroundColor ? "#FFFFFF" : accent,
                 opacity: 0.8,
               }}
             >
@@ -346,13 +349,14 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
           </FadeUp>
           <FadeUp delay={0.1}>
             <blockquote
-              className="text-[#0F1D07] max-w-[900px]"
+              className="max-w-[900px]"
               style={{
                 fontFamily: "var(--font-delight)",
                 fontWeight: 500,
                 fontSize: "clamp(24px, 3.2vw, 44px)",
                 lineHeight: "1.3",
                 letterSpacing: "-0.02em",
+                color: data.backgroundColor ? "#FFFFFF" : "#0F1D07",
               }}
             >
               {data.quote}
@@ -432,7 +436,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
       ════════════════════════════════════════════════════════════════ */}
       <section
         className="py-28 md:py-36 px-6 text-center relative overflow-hidden"
-        style={{ background: "#0F1D07" }}
+        style={{ background: bg }}
       >
         {/* Subtle glow */}
         <div
