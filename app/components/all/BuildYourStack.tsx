@@ -239,14 +239,13 @@ export default function BuildYourStack() {
               {step === 1 && (
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col flex-1">
                   <h2
-                    className="mb-3"
+                    className="mb-3 w-full max-w-[550px]"
                     style={{
                       fontFamily: "var(--font-delight)",
                       fontWeight: 500,
-                      fontSize: "50px",
-                      lineHeight: "68px",
+                      fontSize: "clamp(32px, 8vw, 50px)",
+                      lineHeight: "1.2",
                       color: "#0F1D07",
-                      width: "550px",
                       display: "flex",
                       alignItems: "center"
                     }}
@@ -284,14 +283,13 @@ export default function BuildYourStack() {
               {step === 2 && (
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col flex-1">
                   <h2
-                    className="mb-3"
+                    className="mb-3 w-full max-w-[550px]"
                     style={{
                       fontFamily: "var(--font-delight)",
                       fontWeight: 500,
-                      fontSize: "50px",
-                      lineHeight: "68px",
+                      fontSize: "clamp(32px, 8vw, 50px)",
+                      lineHeight: "1.2",
                       color: "#0F1D07",
-                      width: "550px",
                       display: "flex",
                       alignItems: "center"
                     }}
@@ -329,21 +327,20 @@ export default function BuildYourStack() {
               {step === 3 && (
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col flex-1">
                   <h2
-                    className="mb-3"
+                    className="mb-3 w-full max-w-[614px]"
                     style={{
                       fontFamily: "var(--font-delight)",
                       fontWeight: 500,
-                      fontSize: "50px",
-                      lineHeight: "68px",
+                      fontSize: "clamp(32px, 8vw, 50px)",
+                      lineHeight: "1.2",
                       color: "#0F1D07",
-                      width: "614px",
                       display: "flex",
                       alignItems: "center"
                     }}
                   >
                     Cool – now tell us what it<br />needs to do
                   </h2>
-                  <p style={{ fontFamily: "var(--font-satoshi)", fontWeight: 400, fontSize: "18px", lineHeight: "39px", letterSpacing: "0%", color: "#0F1D07", width: "613px", display: "flex", alignItems: "center" }} className="mb-8">What&apos;s the job this product needs to accomplish?</p>
+                  <p style={{ fontFamily: "var(--font-satoshi)", fontWeight: 400, fontSize: "clamp(14px, 2vw, 18px)", lineHeight: "1.6", letterSpacing: "0%", color: "#0F1D07", maxWidth: "613px", display: "flex", alignItems: "center" }} className="mb-8">What&apos;s the job this product needs to accomplish?</p>
 
                   <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3">
                     {[

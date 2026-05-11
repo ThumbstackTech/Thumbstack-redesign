@@ -61,15 +61,15 @@ export default function Sidebar() {
       </aside>
 
       {/* Mobile Top Header - Visible only on mobile */}
-      <header className="fixed top-0 left-0 w-full h-[70px] bg-[#0F1D07] sm:hidden flex items-center justify-between px-8 z-[50] border-b border-white/5">
+      <header className="fixed top-0 left-0 w-full h-[70px] bg-[#0F1D07] sm:hidden flex items-center justify-between px-6 z-[50] border-b border-white/5">
         <Link href="/">
           <h1 className="text-[#95E7D3] font-medium text-[22px] tracking-tight">Thumbstack.</h1>
         </Link>
 
-        {/* Added mr-4 to push the button further left from the right edge */}
+        {/* Adjusted mr to align button better with right edge on mobile */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="p-2 mr-4 hover:opacity-70 transition-opacity"
+          className="p-2 mr-1 hover:opacity-70 transition-opacity"
           aria-label="Open Menu"
           suppressHydrationWarning
         >
@@ -85,20 +85,20 @@ export default function Sidebar() {
       <div className={`fixed inset-0 z-[9999] grid grid-cols-1 md:grid-cols-[1.8fr_1fr] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${menuOpen ? "translate-x-0" : "-translate-x-full"}`} suppressHydrationWarning>
         {/* Left Pane - Navigation */}
         <div className="bg-[#0F1D07] h-full w-full flex flex-col relative overflow-y-auto scrollbar-hide px-8 py-8 sm:p-10" onClick={(e) => e.stopPropagation()}>
-          {/* Top Row for Mobile: Logo and Close Button */}
-          <div className="flex justify-between items-center w-full mb-12 sm:absolute sm:top-10 sm:left-10 sm:block">
-            <Link href="/" onClick={() => setMenuOpen(false)}>
-              <h2 className="text-[#95E7D3] font-bold text-xl tracking-tight">Thumbstack.</h2>
+          {/* Top Row for Mobile: Logo and Close Button - Optimized for pixel-perfect alignment with the header */}
+          <div className="flex justify-between items-center h-[70px] px-6 mb-12 sm:h-auto sm:px-0 sm:absolute sm:top-10 sm:left-10 sm:block -mx-8 sm:mx-0 w-[calc(100%+64px)] sm:w-full">
+            <Link href="/" onClick={() => setMenuOpen(false)} className="sm:inline-block">
+              <h1 className="text-[#95E7D3] font-medium text-[22px] tracking-tight">Thumbstack.</h1>
             </Link>
 
-            {/* Close Button - Positioned top right on mobile, fixed bottom left on desktop */}
+            {/* Close Button - Positioned to exactly overlap the hamburger button */}
             <button
               onClick={() => setMenuOpen(false)}
-              className="sm:fixed sm:bottom-[60.5px] sm:left-[10.5px] text-white hover:text-[#95E7D3] transition-colors z-[10000] p-2 mr-4"
+              className="sm:fixed sm:bottom-[60.5px] sm:left-[10.5px] text-white hover:text-[#95E7D3] transition-colors z-[10000] p-2 mr-1"
               aria-label="Close Menu"
               suppressHydrationWarning
             >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>

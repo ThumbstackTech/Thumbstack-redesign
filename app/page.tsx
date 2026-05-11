@@ -18,6 +18,10 @@ import AboutHero from "./components/all/AboutHero";
 import WorkInfo from "./components/all/WorkInfo";
 import Team from "./components/all/Team";
 import CapabilitiesHero from "./components/all/CapabilitiesHero";
+import ServiceHero from "./components/all/ServiceHero";
+import CapabilitiesInfo from "./components/all/capabilitiesinfo";
+import WhatWeBuild from "./components/all/WhatWeBuild";
+import CapabilitiesFeatures from "./components/all/CapabilitiesFeatures";
 
 import { fetchStrapi } from "./lib/strapi";
 
@@ -42,6 +46,10 @@ export default async function Home() {
       <Info />
       <Team />
       <CapabilitiesHero />
+      <ServiceHero />
+      <CapabilitiesInfo />
+      <CapabilitiesFeatures />
+      <WhatWeBuild />
       <LetsTalk />
       <Footer />
     </div>
