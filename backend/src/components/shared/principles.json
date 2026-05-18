@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_principles",
+  "info": {
+    "displayName": "Principles (Our Process)",
+    "icon": "sync",
+    "description": "Our process principles with icons and descriptions"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Every Capability Runs Through The Same System."
+    },
+    "description": {
+      "type": "text",
+      "default": "Whether we are building a Shopify store, a custom website, a CMS platform, or a mobile app ecosystem, the process stays connected."
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.grid-item"
+    },
+    "marqueeItems": {
+      "type": "string",
+      "description": "Comma-separated items for the bottom marquee"
+    }
+  }
+}

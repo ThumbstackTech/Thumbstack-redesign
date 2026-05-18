@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_shared_footers",
+  "info": {
+    "displayName": "Footer",
+    "icon": "layout-bottom",
+    "description": "Global site footer with contact info, social links and quick links"
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string"
+    },
+    "subTagline": {
+      "type": "string"
+    },
+    "newsletterLabel": {
+      "type": "string"
+    },
+    "privacyLabel": {
+      "type": "string"
+    },
+    "privacyUrl": {
+      "type": "string"
+    },
+    "termsLabel": {
+      "type": "string"
+    },
+    "termsUrl": {
+      "type": "string"
+    },
+    "offices": {
+      "type": "component",
+      "component": "elements.office-item",
+      "repeatable": true
+    },
+    "quickLinks": {
+      "type": "component",
+      "component": "elements.nav-link",
+      "repeatable": true
+    }
+  }
+}

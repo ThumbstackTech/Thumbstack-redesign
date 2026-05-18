@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_shared_lets_talks",
+  "info": {
+    "displayName": "Let's Talk Form",
+    "icon": "mail",
+    "description": "Contact form section with background image and tagline"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Lets Create"
+    },
+    "tagline": {
+      "type": "string",
+      "default": "Get in touch"
+    },
+    "description": {
+      "type": "text",
+      "default": "Great products begin with simple conversations. Tell us what you're envisioning — the goals, the gaps, the sparks — and we'll come back with ideas, clarity, and a way forward that actually moves the needle."
+    },
+    "bgImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

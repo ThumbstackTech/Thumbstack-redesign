@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_elements_office_items",
+  "info": {
+    "displayName": "Office Item",
+    "icon": "map-pin",
+    "description": "A single office location with contact details"
+  },
+  "options": {},
+  "attributes": {
+    "city": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    },
+    "email": {
+      "type": "string"
+    }
+  }
+}

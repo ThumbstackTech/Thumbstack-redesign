@@ -1,0 +1,85 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project",
+    "description": "Portfolio projects with full visual configuration"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "bg": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "barBg": {
+      "type": "string"
+    },
+    "barBorder": {
+      "type": "string"
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "cursorColor": {
+      "type": "string",
+      "default": "#95E7D3"
+    },
+    "websiteUrl": {
+      "type": "string"
+    },
+    "caseStudyUrl": {
+      "type": "string"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "mobile",
+        "desktop"
+      ],
+      "default": "desktop"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "case_study": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::case-study.case-study",
+      "mappedBy": "project"
+    },
+    "mainImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "sideImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

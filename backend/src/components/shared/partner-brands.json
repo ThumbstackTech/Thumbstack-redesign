@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_partner_brands",
+  "info": {
+    "displayName": "Partner Brands",
+    "icon": "grid",
+    "description": "A grid of partner brand logos"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Partnered Brands."
+    },
+    "logos": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

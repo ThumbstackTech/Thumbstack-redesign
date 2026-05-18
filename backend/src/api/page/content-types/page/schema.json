@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Page",
+    "description": "General page builder"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.hero",
+        "shared.capabilities-features",
+        "shared.interactive-list",
+        "shared.partner-brands",
+        "shared.principles",
+        "shared.faq-section",
+        "shared.team-section",
+        "shared.lets-talk",
+        "shared.build-your-stack",
+        "shared.footer",
+        "shared.info",
+        "shared.what-we-build"
+      ]
+    }
+  }
+}

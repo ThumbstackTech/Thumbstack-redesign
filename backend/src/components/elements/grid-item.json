@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_elements_grid_items",
+  "info": {
+    "displayName": "Grid Item",
+    "icon": "box",
+    "description": "An item in a grid with icon, title, and description"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "description": "Upload SVG or Image icon"
+    }
+  }
+}

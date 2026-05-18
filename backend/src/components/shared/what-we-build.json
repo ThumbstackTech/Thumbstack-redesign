@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_what_we_builds",
+  "info": {
+    "displayName": "What We Build",
+    "icon": "puzzle-piece",
+    "description": "Tag-cloud section listing the types of websites/products built"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "json"
+    }
+  }
+}

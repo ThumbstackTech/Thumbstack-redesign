@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_elements_list_items",
+  "info": {
+    "displayName": "List Item",
+    "icon": "list",
+    "description": "An item in an interactive list with an image reveal"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "tags": {
+      "type": "string",
+      "description": "Comma-separated tags (optional)"
+    },
+    "link": {
+      "type": "string",
+      "default": "#"
+    }
+  }
+}

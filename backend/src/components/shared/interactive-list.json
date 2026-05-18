@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_interactive_lists",
+  "info": {
+    "displayName": "Interactive List",
+    "icon": "list-ul",
+    "description": "A section with a list of items that reveal images on hover"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "string"
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Let's Build Together"
+    },
+    "ctaLink": {
+      "type": "string",
+      "default": "/contact"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.list-item"
+    }
+  }
+}

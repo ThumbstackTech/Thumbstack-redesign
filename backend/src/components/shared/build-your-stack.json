@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_build_your_stacks",
+  "info": {
+    "displayName": "Build Your Stack Estimator",
+    "icon": "chart-pie",
+    "description": "Fun little interactive budget/stack estimator component"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Build Your Stack."
+    },
+    "description": {
+      "type": "text",
+      "default": "A fun little estimator to help you imagine what it'll take to bring your idea to life. One block at a time."
+    },
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_capabilities_features",
+  "info": {
+    "displayName": "Capabilities Features",
+    "icon": "layout",
+    "description": "Grid of capability groups and features"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Custom Website Design, Development, CMS, And Support."
+    },
+    "description": {
+      "type": "text",
+      "default": "A custom website needs more than pages. It needs the right structure, content system, technical foundation, and support path."
+    },
+    "groups": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.feature-group"
+    }
+  }
+}

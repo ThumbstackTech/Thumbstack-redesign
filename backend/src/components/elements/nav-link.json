@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_elements_nav_links",
+  "info": {
+    "displayName": "Nav Link",
+    "icon": "link",
+    "description": "A navigation link with a label and URL"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "capabilities_sections",
+  "info": {
+    "singularName": "capabilities-section",
+    "pluralName": "capabilities-sections",
+    "displayName": "Capabilities Section",
+    "description": "Content for the capabilities hero section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "Capabilities"
+    },
+    "title": {
+      "type": "string",
+      "default": "Digital Work, Built Across The Full Stack."
+    },
+    "description": {
+      "type": "text",
+      "default": "We work across websites, e-commerce, mobile apps, CMS platforms, custom products, AI led experiences, and long term support teams. Each capability is shaped through the same connected process: strategy, design, build, and growth."
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Start building"
+    },
+    "ctaLink": {
+      "type": "string",
+      "default": "/contact"
+    },
+    "viewWorkText": {
+      "type": "string",
+      "default": "View Our Work"
+    },
+    "viewWorkLink": {
+      "type": "string",
+      "default": "/our-work"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_infos",
+  "info": {
+    "displayName": "Info Banner",
+    "icon": "information",
+    "description": "Blue info banner with a tagline, heading, and optional decorative image"
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "text"
+    },
+    "decorativeImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

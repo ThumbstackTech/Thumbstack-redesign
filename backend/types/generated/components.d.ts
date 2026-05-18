@@ -1,0 +1,338 @@
+import type { Schema, Struct } from '@strapi/strapi';
+
+export interface ElementsFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_faq_items';
+  info: {
+    description: 'A single question and answer pair';
+    displayName: 'FAQ Item';
+    icon: 'info';
+  };
+  attributes: {
+    answer: Schema.Attribute.Text & Schema.Attribute.Required;
+    question: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsFeatureGroup extends Struct.ComponentSchema {
+  collectionName: 'components_elements_feature_groups';
+  info: {
+    description: 'A group of features with a title';
+    displayName: 'Feature Group';
+    icon: 'layer-group';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'elements.feature-item', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsFeatureItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_feature_items';
+  info: {
+    description: 'A single item in a feature group';
+    displayName: 'Feature Item';
+    icon: 'list';
+  };
+  attributes: {
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsGridItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_grid_items';
+  info: {
+    description: 'An item in a grid with icon, title, and description';
+    displayName: 'Grid Item';
+    icon: 'box';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsListItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_list_items';
+  info: {
+    description: 'An item in an interactive list with an image reveal';
+    displayName: 'List Item';
+    icon: 'list';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    link: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    tags: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsNavLink extends Struct.ComponentSchema {
+  collectionName: 'components_elements_nav_links';
+  info: {
+    description: 'A navigation link with a label and URL';
+    displayName: 'Nav Link';
+    icon: 'link';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsOfficeItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_office_items';
+  info: {
+    description: 'A single office location with contact details';
+    displayName: 'Office Item';
+    icon: 'map-pin';
+  };
+  attributes: {
+    address: Schema.Attribute.Text;
+    city: Schema.Attribute.String;
+    email: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsTeamMember extends Struct.ComponentSchema {
+  collectionName: 'components_elements_team_members';
+  info: {
+    description: 'Individual team member';
+    displayName: 'Team Member';
+    icon: 'user';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images'>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    role: Schema.Attribute.String;
+  };
+}
+
+export interface SharedBuildYourStack extends Struct.ComponentSchema {
+  collectionName: 'components_shared_build_your_stacks';
+  info: {
+    description: 'Fun little interactive budget/stack estimator component';
+    displayName: 'Build Your Stack Estimator';
+    icon: 'chart-pie';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<"A fun little estimator to help you imagine what it'll take to bring your idea to life. One block at a time.">;
+    logo: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Build Your Stack.'>;
+  };
+}
+
+export interface SharedCapabilitiesFeatures extends Struct.ComponentSchema {
+  collectionName: 'components_shared_capabilities_features';
+  info: {
+    description: 'Grid of capability groups and features';
+    displayName: 'Capabilities Features';
+    icon: 'layout';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'A custom website needs more than pages. It needs the right structure, content system, technical foundation, and support path.'>;
+    groups: Schema.Attribute.Component<'elements.feature-group', true>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Custom Website Design, Development, CMS, And Support.'>;
+  };
+}
+
+export interface SharedFaqSection extends Struct.ComponentSchema {
+  collectionName: 'components_shared_faq_sections';
+  info: {
+    description: 'Frequently Asked Questions';
+    displayName: 'FAQ Section';
+    icon: 'question';
+  };
+  attributes: {
+    faqs: Schema.Attribute.Component<'elements.faq-item', true>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Frequently Asked Questions'>;
+  };
+}
+
+export interface SharedFooter extends Struct.ComponentSchema {
+  collectionName: 'components_shared_footers';
+  info: {
+    description: 'Global site footer with contact info, social links and quick links';
+    displayName: 'Footer';
+    icon: 'layout-bottom';
+  };
+  attributes: {
+    newsletterLabel: Schema.Attribute.String;
+    offices: Schema.Attribute.Component<'elements.office-item', true>;
+    privacyLabel: Schema.Attribute.String;
+    privacyUrl: Schema.Attribute.String;
+    quickLinks: Schema.Attribute.Component<'elements.nav-link', true>;
+    subTagline: Schema.Attribute.String;
+    tagline: Schema.Attribute.String;
+    termsLabel: Schema.Attribute.String;
+    termsUrl: Schema.Attribute.String;
+  };
+}
+
+export interface SharedHero extends Struct.ComponentSchema {
+  collectionName: 'components_shared_heroes';
+  info: {
+    description: 'Main landing page hero section';
+    displayName: 'Hero';
+    icon: 'layout';
+  };
+  attributes: {
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#work'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'View Our Work'>;
+    mainHeadingLine1: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'meaningful digital'>;
+    mainHeadingLine2: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'experiences'>;
+    subtext1: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'We Build The Remarkable, Not The Routine.'>;
+    subtext2: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Thoughtfully Crafted. Bold In Execution.'>;
+    titleMiddle: Schema.Attribute.String & Schema.Attribute.DefaultTo<'and'>;
+    titlePrefix: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Designing'>;
+    titleSuffix: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'building'>;
+  };
+}
+
+export interface SharedInfo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_infos';
+  info: {
+    description: 'Blue info banner with a tagline, heading, and optional decorative image';
+    displayName: 'Info Banner';
+    icon: 'information';
+  };
+  attributes: {
+    decorativeImage: Schema.Attribute.Media<'images'>;
+    heading: Schema.Attribute.Text;
+    tagline: Schema.Attribute.String;
+  };
+}
+
+export interface SharedInteractiveList extends Struct.ComponentSchema {
+  collectionName: 'components_shared_interactive_lists';
+  info: {
+    description: 'A section with a list of items that reveal images on hover';
+    displayName: 'Interactive List';
+    icon: 'list-ul';
+  };
+  attributes: {
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/contact'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"Let's Build Together">;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    items: Schema.Attribute.Component<'elements.list-item', true>;
+    subheading: Schema.Attribute.String;
+  };
+}
+
+export interface SharedLetsTalk extends Struct.ComponentSchema {
+  collectionName: 'components_shared_lets_talks';
+  info: {
+    description: 'Contact form section with background image and tagline';
+    displayName: "Let's Talk Form";
+    icon: 'mail';
+  };
+  attributes: {
+    bgImage: Schema.Attribute.Media<'images'>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<"Great products begin with simple conversations. Tell us what you're envisioning \u2014 the goals, the gaps, the sparks \u2014 and we'll come back with ideas, clarity, and a way forward that actually moves the needle.">;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Get in touch'>;
+    title: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Lets Create'>;
+  };
+}
+
+export interface SharedPartnerBrands extends Struct.ComponentSchema {
+  collectionName: 'components_shared_partner_brands';
+  info: {
+    description: 'A grid of partner brand logos';
+    displayName: 'Partner Brands';
+    icon: 'grid';
+  };
+  attributes: {
+    heading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Partnered Brands.'>;
+    logos: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedPrinciples extends Struct.ComponentSchema {
+  collectionName: 'components_shared_principles';
+  info: {
+    description: 'Our process principles with icons and descriptions';
+    displayName: 'Principles (Our Process)';
+    icon: 'sync';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'Whether we are building a Shopify store, a custom website, a CMS platform, or a mobile app ecosystem, the process stays connected.'>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Every Capability Runs Through The Same System.'>;
+    items: Schema.Attribute.Component<'elements.grid-item', true>;
+    marqueeItems: Schema.Attribute.String;
+  };
+}
+
+export interface SharedTeamSection extends Struct.ComponentSchema {
+  collectionName: 'components_shared_team_sections';
+  info: {
+    description: 'Our Team';
+    displayName: 'Team Section';
+    icon: 'users';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    heading: Schema.Attribute.String & Schema.Attribute.DefaultTo<'The Team'>;
+    members: Schema.Attribute.Component<'elements.team-member', true>;
+  };
+}
+
+export interface SharedWhatWeBuild extends Struct.ComponentSchema {
+  collectionName: 'components_shared_what_we_builds';
+  info: {
+    description: 'Tag-cloud section listing the types of websites/products built';
+    displayName: 'What We Build';
+    icon: 'puzzle-piece';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    heading: Schema.Attribute.String;
+    tags: Schema.Attribute.JSON;
+  };
+}
+
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
+      'elements.faq-item': ElementsFaqItem;
+      'elements.feature-group': ElementsFeatureGroup;
+      'elements.feature-item': ElementsFeatureItem;
+      'elements.grid-item': ElementsGridItem;
+      'elements.list-item': ElementsListItem;
+      'elements.nav-link': ElementsNavLink;
+      'elements.office-item': ElementsOfficeItem;
+      'elements.team-member': ElementsTeamMember;
+      'shared.build-your-stack': SharedBuildYourStack;
+      'shared.capabilities-features': SharedCapabilitiesFeatures;
+      'shared.faq-section': SharedFaqSection;
+      'shared.footer': SharedFooter;
+      'shared.hero': SharedHero;
+      'shared.info': SharedInfo;
+      'shared.interactive-list': SharedInteractiveList;
+      'shared.lets-talk': SharedLetsTalk;
+      'shared.partner-brands': SharedPartnerBrands;
+      'shared.principles': SharedPrinciples;
+      'shared.team-section': SharedTeamSection;
+      'shared.what-we-build': SharedWhatWeBuild;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "collectionName": "components_shared_heroes",
+  "info": {
+    "displayName": "Hero",
+    "icon": "layout",
+    "description": "Main landing page hero section"
+  },
+  "options": {},
+  "attributes": {
+    "titlePrefix": {
+      "type": "string",
+      "default": "Designing"
+    },
+    "titleMiddle": {
+      "type": "string",
+      "default": "and"
+    },
+    "titleSuffix": {
+      "type": "string",
+      "default": "building"
+    },
+    "mainHeadingLine1": {
+      "type": "string",
+      "default": "meaningful digital"
+    },
+    "mainHeadingLine2": {
+      "type": "string",
+      "default": "experiences"
+    },
+    "subtext1": {
+      "type": "string",
+      "default": "We Build The Remarkable, Not The Routine."
+    },
+    "subtext2": {
+      "type": "string",
+      "default": "Thoughtfully Crafted. Bold In Execution."
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "View Our Work"
+    },
+    "ctaLink": {
+      "type": "string",
+      "default": "#work"
+    }
+  }
+}

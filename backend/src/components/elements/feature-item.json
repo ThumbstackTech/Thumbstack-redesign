@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_elements_feature_items",
+  "info": {
+    "displayName": "Feature Item",
+    "icon": "list",
+    "description": "A single item in a feature group"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
