@@ -1,57 +1,62 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { CapabilitiesFeaturesData } from "../../types/strapi";
 
-const featureGroups = [
+const defaultFeatureGroups = [
   {
     title: "Strategy & structure",
     items: [
-      "Website strategy and discovery",
-      "Sitemap and information architecture",
-      "UX and UI website design",
-      "Website wireframes",
-      "Responsive website design"
+      { text: "Website strategy and discovery" },
+      { text: "Sitemap and information architecture" },
+      { text: "UX and UI website design" },
+      { text: "Website wireframes" },
+      { text: "Responsive website design" }
     ]
   },
   {
     title: "Development",
     items: [
-      "Custom frontend development",
-      "Backend development",
-      "CMS website development",
-      "Headless CMS integration",
-      "Page templates and reusable components"
+      { text: "Custom frontend development" },
+      { text: "Backend development" },
+      { text: "CMS website development" },
+      { text: "Headless CMS integration" },
+      { text: "Page templates and reusable components" }
     ]
   },
   {
     title: "Systems & integrations",
     items: [
-      "Blog, news, and insight systems",
-      "Forms and lead capture",
-      "Analytics and tracking setup",
-      "SEO friendly website development"
+      { text: "Blog, news, and insight systems" },
+      { text: "Forms and lead capture" },
+      { text: "Analytics and tracking setup" },
+      { text: "SEO friendly website development" }
     ]
   },
   {
     title: "Launch & support",
     items: [
-      "Structured for AI driven discovery",
-      "Website performance basics",
-      "QA and testing",
-      "Launch support",
-      "Website maintenance and improvements"
+      { text: "Structured for AI driven discovery" },
+      { text: "Website performance basics" },
+      { text: "QA and testing" },
+      { text: "Launch support" },
+      { text: "Website maintenance and improvements" }
     ]
   }
 ];
 
-export default function CapabilitiesFeatures() {
+export default function CapabilitiesFeatures({ data }: { data?: CapabilitiesFeaturesData }) {
+  const title = data?.title || "Custom Website Design, Development, CMS, And Support.";
+  const description = data?.description || "A custom website needs more than pages. It needs the right structure, content system, technical foundation, and support path.";
+  const groups = data?.groups || defaultFeatureGroups;
+
   return (
     <section className="w-full bg-white py-[80px] md:py-[120px] px-6 md:px-[100px]">
       <div className="max-w-[1400px] mx-auto flex flex-col gap-[60px] md:gap-[104px]">
-        
+
         {/* Header Text Block */}
         <div className="flex flex-col gap-6 max-w-[1108px]">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -65,9 +70,9 @@ export default function CapabilitiesFeatures() {
               letterSpacing: "-0.01em"
             }}
           >
-            Custom Website Design, Development, CMS, And Support.
+            {title}
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -80,14 +85,14 @@ export default function CapabilitiesFeatures() {
               fontWeight: 400
             }}
           >
-            A custom website needs more than pages. It needs the right structure, content system, technical foundation, and support path.
+            {description}
           </motion.p>
         </div>
 
         {/* 4-Column Feature Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-16">
-          {featureGroups.map((group, groupIndex) => (
-            <motion.div 
+          {groups.map((group, groupIndex) => (
+            <motion.div
               key={group.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -97,7 +102,7 @@ export default function CapabilitiesFeatures() {
             >
               {/* Group Title with Underline */}
               <div className="flex flex-col gap-2">
-                <h3 
+                <h3
                   className="text-[#0F1D07]"
                   style={{
                     fontFamily: "var(--font-delight)",
@@ -115,7 +120,7 @@ export default function CapabilitiesFeatures() {
               {/* List Items */}
               <ul className="flex flex-col gap-4 md:gap-5">
                 {group.items.map((item, itemIndex) => (
-                  <li 
+                  <li
                     key={itemIndex}
                     className="text-[#0F1D07] opacity-90"
                     style={{
@@ -125,7 +130,7 @@ export default function CapabilitiesFeatures() {
                       fontWeight: 400
                     }}
                   >
-                    {item}
+                    {item.text}
                   </li>
                 ))}
               </ul>

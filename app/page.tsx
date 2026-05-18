@@ -1,66 +1,70 @@
-import Hero from "./components/all/Hero";
-import FieldsOfPlay from "./components/all/FieldsOfPlay";
-import PartnerBrands from "./components/all/PartnerBrands";
-import ProductDriven from "./components/all/ProductDriven";
-import Principles from "./components/all/Principles";
-import BuildYourStack from "./components/all/BuildYourStack";
-import Projects from "./components/all/Projects";
-import WorkItem from "./components/all/WorkItem";
-import FromTheStack from "./components/all/FromTheStack";
-import LetsTalk from "./components/all/LetsTalk";
-import Footer from "./components/all/Footer";
-import Info from "./components/all/Info";
-import HeroNewsAndInsights from "./components/all/HeroNewsAndInsights";
-import NewsAndInsightsGrid from "./components/all/NewsAndInsightsGrid";
-import ArticlesList from "./components/all/ArticlesList";
-import HeroWork from "./components/all/HeroWork";
-import AboutHero from "./components/all/AboutHero";
-import WorkInfo from "./components/all/WorkInfo";
-import Team from "./components/all/Team";
-import CapabilitiesHero from "./components/all/CapabilitiesHero";
-import ServiceHero from "./components/all/ServiceHero";
-import CapabilitiesInfo from "./components/all/capabilitiesinfo";
-import WhatWeBuild from "./components/all/WhatWeBuild";
-import CapabilitiesFeatures from "./components/all/CapabilitiesFeatures";
-import RightStack from "./components/all/RightStack";
-import CapabilitiesFAQ from "./components/all/CapabilitiesFAQ";
-import BestFit from "./components/all/BestFit";
-
 import { fetchStrapi } from "./lib/strapi";
+import SectionRenderer from "./components/SectionRenderer";
+import Projects from "./components/all/Projects";
+import Footer from "./components/all/Footer";
+import { ProjectData } from "./types/strapi";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata() {
+  const pageRes = await fetchStrapi("pages", "filters[slug][$eq]=home&populate[seo][populate]=*&publicationState=preview").catch(() => null);
+  const pageData = (pageRes?.data as any[])?.[0]?.attributes || (pageRes?.data as any[])?.[0];
+
+  if (!pageData) return {};
+
+  const seo = pageData.seo;
+  return {
+    title: seo?.metaTitle || "Thumbstack | Digital Design & Development",
+    description: seo?.metaDescription,
+  };
+}
 
 export default async function Home() {
+  let fetchError = null;
+  const queryString = "filters[slug][$eq]=home&populate[content][populate]=*";
+  const fullUrl = `http://localhost:1337/api/pages?${queryString}`;
+
+  const pageRes = await fetchStrapi("pages", queryString).catch((err) => {
+    console.error("DEBUG: Fetch error for root home page", err);
+    fetchError = err.message;
+    return null;
+  });
+  console.log("DEBUG: Home page data received:", !!pageRes?.data);
+  const pageData = (pageRes?.data as any[])?.[0]?.attributes || (pageRes?.data as any[])?.[0];
+
+  if (!pageData) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
+        <h1 className="text-2xl font-bold mb-4">Page Content Not Found</h1>
+        <p className="mb-4 text-red-500 font-mono text-sm">{fetchError ? `Error: ${fetchError}` : "No data returned from Strapi"}</p>
+        <div className="mb-6 p-2 bg-gray-200 rounded text-xs break-all font-mono">
+          <strong>API URL:</strong><br />
+          <a href={fullUrl} target="_blank" className="text-blue-600 underline">{fullUrl}</a>
+        </div>
+        <p className="mb-4">We couldn't fetch the page data for the <strong>'home'</strong> slug from Strapi.</p>
+        <ul className="text-left bg-gray-100 p-4 rounded-md">
+          <li>1. Check if a Page with slug <code>home</code> exists in Strapi.</li>
+          <li>2. Ensure the page is <strong>Published</strong>.</li>
+          <li>3. Verify <strong>Public Permissions</strong> for the <code>Page</code> API (find/findOne).</li>
+        </ul>
+      </div>
+    );
+  }
+
+  const projectsRes = await fetchStrapi("projects", "populate=*&publicationState=preview").catch(() => null);
+  const projectsData = (projectsRes?.data as any[])?.map(item => ({
+    id: item.id,
+    ...(item.attributes || item)
+  })) as ProjectData[];
+
   return (
     <div className="w-full relative">
-      <Hero />
-      <Projects />
-      <FieldsOfPlay />
-      <PartnerBrands />
-      <Principles />
-      <WorkItem />
-      <ProductDriven />
-      <FromTheStack />
-      <BuildYourStack />
-      <HeroNewsAndInsights />
-      <NewsAndInsightsGrid />
-      <ArticlesList />
-      <HeroWork />
-      <WorkInfo />
-      <AboutHero />
-      <Info />
-      <Team />
-      <CapabilitiesHero />
-      <ServiceHero />
-      <CapabilitiesInfo />
-      <CapabilitiesFeatures />
-      <WhatWeBuild />
-      <RightStack />
-      <BestFit />
-      <CapabilitiesFAQ />
-      <LetsTalk />
+      <SectionRenderer sections={pageData.content || []} />
+      <Projects data={projectsData} />
       <Footer />
     </div>
   );
 }
+
 
 
 

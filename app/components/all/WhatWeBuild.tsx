@@ -2,7 +2,17 @@
 
 import { motion } from "framer-motion";
 
-const tags = [
+// ── Types ──────────────────────────────────────────────────────────────────
+interface WhatWeBuildProps {
+  data?: {
+    heading?: string;
+    description?: string;
+    tags?: string[];
+  };
+}
+
+// ── Design defaults ────────────────────────────────────────────────────────
+const DEFAULT_TAGS = [
   "Corporate websites",
   "Brand websites",
   "Brochure websites",
@@ -17,18 +27,20 @@ const tags = [
   "Lead generation websites",
   "Campaign websites",
   "Website redesigns",
-  "Website rebuilds"
+  "Website rebuilds",
 ];
 
-export default function WhatWeBuild() {
+export default function WhatWeBuild({ data }: WhatWeBuildProps) {
+  const heading     = data?.heading     || "What We Build";
+  const description = data?.description || "We help you define what needs to be built, what needs to be fixed, and what direction makes the most sense before time goes into design or development.";
+  const tags        = data?.tags?.length ? data.tags : DEFAULT_TAGS;
+
   return (
-    <section 
-      className="w-full bg-[#3145DD] py-[80px] md:py-[100px] px-6 md:px-[100px] overflow-hidden"
-    >
+    <section className="w-full bg-[#3145DD] py-[80px] md:py-[100px] px-6 md:px-[100px] overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         {/* Header Content */}
         <div className="flex flex-col gap-6 mb-[60px] md:mb-[104px] max-w-[750px]">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -41,10 +53,10 @@ export default function WhatWeBuild() {
               fontWeight: 500,
             }}
           >
-            What We Build
+            {heading}
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -57,12 +69,12 @@ export default function WhatWeBuild() {
               fontWeight: 400,
             }}
           >
-            We help you define what needs to be built, what needs to be fixed, and what direction makes the most sense before time goes into design or development.
+            {description}
           </motion.p>
         </div>
 
         {/* Tag Cloud */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -75,26 +87,26 @@ export default function WhatWeBuild() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.5, 
+              transition={{
+                duration: 0.5,
                 delay: index * 0.05,
-                ease: "easeOut"
+                ease: "easeOut",
               }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 backgroundColor: "rgba(255, 255, 255, 0.1)",
-                transition: { duration: 0.2 }
+                transition: { duration: 0.2 },
               }}
               className="border border-white border-opacity-60 rounded-full px-6 py-3 md:px-8 md:py-4 flex items-center justify-center cursor-default group transition-colors"
             >
-              <span 
+              <span
                 className="text-white whitespace-nowrap"
                 style={{
                   fontFamily: "var(--font-delight)",
                   fontSize: "clamp(14px, 1.5vw, 16px)",
                   lineHeight: "1",
                   fontWeight: 500,
-                  letterSpacing: "-0.02em"
+                  letterSpacing: "-0.02em",
                 }}
               >
                 {tag}

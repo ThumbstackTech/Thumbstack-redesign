@@ -94,7 +94,9 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
                 }}
               >
                 {data.title}{" "}
-                <span style={{ color: "#95E7D3" }}>{data.clientName}</span>
+                {data.clientName && !data.title.toLowerCase().includes(data.clientName.toLowerCase()) && (
+                  <span style={{ color: accent }}>{data.clientName}</span>
+                )}
               </h1>
             </FadeUp>
 

@@ -2,8 +2,21 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { CapabilitiesSectionData } from "../../types/strapi";
 
-export default function CapabilitiesHero() {
+interface CapabilitiesHeroProps {
+  data?: CapabilitiesSectionData;
+}
+
+export default function CapabilitiesHero({ data }: CapabilitiesHeroProps) {
+  const label = data?.label || "Capabilities";
+  const title = data?.title || "Digital Work, Built Across The Full Stack.";
+  const description = data?.description || "We work across websites, e-commerce, mobile apps, CMS platforms, custom products, AI led experiences, and long term support teams. Each capability is shaped through the same connected process: strategy, design, build, and growth.";
+  const ctaText = data?.ctaText || "Start building";
+  const ctaLink = data?.ctaLink || "/contact";
+  const viewWorkText = data?.viewWorkText || "View Our Work";
+  const viewWorkLink = data?.viewWorkLink || "/our-work";
+
   return (
     <section className="w-full min-h-screen bg-[#3145DD] relative flex flex-col justify-start pt-[200px] md:pt-[280px] pb-12 px-4 sm:px-6 md:px-8 lg:px-[100px] xl:px-[120px] snap-start">
       {/* Container for content, aligned to the left */}
@@ -19,7 +32,7 @@ export default function CapabilitiesHero() {
             className="text-white font-medium text-[14px] md:text-[16px] leading-[40px]"
             style={{ fontFamily: "var(--font-satoshi)" }}
           >
-            Capabilities
+            {label}
           </motion.div>
 
           {/* Heading */}
@@ -34,10 +47,8 @@ export default function CapabilitiesHero() {
               lineHeight: "clamp(56px, 9vw, 134px)",
               letterSpacing: "-0.01em",
             }}
-          >
-            Digital Work, Built<br />
-            Across The Full Stack.
-          </motion.div>
+            dangerouslySetInnerHTML={{ __html: title.replace(", ", ",<br />") }}
+          />
 
           {/* Paragraph */}
           <motion.div
@@ -47,8 +58,7 @@ export default function CapabilitiesHero() {
             className="text-white font-medium text-[16px] md:text-[24px] leading-relaxed md:leading-[40px] max-w-[859px] mt-2 md:mt-0"
             style={{ fontFamily: "var(--font-satoshi)" }}
           >
-            We work across websites, e-commerce, mobile apps, CMS platforms, custom products, AI led experiences, and long term support teams. <br />
-            Each capability is shaped through the same connected process: strategy, design, build, and growth.
+            {description}
           </motion.div>
         </div>
 
@@ -61,27 +71,27 @@ export default function CapabilitiesHero() {
         >
           {/* Start Building Button */}
           <Link 
-            href="/contact" 
+            href={ctaLink} 
             className="bg-white rounded-[18px] px-6 h-[59px] flex items-center justify-center hover:scale-105 transition-transform duration-300"
           >
             <span 
               className="text-[#0F1D07] font-bold text-[16px]"
               style={{ fontFamily: "var(--font-satoshi)" }}
             >
-              Start building
+              {ctaText}
             </span>
           </Link>
 
           {/* View Our Work Button */}
           <Link 
-            href="/our-work" 
+            href={viewWorkLink} 
             className="group flex items-center gap-4 hover:opacity-80 transition-opacity"
           >
             <span 
               className="text-white font-bold text-[16px]"
               style={{ fontFamily: "var(--font-satoshi)" }}
             >
-              View Our Work
+              {viewWorkText}
             </span>
             <div className="w-[30px] h-[30px] relative flex items-center justify-center group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,3 +106,4 @@ export default function CapabilitiesHero() {
     </section>
   );
 }
+

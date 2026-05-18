@@ -10,9 +10,9 @@
   --sidebar-hover: #3145DD;
   --mint-green: #A8F2D1;
   --vibrant-blue: #3B5EDB;
-  --font-delight: var(--font-delight-local), "Clash Display", "Nohemi", var(--font-inter), sans-serif;
-  --font-nohemi: "Nohemi", var(--font-inter), sans-serif;
-  --font-satoshi: var(--font-satoshi-local), "Satoshi", var(--font-inter), sans-serif;
+  --font-delight: var(--font-delight-local), "Clash Display", "Nohemi", sans-serif;
+  --font-nohemi: "Nohemi", sans-serif;
+  --font-satoshi: var(--font-satoshi-local), "Satoshi", sans-serif;
 }
 
 @theme inline {
@@ -22,8 +22,8 @@
   --color-sidebar-hover: var(--sidebar-hover);
   --color-mint: var(--mint-green);
   --color-blue: var(--vibrant-blue);
-  /* Use Inter as the default sans */
-  --font-sans: var(--font-inter);
+  /* Use Satoshi as the default sans */
+  --font-sans: var(--font-satoshi);
   --font-delight: var(--font-delight);
   --font-nohemi: var(--font-nohemi);
   --font-satoshi: var(--font-satoshi);

@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
 
 const delight = localFont({
   src: "../public/fonts/delight-vf.ttf",
@@ -34,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${delight.variable} ${satoshi.variable} h-full antialiased w-full`}
+      className={`${delight.variable} ${satoshi.variable} h-full antialiased w-full`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-white overflow-x-hidden" suppressHydrationWarning>

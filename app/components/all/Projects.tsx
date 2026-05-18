@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, MouseEvent } from "react";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import { projects } from "../../data/projects";
+import { ProjectData } from "../../types/strapi";
+import { getStrapiImageUrl } from "../../lib/strapi";
 
 interface SideImage {
   src: string;
@@ -12,7 +13,7 @@ interface SideImage {
 }
 
 interface Project {
-  id: string;
+  id: string | number;
   name: string;
   tagline: string;
   description: string;
@@ -28,12 +29,61 @@ interface Project {
   images: {
     main: string;
     mainAlt: string;
-    sideTop?: SideImage;
-    sideBot?: SideImage;
     sideImages?: SideImage[];
   };
 }
 
+export default function Projects({ data }: { data?: ProjectData[] }) {
+  const displayProjects: Project[] = data ? data.map(p => {
+    // Handle tags which might be JSON array or string
+    let tagsArray: string[] = [];
+    if (Array.isArray(p.tags)) {
+      tagsArray = p.tags;
+    } else if (typeof p.tags === 'string' && p.tags.trim() !== '') {
+      tagsArray = p.tags.split(',').map(t => t.trim());
+    }
+
+    // Handle sideImages (Strapi 5 returns array directly, Strapi 4 returns { data: [...] })
+    const sideImagesData = Array.isArray(p.sideImages) 
+      ? p.sideImages 
+      : (p.sideImages as any)?.data?.map((item: any) => item.attributes) || [];
+
+    return {
+      id: p.id,
+      name: p.name,
+      tagline: p.tagline,
+      description: p.description,
+      tags: tagsArray,
+      bg: p.bg || "#000000",
+      barBg: p.barBg,
+      barBorder: p.barBorder,
+      accentColor: p.accentColor || "#FFFFFF",
+      cursorColor: p.cursorColor || "#95E7D3",
+      websiteUrl: p.websiteUrl || "#",
+      caseStudyUrl: p.slug ? `/case-study/${p.slug}` : (p.caseStudyUrl || "#"),
+      layout: p.layout || "desktop",
+      images: {
+        main: getStrapiImageUrl(p.mainImage) || "",
+        mainAlt: p.mainImage?.alternativeText || p.name,
+        sideImages: sideImagesData.map((img: any) => ({
+          src: getStrapiImageUrl(img) || "",
+          alt: img.alternativeText || ""
+        }))
+      }
+    };
+  }) : [];
+
+
+  if (displayProjects.length === 0) return null;
+
+  return (
+    <div style={{ height: `${displayProjects.length * 100}svh` }}>
+      {displayProjects.map((p, i) => (
+        <ProjectCard key={p.id} project={p} index={i} />
+      ))}
+    </div>
+  );
+}
 function ProjectCard({
   project,
   index,
@@ -132,40 +182,41 @@ function ProjectCard({
         >
           {/* Main Mockup Container - Scales better for all screens */}
           <div className="relative w-full md:w-[50%] lg:w-[55%] h-[45vh] md:h-full lg:h-[110%] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] border border-white/5 z-20 pointer-events-none self-center md:self-auto">
-            <Image
-              src={project.images.main}
-              alt={project.images.mainAlt}
-              fill
-              priority
-              unoptimized
-              className={isDesktop ? "object-cover object-top" : "object-cover object-center"}
-            />
+            {project.images.main && (
+              <Image
+                src={project.images.main}
+                alt={project.images.mainAlt}
+                fill
+                priority
+                unoptimized
+                className={isDesktop ? "object-cover object-top" : "object-cover object-center"}
+              />
+            )}
           </div>
 
           {/* Side Mockups Container - Better scaling and alignment */}
           <div className="flex gap-4 md:gap-6 flex-1 min-w-0 h-[30vh] md:h-full lg:h-[110%] relative overflow-hidden pointer-events-none justify-center">
             {(() => {
-              const displayImages = project.images.sideImages ||
-                [project.images.sideTop, project.images.sideBot].filter((img): img is SideImage => !!img);
+              const displayImages = project.images.sideImages || [];
 
-              if (project.images.sideImages && project.images.sideImages.length >= 2) {
-                const mid = Math.ceil(project.images.sideImages.length / 2);
-                const col1 = project.images.sideImages.slice(0, mid);
-                const col2 = project.images.sideImages.slice(mid);
+              if (displayImages.length >= 2) {
+                const mid = Math.ceil(displayImages.length / 2);
+                const col1 = displayImages.slice(0, mid);
+                const col2 = displayImages.slice(mid);
 
                 return (
                   <>
                     <div className="flex flex-col gap-4 md:gap-6 animate-[marquee-y-up_30s_linear_infinite] w-1/2">
                       {col1.concat(col1).map((img, idx) => (
                         <div key={`col1-${idx}`} className="relative w-full aspect-[4/5] flex-shrink-0">
-                          <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />
+                          {img.src && <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />}
                         </div>
                       ))}
                     </div>
                     <div className="flex flex-col gap-4 md:gap-6 animate-[marquee-y-down_30s_linear_infinite] w-1/2 mt-[-100px] md:mt-[-150px]">
                       {col2.concat(col2).map((img, idx) => (
                         <div key={`col2-${idx}`} className="relative w-full aspect-[4/5] flex-shrink-0">
-                          <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />
+                          {img.src && <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />}
                         </div>
                       ))}
                     </div>
@@ -177,7 +228,7 @@ function ProjectCard({
                 <div className="flex flex-col gap-4 md:gap-6 animate-[marquee-y-up_30s_linear_infinite] w-full max-w-[400px]">
                   {displayImages.concat(displayImages).map((img, idx) => (
                     <div key={idx} className="relative w-full aspect-[4/5] md:aspect-square flex-shrink-0 pointer-events-none">
-                      <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />
+                      {img.src && <Image src={img.src} alt={img.alt} fill unoptimized className="object-contain" />}
                     </div>
                   ))}
                 </div>
@@ -197,7 +248,7 @@ function ProjectCard({
                   top: smoothY,
                   translateX: "-50%",
                   translateY: "-50%",
-                  backgroundColor: "#95E7D3",
+                  backgroundColor: project.cursorColor || "#95E7D3",
                   color: "#0F1D07",
                   fontFamily: "var(--font-nohemi)",
                 }}
@@ -212,12 +263,7 @@ function ProjectCard({
         <div
           className="flex-shrink-0 z-40 cursor-auto mx-4 md:ml-[90px] md:mr-8 lg:mr-12 mb-6 md:mb-10 px-4 md:px-8 py-5 md:py-8 md:h-auto min-h-[140px] md:min-h-[160px] w-[calc(100%-2rem)] md:w-[calc(100%-120px)] lg:w-[calc(100%-150px)] max-w-[1600px] rounded-2xl md:rounded-t-[32px] md:rounded-b-none border border-white/10 flex items-center justify-center overflow-hidden self-center md:mx-auto"
           style={{
-            backgroundColor:
-              project.id === "bft"
-                ? "#68807B"
-                : project.id === "squlio"
-                  ? "#665EE3"
-                  : project.bg,
+            backgroundColor: project.barBg || project.bg,
           }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -265,16 +311,6 @@ function ProjectCard({
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-export default function Projects() {
-  return (
-    <div style={{ height: `${projects.length * 100}svh` }}>
-      {(projects as Project[]).map((p, i) => (
-        <ProjectCard key={p.id} project={p} index={i} />
-      ))}
     </div>
   );
 }

@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const faqData = [
+import { FAQSectionData } from "../../types/strapi";
+
+const DEFAULT_FAQS = [
   {
     question: "What is custom website development?",
     answer: "Custom website development means designing and building a website around your brand, users, content, CMS needs, SEO goals, and technical requirements instead of using a fixed template."
@@ -19,22 +21,13 @@ const faqData = [
   {
     question: "Will we be able to update the website ourselves?",
     answer: "Absolutely. We build with user-friendly CMS platforms like Strapi or Sanity, allowing your team to manage content, pages, and media without needing technical knowledge."
-  },
-  {
-    question: "Can a custom website be SEO friendly?",
-    answer: "Custom websites are inherently better for SEO because they have cleaner code, faster load times, and semantic structure tailored specifically for search engine indexing."
-  },
-  {
-    question: "Can you rebuild an existing website?",
-    answer: "Yes, we often help brands migrate from outdated platforms or slow template sites to modern, high-performance custom builds while preserving SEO authority."
-  },
-  {
-    question: "Do you maintain websites after launch?",
-    answer: "We offer ongoing support and maintenance packages to ensure your website remains secure, updated, and continues to perform optimally as your business grows."
   }
 ];
 
-export default function CapabilitiesFAQ() {
+export default function CapabilitiesFAQ({ data }: { data?: FAQSectionData }) {
+  const heading = data?.heading || "Frequently asked questions.";
+  const faqs = data?.faqs || DEFAULT_FAQS;
+
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -59,13 +52,13 @@ export default function CapabilitiesFAQ() {
                 letterSpacing: "-0.01em"
               }}
             >
-              Frequently asked<br />questions.
+              {heading}
             </h2>
           </motion.div>
 
           {/* Right: FAQ Accordion */}
           <div className="w-full lg:w-[631px] flex flex-col">
-            {faqData.map((faq, index) => (
+            {faqs.map((faq, index) => (
               <div key={index} className="flex flex-col">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}

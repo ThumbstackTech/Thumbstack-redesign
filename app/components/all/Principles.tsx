@@ -4,11 +4,17 @@ import { motion, Variants } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
-export default function Principles() {
+import { PrinciplesData } from "../../types/strapi";
+import { getStrapiImageUrl } from "../../lib/strapi";
+
+export default function Principles({ data }: { data?: PrinciplesData }) {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "0px" });
 
-  const principles = [
+  const heading = data?.heading || "Every Capability Runs Through The Same System.";
+  const description = data?.description || "Whether we are building a Shopify store, a custom website, a CMS platform, or a mobile app ecosystem, the process stays connected.";
+  
+  const defaultPrinciples = [
     {
       title: "Strategise",
       desc: "We define what needs to be built, fixed, prioritised, or planned.",
@@ -81,12 +87,25 @@ export default function Principles() {
     }
   ];
 
-  const marqueeItems = [
+  const principles = data?.items?.map(item => ({
+    title: item.title,
+    desc: item.description,
+    icon: item.icon?.data?.attributes?.url ? (
+      <img src={getStrapiImageUrl(item.icon.data.attributes) || undefined} alt={item.title} className="w-[32px] h-[32px] object-contain invert" />
+    ) : null
+  })) || defaultPrinciples;
+
+  const defaultMarqueeItems = [
     { text: "MOBILE APPS", color: "#95E7D3" },
     { text: "HUMAN-CENTERED PRODUCTS", color: "#FFFFFF" },
     { text: "END-TO-END OWNERSHIP", color: "#95E7D3" },
     { text: "ECOMMERCE", color: "#FFFFFF" }
   ];
+
+  const marqueeItems = data?.marqueeItems ? data.marqueeItems.split(',').map((text, i) => ({
+    text: text.trim(),
+    color: i % 2 === 0 ? "#95E7D3" : "#FFFFFF"
+  })) : defaultMarqueeItems;
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -144,7 +163,7 @@ export default function Principles() {
               alignItems: "center"
             }}
           >
-            Every Capability Runs Through The Same System.
+            {heading}
           </motion.h2>
 
           <motion.p
@@ -160,7 +179,7 @@ export default function Principles() {
               maxWidth: "600px"
             }}
           >
-            Whether we are building a Shopify store, a custom website, a CMS platform, or a mobile app ecosystem, the process stays connected.
+            {description}
           </motion.p>
         </div>
 

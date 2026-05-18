@@ -1,12 +1,29 @@
 "use client";
 
 import Image from "next/image";
+import { getStrapiImageUrl } from "../../lib/strapi";
 
-export default function Info() {
+// ── Types ──────────────────────────────────────────────────────────────────
+interface InfoProps {
+  data?: {
+    tagline?: string;
+    heading?: string;
+    decorativeImage?: any; // Strapi v5 flat media object
+  };
+}
+
+export default function Info({ data }: InfoProps) {
+  const tagline   = data?.tagline || "This is how we keep our work sharp, human, and meaningful.";
+  const heading   = data?.heading  || "We Work In Small Teams.\nWe Ask The Uncomfortable Questions Early.\nWe Care Deeply About How Things Feel — Not Just How They Function.";
+  const imageUrl  = getStrapiImageUrl(data?.decorativeImage) || "/Design.png";
+
+  // Split heading on newline so CMS editors can use \n in the text field
+  const headingLines = heading.split("\n");
+
   return (
     <section className="relative w-full min-h-[auto] md:min-h-[551px] bg-[#3145DD] overflow-hidden flex items-center snap-start py-16 md:py-0">
 
-      {/* Ellipse 456 - The background glow effect */}
+      {/* Ellipse glow effect */}
       <div
         className="absolute rounded-full pointer-events-none"
         style={{
@@ -19,7 +36,7 @@ export default function Info() {
         }}
       />
 
-      {/* Atmospheric Blur Layer */}
+      {/* Atmospheric blur layer */}
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
         style={{
@@ -41,7 +58,7 @@ export default function Info() {
               fontWeight: 400,
             }}
           >
-            This is how we keep our work sharp, human, and meaningful.
+            {tagline}
           </p>
           <h2
             className="text-white"
@@ -54,13 +71,16 @@ export default function Info() {
               textTransform: "capitalize",
             }}
           >
-            We Work In Small Teams.<br className="hidden sm:block" />
-            We Ask The Uncomfortable Questions Early.<br className="hidden sm:block" />
-            We Care Deeply About How Things Feel — Not Just How They Function.
+            {headingLines.map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < headingLines.length - 1 && <br className="hidden sm:block" />}
+              </span>
+            ))}
           </h2>
         </div>
 
-        {/* Decorative Image — shown only on large screens, sits in flow on the right */}
+        {/* Decorative Image — shown only on large screens */}
         <div
           className="hidden lg:block absolute pointer-events-none z-20"
           style={{
@@ -82,7 +102,7 @@ export default function Info() {
             }}
           >
             <Image
-              src="/Design.png"
+              src={imageUrl}
               alt="Design graphic"
               fill
               className="object-contain"

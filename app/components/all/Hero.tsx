@@ -1,8 +1,23 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-export default function Hero() {
+import { HeroData } from "../../types/strapi";
+
+interface HeroProps {
+  data?: HeroData;
+}
+
+export default function Hero({ data }: HeroProps) {
+  // Use data from props or fall back to hardcoded defaults
+  const titlePrefix = data?.titlePrefix || "Designing";
+  const titleMiddle = data?.titleMiddle || "and";
+  const titleSuffix = data?.titleSuffix || "building";
+  const mainHeadingLine1 = data?.mainHeadingLine1 || "meaningful digital";
+  const mainHeadingLine2 = data?.mainHeadingLine2 || "experiences";
+  const subtext1 = data?.subtext1 || "We Build The Remarkable, Not The Routine.";
+  const subtext2 = data?.subtext2 || "Thoughtfully Crafted. Bold In Execution.";
+  const ctaText = data?.ctaText || "View Our Work";
+  const ctaLink = data?.ctaLink || "#work";
+
   return (
     <section className="min-h-screen w-full flex flex-col justify-center pt-20 md:pt-24 lg:pt-28 pb-10 md:pb-12 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-x-clip gap-4 md:gap-6">
 
@@ -41,13 +56,13 @@ export default function Hero() {
           }}
         >
           <span className="flex flex-wrap lg:flex-nowrap lg:whitespace-nowrap items-baseline gap-x-2 md:gap-x-5 gap-y-1">
-            <span className="bg-mint px-2 py-0.5 sm:py-0 md:px-6 md:pb-3 inline-block">Designing</span>
-            <span>and</span>
-            <span className="bg-[#3145DD] text-mint px-2 py-0.5 sm:py-0 md:px-6 md:pb-3 inline-block">building</span>
+            <span className="bg-mint px-2 py-0.5 sm:py-0 md:px-6 md:pb-3 inline-block">{titlePrefix}</span>
+            <span>{titleMiddle}</span>
+            <span className="bg-[#3145DD] text-mint px-2 py-0.5 sm:py-0 md:px-6 md:pb-3 inline-block">{titleSuffix}</span>
           </span>
 
-          <span className="block mt-1 md:mt-4">meaningful digital</span>
-          <span className="block mt-1 md:mt-4">experiences</span>
+          <span className="block mt-1 md:mt-4">{mainHeadingLine1}</span>
+          <span className="block mt-1 md:mt-4">{mainHeadingLine2}</span>
         </h1>
 
         {/* Sub-text and Decorative Circle */}
@@ -62,7 +77,7 @@ export default function Hero() {
                 color: "#0F1D07",
               }}
             >
-              We Build The Remarkable, Not The Routine.
+              {subtext1}
             </p>
             <p
               className="capitalize text-[15px] sm:text-[16px] md:text-[18px] lg:text-[20px]"
@@ -73,7 +88,7 @@ export default function Hero() {
                 color: "#0F1D07",
               }}
             >
-              Thoughtfully Crafted. <span className="text-[#3145DD]">Bold In Execution.</span>
+              {subtext2.split(". ")[0]}. <span className="text-[#3145DD]">{subtext2.split(". ")[1]}</span>
             </p>
           </div>
 
@@ -95,7 +110,7 @@ export default function Hero() {
       {/* Bottom CTA (View Our Work) */}
       <div className="w-full max-w-[1600px] mx-auto flex justify-center pt-6 md:pt-4 pb-2 md:pb-12 relative z-10">
         <a
-          href="#work"
+          href={ctaLink}
           className="text-[#0F1D07] flex items-center gap-2 md:gap-4 hover:opacity-70 transition-opacity"
           style={{
             fontFamily: "var(--font-satoshi)",
@@ -105,7 +120,7 @@ export default function Hero() {
             textAlign: "center"
           }}
         >
-          View Our Work
+          {ctaText}
           <svg width="32" height="32" className="w-[28px] h-[28px] md:w-[43px] md:h-[43px]" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6227_82077)">
               <path d="M21.2124 10.6068V31.82" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />

@@ -3,7 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const teamMembers = [
+import { TeamSectionData } from "../../types/strapi";
+import { getStrapiImageUrl } from "../../lib/strapi";
+
+const DEFAULT_TEAM_MEMBERS = [
   { name: "Harry Matthew", role: "Co-Founder", image: "/team1.jpg" },
   { name: "Harry Matthew", role: "Co-Founder", image: "/team2.jpg" },
   { name: "Anne Louis", role: "Developer", image: "/team1.jpg" },
@@ -22,7 +25,18 @@ const teamMembers = [
   { name: "Anne Louis", role: "Developer", image: "/team2.jpg" },
 ];
 
-export default function Team() {
+export default function Team({ data }: { data?: TeamSectionData }) {
+  const heading = data?.heading || "About us";
+  const description = data?.description || "Thumbstack is a design and technology studio focused on creating digital products that balance clarity with character. Working as an extension of our clients' teams, we combine thoughtful design, robust engineering, and a collaborative process to build experiences that are both visually refined and functionally strong.";
+  const members = data?.members?.map(m => {
+    const imageUrl = getStrapiImageUrl(m.image);
+    return {
+      name: m.name,
+      role: m.role,
+      image: imageUrl || "/team1.jpg"
+    };
+  }) || DEFAULT_TEAM_MEMBERS;
+
   return (
     <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-[100px]">
       <div className="max-w-[1600px] mx-auto">
@@ -47,7 +61,7 @@ export default function Team() {
               margin: 0
             }}
           >
-            About us
+            {heading}
           </h2>
 
           <div className="max-w-[385px] pb-2"> {/* Adjusted max-width and padding for alignment */}
@@ -60,14 +74,14 @@ export default function Team() {
                 color: "#0F1D07"
               }}
             >
-              Thumbstack is a design and technology studio focused on creating digital products that balance clarity with character. Working as an extension of our clients&apos; teams, we combine thoughtful design, robust engineering, and a collaborative process to build experiences that are both visually refined and functionally strong.
+              {description}
             </p>
           </div>
         </div>
 
         {/* Team Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
-          {teamMembers.map((member, i) => (
+          {members.map((member, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}

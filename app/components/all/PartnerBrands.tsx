@@ -1,6 +1,9 @@
 import Image from "next/image";
 
-const BRAND_LOGOS = [
+import { PartnerBrandsData } from "../../types/strapi";
+import { getStrapiImageUrl } from "../../lib/strapi";
+
+const DEFAULT_BRAND_LOGOS = [
   "APURA.png",
   "Canton_SCHWYZ_logo_1-removebg-preview 1.png",
   "Frame 72.png",
@@ -32,7 +35,13 @@ const BRAND_LOGOS = [
   "main-logo (1).png",
 ];
 
-export default function PartnerBrands() {
+export default function PartnerBrands({ data }: { data?: PartnerBrandsData }) {
+  const heading = data?.heading || "Partnered Brands.";
+  const logos = data?.logos?.data
+    ?.map(img => getStrapiImageUrl(img))
+    ?.filter(Boolean) as string[] || 
+    DEFAULT_BRAND_LOGOS.map(logo => `/TSP/${logo}`);
+
   return (
     <section className="w-full flex flex-col items-center py-[100px] px-8 lg:px-24 snap-start relative bg-white overflow-hidden">
       <div className="w-full max-w-[1602px] flex flex-col items-center">
@@ -48,12 +57,12 @@ export default function PartnerBrands() {
             color: '#0F1D07',
           }}
         >
-          Partnered Brands.
+          {heading}
         </h2>
 
         {/* 6-column Grid (Desktop), 3-column Grid (Mobile) */}
         <div className="w-full grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[16px] md:gap-[24px]">
-          {BRAND_LOGOS.map((logo, index) => {
+          {logos.map((logo, index) => {
             return (
               <div
                 key={index}
@@ -68,7 +77,7 @@ export default function PartnerBrands() {
               >
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image
-                    src={`/TSP/${logo}`}
+                    src={logo}
                     alt="Partner Brand Logo"
                     fill
                     className="object-contain"

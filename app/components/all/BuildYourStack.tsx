@@ -1,10 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function BuildYourStack() {
+interface BuildYourStackProps {
+  data?: {
+    title?: string;
+    description?: string;
+    logo?: {
+      url?: string;
+      data?: {
+        attributes?: {
+          url?: string;
+        };
+      };
+    };
+  };
+}
+
+export default function BuildYourStack({ data }: BuildYourStackProps = {}) {
   const [step, setStep] = useState(0);
   const [journey, setJourney] = useState<string | null>(null);
   const [product, setProduct] = useState<string | null>(null);
@@ -13,6 +28,81 @@ export default function BuildYourStack() {
   const [quality, setQuality] = useState<string | null>(null);
   const [support, setSupport] = useState<string | null>(null);
   const [typedIdea, setTypedIdea] = useState("");
+
+  // Contact info states
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [projectDetails, setProjectDetails] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const title = data?.title || "Build Your Stack.";
+  const description = data?.description || "A fun little estimator to help you imagine what it'll take to bring your idea to life. One block at a time.";
+  
+  // Resolve logo image
+  let logoUrl = "/path.png";
+  if (data?.logo) {
+    const rawUrl = (data.logo as any).url || (data.logo as any).data?.attributes?.url;
+    if (rawUrl) {
+      logoUrl = rawUrl.startsWith("http") ? rawUrl : `http://localhost:1337${rawUrl}`;
+    }
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!firstName || !email) {
+      setStatus("error");
+      setErrorMessage("First Name and Email Address are required.");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          projectDetails,
+          journey,
+          product,
+          features,
+          timeline,
+          quality,
+          support,
+          typedIdea,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus("success");
+        // Reset contact form
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPhone("");
+        setProjectDetails("");
+      } else {
+        setStatus("error");
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setErrorMessage("Failed to send message. Please check your connection.");
+    }
+  };
 
   const handleNext = () => setStep(s => Math.min(s + 1, 4));
   const handlePrev = () => setStep(s => Math.max(s - 1, 0));
@@ -122,7 +212,7 @@ export default function BuildYourStack() {
                   lineHeight: "134px",
                 }}
               >
-                Build Your Stack.
+                {title}
               </h2>
               <p
                 className="text-[#0F1D07] max-w-[742px]"
@@ -133,7 +223,7 @@ export default function BuildYourStack() {
                   lineHeight: "26px",
                 }}
               >
-                A fun little estimator to help you imagine what it&apos;ll take to bring your idea to life. One block at a time.
+                {description}
               </p>
               <button
                 onClick={() => setStep(1)}
@@ -171,7 +261,7 @@ export default function BuildYourStack() {
           >
             {/* Logo/Icon */}
             <div className="mb-8 sm:mb-10 md:mb-12 relative w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24">
-              <Image src="/path.png" alt="Thumbstack Logo" fill className="object-contain" />
+              <Image src={logoUrl} alt="Thumbstack Logo" fill className="object-contain" />
             </div>
 
             <h2
@@ -189,32 +279,88 @@ export default function BuildYourStack() {
             </h2>
             <p className="text-center mb-12 sm:mb-16 md:mb-20 px-2" style={{ fontFamily: "var(--font-satoshi)", fontWeight: 400, fontSize: "18px", lineHeight: "39px", color: "#111" }}>Just a few details, and we&apos;ll turn this into something concrete.</p>
 
-            <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-x-8 sm:gap-x-12 md:gap-x-16 gap-y-8 sm:gap-y-10 md:gap-y-12 px-2 sm:px-0">
-              <div className="flex flex-col gap-2 sm:gap-3">
-                <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>First Name</label>
-                <input type="text" placeholder="Anna" className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" style={{ fontFamily: "var(--font-satoshi)" }} />
+            <form onSubmit={handleSubmit} className="w-full max-w-4xl flex flex-col items-center">
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-8 sm:gap-x-12 md:gap-x-16 gap-y-8 sm:gap-y-10 md:gap-y-12 px-2 sm:px-0">
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>First Name *</label>
+                  <input 
+                    type="text" 
+                    placeholder="Anna" 
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" 
+                    style={{ fontFamily: "var(--font-satoshi)" }} 
+                  />
+                </div>
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Last Name</label>
+                  <input 
+                    type="text" 
+                    placeholder="Louis" 
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" 
+                    style={{ fontFamily: "var(--font-satoshi)" }} 
+                  />
+                </div>
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Email Address *</label>
+                  <input 
+                    type="email" 
+                    placeholder="Anna.Louis@Email.Com" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" 
+                    style={{ fontFamily: "var(--font-satoshi)" }} 
+                  />
+                </div>
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Phone Number</label>
+                  <input 
+                    type="tel" 
+                    placeholder="+91" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" 
+                    style={{ fontFamily: "var(--font-satoshi)" }} 
+                  />
+                </div>
+                <div className="flex flex-col gap-2 sm:gap-3 md:col-span-2">
+                  <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Project Details</label>
+                  <input 
+                    type="text" 
+                    placeholder="Tell Us About Your Project..." 
+                    value={projectDetails}
+                    onChange={(e) => setProjectDetails(e.target.value)}
+                    className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" 
+                    style={{ fontFamily: "var(--font-satoshi)" }} 
+                  />
+                </div>
               </div>
-              <div className="flex flex-col gap-2 sm:gap-3">
-                <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Last Name</label>
-                <input type="text" placeholder="Louis" className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" style={{ fontFamily: "var(--font-satoshi)" }} />
-              </div>
-              <div className="flex flex-col gap-2 sm:gap-3">
-                <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Email Address</label>
-                <input type="email" placeholder="Anna.Louis@Email.Com" className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" style={{ fontFamily: "var(--font-satoshi)" }} />
-              </div>
-              <div className="flex flex-col gap-2 sm:gap-3">
-                <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Phone Number</label>
-                <input type="tel" placeholder="+91" className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" style={{ fontFamily: "var(--font-satoshi)" }} />
-              </div>
-              <div className="flex flex-col gap-2 sm:gap-3 md:col-span-2">
-                <label className="text-[9px] sm:text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider" style={{ fontFamily: "var(--font-satoshi)" }}>Project Details</label>
-                <input type="text" placeholder="Tell Us About Your Project..." className="w-full border-b border-gray-200 py-3 sm:py-4 outline-none text-lg sm:text-2xl md:text-3xl font-medium text-sidebar placeholder:text-gray-100" style={{ fontFamily: "var(--font-satoshi)" }} />
-              </div>
-            </div>
 
-            <button className="mt-16 sm:mt-20 px-8 sm:px-12 py-4 sm:py-5 bg-[#0B1510] text-white rounded-full flex items-center gap-3 sm:gap-4 hover:bg-black transition-all font-medium text-xs sm:text-sm md:text-lg group">
-              Let&apos;s Take This Forward <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
-            </button>
+              <div className="flex flex-col items-center gap-4 w-full mt-16 sm:mt-20">
+                <button 
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="px-8 sm:px-12 py-4 sm:py-5 bg-[#0B1510] text-white rounded-full flex items-center gap-3 sm:gap-4 hover:bg-black transition-all font-medium text-xs sm:text-sm md:text-lg group disabled:opacity-50 disabled:hover:bg-[#0B1510]"
+                >
+                  {status === "loading" ? "Sending..." : "Let's Take This Forward"} <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                </button>
+
+                {status === "success" && (
+                  <p className="text-green-600 text-sm font-semibold text-center mt-2" style={{ fontFamily: "var(--font-satoshi)" }}>
+                    Thank you! Your stack details have been submitted successfully. We will get back to you shortly.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-red-500 text-sm font-semibold text-center mt-2" style={{ fontFamily: "var(--font-satoshi)" }}>
+                    {errorMessage}
+                  </p>
+                )}
+              </div>
+            </form>
 
             <button
               onClick={() => setStep(0)}

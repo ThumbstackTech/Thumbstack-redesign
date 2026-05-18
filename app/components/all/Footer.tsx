@@ -3,7 +3,75 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Footer() {
+// ── Types ──────────────────────────────────────────────────────────────────
+interface OfficeItem {
+  id?: number;
+  city?: string;
+  phone?: string;
+  address?: string;
+  email?: string;
+}
+
+interface NavLink {
+  id?: number;
+  label?: string;
+  url?: string;
+}
+
+interface FooterProps {
+  data?: {
+    tagline?: string;
+    subTagline?: string;
+    newsletterLabel?: string;
+    privacyLabel?: string;
+    privacyUrl?: string;
+    termsLabel?: string;
+    termsUrl?: string;
+    offices?: OfficeItem[];
+    quickLinks?: NavLink[];
+  };
+}
+
+// ── Hardcoded design defaults (used when CMS data is absent) ────────────────
+const DEFAULT_OFFICES: OfficeItem[] = [
+  {
+    city: "Mumbai (Worli)",
+    phone: "+91 8374938493",
+    address: "Building G and D-1, Zoo Media Pvt. Ltd, Worli, Mumbai, Maharashtra 400013",
+    email: "thumbstack@gmail.com",
+  },
+  {
+    city: "Budapest",
+    phone: "+91 8374938493",
+    address: "Building G and D-1, Zoo Media Pvt. Ltd, Worli, Mumbai, Maharashtra 400013",
+    email: "thumbstack@gmail.com",
+  },
+  {
+    city: "Dubai",
+    phone: "+91 8374938493",
+    address: "Building G and D-1, Zoo Media Pvt. Ltd, Worli, Mumbai, Maharashtra 400013",
+    email: "thumbstack@gmail.com",
+  },
+];
+
+const DEFAULT_QUICK_LINKS: NavLink[] = [
+  { label: "Fields of play", url: "#" },
+  { label: "Our Work", url: "#" },
+  { label: "News & insights", url: "#" },
+  { label: "About us", url: "#" },
+];
+
+export default function Footer({ data }: FooterProps) {
+  const tagline        = data?.tagline        || "Say hi!";
+  const subTagline     = data?.subTagline     || "Let's make something amazing together.";
+  const newsletterLabel = data?.newsletterLabel || "Sign up to our newsletter";
+  const privacyLabel   = data?.privacyLabel   || "Privacy Policies";
+  const privacyUrl     = data?.privacyUrl     || "#";
+  const termsLabel     = data?.termsLabel     || "Terms and Conditions";
+  const termsUrl       = data?.termsUrl       || "#";
+  const offices        = data?.offices?.length  ? data.offices  : DEFAULT_OFFICES;
+  const quickLinks     = data?.quickLinks?.length ? data.quickLinks : DEFAULT_QUICK_LINKS;
+
   return (
     <footer className="w-full bg-[#3145DD] snap-start">
       {/* Main Footer Content */}
@@ -11,10 +79,10 @@ export default function Footer() {
 
         {/* Main 3-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_0.8fr] gap-12 md:gap-16 lg:gap-24">
-          
+
           {/* Column 1 - Say Hi + Socials + Newsletter */}
           <div className="flex flex-col gap-8">
-            <h2 
+            <h2
               className="text-white flex flex-row items-center gap-4 whitespace-nowrap"
               style={{
                 fontFamily: "var(--font-delight)",
@@ -24,23 +92,26 @@ export default function Footer() {
                 letterSpacing: "-2%",
               }}
             >
-              Say hi!
+              {tagline}
               <span className="shrink-0 animate-spin-pause w-16 md:w-[120px] inline-block">
-                <Image 
-                  src="/footercircle.png" 
-                  alt="Decorative spinning circle" 
-                  width={152} 
-                  height={152} 
+                <Image
+                  src="/footercircle.png"
+                  alt="Decorative spinning circle"
+                  width={152}
+                  height={152}
                   className="w-full h-auto"
                 />
               </span>
             </h2>
 
             <div className="flex flex-col gap-2" style={{ fontFamily: "var(--font-satoshi)" }}>
-              <p className="text-white text-base font-medium">Let&apos;s make something amazing together.</p>
-              <p className="text-white text-xs max-w-md">Come chat with us — we&apos;ve got coffee (or tea) ready and are always up for a good conversation.</p>
+              <p className="text-white text-base font-medium">{subTagline}</p>
+              <p className="text-white text-xs max-w-md">
+                Come chat with us — we&apos;ve got coffee (or tea) ready and are always up for a good conversation.
+              </p>
             </div>
 
+            {/* Social Icons — SVG inline, no CMS needed */}
             <div className="flex gap-5 text-white">
               <svg width="140" height="27" viewBox="0 0 140 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g style={{ mixBlendMode: 'luminosity' }}>
@@ -83,7 +154,7 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-satoshi)" }}
               suppressHydrationWarning
             >
-              Sign up to our newsletter
+              {newsletterLabel}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -91,25 +162,31 @@ export default function Footer() {
 
             {/* Bottom Links */}
             <div className="flex gap-8 mt-auto pt-12" style={{ fontFamily: "var(--font-satoshi)" }}>
-              <Link href="#" className="text-white text-[14px] font-medium hover:underline underline-offset-4">Privacy Policies</Link>
-              <Link href="#" className="text-white text-[14px] font-medium hover:underline underline-offset-4">Terms and Conditions</Link>
+              <Link href={privacyUrl} className="text-white text-[14px] font-medium hover:underline underline-offset-4">
+                {privacyLabel}
+              </Link>
+              <Link href={termsUrl} className="text-white text-[14px] font-medium hover:underline underline-offset-4">
+                {termsLabel}
+              </Link>
             </div>
           </div>
 
           {/* Column 2 - Contact Details */}
           <div className="flex flex-col gap-10" style={{ fontFamily: "var(--font-satoshi)" }}>
             <h3 className="text-white text-lg font-bold mb-2">Contact</h3>
-            
-            {[
-              { city: "Mumbai (Worli)", phone: "+91 8374938493", address: "Building G and D-1, Zoo Media Pvt. Ltd, Worli, Mumbai, Maharashtra 400013", email: "thumbstack@gmail.com" },
-              { city: "Budapest", phone: "+91 8374938493", address: "Building G and D-1, Zoo Media Pvt. Ltd, Worli, Mumbai, Maharashtra 400013", email: "thumbstack@gmail.com" },
-              { city: "Dubai", phone: "+91 8374938493", address: "Building G and D-1, Zoo Media Pvt. Ltd, Worli, Mumbai, Maharashtra 400013", email: "thumbstack@gmail.com" }
-            ].map((office) => (
-              <div key={office.city} className="flex flex-col gap-2">
+            {offices.map((office, idx) => (
+              <div key={office.id ?? idx} className="flex flex-col gap-2">
                 <p className="text-white text-sm font-bold">{office.city}</p>
-                <a href={`tel:${office.phone}`} className="text-white text-sm font-bold underline underline-offset-4 decoration-white/30 hover:decoration-white">{office.phone}</a>
+                <a
+                  href={`tel:${office.phone}`}
+                  className="text-white text-sm font-bold underline underline-offset-4 decoration-white/30 hover:decoration-white"
+                >
+                  {office.phone}
+                </a>
                 <p className="text-white text-[14px] leading-relaxed max-w-[280px] mt-1">{office.address}</p>
-                <a href={`mailto:${office.email}`} className="text-white text-[14px] font-bold hover:text-white transition-colors">{office.email}</a>
+                <a href={`mailto:${office.email}`} className="text-white text-[14px] font-bold hover:text-white transition-colors">
+                  {office.email}
+                </a>
               </div>
             ))}
           </div>
@@ -118,10 +195,15 @@ export default function Footer() {
           <div className="flex flex-col gap-8" style={{ fontFamily: "var(--font-satoshi)" }}>
             <h3 className="text-white text-lg font-bold mb-2">Quick Links</h3>
             <div className="flex flex-col gap-5">
-              <Link href="#" className="text-white text-[14px] font-bold hover:text-mint transition-colors">Fields of play</Link>
-              <Link href="#" className="text-white text-[14px] font-bold hover:text-mint transition-colors">Our Work</Link>
-              <Link href="#" className="text-white text-[14px] font-bold hover:text-mint transition-colors">News & insights</Link>
-              <Link href="#" className="text-white text-[14px] font-bold hover:text-mint transition-colors">About us</Link>
+              {quickLinks.map((link, idx) => (
+                <Link
+                  key={link.id ?? idx}
+                  href={link.url || "#"}
+                  className="text-white text-[14px] font-bold hover:text-mint transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
 
