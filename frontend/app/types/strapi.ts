@@ -101,6 +101,8 @@ export interface GridItem {
   title: string;
   description: string;
   icon: { data: { attributes: StrapiImage } };
+  linkText?: string;
+  linkUrl?: string;
 }
 
 export interface PrinciplesData {
@@ -110,6 +112,8 @@ export interface PrinciplesData {
   description: string;
   items: GridItem[];
   marqueeItems?: string;
+  ctaText?: string;
+  ctaLink?: string;
 }
 
 export interface FAQItem {
@@ -125,6 +129,40 @@ export interface FAQSectionData {
   faqs: FAQItem[];
 }
 
+export interface AboutHeroData {
+  id: number;
+  __component: "shared.about-hero";
+  heading: string;
+  subheading: string;
+  bgColor: string;
+  textColor: string;
+  image1?: { data?: { attributes?: StrapiImage } };
+  image2?: { data?: { attributes?: StrapiImage } };
+  image3?: { data?: { attributes?: StrapiImage } };
+}
+
+export interface NewsHeroData {
+  id: number;
+  __component: "shared.news-hero";
+  heading: string;
+  description: string;
+  bgColor: string;
+  textColor: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+
+
+export interface ProductDrivenData {
+  id: number;
+  __component: "shared.product-driven";
+  headingLine1: string;
+  headingLine2: string;
+  bgColor: string;
+  logos?: { data?: { attributes?: StrapiImage }[] };
+}
+
 export interface TeamMember {
   id: number;
   name: string;
@@ -138,6 +176,47 @@ export interface TeamSectionData {
   heading: string;
   description?: string;
   members: TeamMember[];
+}
+export interface HeroWorkData {
+  id: number;
+  __component: "shared.hero-work";
+  headingLine1: string;
+  headingLine2?: string;
+  description?: string;
+  bgColor?: string;
+  textColor?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  card1Image?: { data?: { attributes?: StrapiImage } };
+  card1BgColor?: string;
+  card1BadgeText?: string;
+  card1BadgeSubtext?: string;
+  card2Image?: { data?: { attributes?: StrapiImage } };
+  card2BgColor?: string;
+}
+
+export interface BestFitData {
+  id: number;
+  __component: "shared.best-fit";
+  heading: string;
+  description: string;
+  bgColor?: string;
+  textColor?: string;
+  scenarios?: string;
+}
+
+export interface SidebarLink {
+  id: number;
+  label: string;
+  url: string;
+}
+
+export interface SidebarData {
+  id: number;
+  __component: "shared.sidebar";
+  logoText?: string;
+  email?: string;
+  links?: SidebarLink[];
 }
 
 export interface StrapiResponse<T> {

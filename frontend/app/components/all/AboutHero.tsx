@@ -1,80 +1,125 @@
 "use client";
 
-import Image from "next/image";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { AboutHeroData } from "../../types/strapi";
+import { getStrapiImageUrl } from "../../lib/strapi";
 
-export default function AboutHero() {
+export default function AboutHero({ data }: { data?: AboutHeroData }) {
+  const containerRef = useRef(null);
+
+  const heading = data?.heading || "A tight team, doing deliberate work.";
+  const subheading = data?.subheading || "We're a design and technology studio from India, working closely with teams around the world to build thoughtful digital products.";
+  const bgColor = data?.bgColor || "#FFFFFF";
+  const textColor = data?.textColor || "#0F1D07";
+
+  const img1Url = getStrapiImageUrl(data?.image1);
+  const img2Url = getStrapiImageUrl(data?.image2);
+  const img3Url = getStrapiImageUrl(data?.image3);
+
   return (
-    <section className="min-h-screen w-full bg-white relative flex flex-col items-center justify-center pt-20 px-6 md:px-12 lg:px-[100px] snap-start overflow-hidden">
-
-      <div className="w-full max-w-[1600px] mx-auto relative">
-
-        {/* Subtext - Top Right aligned on desktop, left on mobile */}
-        <div className="flex justify-start md:justify-end mb-4">
-          <div
-            className="w-full max-w-[465px] text-left md:text-right"
+    <section
+      ref={containerRef}
+      className="w-full flex flex-col items-center justify-start relative pt-24 md:pt-32 pb-20 md:pb-28 overflow-hidden transition-colors duration-500"
+      style={{ backgroundColor: bgColor, color: textColor }}
+    >
+      <div className="w-full max-w-[1600px] px-6 md:px-12 lg:px-[100px] flex flex-col gap-12 md:gap-16 z-10">
+        
+        {/* Right-Aligned Text Section exactly matching Figma layout */}
+        <div className="flex flex-col items-end text-right w-full gap-6 md:gap-8">
+          
+          {/* Subheading: Small, right-aligned, dynamic */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-[480px] font-medium leading-relaxed opacity-95 text-right self-end"
             style={{
               fontFamily: "var(--font-satoshi)",
-              fontWeight: 700,
-              fontSize: "14px",
-              lineHeight: "28px",
-              color: "#0F1D07",
+              fontSize: "clamp(13px, 1.2vw, 15px)",
+              lineHeight: "1.6",
             }}
           >
-            We&apos;re a design and technology studio from India, working closely with teams around the world to build thoughtful digital products.
-          </div>
-        </div>
+            {subheading}
+          </motion.p>
 
-        {/* Main Heading - Large and Right aligned on desktop */}
-        <div className="w-full flex justify-start md:justify-end mb-12 md:mb-24">
-          <h1
-            className="text-left md:text-right max-w-[1098px]"
+          {/* Huge Main Heading: Right-aligned, Delight font */}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="tracking-tight text-right w-full max-w-[1100px] self-end"
             style={{
               fontFamily: "var(--font-delight)",
+              fontSize: "clamp(38px, 6.5vw, 92px)",
+              lineHeight: "1.08",
               fontWeight: 500,
-              fontSize: "clamp(48px, 10vw, 120px)",
-              lineHeight: "1.1",
-              letterSpacing: "-0.02em",
-              color: "#0F1D07",
             }}
           >
-            A tight team, doing deliberate work.
-          </h1>
+            {heading}
+          </motion.h1>
         </div>
 
-        {/* Images Grid - Matching the screenshot collage style */}
-        <div className="flex flex-col gap-6 w-full mt-12">
-          {/* Main Image - img1 */}
-          <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[20px]">
-            <Image
-              src="/img3.jpg"
-              alt="Team at work"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+        {/* Dynamic workspace image collage grid */}
+        <div className="w-full flex flex-col gap-6 md:gap-8">
+          
+          {/* Image 1: Top Wide Banner */}
+          {img1Url && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-[360px] md:h-[500px] lg:h-[620px] rounded-[24px] md:rounded-[32px] overflow-hidden shadow-sm relative group"
+            >
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500 z-10 pointer-events-none" />
+              <motion.img
+                src={img1Url}
+                alt="Workspace Core Image"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+              />
+            </motion.div>
+          )}
 
-          {/* Secondary Images - img2 and img3 below */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[20px]">
-              <Image
-                src="/img2.jpg"
-                alt="Studio space"
-                fill
-                className="object-cover"
-              />
+          {/* Bottom Split Images Grid */}
+          {(img2Url || img3Url) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full">
+              
+              {/* Image 2: Bottom Left Column */}
+              {img2Url && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full h-[260px] md:h-[380px] lg:h-[480px] rounded-[24px] md:rounded-[32px] overflow-hidden shadow-sm relative group"
+                >
+                  <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500 z-10 pointer-events-none" />
+                  <motion.img
+                    src={img2Url}
+                    alt="Workspace Collaborative Image"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                  />
+                </motion.div>
+              )}
+
+              {/* Image 3: Bottom Right Column */}
+              {img3Url && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full h-[260px] md:h-[380px] lg:h-[480px] rounded-[24px] md:rounded-[32px] overflow-hidden shadow-sm relative group"
+                >
+                  <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500 z-10 pointer-events-none" />
+                  <motion.img
+                    src={img3Url}
+                    alt="Workspace Collaborative Scene"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                  />
+                </motion.div>
+              )}
             </div>
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[20px]">
-              <Image
-                src="/img1.jpg"
-                alt="Team collaboration"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
+          )}
         </div>
-
       </div>
     </section>
   );

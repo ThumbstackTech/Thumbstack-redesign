@@ -2,7 +2,8 @@
 
 import { motion, Variants } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
+import Link from "next/link";
 
 import { PrinciplesData } from "../../types/strapi";
 import { getStrapiImageUrl } from "../../lib/strapi";
@@ -13,87 +14,71 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
 
   const heading = data?.heading || "Every Capability Runs Through The Same System.";
   const description = data?.description || "Whether we are building a Shopify store, a custom website, a CMS platform, or a mobile app ecosystem, the process stays connected.";
-  
-  const defaultPrinciples = [
-    {
-      title: "Strategise",
-      desc: "We define what needs to be built, fixed, prioritised, or planned.",
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g clipPath="url(#clip0_bulb)">
-            <path opacity="0.2" d="M9.8375 20.875C8.64872 19.9463 7.68583 18.7604 7.02118 17.4062C6.35653 16.052 6.00739 14.5648 6 13.0563C5.97 7.63625 10.34 3.125 15.7588 3C17.8588 2.94914 19.9215 3.56088 21.6542 4.74843C23.3869 5.93598 24.7017 7.63903 25.412 9.61594C26.1222 11.5929 26.1919 13.7432 25.6111 15.762C25.0303 17.7807 23.8285 19.5653 22.1763 20.8625C21.8118 21.1451 21.5165 21.5069 21.3127 21.9206C21.1089 22.3342 21.002 22.7889 21 23.25V24C21 24.2652 20.8946 24.5196 20.7071 24.7071C20.5196 24.8946 20.2652 25 20 25H12C11.7348 25 11.4804 24.8946 11.2929 24.7071C11.1054 24.5196 11 24.2652 11 24V23.25C10.9995 22.7918 10.8946 22.3397 10.6931 21.9282C10.4917 21.5167 10.1991 21.1565 9.8375 20.875Z" fill="white" />
-            <path d="M11 29H21" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M9.8375 20.875C8.64872 19.9463 7.68583 18.7604 7.02118 17.4062C6.35653 16.052 6.00739 14.5648 6 13.0563C5.97 7.63625 10.34 3.125 15.7588 3C17.8588 2.94914 19.9215 3.56088 21.6542 4.74843C23.3869 5.93598 24.7017 7.63903 25.412 9.61594C26.1222 11.5929 26.1919 13.7432 25.6111 15.762C25.0303 17.7807 23.8285 19.5653 22.1763 20.8625C21.8118 21.1451 21.5165 21.5069 21.3127 21.9206C21.1089 22.3342 21.002 22.7889 21 23.25V24C21 24.2652 20.8946 24.5196 20.7071 24.7071C20.5196 24.8946 20.2652 25 20 25H12C11.7348 25 11.4804 24.8946 11.2929 24.7071C11.1054 24.5196 11 24.2652 11 24V23.25C10.9995 22.7918 10.8946 22.3397 10.6931 21.9282C10.4917 21.5167 10.1991 21.1565 9.8375 20.875Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M17 7C19.5 7.42125 21.5762 9.5 22 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </g>
-          <defs>
-            <clipPath id="clip0_bulb">
-              <rect width="32" height="32" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-      )
-    },
-    {
-      title: "Design",
-      desc: "We shape the experience, interface, user journeys, and visual system.",
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g clipPath="url(#clip0_design)">
-            <path opacity="0.2" d="M25 7H6C5.44772 7 5 7.44772 5 8V16C5 16.5523 5.44772 17 6 17H25C25.5523 17 26 16.5523 26 16V8C26 7.44772 25.5523 7 25 7Z" fill="white" />
-            <path d="M25 7H6C5.44772 7 5 7.44772 5 8V16C5 16.5523 5.44772 17 6 17H25C25.5523 17 26 16.5523 26 16V8C26 7.44772 25.5523 7 25 7Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M26 12H29C29.2652 12 29.5196 12.1054 29.7071 12.2929C29.8946 12.4804 30 12.7348 30 13V19.25C30 19.4672 29.9292 19.6785 29.7984 19.852C29.6676 20.0254 29.4839 20.1515 29.275 20.2113L16.725 23.7925C16.5168 23.8521 16.3335 23.9776 16.2027 24.1503C16.072 24.323 16.0009 24.5334 16 24.75V29" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M5 12H2" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </g>
-          <defs>
-            <clipPath id="clip0_design">
-              <rect width="32" height="32" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-      )
-    },
-    {
-      title: "Build",
-      desc: "We develop the website, store, app, platform, CMS, integrations, or backend system.",
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15.9993 29.3346C23.3631 29.3346 29.3327 23.3651 29.3327 16.0013C29.3327 8.63751 23.3631 2.66797 15.9993 2.66797C8.63555 2.66797 2.66602 8.63751 2.66602 16.0013C2.66602 23.3651 8.63555 29.3346 15.9993 29.3346Z" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M12.6673 12.668L10.6231 14.43C9.76369 15.1706 9.33398 15.541 9.33398 16.0013C9.33398 16.4616 9.76368 16.832 10.6231 17.5726L12.6673 19.3346" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M19.334 12.668L21.3783 14.43C22.2376 15.1706 22.6673 15.541 22.6673 16.0013C22.6673 16.4616 22.2376 16.832 21.3783 17.5726L19.334 19.3346" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      )
-    },
-    {
-      title: "Grow",
-      desc: "We maintain, improve, optimise, and support the product after launch.",
-      icon: (
-        <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g clipPath="url(#clip0_6495_1189)">
-            <path opacity="0.2" d="M10.5337 21.4662L3.64749 18.9287C3.45761 18.8587 3.29377 18.732 3.17806 18.566C3.06234 18.3999 3.00031 18.2024 3.00031 18C3.00031 17.7976 3.06234 17.6 3.17806 17.434C3.29377 17.2679 3.45761 17.1413 3.64749 17.0712L10.5337 14.5337L13.0712 7.64749C13.1413 7.45761 13.2679 7.29377 13.434 7.17806C13.6 7.06234 13.7976 7.00031 14 7.00031C14.2024 7.00031 14.3999 7.06234 14.566 7.17806C14.732 7.29377 14.8587 7.45761 14.9287 7.64749L17.4662 14.5337L24.3525 17.0712C24.5424 17.1413 24.7062 17.2679 24.8219 17.434C24.9376 17.6 24.9997 17.7976 24.9997 18C24.9997 18.2024 24.9376 18.3999 24.8219 18.566C24.7062 18.732 24.5424 18.8587 24.3525 18.9287L17.4662 21.4662L14.9287 28.3525C14.8587 28.5424 14.732 28.7062 14.566 28.8219C14.3999 28.9376 14.2024 28.9997 14 28.9997C13.7976 28.9997 13.6 28.9376 13.434 28.8219C13.2679 28.7062 13.1413 28.5424 13.0712 28.3525L10.5337 21.4662Z" fill="white" />
-            <path d="M10.5337 21.4662L3.64749 18.9287C3.45761 18.8587 3.29377 18.732 3.17806 18.566C3.06234 18.3999 3.00031 18.2024 3.00031 18C3.00031 17.7976 3.06234 17.6 3.17806 17.434C3.29377 17.2679 3.45761 17.1413 3.64749 17.0712L10.5337 14.5337L13.0712 7.64749C13.1413 7.45761 13.2679 7.29377 13.434 7.17806C13.6 7.06234 13.7976 7.00031 14 7.00031C14.2024 7.00031 14.3999 7.06234 14.566 7.17806C14.732 7.29377 14.8587 7.45761 14.9287 7.64749L17.4662 14.5337L24.3525 17.0712C24.5424 17.1413 24.7062 17.2679 24.8219 17.434C24.9376 17.6 24.9997 17.7976 24.9997 18C24.9997 18.2024 24.9376 18.3999 24.8219 18.566C24.7062 18.732 24.5424 18.8587 24.3525 18.9287L17.4662 21.4662L14.9287 28.3525C14.8587 28.5424 14.732 28.7062 14.566 28.8219C14.3999 28.9376 14.2024 28.9997 14 28.9997C13.7976 28.9997 13.6 28.9376 13.434 28.8219C13.2679 28.7062 13.1413 28.5424 13.0712 28.3525L10.5337 21.4662Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M22 2V8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M28 9V13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M19 5H25" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M26 11H30" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </g>
-          <defs>
-            <clipPath id="clip0_6495_1189">
-              <rect width="32" height="32" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-      )
-    }
-  ];
+  const ctaText = data?.ctaText || "Explore Our Services";
+  const ctaLink = data?.ctaLink || "#";
 
-  const principles = data?.items?.map(item => ({
-    title: item.title,
-    desc: item.description,
-    icon: item.icon?.data?.attributes?.url ? (
-      <img src={getStrapiImageUrl(item.icon.data.attributes) || undefined} alt={item.title} className="w-[32px] h-[32px] object-contain invert" />
-    ) : null
-  })) || defaultPrinciples;
+  // Helper to map default icons or dynamic SVG image icons
+  const getIcon = useCallback((iconName: string, iconUrl?: string | null) => {
+    if (iconUrl) {
+      return <img src={iconUrl} alt={iconName} className="w-[32px] h-[32px] object-contain invert" />;
+    }
+
+    switch (iconName) {
+      case "strategise":
+        return (
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 29H21" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M9.8375 20.875C8.64872 19.9463 7.68583 18.7604 7.02118 17.4062C6.35653 16.052 6.00739 14.5648 6 13.0563C5.97 7.63625 10.34 3.125 15.7588 3C17.8588 2.94914 19.9215 3.56088 21.6542 4.74843C23.3869 5.93598 24.7017 7.63903 25.412 9.61594C26.1222 11.5929 26.1919 13.7432 25.6111 15.762C25.0303 17.7807 23.8285 19.5653 22.1763 20.8625C21.8118 21.1451 21.5165 21.5069 21.3127 21.9206C21.1089 22.3342 21.002 22.7889 21 23.25V24C21 24.2652 20.8946 24.5196 20.7071 24.7071C20.5196 24.8946 20.2652 25 20 25H12C11.7348 25 11.4804 24.8946 11.2929 24.7071C11.1054 24.5196 11 24.2652 11 24V23.25C10.9995 22.7918 10.8946 22.3397 10.6931 21.9282C10.4917 21.5167 10.1991 21.1565 9.8375 20.875Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M17 7C19.5 7.42125 21.5762 9.5 22 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        );
+      case "design":
+        return (
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25 7H6C5.44772 7 5 7.44772 5 8V16C5 16.5523 5.44772 17 6 17H25C25.5523 17 26 16.5523 26 16V8C26 7.44772 25.5523 7 25 7Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M26 12H29C29.2652 12 29.5196 12.1054 29.7071 12.2929C29.8946 12.4804 30 12.7348 30 13V19.25C30 19.4672 29.9292 19.6785 29.7984 19.852C29.6676 20.0254 29.4839 20.1515 29.275 20.2113L16.725 23.7925C16.5168 23.8521 16.3335 23.9776 16.2027 24.1503C16.072 24.323 16.0009 24.5334 16 24.75V29" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5 12H2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        );
+      case "build":
+        return (
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M12.5 12.5L9.5 16L12.5 19.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M19.5 12.5L22.5 16L19.5 19.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        );
+      case "grow":
+        return (
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.5337 21.4662L3.64749 18.9287C3.45761 18.8587 3.29377 18.732 3.17806 18.566C3.06234 18.3999 3.00031 18.2024 3.00031 18C3.00031 17.7976 3.06234 17.6 3.17806 17.434C3.29377 17.2679 3.45761 17.1413 3.64749 17.0712L10.5337 14.5337L13.0712 7.64749C13.1413 7.45761 13.2679 7.29377 13.434 7.17806C13.6 7.06234 13.7976 7.00031 14 7.00031C14.2024 7.00031 14.3999 7.06234 14.566 7.17806C14.732 7.29377 14.8587 7.45761 14.9287 7.64749L17.4662 14.5337L24.3525 17.0712C24.5424 17.1413 24.7062 17.2679 24.8219 17.434C24.9376 17.6 24.9997 17.7976 24.9997 18C24.9997 18.2024 24.9376 18.3999 24.8219 18.566C24.7062 18.732 24.5424 18.8587 24.3525 18.9287L17.4662 21.4662L14.9287 28.3525C14.8587 28.5424 14.732 28.7062 14.566 28.8219C14.3999 28.9376 14.2024 28.9997 14 28.9997C13.7976 28.9997 13.6 28.9376 13.434 28.8219C13.2679 28.7062 13.1413 28.5424 13.0712 28.3525L10.5337 21.4662Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M22 2V8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M28 9V13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M19 5H25" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M26 11H30" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        );
+      default:
+        return null;
+    }
+  }, []);
+
+  const finalPrinciples = data?.items?.map(item => {
+    const lowerTitle = item.title?.toLowerCase() || "";
+    let iconName = "strategise";
+    if (lowerTitle.includes("design")) iconName = "design";
+    else if (lowerTitle.includes("build") || lowerTitle.includes("develop")) iconName = "build";
+    else if (lowerTitle.includes("grow") || lowerTitle.includes("maintain")) iconName = "grow";
+
+    return {
+      title: item.title,
+      desc: item.description,
+      linkText: item.linkText || `Explore ${item.title}`,
+      linkUrl: item.linkUrl || "#",
+      iconName,
+      iconUrl: item.icon?.data?.attributes?.url ? getStrapiImageUrl(item.icon.data.attributes) : null
+    };
+  }) || [];
 
   const defaultMarqueeItems = [
     { text: "MOBILE APPS", color: "#95E7D3" },
@@ -113,26 +98,31 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3
+        delayChildren: 0.2
       }
     }
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
+  };
+
+  const arrowVariants = {
+    initial: { x: 0 },
+    hover: { x: 6 }
   };
 
   return (
     <section
       ref={containerRef}
-      className="w-full flex flex-col items-center justify-start snap-start relative bg-[#0F1D07] text-white overflow-hidden pt-16 sm:pt-20 pb-0"
+      className="w-full flex flex-col items-center justify-start snap-start relative bg-[#0B1306] text-white overflow-hidden pt-20 sm:pt-24 pb-0"
     >
-      <div className="w-full max-w-[1600px] px-4 sm:px-6 md:px-8 lg:pl-24 lg:pr-24 flex flex-col z-10 relative">
+      <div className="w-full max-w-[1600px] px-6 md:px-12 lg:px-[100px] flex flex-col z-10 relative">
 
         {/* Label */}
         <motion.span
@@ -145,119 +135,153 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
           Our Process
         </motion.span>
 
-        {/* Header */}
-        <div className="flex flex-col justify-start items-start w-full relative mb-16 lg:mb-24 gap-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="capitalize"
-            style={{
-              fontFamily: "var(--font-delight)",
-              fontWeight: 500,
-              fontSize: "clamp(32px, 5vw, 60px)",
-              lineHeight: "1.47", // 88px / 60px
-              color: "#FFFFFF",
-              maxWidth: "916px",
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            {heading}
-          </motion.h2>
+        {/* Header containing CTA Explore Our Services on right */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between w-full relative mb-16 lg:mb-24 gap-8">
+          <div className="flex flex-col gap-6 max-w-[900px]">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8 }}
+              className="capitalize text-white"
+              style={{
+                fontFamily: "var(--font-delight)",
+                fontWeight: 500,
+                fontSize: "clamp(34px, 5vw, 60px)",
+                lineHeight: "1.25",
+              }}
+            >
+              {heading}
+            </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white/60"
-            style={{
-              fontFamily: "var(--font-satoshi)",
-              fontWeight: 400,
-              fontSize: "clamp(14px, 1.2vw, 16px)",
-              lineHeight: "1.6",
-              maxWidth: "600px"
-            }}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-white/60"
+              style={{
+                fontFamily: "var(--font-satoshi)",
+                fontWeight: 400,
+                fontSize: "clamp(14px, 1.2vw, 16px)",
+                lineHeight: "1.6",
+                maxWidth: "600px"
+              }}
+            >
+              {description}
+            </motion.p>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="shrink-0"
           >
-            {description}
-          </motion.p>
+            <Link
+              href={ctaLink}
+              className="w-[218px] h-[55px] bg-white border border-white rounded-[18px] text-[#0B1306] text-[16px] font-bold flex items-center justify-center transition-all hover:bg-white/95 hover:scale-[1.02] active:scale-[0.98] shadow-md"
+              style={{ fontFamily: "var(--font-satoshi)" }}
+            >
+              {ctaText}
+            </Link>
+          </motion.div>
         </div>
 
-        {/* Principles Grid - 2x2 */}
+        {/* Principles 2x2 Floating Outline Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "0px" }}
-          className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 lg:gap-y-16 mb-12"
+          viewport={{ once: true, margin: "-100px" }}
+          className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-16 lg:gap-x-24 gap-y-12 lg:gap-y-16 mb-20"
         >
-          {principles.map((p, i) => (
+          {finalPrinciples.map((p, i) => (
             <motion.div
               key={i}
               variants={itemVariants}
-              whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.04)" }}
-              whileTap={{ scale: 0.98 }}
-              className="flex flex-col items-start gap-4 p-6 md:p-8 rounded-2xl transition-colors duration-300 cursor-pointer"
+              whileHover="hover"
+              initial="initial"
+              className="flex flex-col items-start gap-4 p-0"
             >
               {/* Icon Container */}
-              <div className="w-[32px] h-[32px] flex items-center justify-center text-white mb-4">
-                {p.icon}
+              <div className="w-[36px] h-[36px] flex items-center justify-center text-white mb-2">
+                {getIcon(p.iconName, p.iconUrl)}
               </div>
-              {/* Text */}
-              <div className="flex flex-col gap-3">
+              
+              {/* Text Area */}
+              <div className="flex flex-col gap-3 w-full">
                 <h3
                   className="text-white"
                   style={{
                     fontFamily: "var(--font-satoshi)",
                     fontWeight: 700,
-                    fontSize: "clamp(24px, 5vw, 34px)",
+                    fontSize: "clamp(24px, 2.5vw, 32px)",
                     lineHeight: "1.2"
                   }}
                 >
                   {p.title}
                 </h3>
+                
                 <p
-                  className="text-white opacity-60"
+                  className="text-white opacity-60 font-medium"
                   style={{
                     fontFamily: "var(--font-satoshi)",
-                    fontWeight: 700,
                     fontSize: "14px",
-                    lineHeight: "26px",
-                    maxWidth: "625.5px"
+                    lineHeight: "24px",
+                    maxWidth: "500px"
                   }}
                 >
                   {p.desc}
                 </p>
+
+                {/* Explore [Title] -> Link */}
+                <Link
+                  href={p.linkUrl}
+                  className="flex items-center gap-2 text-white text-[14px] font-bold mt-4 group"
+                  style={{ fontFamily: "var(--font-satoshi)" }}
+                >
+                  <span>{p.linkText}</span>
+                  <motion.svg 
+                    variants={arrowVariants}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </motion.svg>
+                </Link>
               </div>
             </motion.div>
           ))}
         </motion.div>
       </div>
 
-      {/* Enhanced Marquee Banner */}
-      <div className="mt-0 w-full py-4 lg:py-6 bg-transparent relative z-20 overflow-hidden">
+      {/* Marquee Banner */}
+      <div className="w-full py-6 bg-transparent border-t border-white/5 relative z-20 overflow-hidden">
         <div className="flex overflow-hidden w-full">
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
             transition={{
-              duration: 60,
+              duration: 40,
               repeat: Infinity,
               ease: "linear"
             }}
-            className="flex whitespace-nowrap items-center shrink-0 gap-[37px]"
+            className="flex whitespace-nowrap items-center shrink-0 gap-[48px]"
           >
             {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex shrink-0 gap-[37px]">
+              <div key={i} className="flex shrink-0 gap-[48px]">
                 {marqueeItems.map((item, k) => (
                   <span
                     key={k}
                     className="font-medium text-center uppercase"
                     style={{
                       fontFamily: "var(--font-nohemi)",
-                      fontSize: "33.8824px",
-                      lineHeight: "34px",
+                      fontSize: "32px",
+                      lineHeight: "1",
                       color: item.color,
-                      padding: "0 10px"
+                      letterSpacing: "0.02em"
                     }}
                   >
                     {item.text}

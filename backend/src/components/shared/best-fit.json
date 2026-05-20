@@ -1,0 +1,32 @@
+{
+    "collectionName": "components_shared_best_fits",
+    "info": {
+        "displayName": "Best Fit",
+        "icon": "thumbs-up",
+        "description": "Best Fit section listing customizable scenario lines"
+    },
+    "options": {},
+    "attributes": {
+        "heading": {
+            "type": "string",
+            "required": true,
+            "default": "Best fit for businesses that need more than a basic website."
+        },
+        "description": {
+            "type": "text",
+            "default": "This is best suited for businesses that need a website to carry serious brand, content, SEO, lead generation, or operational value."
+        },
+        "bgColor": {
+            "type": "string",
+            "default": "#95E7D3"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#0F1D07"
+        },
+        "scenarios": {
+            "type": "text",
+            "description": "Enter each scenario on a new line"
+        }
+    }
+}

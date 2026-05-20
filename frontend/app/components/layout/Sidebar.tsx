@@ -4,8 +4,31 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Sidebar() {
+import { SidebarData } from "../../types/strapi";
+
+export default function Sidebar({ data }: { data?: SidebarData }) {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const logoText = data?.logoText || "Thumbstack.";
+  const email = data?.email || "hey@thumbstack.co";
+
+  const defaultLinks = [
+    { label: "Capabilities", url: "/#fields-of-play" },
+    { label: "Our Work", url: "/our-work" },
+    { label: "News & Insights", url: "/news-and-insights" },
+    { label: "Service", url: "/#service" },
+    { label: "About Us", url: "/about-us" },
+  ];
+
+  const links = data?.links && data.links.length > 0
+    ? data.links.map(l => {
+      let url = l.url || "";
+      if (url && !url.startsWith("/") && !url.startsWith("#") && !url.startsWith("mailto:") && !url.startsWith("http") && !url.startsWith("https")) {
+        url = `/${url}`;
+      }
+      return { label: l.label, url };
+    })
+    : defaultLinks;
 
   return (
     <>
@@ -26,12 +49,12 @@ export default function Sidebar() {
                 lineHeight: "23px",
               }}
             >
-              Thumbstack.
+              {logoText}
             </h1>
           </Link>
 
           <a
-            href="mailto:hello@thumbstack.co"
+            href={`mailto:${email}`}
             className="text-white rotate-90 whitespace-nowrap opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 underline pointer-events-auto"
             style={{
               fontFamily: "var(--font-satoshi)",
@@ -40,7 +63,7 @@ export default function Sidebar() {
               lineHeight: "24px",
             }}
           >
-            hey@thumbstack.co
+            {email}
           </a>
         </div>
 
@@ -63,7 +86,7 @@ export default function Sidebar() {
       {/* Mobile Top Header - Visible only on mobile */}
       <header className="fixed top-0 left-0 w-full h-[70px] bg-[#0F1D07] sm:hidden flex items-center justify-between px-6 z-[50] border-b border-white/5">
         <Link href="/">
-          <h1 className="text-[#95E7D3] font-medium text-[22px] tracking-tight">Thumbstack.</h1>
+          <h1 className="text-[#95E7D3] font-medium text-[22px] tracking-tight">{logoText}</h1>
         </Link>
 
         {/* Adjusted mr to align button better with right edge on mobile */}
@@ -88,7 +111,7 @@ export default function Sidebar() {
           {/* Top Row for Mobile: Logo and Close Button - Optimized for pixel-perfect alignment with the header */}
           <div className="flex justify-between items-center h-[70px] px-6 mb-12 sm:h-auto sm:px-0 sm:absolute sm:top-10 sm:left-10 sm:block -mx-8 sm:mx-0 w-[calc(100%+64px)] sm:w-full">
             <Link href="/" onClick={() => setMenuOpen(false)} className="sm:inline-block">
-              <h1 className="text-[#95E7D3] font-medium text-[22px] tracking-tight">Thumbstack.</h1>
+              <h1 className="text-[#95E7D3] font-medium text-[22px] tracking-tight">{logoText}</h1>
             </Link>
 
             {/* Close Button - Positioned to exactly overlap the hamburger button */}
@@ -107,23 +130,17 @@ export default function Sidebar() {
 
           {/* Navigation Links */}
           <nav className="flex flex-col gap-4 sm:gap-4 mt-4 sm:mt-24 md:pl-24">
-            {[
-              { name: "Capabilities", href: "/#fields-of-play" },
-              { name: "Our Work", href: "/our-work" },
-              { name: "News & Insights", href: "/news-and-insights" },
-              { name: "Service", href: "/#service" },
-              { name: "About Us", href: "/about-us" },
-            ].map((item, idx) => (
+            {links.map((item, idx) => (
               <Link
                 key={idx}
-                href={item.href}
+                href={item.url}
                 onClick={() => setMenuOpen(false)}
                 className="text-white font-medium hover:text-[#95E7D3] transition-colors w-fit leading-[1.1]"
                 style={{
                   fontSize: "clamp(48px, 10vw, 84px)",
                 }}
               >
-                {item.name}
+                {item.label}
               </Link>
             ))}
           </nav>

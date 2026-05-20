@@ -1,79 +1,59 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useRef } from "react";
+import { ProductDrivenData } from "../../types/strapi";
+import { getStrapiImageUrl } from "../../lib/strapi";
 
-const TECH_TOOLS = [
-  { name: "8th Wall", logo: "8b1802af-8th-Wall-Horizontal-Logo-Purple 1.png" },
-  { name: "WordPress", logo: "bi_wordpress.png" },
-  { name: "Android", logo: "devicon_android.png" },
-  { name: "Next.js", logo: "devicon_nextjs-wordmark.png" },
-  { name: "Nuxt.js", logo: "devicon_nuxtjs.png" },
-  { name: "Ghost", logo: "ghost-logo-dark 2.png" },
-  { name: "Midjourney", logo: "logos_midjourney.png" },
-  { name: "Python", logo: "logos_python.png" },
-  { name: "Segment", logo: "logos_segment-icon.png" },
-  { name: "Shopify", logo: "logos_shopify.png" },
-  { name: "Node.js", logo: "material-icon-theme_nodejs.png" },
-  { name: "Ollama", logo: "ollama 1.png" },
-  { name: "Fspace", logo: "skill-icons_figma-light.png" },
-  { name: "Group 49", logo: "6808f9ca7883e7d17a64a7b8_Group 49 1.png" },
-  { name: "Vector", logo: "Vector.png" },
-  { name: "Vector 1", logo: "Vector-1.png" },
-  { name: "Group", logo: "Group.png" },
-  { name: "Group 1", logo: "Group-1.png" },
-  { name: "GraphQL", logo: "logos_graphql.png" },
-  { name: "OpenAI", logo: "OpenAI_Logo.svg 2.png" },
-  { name: "Logo 53", logo: "image 53.png" },
-  { name: "Group 594", logo: "Group 1321314594.png" },
-  { name: "Group 597", logo: "Group 1321314597.png" },
-  { name: "Group 598", logo: "Group 1321314598.png" },
-];
-
-export default function ProductDriven() {
+export default function ProductDriven({ data }: { data?: ProductDrivenData }) {
   const [activeId, setActiveId] = useState<number | null>(null);
+  const containerRef = useRef(null);
+
+  const headingLine1 = data?.headingLine1 || "Product-Smart.";
+  const headingLine2 = data?.headingLine2 || "Progress-Driven.";
+  const bgColor = data?.bgColor || "#FFFFFF";
+
+  const rawLogos = data?.logos?.data || (Array.isArray(data?.logos) ? data.logos : []);
+  const logosList = rawLogos.map((item: any) => {
+    const altText = item?.attributes?.alternativeText || item?.alternativeText || "Tech Partner";
+    return {
+      name: altText,
+      logoUrl: getStrapiImageUrl(item)
+    };
+  }).filter((item: any) => !!item.logoUrl) || [];
 
   // Positions arranged around the periphery, keeping center clear for text
   const positions = [
-    // Top row
-    { top: "4%", left: "10%" },       // Flutter (top-left corner)
-    { top: "2%", left: "22%" },      // Shopify
-    { top: "1%", left: "35%" },      // Meta
-    { top: "8%", left: "55%" },      // 8thWall logo area
-    { top: "3%", left: "73%" },      // Segment
-    // Upper sides
-    { top: "14%", left: "14%" },      // 8thWall
-    { top: "12%", left: "25%" },     // Figma
-    { top: "10%", right: "3%" },     // Android
-    { top: "15%", right: "12%" },    // Group icon
-    { top: "20%", right: "25%" },    // ReactJS
-    // Middle sides (far left & right only)
-    { top: "38%", left: "9%" },      // Apple
-    { top: "32%", left: "18%" },     // Ollama
-    { top: "42%", right: "2%" },     // Next.js
-    { top: "28%", right: "5%" },     // Bitcoin/Group
-    // Lower sides
-    { top: "55%", left: "11%" },      // Ellipse
-    { top: "60%", left: "20%" },     // Midjourney
-    { top: "58%", right: "4%" },     // Nuxt
-    { top: "52%", right: "15%" },    // Vue/Mint
-    // Bottom row
-    { top: "72%", left: "20%" },     // Python
-    { top: "70%", left: "35%" },     // Segment alt
-    { top: "75%", right: "30%" },    // Ghost
-    { top: "78%", right: "15%" },    // Node
-    { top: "85%", left: "12%" },      // WordPress
-    { top: "82%", left: "28%" },     // Group 594
-    { top: "88%", right: "3%" },     // Group 598
+    { top: "5%", left: "10%" },
+    { top: "4%", left: "30%" },
+    { top: "6%", right: "12%" },
+    { top: "15%", left: "20%" },
+    { top: "12%", right: "28%" },
+    { top: "25%", left: "8%" },
+    { top: "22%", right: "5%" },
+    { top: "38%", left: "16%" },
+    { top: "35%", right: "18%" },
+    { top: "52%", left: "6%" },
+    { top: "48%", right: "8%" },
+    { top: "65%", left: "22%" },
+    { top: "62%", right: "25%" },
+    { top: "78%", left: "12%" },
+    { top: "75%", right: "15%" },
+    { top: "86%", left: "30%" },
+    { top: "88%", right: "32%" },
+    { top: "82%", left: "50%" }
   ];
 
   return (
-    <section className="min-h-screen w-full bg-white relative flex flex-col items-center justify-center overflow-hidden py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-24 snap-start">
+    <section
+      ref={containerRef}
+      className="min-h-screen w-full relative flex flex-col items-center justify-center overflow-hidden py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-24 snap-start transition-colors duration-500"
+      style={{ backgroundColor: bgColor }}
+    >
       
       {/* Background Floating Logos */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {TECH_TOOLS.map((item, i) => {
+        {logosList.map((item: any, i: number) => {
           const pos = positions[i % positions.length];
           const isActive = activeId === i;
 
@@ -94,35 +74,33 @@ export default function ProductDriven() {
               onMouseEnter={() => setActiveId(i)}
               onMouseLeave={() => setActiveId(null)}
             >
-              <div className={`w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-white rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex items-center justify-center p-2 sm:p-3 md:p-4 border border-gray-100 transition-all duration-300 ${isActive ? 'scale-125 shadow-2xl border-blue/20 ring-4 ring-blue/5' : 'hover:scale-110 hover:shadow-xl'}`}>
-                <Image 
-                  src={`/TSP/tools/${item.logo}`} 
+              {/* High-Quality, Premium Sized Dynamic Logo Container */}
+              <div className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.06)] flex items-center justify-center p-3 sm:p-4 border border-gray-100/50 transition-all duration-300 ${isActive ? 'scale-125 shadow-2xl ring-4 ring-black/5' : 'hover:scale-110 hover:shadow-xl'}`}>
+                <img 
+                  src={item.logoUrl} 
                   alt={item.name} 
-                  width={48} 
-                  height={48} 
-                  className="object-contain w-full h-full"
-                  unoptimized
+                  className="object-contain w-full h-full max-w-full max-h-full"
                 />
               </div>
               
-                {isActive && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                    animate={{ opacity: 1, y: 12, scale: 1 }}
-                    className="absolute top-full mt-1 sm:mt-2 whitespace-nowrap z-30"
-                  >
-                    <span className="text-[8px] sm:text-xs font-bold text-sidebar bg-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-lg border border-gray-100">
-                      {item.name}
-                    </span>
-                  </motion.div>
-                )}
+              {isActive && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 12, scale: 1 }}
+                  className="absolute top-full mt-1 sm:mt-2 whitespace-nowrap z-30"
+                >
+                  <span className="text-[10px] sm:text-xs font-bold text-gray-800 bg-white px-3 py-1.5 rounded-full shadow-lg border border-gray-100">
+                    {item.name}
+                  </span>
+                </motion.div>
+              )}
             </motion.div>
           );
         })}
       </div>
 
       {/* Center Text */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto">
+      <div className="relative z-10 text-center max-w-5xl mx-auto px-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -131,23 +109,22 @@ export default function ProductDriven() {
           style={{
             fontFamily: "var(--font-delight)",
             fontWeight: 500,
-            fontSize: "clamp(48px, 8vw, 105px)",
-            lineHeight: "clamp(60px, 10vw, 147px)",
-            letterSpacing: "0%",
-            verticalAlign: "middle",
+            fontSize: "clamp(46px, 7.5vw, 96px)",
+            lineHeight: "1.2",
+            letterSpacing: "-0.01em",
             textTransform: "capitalize",
             textAlign: "center"
           }}
         >
-          <span>Product-Smart.</span>
-          <span className="opacity-90">Progress-Driven.</span>
+          <span>{headingLine1}</span>
+          <span className="opacity-90">{headingLine2}</span>
         </motion.h2>
       </div>
 
-      {/* Decorative Blur Gradients */}
+      {/* Subtle Premium BG Radial Blurs */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-mint/10 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#95E7D3]/10 blur-[130px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#0B1306]/5 blur-[130px] rounded-full" />
       </div>
 
     </section>

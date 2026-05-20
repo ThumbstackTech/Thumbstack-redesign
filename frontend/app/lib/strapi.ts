@@ -25,6 +25,42 @@ export async function fetchStrapi(
   return res.json();
 }
 
+/**
+ * Builds the correct Strapi 5 query string for fetching a page by slug.
+ * Strapi 5 dynamic zones require the polymorphic `populate[field][on][component]`
+ * syntax — the simple `populate[content][populate]=*` returns an empty array.
+ * NOTE: The Page schema has no `seo` field, so never add populate[seo] here.
+ */
+export function getPagesQueryString(slug: string): string {
+  const params: string[] = [
+    `filters[slug][$eq]=${slug}`,
+    "publicationState=preview",
+    // --- Dynamic zone components (polymorphic populate required for Strapi 5) ---
+    "populate[content][on][shared.hero][populate]=*",
+    "populate[content][on][shared.interactive-list][populate][items][populate][image]=true",
+    "populate[content][on][shared.partner-brands][populate][logos]=true",
+    "populate[content][on][shared.principles][populate]=*",
+    "populate[content][on][shared.capabilities-features][populate][groups][populate][items]=*",
+    "populate[content][on][shared.faq-section][populate][faqs]=*",
+    "populate[content][on][shared.team-section][populate][members][populate][image]=true",
+    "populate[content][on][shared.lets-talk][populate]=*",
+    "populate[content][on][shared.build-your-stack][populate]=*",
+    "populate[content][on][shared.footer][populate]=*",
+    "populate[content][on][shared.info][populate]=*",
+    "populate[content][on][shared.what-we-build][populate]=*",
+    "populate[content][on][shared.projects-section][populate]=*",
+    "populate[content][on][shared.about-hero][populate]=*",
+    "populate[content][on][shared.news-hero][populate]=*",
+    "populate[content][on][shared.product-driven][populate]=*",
+    // hero-work has card1Image/card2Image media — use explicit fields to avoid related cascade
+    "populate[content][on][shared.hero-work][populate][card1Image]=true",
+    "populate[content][on][shared.hero-work][populate][card2Image]=true",
+    "populate[content][on][shared.best-fit][populate]=*",
+    "populate[content][on][shared.sidebar][populate][links]=*",
+  ];
+  return params.join("&");
+}
+
 export function getStrapiURL(path: string) {
   if (!path) return "";
   if (path.startsWith("http")) return path;
@@ -55,12 +91,12 @@ export function getStrapiImageUrl(image: any): string | null {
   const attrs = imgObj.attributes || imgObj;
 
   // 4. Prioritize pre-resized optimized versions, falling back to original
-  const imageUrl = attrs?.formats?.large?.url || 
-                   attrs?.formats?.medium?.url || 
-                   attrs?.url || 
-                   attrs?.formats?.small?.url ||
-                   attrs?.formats?.thumbnail?.url;
-  
+  const imageUrl = attrs?.formats?.large?.url ||
+    attrs?.formats?.medium?.url ||
+    attrs?.url ||
+    attrs?.formats?.small?.url ||
+    attrs?.formats?.thumbnail?.url;
+
   if (!imageUrl) return null;
   return getStrapiURL(imageUrl);
 }

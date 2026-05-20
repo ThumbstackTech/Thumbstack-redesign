@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_shared_product_drivens",
+  "info": {
+    "displayName": "Product Driven",
+    "icon": "cog",
+    "description": "Premium dynamic floating product-driven / tech tools section"
+  },
+  "options": {},
+  "attributes": {
+    "headingLine1": {
+      "type": "string",
+      "required": true,
+      "default": "Product-Smart."
+    },
+    "headingLine2": {
+      "type": "string",
+      "required": true,
+      "default": "Progress-Driven."
+    },
+    "bgColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "logos": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "description": "Upload high-quality partner logos or tool logos to float"
+    }
+  }
+}

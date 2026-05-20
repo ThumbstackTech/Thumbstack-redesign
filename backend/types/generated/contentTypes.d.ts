@@ -616,6 +616,13 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.footer',
         'shared.info',
         'shared.what-we-build',
+        'shared.projects-section',
+        'shared.about-hero',
+        'shared.news-hero',
+        'shared.product-driven',
+        'shared.best-fit',
+        'shared.hero-work',
+        'shared.sidebar',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

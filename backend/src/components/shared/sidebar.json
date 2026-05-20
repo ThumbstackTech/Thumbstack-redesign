@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_sidebars",
+  "info": {
+    "displayName": "Sidebar Menu",
+    "icon": "menu",
+    "description": "Dynamic sidebar navigation overlay with custom links, logo and email"
+  },
+  "options": {},
+  "attributes": {
+    "logoText": {
+      "type": "string",
+      "default": "Thumbstack."
+    },
+    "email": {
+      "type": "string",
+      "default": "hey@thumbstack.co"
+    },
+    "links": {
+      "type": "component",
+      "component": "elements.nav-link",
+      "repeatable": true
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+    "collectionName": "components_shared_hero_works",
+    "info": {
+        "displayName": "Hero Work",
+        "icon": "briefcase",
+        "description": "Dynamic Hero Work section with customizable images, backgrounds, and badges"
+    },
+    "options": {},
+    "attributes": {
+        "headingLine1": {
+            "type": "string",
+            "required": true,
+            "default": "Work That Moves"
+        },
+        "headingLine2": {
+            "type": "string",
+            "default": "Businesses Forward"
+        },
+        "description": {
+            "type": "text",
+            "default": "A curated collection of digital products, brand systems, and platforms we've built across real estate, e-commerce, enterprise systems, and emerging startups."
+        },
+        "bgColor": {
+            "type": "string",
+            "default": "#3145DD"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "ctaText": {
+            "type": "string",
+            "default": "Let's Build Together"
+        },
+        "ctaLink": {
+            "type": "string",
+            "default": "#"
+        },
+        "card1Image": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images"
+            ],
+            "required": true
+        },
+        "card1BgColor": {
+            "type": "string",
+            "default": "#7FABA2"
+        },
+        "card1BadgeText": {
+            "type": "string",
+            "default": "BFT"
+        },
+        "card1BadgeSubtext": {
+            "type": "string",
+            "default": "Read"
+        },
+        "card2Image": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images"
+            ],
+            "required": true
+        },
+        "card2BgColor": {
+            "type": "string",
+            "default": "#9EA3F1"
+        }
+    }
+}

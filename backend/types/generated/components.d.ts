@@ -41,13 +41,15 @@ export interface ElementsFeatureItem extends Struct.ComponentSchema {
 export interface ElementsGridItem extends Struct.ComponentSchema {
   collectionName: 'components_elements_grid_items';
   info: {
-    description: 'An item in a grid with icon, title, and description';
+    description: 'An item in a grid with icon, title, description, and link';
     displayName: 'Grid Item';
     icon: 'box';
   };
   attributes: {
     description: Schema.Attribute.Text;
     icon: Schema.Attribute.Media<'images'>;
+    linkText: Schema.Attribute.String;
+    linkUrl: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -107,6 +109,46 @@ export interface ElementsTeamMember extends Struct.ComponentSchema {
     image: Schema.Attribute.Media<'images'>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     role: Schema.Attribute.String;
+  };
+}
+
+export interface SharedAboutHero extends Struct.ComponentSchema {
+  collectionName: 'components_shared_about_heroes';
+  info: {
+    description: 'Hero section for the About page with 3 high-quality dynamic images';
+    displayName: 'About Hero';
+    icon: 'user';
+  };
+  attributes: {
+    bgColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#FFFFFF'>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'A tight team, doing deliberate work.'>;
+    image1: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    image2: Schema.Attribute.Media<'images'>;
+    image3: Schema.Attribute.Media<'images'>;
+    subheading: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<"We're a design and technology studio from India, working closely with teams around the world to build thoughtful digital products.">;
+    textColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#0F1D07'>;
+  };
+}
+
+export interface SharedBestFit extends Struct.ComponentSchema {
+  collectionName: 'components_shared_best_fits';
+  info: {
+    description: 'Best Fit section listing customizable scenario lines';
+    displayName: 'Best Fit';
+    icon: 'thumbs-up';
+  };
+  attributes: {
+    bgColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#95E7D3'>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'This is best suited for businesses that need a website to carry serious brand, content, SEO, lead generation, or operational value.'>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Best fit for businesses that need more than a basic website.'>;
+    scenarios: Schema.Attribute.Text;
+    textColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#0F1D07'>;
   };
 }
 
@@ -203,6 +245,38 @@ export interface SharedHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHeroWork extends Struct.ComponentSchema {
+  collectionName: 'components_shared_hero_works';
+  info: {
+    description: 'Dynamic Hero Work section with customizable images, backgrounds, and badges';
+    displayName: 'Hero Work';
+    icon: 'briefcase';
+  };
+  attributes: {
+    bgColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#3145DD'>;
+    card1BadgeSubtext: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Read'>;
+    card1BadgeText: Schema.Attribute.String & Schema.Attribute.DefaultTo<'BFT'>;
+    card1BgColor: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#7FABA2'>;
+    card1Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    card2BgColor: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#9EA3F1'>;
+    card2Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"Let's Build Together">;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<"A curated collection of digital products, brand systems, and platforms we've built across real estate, e-commerce, enterprise systems, and emerging startups.">;
+    headingLine1: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Work That Moves'>;
+    headingLine2: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Businesses Forward'>;
+    textColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#FFFFFF'>;
+  };
+}
+
 export interface SharedInfo extends Struct.ComponentSchema {
   collectionName: 'components_shared_infos';
   info: {
@@ -251,6 +325,27 @@ export interface SharedLetsTalk extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedNewsHero extends Struct.ComponentSchema {
+  collectionName: 'components_shared_news_heroes';
+  info: {
+    description: 'Hero section for the News & Insights page';
+    displayName: 'News Hero';
+    icon: 'bullhorn';
+  };
+  attributes: {
+    bgColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#3145DD'>;
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"Let's Build Together">;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'We document what we learn \u2014 from design sprints to engineering breakthroughs, new project launches, experiments, and small discoveries that move our work forward.'>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Ideas, News & Notes From The Studio.'>;
+    textColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#FFFFFF'>;
+  };
+}
+
 export interface SharedPartnerBrands extends Struct.ComponentSchema {
   collectionName: 'components_shared_partner_brands';
   info: {
@@ -273,12 +368,63 @@ export interface SharedPrinciples extends Struct.ComponentSchema {
     icon: 'sync';
   };
   attributes: {
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Explore Our Services'>;
     description: Schema.Attribute.Text &
       Schema.Attribute.DefaultTo<'Whether we are building a Shopify store, a custom website, a CMS platform, or a mobile app ecosystem, the process stays connected.'>;
     heading: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Every Capability Runs Through The Same System.'>;
     items: Schema.Attribute.Component<'elements.grid-item', true>;
     marqueeItems: Schema.Attribute.String;
+  };
+}
+
+export interface SharedProductDriven extends Struct.ComponentSchema {
+  collectionName: 'components_shared_product_drivens';
+  info: {
+    description: 'Premium dynamic floating product-driven / tech tools section';
+    displayName: 'Product Driven';
+    icon: 'cog';
+  };
+  attributes: {
+    bgColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#FFFFFF'>;
+    headingLine1: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Product-Smart.'>;
+    headingLine2: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Progress-Driven.'>;
+    logos: Schema.Attribute.Media<'images', true>;
+  };
+}
+
+export interface SharedProjectsSection extends Struct.ComponentSchema {
+  collectionName: 'components_shared_projects_sections';
+  info: {
+    description: 'A dynamic portfolio projects showcase section';
+    displayName: 'Projects Section';
+    icon: 'briefcase';
+  };
+  attributes: {
+    heading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Selected Work.'>;
+  };
+}
+
+export interface SharedSidebar extends Struct.ComponentSchema {
+  collectionName: 'components_shared_sidebars';
+  info: {
+    description: 'Dynamic sidebar navigation overlay with custom links, logo and email';
+    displayName: 'Sidebar Menu';
+    icon: 'menu';
+  };
+  attributes: {
+    email: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'hey@thumbstack.co'>;
+    links: Schema.Attribute.Component<'elements.nav-link', true>;
+    logoText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Thumbstack.'>;
   };
 }
 
@@ -321,16 +467,23 @@ declare module '@strapi/strapi' {
       'elements.nav-link': ElementsNavLink;
       'elements.office-item': ElementsOfficeItem;
       'elements.team-member': ElementsTeamMember;
+      'shared.about-hero': SharedAboutHero;
+      'shared.best-fit': SharedBestFit;
       'shared.build-your-stack': SharedBuildYourStack;
       'shared.capabilities-features': SharedCapabilitiesFeatures;
       'shared.faq-section': SharedFaqSection;
       'shared.footer': SharedFooter;
       'shared.hero': SharedHero;
+      'shared.hero-work': SharedHeroWork;
       'shared.info': SharedInfo;
       'shared.interactive-list': SharedInteractiveList;
       'shared.lets-talk': SharedLetsTalk;
+      'shared.news-hero': SharedNewsHero;
       'shared.partner-brands': SharedPartnerBrands;
       'shared.principles': SharedPrinciples;
+      'shared.product-driven': SharedProductDriven;
+      'shared.projects-section': SharedProjectsSection;
+      'shared.sidebar': SharedSidebar;
       'shared.team-section': SharedTeamSection;
       'shared.what-we-build': SharedWhatWeBuild;
     }

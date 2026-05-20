@@ -166,6 +166,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
               alt={data.heroImage.alt ?? `${data.clientName} hero`}
               fill
               priority
+              unoptimized
               className="object-cover"
               sizes="100vw"
             />
@@ -230,6 +231,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
                       src={img.url}
                       alt={img.alt ?? "Challenge image"}
                       fill
+                      unoptimized
                       className="object-cover"
                     />
                   </div>
@@ -423,6 +425,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
                       src={img.url}
                       alt={img.alt ?? `Gallery ${idx + 1}`}
                       fill
+                      unoptimized
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>

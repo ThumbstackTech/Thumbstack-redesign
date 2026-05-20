@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shared_news_heroes",
+  "info": {
+    "displayName": "News Hero",
+    "icon": "bullhorn",
+    "description": "Hero section for the News & Insights page"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true,
+      "default": "Ideas, News & Notes From The Studio."
+    },
+    "description": {
+      "type": "text",
+      "default": "We document what we learn — from design sprints to engineering breakthroughs, new project launches, experiments, and small discoveries that move our work forward."
+    },
+    "bgColor": {
+      "type": "string",
+      "default": "#3145DD"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Let's Build Together"
+    },
+    "ctaLink": {
+      "type": "string",
+      "default": "#"
+    }
+  }
+}

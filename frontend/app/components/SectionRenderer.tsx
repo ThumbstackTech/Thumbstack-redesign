@@ -12,6 +12,14 @@ import BuildYourStack from "./all/BuildYourStack";
 import Footer from "./all/Footer";
 import Info from "./all/Info";
 import WhatWeBuild from "./all/WhatWeBuild";
+import Projects from "./all/Projects";
+import AboutHero from "./all/AboutHero";
+import HeroNewsAndInsights from "./all/HeroNewsAndInsights";
+import ProductDriven from "./all/ProductDriven";
+import HeroWork from "./all/HeroWork";
+import BestFit from "./all/BestFit";
+import Sidebar from "./layout/Sidebar";
+
 
 const componentMap: { [key: string]: any } = {
   "shared.hero": Hero,
@@ -26,9 +34,16 @@ const componentMap: { [key: string]: any } = {
   "shared.footer": Footer,
   "shared.info": Info,
   "shared.what-we-build": WhatWeBuild,
+  "shared.projects-section": Projects,
+  "shared.about-hero": AboutHero,
+  "shared.news-hero": HeroNewsAndInsights,
+  "shared.product-driven": ProductDriven,
+  "shared.hero-work": HeroWork,
+  "shared.best-fit": BestFit,
+  "shared.sidebar": Sidebar
 };
 
-export default function SectionRenderer({ sections }: { sections: any[] }) {
+export default function SectionRenderer({ sections, projects }: { sections: any[]; projects?: any[] }) {
   return (
     <>
       {sections.map((section, index) => {
@@ -37,7 +52,10 @@ export default function SectionRenderer({ sections }: { sections: any[] }) {
           console.warn(`No component found for: ${section.__component}`);
           return null;
         }
-        return <Component key={`${section.__component}-${index}`} data={section} />;
+
+        // Pass the loaded projects array for the Projects Section slot
+        const componentData = section.__component === "shared.projects-section" ? projects : section;
+        return <Component key={`${section.__component}-${index}`} data={componentData} />;
       })}
     </>
   );

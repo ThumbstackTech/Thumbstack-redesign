@@ -3,7 +3,7 @@
   "info": {
     "displayName": "Grid Item",
     "icon": "box",
-    "description": "An item in a grid with icon, title, and description"
+    "description": "An item in a grid with icon, title, description, and link"
   },
   "options": {},
   "attributes": {
@@ -21,6 +21,12 @@
         "images"
       ],
       "description": "Upload SVG or Image icon"
+    },
+    "linkText": {
+      "type": "string"
+    },
+    "linkUrl": {
+      "type": "string"
     }
   }
 }

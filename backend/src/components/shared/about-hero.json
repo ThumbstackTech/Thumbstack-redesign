@@ -1,0 +1,50 @@
+{
+  "collectionName": "components_shared_about_heroes",
+  "info": {
+    "displayName": "About Hero",
+    "icon": "user",
+    "description": "Hero section for the About page with 3 high-quality dynamic images"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true,
+      "default": "A tight team, doing deliberate work."
+    },
+    "subheading": {
+      "type": "text",
+      "default": "We're a design and technology studio from India, working closely with teams around the world to build thoughtful digital products."
+    },
+    "bgColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#0F1D07"
+    },
+    "image1": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "required": true
+    },
+    "image2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image3": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
