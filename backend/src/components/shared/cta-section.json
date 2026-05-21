@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_shared_cta_sections",
+  "info": {
+    "displayName": "CTA Section",
+    "icon": "share-alt",
+    "description": "Call-to-action section with subtitle, heading, and buttons"
+  },
+  "options": {},
+  "attributes": {
+    "subtitle": {
+      "type": "string",
+      "default": "Let's chat about your idea, your product, or your next launch."
+    },
+    "mainHeading": {
+      "type": "text",
+      "default": "Want Deeper Insights Or Want To Build Something With Us?"
+    },
+    "primaryButtonText": {
+      "type": "string",
+      "default": "Get In Touch"
+    },
+    "primaryButtonLink": {
+      "type": "string",
+      "default": "/contact"
+    },
+    "secondaryButtonText": {
+      "type": "string",
+      "default": "Let's Build Together"
+    },
+    "secondaryButtonLink": {
+      "type": "string",
+      "default": "/build"
+    }
+  }
+}

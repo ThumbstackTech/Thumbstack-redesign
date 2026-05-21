@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-
-const categories = ["All", "Project Launches", "Inside Thumbstack", "Perspectives"];
+import { getNewsDetailed, getStrapiImageUrl } from "@/lib/strapi";
 
 type CardType = {
   id: number;
@@ -18,101 +17,8 @@ type CardType = {
   image?: string;
   logo?: string;
   bg?: string;
+  slug?: string;
 };
-
-const cards: CardType[] = [
-  {
-    id: 1,
-    title: "Design Is a Series of Decisions",
-    description: "A look at how restraint, clarity, and intention shape products that actually last.",
-    category: "Inside Thumbstack",
-    tag: "Thumbstack News",
-    cta: "Read News",
-    visual: "red-design",
-  },
-  {
-    id: 2,
-    title: "Launch: Sunteck Realty Digital Showcase",
-    description: "We transformed how a luxury real estate brand tells its story online — blending cinematic design with seamless performance.",
-    category: "Project Launches",
-    tag: "Launch",
-    cta: "Read Case Study",
-    visual: "photo-logo",
-    image: "/stack2.jpg",
-    logo: "/circle.png",
-  },
-  {
-    id: 3,
-    title: "Launch: Bharat Flooring Tiles",
-    description: "An AI-powered showroom that lets you visualise any tile in your own space — before a single tile is laid.",
-    category: "Project Launches",
-    tag: "Launch",
-    cta: "Read Case Study",
-    visual: "photo-logo",
-    image: "/BFT2.jpg",
-    logo: "/footercircle.png",
-  },
-  {
-    id: 4,
-    title: "Growing the Thumbstack team",
-    description: "New hires, new capabilities, and how our studio is evolving this year.",
-    category: "Inside Thumbstack",
-    tag: "Thumbstack News",
-    cta: "Read News",
-    visual: "plain-photo",
-    image: "/Home.png",
-    bg: "#4F46E5",
-  },
-  {
-    id: 5,
-    title: "Launch: Campaign Showcase",
-    description: "A high-impact editorial launch that blended brand film, digital storytelling, and live events.",
-    category: "Project Launches",
-    tag: "Launch",
-    cta: "Read Case Study",
-    visual: "photo-logo",
-    image: "/Campaign.png",
-    logo: "/circle.png",
-  },
-  {
-    id: 6,
-    title: "Introducing enterprise-grade web and mobile platforms",
-    description: "A few thoughtful additions to the team as we scale our work — not our chaos.",
-    category: "Inside Thumbstack",
-    tag: "Thumbstack News",
-    cta: "Read News",
-    visual: "purple-clarity",
-  },
-  {
-    id: 7,
-    title: "Why speed should feel calm, not chaotic",
-    description: "How we balance momentum, craft, and decision-making in high-pressure builds.",
-    category: "Perspectives",
-    tag: "Article",
-    cta: "Read Article",
-    visual: "blue-speed",
-  },
-  {
-    id: 8,
-    title: "Launch: Store Redesign",
-    description: "A reimagined retail-first e-commerce experience built to convert and retain at scale.",
-    category: "Project Launches",
-    tag: "Launch",
-    cta: "Read Case Study",
-    visual: "photo-logo",
-    image: "/Store 1.png",
-    logo: "/footercircle.png",
-  },
-  {
-    id: 9,
-    title: "Why design decisions are never just visual",
-    description: "Every screen is a business decision, whether you treat it like one or not.",
-    category: "Perspectives",
-    tag: "Article",
-    cta: "Read Article",
-    visual: "green-strategy",
-  },
-];
 
 // ── Arrow Icon ──────────────────────────────────────────
 function Arrow() {
@@ -148,6 +54,7 @@ function RedDesignVisual() {
   );
 }
 
+// ── Purple Clarity Visual ──
 function PurpleClarityVisual() {
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden" style={{ background: "#A957F1" }}>
@@ -174,6 +81,7 @@ function PurpleClarityVisual() {
   );
 }
 
+// ── Blue Speed Visual ──
 function BlueSpeedVisual() {
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden" style={{ background: "#9BC0FF" }}>
@@ -198,6 +106,7 @@ function BlueSpeedVisual() {
   );
 }
 
+// ── Green Strategy Visual ──
 function GreenStrategyVisual() {
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden" style={{ background: "#8BFCDE" }}>
@@ -224,6 +133,7 @@ function GreenStrategyVisual() {
   );
 }
 
+// ── Photo with Logo Visual ──
 function PhotoWithLogoVisual({ image, logo }: { image: string; logo?: string }) {
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden bg-gray-200">
@@ -247,6 +157,7 @@ function PhotoWithLogoVisual({ image, logo }: { image: string; logo?: string }) 
   );
 }
 
+// ── Plain Photo Visual ──
 function PlainPhotoVisual({ image, bg }: { image?: string; bg?: string }) {
   return (
     <div
@@ -276,7 +187,7 @@ function Card({ card }: { card: CardType }) {
         {card.visual === "purple-clarity" && <PurpleClarityVisual />}
         {card.visual === "blue-speed" && <BlueSpeedVisual />}
         {card.visual === "green-strategy" && <GreenStrategyVisual />}
-        {card.visual === "photo-logo" && <PhotoWithLogoVisual image={card.image!} logo={card.logo} />}
+        {card.visual === "photo-logo" && card.image && <PhotoWithLogoVisual image={card.image} logo={card.logo} />}
         {card.visual === "plain-photo" && <PlainPhotoVisual image={card.image} bg={card.bg} />}
       </div>
 
@@ -328,7 +239,7 @@ function Card({ card }: { card: CardType }) {
 
         {/* CTA */}
         <Link
-          href="/news-and-insights/article"
+          href={`/news-detailed/${card.slug || ""}`}
           className="flex items-center gap-2 text-black hover:opacity-60 transition-opacity w-fit"
           suppressHydrationWarning
           style={{
@@ -346,46 +257,149 @@ function Card({ card }: { card: CardType }) {
 }
 
 // ── Main Grid Component ────────────────────────────────
-export default function NewsAndInsightsGrid() {
+export default function NewsAndInsightsGrid({ data }: { data?: any }) {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [dbCards, setDbCards] = useState<CardType[]>([]);
 
-  const filtered = activeCategory === "All"
-    ? cards
-    : cards.filter((c) => c.category === activeCategory);
+  useEffect(() => {
+    async function loadArticles() {
+      // Check if we have articles directly passed via Strapi dynamic page content relation
+      const rawItems = data?.news_detaileds?.data || data?.news_detaileds;
+      if (Array.isArray(rawItems) && rawItems.length > 0) {
+        const mapped = rawItems.map((art: any) => {
+          const attrs = art.attributes || art;
+          return {
+            id: art.id,
+            title: attrs.title || "",
+            description: attrs.description || "",
+            category: attrs.category || "Inside Thumbstack",
+            tag: attrs.tag || "Article",
+            cta: attrs.ctaText || "Read Article",
+            visual: attrs.visual || "photo-logo",
+            image: getStrapiImageUrl(attrs.heroImage) || undefined,
+            logo: getStrapiImageUrl(attrs.logo) || undefined,
+            bg: attrs.bgColor || undefined,
+            slug: attrs.slug || ""
+          };
+        });
+        setDbCards(mapped);
+        return;
+      }
+
+      // Otherwise fallback to loading all published news-detaileds from CMS
+      try {
+        const fetched = await getNewsDetailed();
+        if (fetched && fetched.length > 0) {
+          const mapped = fetched.map((art: any) => {
+            const attrs = art.attributes || art;
+            return {
+              id: art.id,
+              title: attrs.title || "",
+              description: attrs.description || "",
+              category: attrs.category || "Inside Thumbstack",
+              tag: attrs.tag || "Article",
+              cta: attrs.ctaText || "Read Article",
+              visual: attrs.visual || "photo-logo",
+              image: getStrapiImageUrl(attrs.heroImage) || undefined,
+              logo: getStrapiImageUrl(attrs.logo) || undefined,
+              bg: attrs.bgColor || undefined,
+              slug: attrs.slug || ""
+            };
+          });
+          setDbCards(mapped);
+        }
+      } catch (err) {
+        console.error("Error loading articles from CMS:", err);
+      }
+    }
+    loadArticles();
+  }, [data]);
+
+  const cardsToRender = dbCards;
+
+  const categories = ["All", ...Array.from(new Set(dbCards.map((c) => c.category).filter(Boolean)))];
+
+  let filtered = activeCategory === "All"
+    ? cardsToRender
+    : cardsToRender.filter((c) => c.category === activeCategory);
+
+  if (typeof data?.limit === "number" && data.limit > 0) {
+    filtered = filtered.slice(0, data.limit);
+  }
+
+  if (cardsToRender.length === 0) {
+    return null;
+  }
 
   return (
     <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-[105px]">
       <div className="max-w-[1600px] mx-auto flex flex-col gap-[68px]">
-
-        {/* Filter Tabs */}
-        <div className="flex flex-col gap-[45px]">
-          <div className="flex flex-row items-center gap-6 md:gap-[47px] overflow-x-auto scrollbar-hide pb-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                suppressHydrationWarning
-                className="transition-opacity whitespace-nowrap"
+        
+        {/* Header Block */}
+        {(data?.title || data?.subtitle) && (
+          <div className="flex flex-col gap-4">
+            {data.title && (
+              <h2
+                className="text-[#0F1D07]"
                 style={{
-                  fontFamily: "var(--font-nohemi)",
+                  fontFamily: "var(--font-delight)",
                   fontWeight: 500,
-                  fontSize: "clamp(20px, 4vw, 30px)",
-                  lineHeight: "1",
+                  fontSize: "clamp(36px, 6vw, 64px)",
+                  lineHeight: "1.1",
                   letterSpacing: "-0.02em",
-                  color: "#0F1D07",
-                  opacity: activeCategory === cat ? 1 : 0.4,
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: 0,
                 }}
               >
-                {cat}
-              </button>
-            ))}
+                {data.title}
+              </h2>
+            )}
+            {data.subtitle && (
+              <p
+                className="text-[#0F1D07]/60 max-w-[600px]"
+                style={{
+                  fontFamily: "var(--font-satoshi)",
+                  fontWeight: 400,
+                  fontSize: "clamp(16px, 3vw, 20px)",
+                  lineHeight: "1.5",
+                }}
+              >
+                {data.subtitle}
+              </p>
+            )}
           </div>
-        </div>
+        )}
 
+        {/* Filter Tabs */}
+        {data?.showFilters !== false && categories.length > 1 && (
+          <div className="flex flex-col gap-[45px]">
+            <div className="flex flex-row items-center gap-6 md:gap-[47px] overflow-x-auto scrollbar-hide pb-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  suppressHydrationWarning
+                  className="transition-opacity whitespace-nowrap"
+                  style={{
+                    fontFamily: "var(--font-nohemi)",
+                    fontWeight: 500,
+                    fontSize: "clamp(20px, 4vw, 30px)",
+                    lineHeight: "1",
+                    letterSpacing: "-0.02em",
+                    color: "#0F1D07",
+                    opacity: activeCategory === cat ? 1 : 0.4,
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Cards Grid */}
         <motion.div layout className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-12 md:gap-y-[80px]">
           <AnimatePresence>
             {filtered.map((card) => (
@@ -393,6 +407,25 @@ export default function NewsAndInsightsGrid() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Section CTA - e.g. "View All Stories" */}
+        {data?.ctaText && data?.ctaLink && (
+          <div className="flex justify-center mt-4">
+            <Link
+              href={data.ctaLink}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white font-bold text-sm hover:opacity-90 transition-opacity"
+              style={{
+                backgroundColor: "#0F1D07",
+                fontFamily: "var(--font-satoshi)",
+              }}
+            >
+              {data.ctaText}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 19L19 5M19 5V19M19 5H5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

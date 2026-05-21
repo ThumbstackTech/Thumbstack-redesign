@@ -1,4 +1,4 @@
-import { fetchStrapi, getPagesQueryString } from "./lib/strapi";
+import { fetchStrapi, getPagesQueryString } from "@/lib/strapi";
 import SectionRenderer from "./components/SectionRenderer";
 import Projects from "./components/all/Projects";
 import Footer from "./components/all/Footer";

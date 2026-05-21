@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_shared_news_and_insights_grids",
+  "info": {
+    "displayName": "News and Insights Grid",
+    "icon": "grid",
+    "description": "Dynamic grid component that displays news articles"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "All Stories"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "showFilters": {
+      "type": "boolean",
+      "default": true
+    },
+    "limit": {
+      "type": "integer",
+      "default": -1
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "View All Stories"
+    },
+    "ctaLink": {
+      "type": "string",
+      "default": "/news-and-insights"
+    },
+    "news_detaileds": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::news-detailed.news-detailed"
+    }
+  }
+}

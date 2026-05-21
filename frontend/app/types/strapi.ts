@@ -2,11 +2,107 @@ export interface StrapiImage {
   id: number;
   url: string;
   alternativeText: string | null;
-  formats: {
+  name?: string;
+  caption?: string | null;
+  width?: number;
+  height?: number;
+  formats?: {
     thumbnail?: { url: string };
     small?: { url: string };
     medium?: { url: string };
     large?: { url: string };
+  };
+  hash?: string;
+  ext?: string;
+  mime?: string;
+  size?: number;
+  previewUrl?: string | null;
+  provider?: string;
+  provider_metadata?: unknown | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface BrandType {
+  id: number;
+  documentId?: string;
+  name: string;
+  logo: StrapiImage | null;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+}
+
+export interface TechStackType {
+  id: number;
+  documentId?: string;
+  name: string;
+  icon: StrapiImage | null;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+}
+
+export interface CtaSectionComponent {
+  subtitle: string;
+  mainHeading: string;
+  primaryButtonText: string;
+  primaryButtonLink: string;
+  secondaryButtonText: string;
+  secondaryButtonLink: string;
+}
+
+export interface ServiceHeroComponent {
+  mainHeading: string;
+  description: string;
+  primaryButtonText: string;
+  primaryButtonLink: string;
+  secondaryButtonText: string;
+  secondaryButtonLink: string;
+}
+
+export interface StackItemComponent {
+  id: number;
+  title: string;
+  description: string;
+  image: StrapiImage | null;
+  logo: StrapiImage | null;
+  tag: string;
+}
+
+export interface WorkItemComponent {
+  title: string;
+  subtitle: string;
+  tags: Array<{ label: string }>;
+  featuredImage: StrapiImage | null;
+  video: StrapiImage | null;
+  playButtonColor: string;
+  quote: string;
+  clientName: string;
+  clientTitle: string;
+  clientCompany: string;
+  companyLogo: string;
+  companyLogoColor: string;
+  ctaText: string;
+  ctaLink: string;
+  slug: string;
+}
+
+export interface StrapiResponse<T> {
+  data: {
+    id: number;
+    attributes: T;
+  } | {
+    id: number;
+    attributes: T;
+  }[];
+  meta: {
+    pagination?: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
   };
 }
 

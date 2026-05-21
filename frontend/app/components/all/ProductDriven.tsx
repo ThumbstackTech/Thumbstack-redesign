@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useRef } from "react";
 import { ProductDrivenData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 export default function ProductDriven({ data }: { data?: ProductDrivenData }) {
   const [activeId, setActiveId] = useState<number | null>(null);

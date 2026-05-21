@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { TeamSectionData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 const DEFAULT_TEAM_MEMBERS = [
   { name: "Harry Matthew", role: "Co-Founder", image: "/team1.jpg" },

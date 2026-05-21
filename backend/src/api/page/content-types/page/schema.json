@@ -41,7 +41,12 @@
         "shared.product-driven",
         "shared.best-fit",
         "shared.hero-work",
-        "shared.sidebar"
+        "shared.sidebar",
+        "shared.cta-section",
+        "shared.service-hero",
+        "shared.stack-item",
+        "shared.work-item",
+        "shared.news-and-insights-grid"
       ]
     }
   }

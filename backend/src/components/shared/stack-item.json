@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_shared_stack_items",
+  "info": {
+    "displayName": "Stack Item",
+    "icon": "list",
+    "description": "Blog/news carousel item for 'From The Stack' section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "logo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "tag": {
+      "type": "enumeration",
+      "enum": [
+        "Blog",
+        "Article",
+        "Case Study",
+        "News",
+        "Tutorial"
+      ],
+      "required": true
+    }
+  }
+}

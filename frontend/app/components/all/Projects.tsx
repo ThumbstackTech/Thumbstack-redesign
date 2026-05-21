@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, MouseEvent } from "react";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { ProjectData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 
 interface SideImage {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { HeroWorkData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 export default function HeroWork({ data }: { data?: HeroWorkData }) {
   // Extract Dynamic fields with Fallbacks

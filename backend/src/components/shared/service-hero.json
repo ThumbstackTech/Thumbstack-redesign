@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_shared_service_heroes",
+  "info": {
+    "displayName": "Service Hero",
+    "icon": "heading",
+    "description": "Service page hero section with heading, description, and CTA buttons"
+  },
+  "options": {},
+  "attributes": {
+    "mainHeading": {
+      "type": "text",
+      "default": "Strategise. Design. Build. Grow."
+    },
+    "description": {
+      "type": "richtext",
+      "default": "We help brands, founders, and teams turn digital ideas into clear, usable, and scalable products. From websites and e-commerce platforms to mobile apps, CMS systems, AI led tools, and long term support, we work across the full lifecycle of digital experience."
+    },
+    "primaryButtonText": {
+      "type": "string",
+      "default": "Start building"
+    },
+    "primaryButtonLink": {
+      "type": "string",
+      "default": "/contact"
+    },
+    "secondaryButtonText": {
+      "type": "string",
+      "default": "View Our Work"
+    },
+    "secondaryButtonLink": {
+      "type": "string",
+      "default": "/our-work"
+    }
+  }
+}

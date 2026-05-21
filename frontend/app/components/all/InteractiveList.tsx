@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { InteractiveListData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 interface InteractiveListProps {
   data?: InteractiveListData;

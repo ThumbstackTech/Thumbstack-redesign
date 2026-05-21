@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { getStackItems, getStrapiImageUrl, StackItemComponent } from "@/lib/strapi";
 
-function StackCard({ item, idx }: { item: any; idx: number }) {
+function StackCard({ item, idx }: { item: StackItemComponent; idx: number }) {
   return (
     <div
       className="flex flex-col gap-4 sm:gap-6 shrink-0 relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group/item w-[280px] sm:w-[400px] md:w-[639px]"
@@ -13,7 +14,7 @@ function StackCard({ item, idx }: { item: any; idx: number }) {
       {/* Card Image Container */}
       <div className="relative rounded-lg sm:rounded-2xl md:rounded-[2rem] overflow-hidden group/card shadow-lg w-[280px] sm:w-[400px] md:w-[639px] h-[200px] sm:h-[300px] md:h-[488px]">
         <Image
-          src={item.image}
+          src={getStrapiImageUrl(item.image) || "/stack1.png"}
           alt={item.title}
           fill
           sizes="(max-width: 640px) 240px, (max-width: 768px) 320px, 480px"
@@ -25,7 +26,7 @@ function StackCard({ item, idx }: { item: any; idx: number }) {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 sm:w-24 md:w-32 lg:w-40 h-16 sm:h-24 md:h-32 lg:h-40 bg-white/95 rounded-lg sm:rounded-xl md:rounded-[1.5rem] shadow-2xl flex items-center justify-center p-3 sm:p-4 md:p-6 backdrop-blur-md">
           <div className="relative w-full h-full">
             <Image
-              src={item.logo}
+              src={getStrapiImageUrl(item.logo) || "/TSP/logo 1.png"}
               alt="Brand Logo"
               fill
               className="object-contain"
@@ -77,6 +78,8 @@ function StackCard({ item, idx }: { item: any; idx: number }) {
 
 export default function FromTheStack() {
   const [isHovering, setIsHovering] = useState(false);
+  const [stackItems, setStackItems] = useState<StackItemComponent[]>([]);
+  const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Motion values for smooth cursor tracking
@@ -88,37 +91,29 @@ export default function FromTheStack() {
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const items = await getStackItems();
+        setStackItems(items);
+      } catch (error) {
+        console.error("Error fetching stack items:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent) => {
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
   };
 
-  const stackItems = [
-    {
-      id: 1,
-      image: "/stack1.png",
-      logo: "/TSP/logo 1.png",
-      title: "Launch: Sunteck Realty Digital Showcase",
-      description: "We transformed how a luxury real estate brand tells its story online — blending cinematic design with seamless performance.",
-      tag: "Blog"
-    },
-    {
-      id: 2,
-      image: "/stack2.png",
-      logo: "/TSP/Group.png",
-      title: "Launch: Sunteck Realty Digital Showcase",
-      description: "We transformed how a luxury real estate brand tells its story online — blending cinematic design with seamless performance.",
-      tag: "Article"
-    },
-    {
-      id: 3,
-      image: "/stack3.jpg",
-      logo: "/TSP/logo-3.png",
-      title: "Launch: Sunteck Realty Digital Showcase",
-      description: "We transformed how a luxury real estate brand tells its story online — blending cinematic design with seamless performance.",
-      tag: "Blog"
-    }
-  ];
+  if (loading || stackItems.length === 0) return null;
+
+  const displayItems = stackItems;
 
   return (
     <section
@@ -182,7 +177,7 @@ export default function FromTheStack() {
             dragConstraints={{ left: -1000, right: 1000 }}
             className="flex gap-4 sm:gap-6 md:gap-8 items-stretch w-max"
           >
-            {[...stackItems, ...stackItems].map((item, idx) => (
+            {[...displayItems, ...displayItems].map((item, idx) => (
               <StackCard key={`${item.id}-${idx}`} item={item} idx={idx} />
             ))}
           </motion.div>

@@ -184,6 +184,29 @@ export interface SharedCapabilitiesFeatures extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedCtaSection extends Struct.ComponentSchema {
+  collectionName: 'components_shared_cta_sections';
+  info: {
+    description: 'Call-to-action section with subtitle, heading, and buttons';
+    displayName: 'CTA Section';
+    icon: 'share-alt';
+  };
+  attributes: {
+    mainHeading: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'Want Deeper Insights Or Want To Build Something With Us?'>;
+    primaryButtonLink: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/contact'>;
+    primaryButtonText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Get In Touch'>;
+    secondaryButtonLink: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/build'>;
+    secondaryButtonText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"Let's Build Together">;
+    subtitle: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"Let's chat about your idea, your product, or your next launch.">;
+  };
+}
+
 export interface SharedFaqSection extends Struct.ComponentSchema {
   collectionName: 'components_shared_faq_sections';
   info: {
@@ -325,6 +348,29 @@ export interface SharedLetsTalk extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedNewsAndInsightsGrid extends Struct.ComponentSchema {
+  collectionName: 'components_shared_news_and_insights_grids';
+  info: {
+    description: 'Dynamic grid component that displays news articles';
+    displayName: 'News and Insights Grid';
+    icon: 'grid';
+  };
+  attributes: {
+    ctaLink: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/news-and-insights'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'View All Stories'>;
+    limit: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<-1>;
+    news_detaileds: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::news-detailed.news-detailed'
+    >;
+    showFilters: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.DefaultTo<'All Stories'>;
+  };
+}
+
 export interface SharedNewsHero extends Struct.ComponentSchema {
   collectionName: 'components_shared_news_heroes';
   info: {
@@ -412,6 +458,29 @@ export interface SharedProjectsSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedServiceHero extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_heroes';
+  info: {
+    description: 'Service page hero section with heading, description, and CTA buttons';
+    displayName: 'Service Hero';
+    icon: 'heading';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.DefaultTo<'We help brands, founders, and teams turn digital ideas into clear, usable, and scalable products. From websites and e-commerce platforms to mobile apps, CMS systems, AI led tools, and long term support, we work across the full lifecycle of digital experience.'>;
+    mainHeading: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'Strategise. Design. Build. Grow.'>;
+    primaryButtonLink: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/contact'>;
+    primaryButtonText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Start building'>;
+    secondaryButtonLink: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'/our-work'>;
+    secondaryButtonText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'View Our Work'>;
+  };
+}
+
 export interface SharedSidebar extends Struct.ComponentSchema {
   collectionName: 'components_shared_sidebars';
   info: {
@@ -425,6 +494,37 @@ export interface SharedSidebar extends Struct.ComponentSchema {
     links: Schema.Attribute.Component<'elements.nav-link', true>;
     logoText: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Thumbstack.'>;
+  };
+}
+
+export interface SharedStackItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_stack_items';
+  info: {
+    description: "Blog/news carousel item for 'From The Stack' section";
+    displayName: 'Stack Item';
+    icon: 'list';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    tag: Schema.Attribute.Enumeration<
+      ['Blog', 'Article', 'Case Study', 'News', 'Tutorial']
+    > &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedTag extends Struct.ComponentSchema {
+  collectionName: 'components_shared_tags';
+  info: {
+    description: 'A reusable text tag component';
+    displayName: 'Tag';
+    icon: 'tag';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -456,6 +556,35 @@ export interface SharedWhatWeBuild extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedWorkItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_work_items';
+  info: {
+    description: 'Case study showcase item for work/portfolio section';
+    displayName: 'Work Item';
+    icon: 'briefcase';
+  };
+  attributes: {
+    clientCompany: Schema.Attribute.String & Schema.Attribute.Required;
+    clientName: Schema.Attribute.String & Schema.Attribute.Required;
+    clientTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    companyLogo: Schema.Attribute.String & Schema.Attribute.Required;
+    companyLogoColor: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#D9443E'>;
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/contact'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Start your story'>;
+    featuredImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    playButtonColor: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#FDEBEB'>;
+    quote: Schema.Attribute.Text & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'>;
+    subtitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    tags: Schema.Attribute.Component<'shared.tag', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    video: Schema.Attribute.Media<'files' | 'images' | 'videos'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -471,6 +600,7 @@ declare module '@strapi/strapi' {
       'shared.best-fit': SharedBestFit;
       'shared.build-your-stack': SharedBuildYourStack;
       'shared.capabilities-features': SharedCapabilitiesFeatures;
+      'shared.cta-section': SharedCtaSection;
       'shared.faq-section': SharedFaqSection;
       'shared.footer': SharedFooter;
       'shared.hero': SharedHero;
@@ -478,14 +608,19 @@ declare module '@strapi/strapi' {
       'shared.info': SharedInfo;
       'shared.interactive-list': SharedInteractiveList;
       'shared.lets-talk': SharedLetsTalk;
+      'shared.news-and-insights-grid': SharedNewsAndInsightsGrid;
       'shared.news-hero': SharedNewsHero;
       'shared.partner-brands': SharedPartnerBrands;
       'shared.principles': SharedPrinciples;
       'shared.product-driven': SharedProductDriven;
       'shared.projects-section': SharedProjectsSection;
+      'shared.service-hero': SharedServiceHero;
       'shared.sidebar': SharedSidebar;
+      'shared.stack-item': SharedStackItem;
+      'shared.tag': SharedTag;
       'shared.team-section': SharedTeamSection;
       'shared.what-we-build': SharedWhatWeBuild;
+      'shared.work-item': SharedWorkItem;
     }
   }
 }

@@ -1,15 +1,23 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { getStrapiImageUrl, WorkItemComponent } from "@/lib/strapi";
 
-export default function WorkItem() {
+interface WorkItemProps {
+  data?: WorkItemComponent;
+}
+
+export default function WorkItem({ data }: WorkItemProps) {
+  if (!data) return null;
+
   return (
     <section className="w-full min-h-[auto] lg:min-h-[967px] flex flex-col items-center justify-start lg:justify-center bg-white overflow-hidden md:pl-[0px] md:pr-[90px] py-12 lg:py-0">
       <div className="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center">
         {/* Left Side: Featured Image (Frame 2085663066) */}
         <div className="relative w-full lg:w-[55%] h-[400px] md:h-[600px] lg:h-[967px] flex-shrink-0 rounded-none overflow-hidden">
           <Image
-            src="/stack2.jpg" // Ensure this maps to your ASV06202-2.jpg
+            src={getStrapiImageUrl(data.featuredImage) || "/stack2.jpg"}
             alt="Case study featured project"
             fill
             priority
@@ -21,7 +29,7 @@ export default function WorkItem() {
           {/* Play Button (Frame 2085663067) - Centered */}
           <div
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[72.95px] h-[72.95px] rounded-full flex items-center justify-center cursor-pointer transition-transform hover:scale-105 shadow-xl"
-            style={{ backgroundColor: "#FDEBEB" }}
+            style={{ backgroundColor: data.playButtonColor }}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 5V19L19 12L8 5Z" />
@@ -37,15 +45,18 @@ export default function WorkItem() {
             <div className="flex flex-col gap-[18px]">
               {/* Tags (Frame 2087326541) */}
               <div className="flex flex-wrap gap-6">
-                {["Design", "E-Commerce", "AI"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-[14px] py-[6px] border border-[#0F1D07] rounded-[10px] text-[12px] leading-[24px] font-medium tracking-tight"
-                    style={{ fontFamily: "var(--font-delight)", color: "#0F1D07" }}
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {(Array.isArray(data.tags) ? data.tags : []).map((tag: any) => {
+                  const tagLabel = typeof tag === 'string' ? tag : tag?.label || '';
+                  return (
+                    <span
+                      key={tagLabel}
+                      className="px-[14px] py-[6px] border border-[#0F1D07] rounded-[10px] text-[12px] leading-[24px] font-medium tracking-tight"
+                      style={{ fontFamily: "var(--font-delight)", color: "#0F1D07" }}
+                    >
+                      {tagLabel}
+                    </span>
+                  );
+                })}
               </div>
 
               {/* Main Heading */}
@@ -63,9 +74,12 @@ export default function WorkItem() {
                   alignItems: "center"
                 }}
               >
-                Redefining How Luxury<br className="hidden lg:block" />
-                Clothing Connects With<br className="hidden lg:block" />
-                The World
+                {data.subtitle.split('\n').map((line: string, i: number) => (
+                  <span key={i}>
+                    {line}
+                    {i < data.subtitle.split('\n').length - 1 && <br className="hidden lg:block" />}
+                  </span>
+                ))}
               </h2>
             </div>
 
@@ -77,41 +91,41 @@ export default function WorkItem() {
                   className="text-[22px] leading-[34px] font-medium capitalize"
                   style={{ fontFamily: "var(--font-delight)", color: "#0F1D07" }}
                 >
-                  &ldquo;They didn&apos;t just Design our brand they helped us understand who we truly are.&rdquo;
+                  &ldquo;{data.quote}&rdquo;
                 </p>
 
                 {/* Client Info */}
                 <div className="flex flex-col gap-[4px]">
                   <p className="text-[16px] leading-[22px] font-bold text-[#0F1D07]" style={{ fontFamily: "var(--font-satoshi)" }}>
-                    Ayesha N.
+                    {data.clientName}
                   </p>
                   <p className="text-[14px] leading-[20px] font-medium uppercase text-[#616161]" style={{ fontFamily: "var(--font-satoshi)" }}>
-                    HEAD OF ECOMM, SIORAI
+                    {data.clientTitle}, {data.clientCompany}
                   </p>
                 </div>
 
-                {/* Red Logo Text (SIORAI) */}
+                {/* Red Logo Text */}
                 <div
                   className="text-[32px] font-bold tracking-[0.05em]"
-                  style={{ fontFamily: "var(--font-nohemi)", color: "#D9443E" }}
+                  style={{ fontFamily: "var(--font-nohemi)", color: data.companyLogoColor }}
                 >
-                  SIORAI
+                  {data.companyLogo}
                 </div>
               </div>
 
               {/* CTA Button (Component 44) */}
-              <button
+              <Link
+                href={data.ctaLink}
                 className="flex items-center justify-center gap-[8px] px-5 py-[8px] w-fit rounded-[14px] transition-opacity hover:opacity-90"
                 style={{ backgroundColor: "#0F1D07" }}
-                suppressHydrationWarning
               >
                 <span className="text-[16px] leading-[32px] font-bold text-white" style={{ fontFamily: "var(--font-satoshi)" }}>
-                  Start your story
+                  {data.ctaText}
                 </span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7V17M17 7H7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

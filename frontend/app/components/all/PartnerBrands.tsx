@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { PartnerBrandsData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 const DEFAULT_BRAND_LOGOS = [
   "APURA.png",

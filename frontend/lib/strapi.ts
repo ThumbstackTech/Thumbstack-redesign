@@ -1,6 +1,27 @@
-const BASE_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+import {
+  StrapiImage,
+  BrandType,
+  TechStackType,
+  CtaSectionComponent,
+  ServiceHeroComponent,
+  StackItemComponent,
+  WorkItemComponent
+} from "@/app/types/strapi";
 
-interface StrapiResponse<T> {
+export type {
+  StrapiImage,
+  BrandType,
+  TechStackType,
+  CtaSectionComponent,
+  ServiceHeroComponent,
+  StackItemComponent,
+  WorkItemComponent
+};
+
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
+const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
+
+interface StrapiResponseWrapper<T> {
   data: T;
   meta?: {
     pagination?: {
@@ -12,64 +33,113 @@ interface StrapiResponse<T> {
   };
 }
 
-interface StrapiImage {
-  id: number;
-  documentId?: string;
-  name: string;
-  alternativeText: string | null;
-  caption: string | null;
-  width: number;
-  height: number;
-  formats?: {
-    large?: { url: string };
-    medium?: { url: string };
-    small?: { url: string };
-    thumbnail?: { url: string };
-  };
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl: string | null;
-  provider: string;
-  provider_metadata: unknown | null;
-  createdAt: string;
-  updatedAt: string;
-}
+export async function fetchStrapi(
+  endpoint: string,
+  query?: string,
+  options?: RequestInit
+) {
+  const url = `${STRAPI_URL}/api/${endpoint}${query ? `?${query}` : ""}`;
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+    },
+    ...options,
+    cache: options?.cache || "no-store", // or next: { revalidate: 60 }
+  });
 
-export interface BrandType {
-  id: number;
-  documentId?: string;
-  name: string;
-  logo: StrapiImage | null;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string | null;
-}
+  if (!res.ok) {
+    throw new Error(`Failed to fetch from Strapi: ${res.statusText}`);
+  }
 
-export interface TechStackType {
-  id: number;
-  documentId?: string;
-  name: string;
-  icon: StrapiImage | null;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string | null;
+  return res.json();
 }
 
 /**
- * Get full image URL from Strapi
- * Handles both absolute URLs and relative paths
+ * Builds the correct Strapi 5 query string for fetching a page by slug.
+ * Strapi 5 dynamic zones require the polymorphic `populate[field][on][component]`
+ * syntax — the simple `populate[content][populate]=*` returns an empty array.
+ * NOTE: The Page schema has no `seo` field, so never add populate[seo] here.
  */
-export function getStrapiImageUrl(image: StrapiImage | null | undefined): string | null {
-  if (!image?.url) return null;
+export function getPagesQueryString(slug: string): string {
+  const params: string[] = [
+    `filters[slug][$eq]=${slug}`,
+    "publicationState=preview",
+    // --- Dynamic zone components (polymorphic populate required for Strapi 5) ---
+    "populate[content][on][shared.hero][populate]=*",
+    "populate[content][on][shared.interactive-list][populate][items][populate][image]=true",
+    "populate[content][on][shared.partner-brands][populate][logos]=true",
+    "populate[content][on][shared.principles][populate]=*",
+    "populate[content][on][shared.capabilities-features][populate][groups][populate][items]=*",
+    "populate[content][on][shared.faq-section][populate][faqs]=*",
+    "populate[content][on][shared.team-section][populate][members][populate][image]=true",
+    "populate[content][on][shared.lets-talk][populate]=*",
+    "populate[content][on][shared.build-your-stack][populate]=*",
+    "populate[content][on][shared.footer][populate]=*",
+    "populate[content][on][shared.info][populate]=*",
+    "populate[content][on][shared.what-we-build][populate]=*",
+    "populate[content][on][shared.projects-section][populate]=*",
+    "populate[content][on][shared.about-hero][populate]=*",
+    "populate[content][on][shared.news-hero][populate]=*",
+    "populate[content][on][shared.product-driven][populate]=*",
+    // hero-work has card1Image/card2Image media — use explicit fields to avoid related cascade
+    "populate[content][on][shared.hero-work][populate][card1Image]=true",
+    "populate[content][on][shared.hero-work][populate][card2Image]=true",
+    "populate[content][on][shared.best-fit][populate]=*",
+    "populate[content][on][shared.sidebar][populate][links]=*",
+    // Explicit populate for the 4 newly added components if placed directly in dynamic zone
+    "populate[content][on][shared.cta-section][populate]=*",
+    "populate[content][on][shared.service-hero][populate]=*",
+    "populate[content][on][shared.stack-item][populate][image]=true",
+    "populate[content][on][shared.stack-item][populate][logo]=true",
+    "populate[content][on][shared.work-item][populate][featuredImage]=true",
+    "populate[content][on][shared.work-item][populate][video]=true",
+    "populate[content][on][shared.work-item][populate][tags]=true",
+    "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][heroImage]=true",
+    "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][logo]=true",
+    "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][galleryImages]=true",
+  ];
+  return params.join("&");
+}
 
-  if (image.url.startsWith('http://') || image.url.startsWith('https://')) {
-    return image.url;
+export function getStrapiURL(path: string) {
+  if (!path) return "";
+  if (path.startsWith("http")) return path;
+  return `${STRAPI_URL}${path}`;
+}
+
+/**
+ * Get optimized image URL - useful for Next.js Image component
+ * Handles Strapi image URLs and returns full URL
+ */
+export function getStrapiImageUrl(image: any): string | null {
+  if (!image) return null;
+
+  // 1. Unpack wrapped "data" if present (common in Strapi v4/v5 queries)
+  let imgObj = image;
+  if (image.data !== undefined) {
+    imgObj = image.data;
   }
 
-  return `${BASE_URL}${image.url}`;
+  // 2. Handle array format (sometimes returned for media items)
+  if (Array.isArray(imgObj)) {
+    imgObj = imgObj[0];
+  }
+
+  if (!imgObj) return null;
+
+  // 3. Extract attributes if nested, otherwise use raw object
+  const attrs = imgObj.attributes || imgObj;
+
+  // 4. Prioritize pre-resized optimized versions, falling back to original
+  const imageUrl = attrs?.formats?.large?.url ||
+    attrs?.formats?.medium?.url ||
+    attrs?.url ||
+    attrs?.formats?.small?.url ||
+    attrs?.formats?.thumbnail?.url;
+
+  if (!imageUrl) return null;
+  return getStrapiURL(imageUrl);
 }
 
 /**
@@ -78,10 +148,11 @@ export function getStrapiImageUrl(image: StrapiImage | null | undefined): string
 export async function getBrands(): Promise<BrandType[]> {
   try {
     const response = await fetch(
-      `${BASE_URL}/api/brands?populate=logo&filters[publishedAt][$notNull]=true`,
+      `${STRAPI_URL}/api/brands?populate=logo&filters[publishedAt][$notNull]=true`,
       {
         headers: {
           'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
         },
         next: { revalidate: 60 }, // ISR: revalidate every 60 seconds
       }
@@ -91,7 +162,7 @@ export async function getBrands(): Promise<BrandType[]> {
       throw new Error(`Failed to fetch brands: ${response.statusText}`);
     }
 
-    const result: StrapiResponse<BrandType[]> = await response.json();
+    const result: StrapiResponseWrapper<BrandType[]> = await response.json();
     return result.data || [];
   } catch (error) {
     console.error('Error fetching brands:', error);
@@ -104,9 +175,10 @@ export async function getBrands(): Promise<BrandType[]> {
  */
 export async function getBrandById(id: string | number): Promise<BrandType | null> {
   try {
-    const response = await fetch(`${BASE_URL}/api/brands/${id}?populate=logo`, {
+    const response = await fetch(`${STRAPI_URL}/api/brands/${id}?populate=logo`, {
       headers: {
         'Content-Type': 'application/json',
+        ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
       },
       next: { revalidate: 60 },
     });
@@ -115,7 +187,7 @@ export async function getBrandById(id: string | number): Promise<BrandType | nul
       throw new Error(`Failed to fetch brand: ${response.statusText}`);
     }
 
-    const result: StrapiResponse<BrandType> = await response.json();
+    const result: StrapiResponseWrapper<BrandType> = await response.json();
     return result.data || null;
   } catch (error) {
     console.error('Error fetching brand:', error);
@@ -129,10 +201,11 @@ export async function getBrandById(id: string | number): Promise<BrandType | nul
 export async function getTechStacks(): Promise<TechStackType[]> {
   try {
     const response = await fetch(
-      `${BASE_URL}/api/tech-stacks?populate=icon&filters[publishedAt][$notNull]=true`,
+      `${STRAPI_URL}/api/tech-stacks?populate=icon&filters[publishedAt][$notNull]=true`,
       {
         headers: {
           'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
         },
         next: { revalidate: 60 },
       }
@@ -142,7 +215,7 @@ export async function getTechStacks(): Promise<TechStackType[]> {
       throw new Error(`Failed to fetch tech stacks: ${response.statusText}`);
     }
 
-    const result: StrapiResponse<TechStackType[]> = await response.json();
+    const result: StrapiResponseWrapper<TechStackType[]> = await response.json();
     return result.data || [];
   } catch (error) {
     console.error('Error fetching tech stacks:', error);
@@ -155,9 +228,10 @@ export async function getTechStacks(): Promise<TechStackType[]> {
  */
 export async function getTechStackById(id: string | number): Promise<TechStackType | null> {
   try {
-    const response = await fetch(`${BASE_URL}/api/tech-stacks/${id}?populate=icon`, {
+    const response = await fetch(`${STRAPI_URL}/api/tech-stacks/${id}?populate=icon`, {
       headers: {
         'Content-Type': 'application/json',
+        ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
       },
       next: { revalidate: 60 },
     });
@@ -166,10 +240,210 @@ export async function getTechStackById(id: string | number): Promise<TechStackTy
       throw new Error(`Failed to fetch tech stack: ${response.statusText}`);
     }
 
-    const result: StrapiResponse<TechStackType> = await response.json();
+    const result: StrapiResponseWrapper<TechStackType> = await response.json();
     return result.data || null;
   } catch (error) {
     console.error('Error fetching tech stack:', error);
     return null;
   }
 }
+
+/**
+ * Fetch CTA section component from a page
+ */
+export async function getCtaSectionComponent(pageSlug: string): Promise<CtaSectionComponent | null> {
+  try {
+    const response = await fetch(
+      `${STRAPI_URL}/api/pages?filters[slug][$eq]=${pageSlug}&${getPagesQueryString(pageSlug)}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+        },
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) throw new Error(`Failed to fetch page: ${response.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await response.json();
+    const pageData = result.data?.[0]?.attributes || result.data?.[0];
+    const content = pageData?.content || [];
+    return content.find((item: any) => item.__component === "shared.cta-section") || null;
+  } catch (error) {
+    console.error('Error fetching CTA section:', error);
+    return null;
+  }
+}
+
+/**
+ * Fetch service hero component from a page
+ */
+export async function getServiceHeroComponent(pageSlug: string): Promise<ServiceHeroComponent | null> {
+  try {
+    const response = await fetch(
+      `${STRAPI_URL}/api/pages?filters[slug][$eq]=${pageSlug}&${getPagesQueryString(pageSlug)}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+        },
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) throw new Error(`Failed to fetch page: ${response.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await response.json();
+    const pageData = result.data?.[0]?.attributes || result.data?.[0];
+    const content = pageData?.content || [];
+    return content.find((item: any) => item.__component === "shared.service-hero") || null;
+  } catch (error) {
+    console.error('Error fetching service hero:', error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all stack items (From The Stack carousel)
+ */
+export async function getStackItems(): Promise<StackItemComponent[]> {
+  try {
+    const response = await fetch(
+      `${STRAPI_URL}/api/pages?filters[slug][$eq]=home&${getPagesQueryString("home")}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+        },
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) throw new Error(`Failed to fetch stack items: ${response.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await response.json();
+    const pageData = result.data?.[0]?.attributes || result.data?.[0];
+    const content = pageData?.content || [];
+    return content.filter((item: any) => item.__component === "shared.stack-item") || [];
+  } catch (error) {
+    console.error('Error fetching stack items:', error);
+    return [];
+  }
+}
+
+/**
+ * Fetch all work items (case studies)
+ */
+export async function getWorkItems(): Promise<WorkItemComponent[]> {
+  try {
+    const response = await fetch(
+      `${STRAPI_URL}/api/pages?filters[slug][$eq]=home&${getPagesQueryString("home")}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+        },
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) throw new Error(`Failed to fetch work items: ${response.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await response.json();
+    const pageData = result.data?.[0]?.attributes || result.data?.[0];
+    const content = pageData?.content || [];
+    return content.filter((item: any) => item.__component === "shared.work-item") || [];
+  } catch (error) {
+    console.error('Error fetching work items:', error);
+    return [];
+  }
+}
+
+/**
+ * Fetch single work item by slug
+ */
+export async function getWorkItemBySlug(slug: string): Promise<WorkItemComponent | null> {
+  try {
+    const response = await fetch(
+      `${STRAPI_URL}/api/pages?filters[slug][$eq]=home&${getPagesQueryString("home")}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+        },
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) throw new Error(`Failed to fetch work item: ${response.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await response.json();
+    const pageData = result.data?.[0]?.attributes || result.data?.[0];
+    const content = pageData?.content || [];
+    
+    // Find matching work item component
+    const workItem = content.find((item: any) => 
+      item.__component === "shared.work-item" && 
+      (item.slug === slug || (!item.slug && slug === "siorai"))
+    );
+
+    return workItem || null;
+  } catch (error) {
+    console.error('Error fetching work item:', error);
+    return null;
+  }
+}
+
+/**
+ * Fetch all news detailed items
+ */
+export async function getNewsDetailed(): Promise<any[]> {
+  try {
+    const response = await fetch(
+      `${STRAPI_URL}/api/news-detaileds?populate=*&filters[publishedAt][$notNull]=true`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+        },
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) throw new Error(`Failed to fetch news-detaileds: ${response.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await response.json();
+    return result.data || [];
+  } catch (error) {
+    console.error('Error fetching news-detaileds:', error);
+    return [];
+  }
+}
+
+/**
+ * Fetch single news detailed by slug
+ */
+export async function getNewsDetailedBySlug(slug: string): Promise<any | null> {
+  try {
+    const response = await fetch(
+      `${STRAPI_URL}/api/news-detaileds?filters[slug][$eq]=${slug}&populate=*`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+        },
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (!response.ok) throw new Error(`Failed to fetch news-detailed: ${response.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await response.json();
+    return result.data?.[0] || null;
+  } catch (error) {
+    console.error('Error fetching news-detailed:', error);
+    return null;
+  }
+}
+

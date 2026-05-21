@@ -6,7 +6,7 @@ import { useRef, useCallback } from "react";
 import Link from "next/link";
 
 import { PrinciplesData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 export default function Principles({ data }: { data?: PrinciplesData }) {
   const containerRef = useRef(null);

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 interface InfoProps {

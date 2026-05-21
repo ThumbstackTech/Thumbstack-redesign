@@ -19,6 +19,11 @@ import ProductDriven from "./all/ProductDriven";
 import HeroWork from "./all/HeroWork";
 import BestFit from "./all/BestFit";
 import Sidebar from "./layout/Sidebar";
+import CTASection from "./all/CTASection";
+import ServiceHero from "./all/ServiceHero";
+import FromTheStack from "./all/FromTheStack";
+import WorkItem from "./all/WorkItem";
+import NewsAndInsightsGrid from "./all/NewsAndInsightsGrid";
 
 
 const componentMap: { [key: string]: any } = {
@@ -40,7 +45,12 @@ const componentMap: { [key: string]: any } = {
   "shared.product-driven": ProductDriven,
   "shared.hero-work": HeroWork,
   "shared.best-fit": BestFit,
-  "shared.sidebar": Sidebar
+  "shared.sidebar": Sidebar,
+  "shared.cta-section": CTASection,
+  "shared.service-hero": ServiceHero,
+  "shared.stack-item": FromTheStack,
+  "shared.work-item": WorkItem,
+  "shared.news-and-insights-grid": NewsAndInsightsGrid
 };
 
 export default function SectionRenderer({ sections, projects }: { sections: any[]; projects?: any[] }) {

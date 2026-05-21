@@ -590,6 +590,67 @@ export interface ApiHeroHero extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiNewsDetailedNewsDetailed
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'news_detaileds';
+  info: {
+    description: 'News & Insights articles/details for the grid and detail pages';
+    displayName: 'News Detailed';
+    pluralName: 'news-detaileds';
+    singularName: 'news-detailed';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    accentColor: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#3145DD'>;
+    bgColor: Schema.Attribute.String;
+    category: Schema.Attribute.Enumeration<
+      ['Project Launches', 'Inside Thumbstack', 'Perspectives']
+    > &
+      Schema.Attribute.DefaultTo<'Inside Thumbstack'>;
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Read Article'>;
+    date: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    galleryImages: Schema.Attribute.Media<'images', true>;
+    heroImage: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::news-detailed.news-detailed'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images'>;
+    publishedAt: Schema.Attribute.DateTime;
+    readTime: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'5 min read'>;
+    slug: Schema.Attribute.UID<'title'>;
+    subtitle: Schema.Attribute.Text;
+    tag: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Article'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    visual: Schema.Attribute.Enumeration<
+      [
+        'red-design',
+        'photo-logo',
+        'purple-clarity',
+        'blue-speed',
+        'green-strategy',
+        'plain-photo',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'photo-logo'>;
+  };
+}
+
 export interface ApiPagePage extends Struct.CollectionTypeSchema {
   collectionName: 'pages';
   info: {
@@ -623,6 +684,11 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.best-fit',
         'shared.hero-work',
         'shared.sidebar',
+        'shared.cta-section',
+        'shared.service-hero',
+        'shared.stack-item',
+        'shared.work-item',
+        'shared.news-and-insights-grid',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -1236,6 +1302,7 @@ declare module '@strapi/strapi' {
       'api::capabilities-section.capabilities-section': ApiCapabilitiesSectionCapabilitiesSection;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::hero.hero': ApiHeroHero;
+      'api::news-detailed.news-detailed': ApiNewsDetailedNewsDetailed;
       'api::page.page': ApiPagePage;
       'api::project.project': ApiProjectProject;
       'api::tech-stack.tech-stack': ApiTechStackTechStack;

@@ -1,4 +1,4 @@
-import { fetchStrapi, getStrapiImageUrl } from "../../lib/strapi";
+import { fetchStrapi, getStrapiImageUrl } from "@/lib/strapi";
 import { notFound } from "next/navigation";
 import { caseStudies } from "../../data/case-studies";
 import CaseStudyTemplate from "../../components/all/CaseStudyTemplate";

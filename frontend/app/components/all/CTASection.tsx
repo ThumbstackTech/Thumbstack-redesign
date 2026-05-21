@@ -1,8 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { CtaSectionComponent } from "@/lib/strapi";
 
-export default function CTASection() {
+export default function CTASection({ data }: { data?: CtaSectionComponent }) {
+  // Extract Dynamic fields with Fallbacks
+  const subtitle = data?.subtitle || "Let's chat about your project and see how we can help.";
+  const mainHeading = data?.mainHeading || "Ready to build something remarkable?";
+  const primaryButtonText = data?.primaryButtonText || "Get In Touch";
+  const primaryButtonLink = data?.primaryButtonLink || "/contact";
+  const secondaryButtonText = data?.secondaryButtonText || "Let's Build Together";
+  const secondaryButtonLink = data?.secondaryButtonLink || "/build";
+
   return (
     <section className="w-full bg-[#0F1D07] py-[150px] px-6 flex flex-col items-center justify-center text-center relative overflow-hidden min-h-[750px]">
 
@@ -38,7 +47,7 @@ export default function CTASection() {
               width: '100%'
             }}
           >
-            Let&apos;s chat about your idea, your product, or your next launch.
+            {subtitle}
           </p>
 
           {/* Main Heading - Based on your Figma 'Delight' 80px/120px */}
@@ -53,8 +62,7 @@ export default function CTASection() {
               maxWidth: '1302px'
             }}
           >
-            Want Deeper Insights Or Want To <br />
-            Build Something With Us?
+            {mainHeading}
           </h2>
         </div>
 
@@ -63,7 +71,7 @@ export default function CTASection() {
 
           {/* Get In Touch - Component 144 */}
           <Link
-            href="/contact"
+            href={primaryButtonLink}
             className="flex flex-row justify-center items-center gap-[10px] border border-white hover:bg-white/5 transition-colors"
             style={{
               width: '175px',
@@ -78,7 +86,7 @@ export default function CTASection() {
               fontSize: "16px",
               color: "#FFFFFF"
             }}>
-              Get In Touch
+              {primaryButtonText}
             </span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -87,7 +95,7 @@ export default function CTASection() {
 
           {/* Let's Build Together - Component 143 */}
           <Link
-            href="/build"
+            href={secondaryButtonLink}
             className="flex flex-row justify-center items-center gap-[10px] bg-white border border-white hover:bg-opacity-90 transition-opacity"
             style={{
               width: '226px',
@@ -102,7 +110,7 @@ export default function CTASection() {
               fontSize: "16px",
               color: "#120321"
             }}>
-              Let&apos;s Build Together
+              {secondaryButtonText}
             </span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#120321" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

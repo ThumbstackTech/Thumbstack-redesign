@@ -1,0 +1,82 @@
+{
+  "collectionName": "components_shared_work_items",
+  "info": {
+    "displayName": "Work Item",
+    "icon": "briefcase",
+    "description": "Case study showcase item for work/portfolio section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text",
+      "required": true
+    },
+    "tags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag"
+    },
+    "featuredImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "video": {
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": false
+    },
+    "playButtonColor": {
+      "type": "string",
+      "default": "#FDEBEB"
+    },
+    "quote": {
+      "type": "text",
+      "required": true
+    },
+    "clientName": {
+      "type": "string",
+      "required": true
+    },
+    "clientTitle": {
+      "type": "string",
+      "required": true
+    },
+    "clientCompany": {
+      "type": "string",
+      "required": true
+    },
+    "companyLogo": {
+      "type": "string",
+      "required": true
+    },
+    "companyLogoColor": {
+      "type": "string",
+      "default": "#D9443E"
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Start your story"
+    },
+    "ctaLink": {
+      "type": "string",
+      "default": "/contact"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    }
+  }
+}

@@ -2,8 +2,17 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ServiceHeroComponent } from "@/lib/strapi";
 
-export default function ServiceHero() {
+export default function ServiceHero({ data }: { data?: ServiceHeroComponent }) {
+  // Extract Dynamic fields with Fallbacks
+  const mainHeading = data?.mainHeading || "Strategise. Design. Build. Grow.";
+  const description = data?.description || "We document what we learn — from design sprints to engineering breakthroughs, new project launches, experiments, and small discoveries that move our work forward.";
+  const primaryButtonText = data?.primaryButtonText || "Start Building";
+  const primaryButtonLink = data?.primaryButtonLink || "/contact";
+  const secondaryButtonText = data?.secondaryButtonText || "View Our Work";
+  const secondaryButtonLink = data?.secondaryButtonLink || "/work";
+
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden">
       {/* 
@@ -27,8 +36,7 @@ export default function ServiceHero() {
               fontWeight: 600,
             }}
           >
-            Strategise. Design.<br className="hidden md:block" />
-            Build. Grow.
+            {mainHeading}
           </h1>
 
           {/* Description Paragraph - Updated to match Figma 24px/40px */}
@@ -41,7 +49,7 @@ export default function ServiceHero() {
               lineHeight: "clamp(26px, 3vw, 40px)",
             }}
           >
-            We help brands, founders, and teams turn digital ideas into clear, usable, and scalable products. From websites and e-commerce platforms to mobile apps, CMS systems, AI led tools, and long term support, we work across the full lifecycle of digital experience.
+            {description}
           </p>
         </div>
 
@@ -49,20 +57,20 @@ export default function ServiceHero() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-12 w-full sm:w-auto">
           {/* Primary Button: Start Building */}
           <Link
-            href="/contact"
+            href={primaryButtonLink}
             className="w-full sm:w-auto bg-[#0D1C06] text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-medium hover:bg-black transition-all duration-300 active:scale-95 shadow-sm text-center"
             style={{ fontFamily: "var(--font-satoshi)" }}
           >
-            Start building
+            {primaryButtonText}
           </Link>
 
           {/* Secondary Link: View Our Work */}
           <Link
-            href="/our-work"
+            href={secondaryButtonLink}
             className="flex items-center gap-4 text-[#0D1C06] text-[18px] md:text-[20px] font-medium group transition-all duration-300"
             style={{ fontFamily: "var(--font-satoshi)" }}
           >
-            View Our Work
+            {secondaryButtonText}
             <svg
               width="28"
               height="28"

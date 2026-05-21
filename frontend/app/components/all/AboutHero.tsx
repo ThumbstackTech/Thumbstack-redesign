@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { AboutHeroData } from "../../types/strapi";
-import { getStrapiImageUrl } from "../../lib/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
 export default function AboutHero({ data }: { data?: AboutHeroData }) {
   const containerRef = useRef(null);
