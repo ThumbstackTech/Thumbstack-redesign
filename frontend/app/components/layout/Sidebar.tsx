@@ -22,11 +22,14 @@ export default function Sidebar({ data }: { data?: SidebarData }) {
 
   const links = data?.links && data.links.length > 0
     ? data.links.map(l => {
-      let url = l.url || "";
+      const pageData: any = l.page?.data?.attributes || l.page; // handle both populated and direct formats
+      let url = l.url || (pageData?.slug ? `/${pageData.slug}` : "");
+      let label = l.label || pageData?.title || "";
+      
       if (url && !url.startsWith("/") && !url.startsWith("#") && !url.startsWith("mailto:") && !url.startsWith("http") && !url.startsWith("https")) {
         url = `/${url}`;
       }
-      return { label: l.label, url };
+      return { label, url };
     })
     : defaultLinks;
 

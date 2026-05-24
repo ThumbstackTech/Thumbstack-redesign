@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { getStackItems, getStrapiImageUrl, StackItemComponent } from "@/lib/strapi";
+import { FromTheStackData, StackItemComponent } from "../../types/strapi";
+import { getStrapiImageUrl } from "@/lib/strapi";
 
-function StackCard({ item, idx }: { item: StackItemComponent; idx: number }) {
+function StackCard({ item }: { item: StackItemComponent }) {
   return (
     <div
       className="flex flex-col gap-4 sm:gap-6 shrink-0 relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group/item w-[280px] sm:w-[400px] md:w-[639px]"
@@ -19,6 +20,7 @@ function StackCard({ item, idx }: { item: StackItemComponent; idx: number }) {
           fill
           sizes="(max-width: 640px) 240px, (max-width: 768px) 320px, 480px"
           className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+          unoptimized
         />
         <div className="absolute inset-0 bg-black/10 group-hover/card:bg-black/0 transition-colors" />
 
@@ -30,6 +32,7 @@ function StackCard({ item, idx }: { item: StackItemComponent; idx: number }) {
               alt="Brand Logo"
               fill
               className="object-contain"
+              unoptimized
             />
           </div>
         </div>
@@ -57,7 +60,7 @@ function StackCard({ item, idx }: { item: StackItemComponent; idx: number }) {
         >
           {item.description}
         </p>
-        <Link href="#" className="flex items-center gap-1 sm:gap-2 text-black font-medium text-[14px] hover:underline w-fit mt-1">
+        <Link href={item.link || "#"} className="flex items-center gap-1 sm:gap-2 text-black font-medium text-[14px] hover:underline w-fit mt-1">
           Read Case Study
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6227_81831)">
@@ -76,10 +79,12 @@ function StackCard({ item, idx }: { item: StackItemComponent; idx: number }) {
   );
 }
 
-export default function FromTheStack() {
+interface FromTheStackProps {
+  data?: FromTheStackData;
+}
+
+export default function FromTheStack({ data }: FromTheStackProps) {
   const [isHovering, setIsHovering] = useState(false);
-  const [stackItems, setStackItems] = useState<StackItemComponent[]>([]);
-  const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Motion values for smooth cursor tracking
@@ -91,29 +96,19 @@ export default function FromTheStack() {
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const items = await getStackItems();
-        setStackItems(items);
-      } catch (error) {
-        console.error("Error fetching stack items:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const handleMouseMove = (e: React.MouseEvent) => {
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
   };
 
-  if (loading || stackItems.length === 0) return null;
+  // Fallbacks if data is not loaded yet or undefined
+  const heading = data?.heading || "From The Stack";
+  const subheading = data?.subheading || "Our latest launches, experiments, and thoughts on what's shaping design and technology.";
+  const ctaText = data?.ctaText || "Explore More";
+  const ctaLink = data?.ctaLink || "#";
+  const displayItems = data?.items || [];
 
-  const displayItems = stackItems;
+  if (displayItems.length === 0) return null;
 
   return (
     <section
@@ -132,7 +127,7 @@ export default function FromTheStack() {
                 textTransform: "capitalize",
               }}
             >
-              From The Stack
+              {heading}
             </h2>
             <p
               className="text-sidebar max-w-5xl"
@@ -143,11 +138,11 @@ export default function FromTheStack() {
                 letterSpacing: "0%",
               }}
             >
-              Our latest launches, experiments, and thoughts on what&apos;s shaping design and technology.
+              {subheading}
             </p>
           </div>
-          <Link href="#" className="flex items-center gap-2 text-sidebar font-medium text-xs md:text-base hover:opacity-70 transition-opacity mt-8 md:mt-10 shrink-0 whitespace-nowrap">
-            Explore More
+          <Link href={ctaLink} className="flex items-center gap-2 text-sidebar font-medium text-xs md:text-base hover:opacity-70 transition-opacity mt-8 md:mt-10 shrink-0 whitespace-nowrap">
+            {ctaText}
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_6227_81744)">
                 <path d="M5 15L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -178,7 +173,7 @@ export default function FromTheStack() {
             className="flex gap-4 sm:gap-6 md:gap-8 items-stretch w-max"
           >
             {[...displayItems, ...displayItems].map((item, idx) => (
-              <StackCard key={`${item.id}-${idx}`} item={item} idx={idx} />
+              <StackCard key={`${item.id}-${idx}`} item={item} />
             ))}
           </motion.div>
         </div>

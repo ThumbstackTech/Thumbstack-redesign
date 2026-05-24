@@ -68,6 +68,7 @@ export function getPagesQueryString(slug: string): string {
     // --- Dynamic zone components (polymorphic populate required for Strapi 5) ---
     "populate[content][on][shared.hero][populate]=*",
     "populate[content][on][shared.interactive-list][populate][items][populate][image]=true",
+    "populate[content][on][shared.work-interactive-list][populate][items][populate][image]=true",
     "populate[content][on][shared.partner-brands][populate][logos]=true",
     "populate[content][on][shared.principles][populate]=*",
     "populate[content][on][shared.capabilities-features][populate][groups][populate][items]=*",
@@ -86,12 +87,13 @@ export function getPagesQueryString(slug: string): string {
     "populate[content][on][shared.hero-work][populate][card1Image]=true",
     "populate[content][on][shared.hero-work][populate][card2Image]=true",
     "populate[content][on][shared.best-fit][populate]=*",
-    "populate[content][on][shared.sidebar][populate][links]=*",
+    "populate[content][on][shared.sidebar][populate][links][populate]=*",
+    "populate[content][on][shared.capabilities-hero][populate]=*",
     // Explicit populate for the 4 newly added components if placed directly in dynamic zone
     "populate[content][on][shared.cta-section][populate]=*",
     "populate[content][on][shared.service-hero][populate]=*",
-    "populate[content][on][shared.stack-item][populate][image]=true",
-    "populate[content][on][shared.stack-item][populate][logo]=true",
+    "populate[content][on][shared.stack-item][populate][items][populate][image]=true",
+    "populate[content][on][shared.stack-item][populate][items][populate][logo]=true",
     "populate[content][on][shared.work-item][populate][featuredImage]=true",
     "populate[content][on][shared.work-item][populate][video]=true",
     "populate[content][on][shared.work-item][populate][tags]=true",
@@ -422,27 +424,81 @@ export async function getNewsDetailed(): Promise<any[]> {
 }
 
 /**
- * Fetch single news detailed by slug
+ * Fetch single news detailed by slug.
+ * Primary query: fully populates media + the `sections` dynamic zone.
+ * Fallback query: simple populate=* in case Strapi hasn't registered `sections` yet
+ *   (e.g. backend hasn't restarted after schema change). Never throws; returns null on failure.
  */
 export async function getNewsDetailedBySlug(slug: string): Promise<any | null> {
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+  };
+
+  // --- Primary query: sections dynamic zone + media ---
+  const primaryParams = [
+    `filters[slug][$eq]=${slug}`,
+    "populate[heroImage]=true",
+    "populate[logo]=true",
+    "populate[galleryImages]=true",
+    "populate[sections][on][shared.build-your-stack][populate]=*",
+    "populate[sections][on][shared.lets-talk][populate]=*",
+    "populate[sections][on][shared.footer][populate]=*",
+    "populate[sections][on][shared.work-interactive-list][populate][items][populate][image]=true",
+    "populate[sections][on][shared.stack-item][populate][items][populate][image]=true",
+    "populate[sections][on][shared.stack-item][populate][items][populate][logo]=true",
+    "populate[sections][on][shared.cta-section][populate]=*",
+    "populate[sections][on][shared.news-and-insights-grid][populate][news_detaileds][populate][heroImage]=true",
+    "populate[sections][on][shared.news-and-insights-grid][populate][news_detaileds][populate][logo]=true",
+    "populate[sections][on][shared.news-and-insights-grid][populate][news_detaileds][populate][galleryImages]=true",
+    "populate[sections][on][shared.principles][populate]=*",
+    "populate[sections][on][shared.faq-section][populate][faqs]=*",
+    "populate[sections][on][shared.team-section][populate][members][populate][image]=true",
+    "populate[sections][on][shared.partner-brands][populate][logos]=true",
+    "populate[sections][on][shared.product-driven][populate]=*",
+    "populate[sections][on][shared.best-fit][populate]=*",
+    "populate[sections][on][shared.info][populate]=*",
+    "populate[sections][on][shared.what-we-build][populate]=*",
+  ].join("&");
+
   try {
-    const response = await fetch(
-      `${STRAPI_URL}/api/news-detaileds?filters[slug][$eq]=${slug}&populate=*`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
-        },
-        next: { revalidate: 60 },
-      }
-    );
+    const res = await fetch(`${STRAPI_URL}/api/news-detaileds?${primaryParams}`, {
+      headers,
+      next: { revalidate: 60 },
+    });
 
-    if (!response.ok) throw new Error(`Failed to fetch news-detailed: ${response.statusText}`);
+    if (res.ok) {
+      const result: StrapiResponseWrapper<any[]> = await res.json();
+      return result.data?.[0] || null;
+    }
 
-    const result: StrapiResponseWrapper<any[]> = await response.json();
+    // 400 usually means `sections` field not yet registered (backend needs restart)
+    // Fall through to simple fallback query below
+    console.warn(`Primary news-detailed query failed (${res.status}), falling back to simple populate. Restart the Strapi backend to enable dynamic sections.`);
+  } catch (error) {
+    console.warn("Primary news-detailed fetch threw, falling back:", error);
+  }
+
+  // --- Fallback query: basic media populate only (no sections) ---
+  try {
+    const fallbackParams = [
+      `filters[slug][$eq]=${slug}`,
+      "populate[heroImage]=true",
+      "populate[logo]=true",
+      "populate[galleryImages]=true",
+    ].join("&");
+
+    const res = await fetch(`${STRAPI_URL}/api/news-detaileds?${fallbackParams}`, {
+      headers,
+      next: { revalidate: 60 },
+    });
+
+    if (!res.ok) throw new Error(`Failed to fetch news-detailed: ${res.statusText}`);
+
+    const result: StrapiResponseWrapper<any[]> = await res.json();
     return result.data?.[0] || null;
   } catch (error) {
-    console.error('Error fetching news-detailed:', error);
+    console.error("Error fetching news-detailed:", error);
     return null;
   }
 }

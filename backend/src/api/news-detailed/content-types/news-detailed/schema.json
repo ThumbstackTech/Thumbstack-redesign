@@ -92,6 +92,26 @@
     "accentColor": {
       "type": "string",
       "default": "#3145DD"
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.build-your-stack",
+        "shared.lets-talk",
+        "shared.footer",
+        "shared.cta-section",
+        "shared.news-and-insights-grid",
+        "shared.principles",
+        "shared.faq-section",
+        "shared.team-section",
+        "shared.partner-brands",
+        "shared.product-driven",
+        "shared.best-fit",
+        "shared.info",
+        "shared.what-we-build",
+        "shared.work-interactive-list",
+        "shared.stack-item"
+      ]
     }
   }
 }

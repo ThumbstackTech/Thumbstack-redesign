@@ -46,7 +46,9 @@
         "shared.service-hero",
         "shared.stack-item",
         "shared.work-item",
-        "shared.news-and-insights-grid"
+        "shared.capabilities-hero",
+        "shared.news-and-insights-grid",
+        "shared.work-interactive-list"
       ]
     }
   }

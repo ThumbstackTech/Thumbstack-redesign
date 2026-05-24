@@ -1,46 +1,33 @@
 {
   "collectionName": "components_shared_stack_items",
   "info": {
-    "displayName": "Stack Item",
+    "displayName": "From The Stack",
     "icon": "list",
-    "description": "Blog/news carousel item for 'From The Stack' section"
+    "description": "Blog/news carousel section 'From The Stack'"
   },
   "options": {},
   "attributes": {
-    "title": {
+    "heading": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "From The Stack"
     },
-    "description": {
-      "type": "text",
-      "required": true
+    "subheading": {
+      "type": "string",
+      "default": "Our latest launches, experiments, and thoughts on what's shaping design and technology."
     },
-    "image": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+    "ctaText": {
+      "type": "string",
+      "default": "Explore More"
     },
-    "logo": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+    "ctaLink": {
+      "type": "string",
+      "default": "#"
     },
-    "tag": {
-      "type": "enumeration",
-      "enum": [
-        "Blog",
-        "Article",
-        "Case Study",
-        "News",
-        "Tutorial"
-      ],
-      "required": true
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.stack-card"
     }
   }
 }

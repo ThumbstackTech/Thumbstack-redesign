@@ -79,6 +79,7 @@ export interface ElementsNavLink extends Struct.ComponentSchema {
   };
   attributes: {
     label: Schema.Attribute.String;
+    page: Schema.Attribute.Relation<'oneToOne', 'api::page.page'>;
     url: Schema.Attribute.String;
   };
 }
@@ -95,6 +96,26 @@ export interface ElementsOfficeItem extends Struct.ComponentSchema {
     city: Schema.Attribute.String;
     email: Schema.Attribute.String;
     phone: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsStackCard extends Struct.ComponentSchema {
+  collectionName: 'components_elements_stack_cards';
+  info: {
+    description: "An individual card inside the 'From The Stack' carousel";
+    displayName: 'Stack Card';
+    icon: 'list';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    link: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    tag: Schema.Attribute.Enumeration<
+      ['Blog', 'Article', 'Case Study', 'News', 'Tutorial']
+    > &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -181,6 +202,24 @@ export interface SharedCapabilitiesFeatures extends Struct.ComponentSchema {
     groups: Schema.Attribute.Component<'elements.feature-group', true>;
     title: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Custom Website Design, Development, CMS, And Support.'>;
+  };
+}
+
+export interface SharedCapabilitiesHero extends Struct.ComponentSchema {
+  collectionName: 'components_shared_capabilities_heroes';
+  info: {
+    description: 'Hero section for the capabilities page';
+    displayName: 'Capabilities Hero';
+    icon: 'star';
+  };
+  attributes: {
+    ctaLink: Schema.Attribute.String;
+    ctaText: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    label: Schema.Attribute.String;
+    title: Schema.Attribute.Text;
+    viewWorkLink: Schema.Attribute.String;
+    viewWorkText: Schema.Attribute.String;
   };
 }
 
@@ -500,19 +539,20 @@ export interface SharedSidebar extends Struct.ComponentSchema {
 export interface SharedStackItem extends Struct.ComponentSchema {
   collectionName: 'components_shared_stack_items';
   info: {
-    description: "Blog/news carousel item for 'From The Stack' section";
-    displayName: 'Stack Item';
+    description: "Blog/news carousel section 'From The Stack'";
+    displayName: 'From The Stack';
     icon: 'list';
   };
   attributes: {
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    tag: Schema.Attribute.Enumeration<
-      ['Blog', 'Article', 'Case Study', 'News', 'Tutorial']
-    > &
-      Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Explore More'>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'From The Stack'>;
+    items: Schema.Attribute.Component<'elements.stack-card', true>;
+    subheading: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<"Our latest launches, experiments, and thoughts on what's shaping design and technology.">;
   };
 }
 
@@ -556,6 +596,23 @@ export interface SharedWhatWeBuild extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedWorkInteractiveList extends Struct.ComponentSchema {
+  collectionName: 'components_shared_work_interactive_lists';
+  info: {
+    description: 'A list with full-width dark green background on hover, image overlay, and custom view cursor';
+    displayName: 'Work Interactive List';
+    icon: 'list-ul';
+  };
+  attributes: {
+    ctaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/our-work'>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Explore More'>;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    items: Schema.Attribute.Component<'elements.list-item', true>;
+    subheading: Schema.Attribute.String;
+  };
+}
+
 export interface SharedWorkItem extends Struct.ComponentSchema {
   collectionName: 'components_shared_work_items';
   info: {
@@ -595,11 +652,13 @@ declare module '@strapi/strapi' {
       'elements.list-item': ElementsListItem;
       'elements.nav-link': ElementsNavLink;
       'elements.office-item': ElementsOfficeItem;
+      'elements.stack-card': ElementsStackCard;
       'elements.team-member': ElementsTeamMember;
       'shared.about-hero': SharedAboutHero;
       'shared.best-fit': SharedBestFit;
       'shared.build-your-stack': SharedBuildYourStack;
       'shared.capabilities-features': SharedCapabilitiesFeatures;
+      'shared.capabilities-hero': SharedCapabilitiesHero;
       'shared.cta-section': SharedCtaSection;
       'shared.faq-section': SharedFaqSection;
       'shared.footer': SharedFooter;
@@ -620,6 +679,7 @@ declare module '@strapi/strapi' {
       'shared.tag': SharedTag;
       'shared.team-section': SharedTeamSection;
       'shared.what-we-build': SharedWhatWeBuild;
+      'shared.work-interactive-list': SharedWorkInteractiveList;
       'shared.work-item': SharedWorkItem;
     }
   }

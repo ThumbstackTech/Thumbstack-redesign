@@ -1,9 +1,7 @@
 import { getNewsDetailedBySlug, getStrapiImageUrl } from "@/lib/strapi";
 import { notFound } from "next/navigation";
 import NewsAndInsightsArticle from "../../components/all/NewsAndInsightsArticle";
-import BuildYourStack from "../../components/all/BuildYourStack";
-import LetsTalk from "../../components/all/LetsTalk";
-import Footer from "../../components/all/Footer";
+import SectionRenderer from "../../components/SectionRenderer";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -23,7 +21,7 @@ export default async function NewsAndInsightsArticleSlugPage({ params }: { param
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
 
-  // Fetch article from Strapi CMS
+  // Fetch article from Strapi CMS with all sections populated
   const article = await getNewsDetailedBySlug(slug).catch((err) => {
     console.error("DEBUG: Fetch error for news-detailed:", err);
     return null;
@@ -35,7 +33,7 @@ export default async function NewsAndInsightsArticleSlugPage({ params }: { param
 
   const attrs = article.attributes || article;
 
-  // Map CMS data into standard structured object for the template
+  // Map CMS data into structured object for the article template
   const mappedData = {
     slug: slug,
     title: attrs.title || "",
@@ -46,16 +44,20 @@ export default async function NewsAndInsightsArticleSlugPage({ params }: { param
     logo: getStrapiImageUrl(attrs.logo) || undefined,
     content: attrs.content || undefined,
     bgColor: attrs.bgColor || "#FFFFFF",
-    accentColor: attrs.accentColor || "#3145DD"
+    accentColor: attrs.accentColor || "#3145DD",
   };
+
+  // Sections dynamic zone — added via Strapi CMS for full editorial control
+  const sections: any[] = attrs.sections || [];
 
   return (
     <div className="w-full relative">
       <NewsAndInsightsArticle data={mappedData} />
 
-      <BuildYourStack />
-      <LetsTalk />
-      <Footer />
+      {/* Dynamic sections added via Strapi — add Footer, LetsTalk, CTASection, etc. here */}
+      {sections.length > 0 && (
+        <SectionRenderer sections={sections} />
+      )}
     </div>
   );
 }

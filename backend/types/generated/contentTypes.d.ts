@@ -630,6 +630,25 @@ export interface ApiNewsDetailedNewsDetailed
     publishedAt: Schema.Attribute.DateTime;
     readTime: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'5 min read'>;
+    sections: Schema.Attribute.DynamicZone<
+      [
+        'shared.build-your-stack',
+        'shared.lets-talk',
+        'shared.footer',
+        'shared.cta-section',
+        'shared.news-and-insights-grid',
+        'shared.principles',
+        'shared.faq-section',
+        'shared.team-section',
+        'shared.partner-brands',
+        'shared.product-driven',
+        'shared.best-fit',
+        'shared.info',
+        'shared.what-we-build',
+        'shared.work-interactive-list',
+        'shared.stack-item',
+      ]
+    >;
     slug: Schema.Attribute.UID<'title'>;
     subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Article'>;
@@ -688,7 +707,9 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.service-hero',
         'shared.stack-item',
         'shared.work-item',
+        'shared.capabilities-hero',
         'shared.news-and-insights-grid',
+        'shared.work-interactive-list',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

@@ -67,7 +67,18 @@ export interface StackItemComponent {
   description: string;
   image: StrapiImage | null;
   logo: StrapiImage | null;
-  tag: string;
+  tag: "Blog" | "Article" | "Case Study" | "News" | "Tutorial";
+  link?: string;
+}
+
+export interface FromTheStackData {
+  id: number;
+  __component: "shared.stack-item";
+  heading: string;
+  subheading: string;
+  ctaText: string;
+  ctaLink: string;
+  items: StackItemComponent[];
 }
 
 export interface WorkItemComponent {
@@ -178,6 +189,16 @@ export interface ListItem {
 export interface InteractiveListData {
   id: number;
   __component: "shared.interactive-list";
+  heading: string;
+  subheading: string;
+  ctaText: string;
+  ctaLink: string;
+  items: ListItem[];
+}
+
+export interface WorkInteractiveListData {
+  id: number;
+  __component: "shared.work-interactive-list";
   heading: string;
   subheading: string;
   ctaText: string;
@@ -303,8 +324,16 @@ export interface BestFitData {
 
 export interface SidebarLink {
   id: number;
-  label: string;
-  url: string;
+  label?: string;
+  url?: string;
+  page?: {
+    data?: {
+      attributes?: {
+        slug: string;
+        title: string;
+      }
+    } | null;
+  } | null;
 }
 
 export interface SidebarData {

@@ -2,6 +2,7 @@
 
 import Hero from "./all/Hero";
 import InteractiveList from "./all/InteractiveList";
+import WorkInteractiveList from "./all/WorkInteractiveList";
 import PartnerBrands from "./all/PartnerBrands";
 import Principles from "./all/Principles";
 import CapabilitiesFeatures from "./all/CapabilitiesFeatures";
@@ -24,11 +25,13 @@ import ServiceHero from "./all/ServiceHero";
 import FromTheStack from "./all/FromTheStack";
 import WorkItem from "./all/WorkItem";
 import NewsAndInsightsGrid from "./all/NewsAndInsightsGrid";
+import CapabilitiesHero from "./all/CapabilitiesHero";
 
 
 const componentMap: { [key: string]: any } = {
   "shared.hero": Hero,
   "shared.interactive-list": InteractiveList,
+  "shared.work-interactive-list": WorkInteractiveList,
   "shared.partner-brands": PartnerBrands,
   "shared.principles": Principles,
   "shared.capabilities-features": CapabilitiesFeatures,
@@ -50,7 +53,8 @@ const componentMap: { [key: string]: any } = {
   "shared.service-hero": ServiceHero,
   "shared.stack-item": FromTheStack,
   "shared.work-item": WorkItem,
-  "shared.news-and-insights-grid": NewsAndInsightsGrid
+  "shared.news-and-insights-grid": NewsAndInsightsGrid,
+  "shared.capabilities-hero": CapabilitiesHero
 };
 
 export default function SectionRenderer({ sections, projects }: { sections: any[]; projects?: any[] }) {

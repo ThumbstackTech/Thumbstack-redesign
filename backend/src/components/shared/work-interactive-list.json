@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_work_interactive_lists",
+  "info": {
+    "displayName": "Work Interactive List",
+    "icon": "list-ul",
+    "description": "A list with full-width dark green background on hover, image overlay, and custom view cursor"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "string"
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Explore More"
+    },
+    "ctaLink": {
+      "type": "string",
+      "default": "/our-work"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.list-item"
+    }
+  }
+}

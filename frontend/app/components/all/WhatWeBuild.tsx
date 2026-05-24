@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-// ── Types ──────────────────────────────────────────────────────────────────
+
 interface WhatWeBuildProps {
   data?: {
     heading?: string;
@@ -11,7 +11,7 @@ interface WhatWeBuildProps {
   };
 }
 
-// ── Design defaults ────────────────────────────────────────────────────────
+
 const DEFAULT_TAGS = [
   "Corporate websites",
   "Brand websites",
