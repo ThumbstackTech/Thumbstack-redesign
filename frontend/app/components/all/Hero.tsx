@@ -19,26 +19,63 @@ export default function Hero({ data }: HeroProps) {
   const ctaLink = data?.ctaLink || "#work";
 
   return (
-    <section className="min-h-screen w-full flex flex-col justify-center pt-20 md:pt-24 lg:pt-28 pb-10 md:pb-12 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-x-clip gap-4 md:gap-6">
+    <section className="min-h-screen w-full flex flex-col justify-center pt-[70px] md:pt-[86px] lg:pt-[102px] pb-10 md:pb-12 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-x-clip gap-4 md:gap-6">
 
       {/* Top row */}
-      <div className="flex justify-between items-start w-full max-w-[1600px] mx-auto pt-3 md:pt-8 pb-1 relative z-10">
+      <div className="flex justify-between items-start w-full max-w-[1600px] mx-auto pt-0.5 md:pt-[22px] pb-1 relative z-10">
         <Link
           href="/services"
-          className="text-[#0F1D07] font-semibold text-[14px] md:text-[18px] flex items-center gap-1.5 md:gap-2 hover:opacity-70 transition-opacity"
-          style={{ fontFamily: "var(--font-satoshi)" }}
+          className="text-[#0F1D07] flex items-center hover:opacity-70 transition-opacity"
+          style={{
+            fontFamily: "var(--font-satoshi)",
+            fontWeight: 700,
+            fontSize: "21px",
+            lineHeight: "54px",
+            padding: "15px 0px",
+            gap: "15px",
+            borderRadius: "27px",
+          }}
         >
           Our Services
-          <svg width="24" height="24" className="w-[22px] h-[22px] md:w-[30px] md:h-[30px]" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_6227_82053)">
-              <path d="M7.49985 22.5L22.4998 7.5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M10.3123 7.5H22.4998V19.6875" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-            </g>
-            <defs>
-              <clipPath id="clip0_6227_82053">
-                <rect width="30" height="30" fill="white" />
-              </clipPath>
-            </defs>
+          {/* ArrowRight → icon matching Figma spec */}
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ flexShrink: 0 }}
+          >
+            {/* Horizontal shaft */}
+            <line
+              x1="6"
+              y1="15"
+              x2="24"
+              y2="15"
+              stroke="#0F1D07"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            {/* Arrowhead top arm */}
+            <line
+              x1="24"
+              y1="15"
+              x2="16"
+              y2="7"
+              stroke="#0F1D07"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            {/* Arrowhead bottom arm */}
+            <line
+              x1="24"
+              y1="15"
+              x2="16"
+              y2="23"
+              stroke="#0F1D07"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
           </svg>
         </Link>
       </div>

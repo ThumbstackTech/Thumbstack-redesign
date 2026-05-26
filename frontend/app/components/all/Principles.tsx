@@ -136,7 +136,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
         </motion.span>
 
         {/* Header containing CTA Explore Our Services on right */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between w-full relative mb-16 lg:mb-24 gap-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between w-full relative mb-16 lg:mb-24 gap-8">
           <div className="flex flex-col gap-6 max-w-[900px]">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
