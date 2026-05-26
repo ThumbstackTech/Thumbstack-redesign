@@ -26,6 +26,8 @@
         "shared.hero",
         "shared.capabilities-features",
         "shared.interactive-list",
+        "shared.capabilities-listing",
+        "shared.how-we-work",
         "shared.partner-brands",
         "shared.principles",
         "shared.faq-section",
@@ -47,8 +49,12 @@
         "shared.stack-item",
         "shared.work-item",
         "shared.capabilities-hero",
+        "shared.capabilities-hero-detail",
+        "shared.capabilities-info",
         "shared.news-and-insights-grid",
-        "shared.work-interactive-list"
+        "shared.work-interactive-list",
+        "shared.service-hero-detail",
+        "shared.service-info"
       ]
     }
   }

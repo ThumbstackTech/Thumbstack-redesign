@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_elements_process_stages",
+  "info": {
+    "displayName": "Process Stage",
+    "icon": "step-forward",
+    "description": "An individual stage inside the 'How we work' process section."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "tagline": {
+      "type": "string",
+      "description": "Short sentence tagline"
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "lightbulb",
+        "paintroller",
+        "code-circle",
+        "sparkle"
+      ],
+      "default": "lightbulb"
+    },
+    "features": {
+      "type": "text",
+      "description": "Comma-separated stage points or deliverables"
+    },
+    "link": {
+      "type": "string",
+      "default": "#"
+    },
+    "linkText": {
+      "type": "string"
+    }
+  }
+}

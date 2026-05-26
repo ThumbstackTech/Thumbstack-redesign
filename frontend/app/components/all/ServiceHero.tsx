@@ -12,18 +12,17 @@ export default function ServiceHero({ data }: { data?: ServiceHeroComponent }) {
   const primaryButtonLink = data?.primaryButtonLink || "/contact";
   const secondaryButtonText = data?.secondaryButtonText || "View Our Work";
   const secondaryButtonLink = data?.secondaryButtonLink || "/work";
-
   return (
-    <section className="relative w-full min-h-screen bg-white overflow-hidden">
+    <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center pt-24 pb-16 px-6 md:px-12 lg:px-20 xl:px-24 md:pl-[100px] md:pr-[100px]">
       {/* 
         Main Hero Content Container
-        Responsive layout: Absolute on desktop (per Figma), relative/flex on mobile.
+        Responsive layout: Clean flex alignment, avoiding absolute offset issues.
       */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex flex-col justify-end items-start gap-[40px] md:gap-[75px] relative md:absolute px-6 md:px-0 pt-[180px] md:pt-0 w-full max-w-[1048px] h-auto md:min-h-[543px] md:left-[100px] md:top-[280px]"
+        className="flex flex-col justify-center items-start gap-[40px] md:gap-[75px] w-full max-w-[1048px]"
       >
         <div className="flex flex-col gap-6 md:gap-10">
           {/* Headline: Strategise. Design. Build. Grow. */}

@@ -61,6 +61,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     `&populate[case_study][populate][challengeImages]=true` +
     `&populate[case_study][populate][gallery]=true` +
     `&populate[case_study][populate][mainImage]=true` +
+    `&populate[case_study][populate][content][populate]=*` +
     `&populate[mainImage]=true`;
 
   const projectRes = await fetchStrapi("projects", queryString).catch((err) => {
@@ -142,7 +143,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
     projectUrl: caseStudy?.projectUrl || project?.websiteUrl || staticCaseStudy?.projectUrl || "#",
     accentColor: caseStudy?.accentColor || project?.accentColor || staticCaseStudy?.accentColor || "#95E7D3",
-    backgroundColor: caseStudy?.backgroundColor || project?.bg || staticCaseStudy?.backgroundColor || "#141417"
+    backgroundColor: caseStudy?.backgroundColor || project?.bg || staticCaseStudy?.backgroundColor || "#141417",
+    
+    dynamicContent: caseStudy?.content || []
   };
 
   return <CaseStudyTemplate data={mappedData} />;

@@ -498,6 +498,74 @@ export interface ApiCapabilitiesSectionCapabilitiesSection
   };
 }
 
+export interface ApiCapabilityDetailedCapabilityDetailed
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'capability_detaileds';
+  info: {
+    description: 'Dynamic detail pages for capabilities';
+    displayName: 'Capability Detailed';
+    pluralName: 'capability-detaileds';
+    singularName: 'capability-detailed';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.DynamicZone<
+      [
+        'shared.about-hero',
+        'shared.best-fit',
+        'shared.build-your-stack',
+        'shared.capabilities-features',
+        'shared.capabilities-hero-detail',
+        'shared.capabilities-hero',
+        'shared.capabilities-info',
+        'shared.capabilities-listing',
+        'shared.cta-section',
+        'shared.faq-section',
+        'shared.footer',
+        'shared.hero-work',
+        'shared.hero',
+        'shared.how-we-work',
+        'shared.info',
+        'shared.interactive-list',
+        'shared.lets-talk',
+        'shared.news-and-insights-grid',
+        'shared.news-hero',
+        'shared.partner-brands',
+        'shared.principles',
+        'shared.product-driven',
+        'shared.projects-section',
+        'shared.service-hero',
+        'shared.sidebar',
+        'shared.stack-item',
+        'shared.team-section',
+        'shared.what-we-build',
+        'shared.work-interactive-list',
+        'shared.work-item',
+        'shared.service-hero-detail',
+        'shared.service-info',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::capability-detailed.capability-detailed'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   collectionName: 'case_studies';
   info: {
@@ -521,6 +589,41 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
     challengeImages: Schema.Attribute.Media<'images', true>;
     challengeText: Schema.Attribute.Text;
     clientName: Schema.Attribute.String & Schema.Attribute.Required;
+    content: Schema.Attribute.DynamicZone<
+      [
+        'shared.about-hero',
+        'shared.best-fit',
+        'shared.build-your-stack',
+        'shared.capabilities-features',
+        'shared.capabilities-hero-detail',
+        'shared.capabilities-hero',
+        'shared.capabilities-listing',
+        'shared.cta-section',
+        'shared.faq-section',
+        'shared.footer',
+        'shared.hero-work',
+        'shared.hero',
+        'shared.how-we-work',
+        'shared.info',
+        'shared.interactive-list',
+        'shared.lets-talk',
+        'shared.news-and-insights-grid',
+        'shared.news-hero',
+        'shared.partner-brands',
+        'shared.principles',
+        'shared.product-driven',
+        'shared.projects-section',
+        'shared.service-hero',
+        'shared.sidebar',
+        'shared.stack-item',
+        'shared.team-section',
+        'shared.what-we-build',
+        'shared.work-interactive-list',
+        'shared.work-item',
+        'shared.service-hero-detail',
+        'shared.service-info',
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -633,6 +736,7 @@ export interface ApiNewsDetailedNewsDetailed
     sections: Schema.Attribute.DynamicZone<
       [
         'shared.build-your-stack',
+        'shared.capabilities-info',
         'shared.lets-talk',
         'shared.footer',
         'shared.cta-section',
@@ -687,6 +791,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.hero',
         'shared.capabilities-features',
         'shared.interactive-list',
+        'shared.capabilities-listing',
+        'shared.how-we-work',
         'shared.partner-brands',
         'shared.principles',
         'shared.faq-section',
@@ -708,8 +814,12 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.stack-item',
         'shared.work-item',
         'shared.capabilities-hero',
+        'shared.capabilities-hero-detail',
+        'shared.capabilities-info',
         'shared.news-and-insights-grid',
         'shared.work-interactive-list',
+        'shared.service-hero-detail',
+        'shared.service-info',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -774,6 +884,74 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     websiteUrl: Schema.Attribute.String;
+  };
+}
+
+export interface ApiServiceDetailedServiceDetailed
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'service_detaileds';
+  info: {
+    description: 'Dynamic detail pages for services';
+    displayName: 'Service Detailed';
+    pluralName: 'service-detaileds';
+    singularName: 'service-detailed';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.DynamicZone<
+      [
+        'shared.about-hero',
+        'shared.best-fit',
+        'shared.build-your-stack',
+        'shared.capabilities-features',
+        'shared.capabilities-hero-detail',
+        'shared.capabilities-hero',
+        'shared.capabilities-info',
+        'shared.capabilities-listing',
+        'shared.cta-section',
+        'shared.faq-section',
+        'shared.footer',
+        'shared.hero-work',
+        'shared.hero',
+        'shared.how-we-work',
+        'shared.info',
+        'shared.interactive-list',
+        'shared.lets-talk',
+        'shared.news-and-insights-grid',
+        'shared.news-hero',
+        'shared.partner-brands',
+        'shared.principles',
+        'shared.product-driven',
+        'shared.projects-section',
+        'shared.service-hero',
+        'shared.sidebar',
+        'shared.stack-item',
+        'shared.team-section',
+        'shared.what-we-build',
+        'shared.work-interactive-list',
+        'shared.work-item',
+        'shared.service-hero-detail',
+        'shared.service-info',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service-detailed.service-detailed'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1321,11 +1499,13 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::brand.brand': ApiBrandBrand;
       'api::capabilities-section.capabilities-section': ApiCapabilitiesSectionCapabilitiesSection;
+      'api::capability-detailed.capability-detailed': ApiCapabilityDetailedCapabilityDetailed;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::hero.hero': ApiHeroHero;
       'api::news-detailed.news-detailed': ApiNewsDetailedNewsDetailed;
       'api::page.page': ApiPagePage;
       'api::project.project': ApiProjectProject;
+      'api::service-detailed.service-detailed': ApiServiceDetailedServiceDetailed;
       'api::tech-stack.tech-stack': ApiTechStackTechStack;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

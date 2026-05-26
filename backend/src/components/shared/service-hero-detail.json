@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_shared_service_hero_details",
+  "info": {
+    "displayName": "Service Hero Detail",
+    "icon": "align-left",
+    "description": "Hero section for service details with tagline, title, description and buttons."
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "required": true,
+      "default": "Strategise"
+    },
+    "title": {
+      "type": "text",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "primaryCtaText": {
+      "type": "string",
+      "default": "Start With Strategy"
+    },
+    "primaryCtaLink": {
+      "type": "string",
+      "default": "#"
+    },
+    "secondaryCtaText": {
+      "type": "string",
+      "default": "View Our Work"
+    },
+    "secondaryCtaLink": {
+      "type": "string",
+      "default": "#"
+    }
+  }
+}

@@ -97,6 +97,7 @@
       "type": "dynamiczone",
       "components": [
         "shared.build-your-stack",
+        "shared.capabilities-info",
         "shared.lets-talk",
         "shared.footer",
         "shared.cta-section",

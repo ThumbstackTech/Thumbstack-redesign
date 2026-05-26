@@ -71,11 +71,10 @@ export default function Footer({ data }: FooterProps) {
   const termsUrl       = data?.termsUrl       || "#";
   const offices        = data?.offices?.length  ? data.offices  : DEFAULT_OFFICES;
   const quickLinks     = data?.quickLinks?.length ? data.quickLinks : DEFAULT_QUICK_LINKS;
-
   return (
     <footer className="w-full bg-[#3145DD] snap-start">
       {/* Main Footer Content */}
-      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-16 pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 md:pb-12 flex flex-col gap-12 md:gap-16">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-24 md:pl-[90px] md:pr-[90px] pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 md:pb-12 flex flex-col gap-12 md:gap-16">
 
         {/* Main 3-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_0.8fr] gap-12 md:gap-16 lg:gap-24">
@@ -104,9 +103,29 @@ export default function Footer({ data }: FooterProps) {
               </span>
             </h2>
 
-            <div className="flex flex-col gap-2" style={{ fontFamily: "var(--font-satoshi)" }}>
-              <p className="text-white text-base font-medium">{subTagline}</p>
-              <p className="text-white text-xs max-w-md">
+            <div className="flex flex-col gap-[10px] max-w-[620px] w-full">
+              <p
+                className="text-white m-0"
+                style={{
+                  fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  lineHeight: "30px",
+                  letterSpacing: "-0.02em"
+                }}
+              >
+                Let&apos;s make something amazing together.
+              </p>
+              <p
+                className="text-white m-0"
+                style={{
+                  fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  lineHeight: "30px",
+                  letterSpacing: "-0.02em"
+                }}
+              >
                 Come chat with us — we&apos;ve got coffee (or tea) ready and are always up for a good conversation.
               </p>
             </div>
@@ -148,17 +167,7 @@ export default function Footer({ data }: FooterProps) {
               </svg>
             </div>
 
-            {/* Newsletter */}
-            <button
-              className="flex items-center justify-between w-full max-w-[320px] px-8 py-4 bg-white rounded-full text-blue text-sm font-bold hover:bg-mint transition-colors mt-4"
-              style={{ fontFamily: "var(--font-satoshi)" }}
-              suppressHydrationWarning
-            >
-              {newsletterLabel}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+
 
             {/* Bottom Links */}
             <div className="flex gap-8 mt-auto pt-12" style={{ fontFamily: "var(--font-satoshi)" }}>

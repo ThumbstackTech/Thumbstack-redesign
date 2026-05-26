@@ -1,4 +1,4 @@
-import { fetchStrapi, getPagesQueryString } from "@/lib/strapi";
+import { fetchStrapi, getPagesQueryString, getCapabilityDetailedBySlug, getServiceDetailedBySlug } from "@/lib/strapi";
 import SectionRenderer from "../components/SectionRenderer";
 import Projects from "../components/all/Projects";
 import Footer from "../components/all/Footer";
@@ -8,12 +8,25 @@ import { redirect } from "next/navigation";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug?.join("/") || "";
-  // Simple metadata fetch — page schema has no seo field, just use the title
+  
+  let pageData = null;
+  
   const pageRes = await fetchStrapi(
     "pages",
     `filters[slug][$eq]=${slug}&publicationState=preview`
   ).catch(() => null);
-  const pageData = (pageRes?.data as any[])?.[0]?.attributes || (pageRes?.data as any[])?.[0];
+  pageData = (pageRes?.data as any[])?.[0]?.attributes || (pageRes?.data as any[])?.[0];
+
+  if (!pageData) {
+    const capRes = await getCapabilityDetailedBySlug(slug);
+    if (capRes) pageData = capRes.attributes || capRes;
+  }
+  
+  if (!pageData) {
+    const servRes = await getServiceDetailedBySlug(slug);
+    if (servRes) pageData = servRes.attributes || servRes;
+  }
+
   if (!pageData) return {};
   return {
     title: pageData.title ? `${pageData.title} | Thumbstack` : "Thumbstack",
@@ -27,16 +40,25 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
   if (slug === "home") redirect("/");
   console.log("DEBUG: Rendering DynamicPage for slug:", slug);
 
-  // Use the correct Strapi 5 polymorphic populate — this is required for dynamic zones
-  const pageRes = await fetchStrapi("pages", getPagesQueryString(slug)).catch((err) => {
+  // Try standard page
+  let pageRes = await fetchStrapi("pages", getPagesQueryString(slug)).catch((err) => {
     console.error("DEBUG: Fetch error for slug", slug, err);
     return null;
   });
 
-  console.log("DEBUG: Page data received for slug", slug, !!pageRes?.data);
+  let pageData = (pageRes?.data as any[])?.[0]?.attributes || (pageRes?.data as any[])?.[0];
 
-  // Strapi 5 flat response — no .attributes wrapper, but keep fallback for safety
-  const pageData = (pageRes?.data as any[])?.[0]?.attributes || (pageRes?.data as any[])?.[0];
+  // Fallback to capability
+  if (!pageData) {
+    const capRes = await getCapabilityDetailedBySlug(slug);
+    if (capRes) pageData = capRes.attributes || capRes;
+  }
+
+  // Fallback to service
+  if (!pageData) {
+    const servRes = await getServiceDetailedBySlug(slug);
+    if (servRes) pageData = servRes.attributes || servRes;
+  }
 
   if (!pageData) {
     return (

@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_elements_service_info_items",
+  "info": {
+    "displayName": "Service Info Item",
+    "icon": "list",
+    "description": "An item inside the Service Info section containing title, description, tags and outcomes."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Comma-separated list of tags/pills"
+    },
+    "outcomeTitle": {
+      "type": "string",
+      "default": "Outcome"
+    },
+    "outcomeDescription": {
+      "type": "text"
+    }
+  }
+}

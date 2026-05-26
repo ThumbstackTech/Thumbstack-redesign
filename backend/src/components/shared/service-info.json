@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_service_infos",
+  "info": {
+    "displayName": "Service Info",
+    "icon": "align-justify",
+    "description": "Information block for services with customizable items, tags, and outcomes."
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "default": "What we help with"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.service-info-item"
+    }
+  }
+}

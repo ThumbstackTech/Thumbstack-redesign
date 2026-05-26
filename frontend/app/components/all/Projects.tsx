@@ -36,12 +36,31 @@ interface Project {
 
 export default function Projects({ data }: { data?: ProjectData[] }) {
   const displayProjects: Project[] = data ? data.map(p => {
-    // Handle tags which might be JSON array or string
+    // Handle tags which might be JSON array, object containing array, or string
     let tagsArray: string[] = [];
     if (Array.isArray(p.tags)) {
       tagsArray = p.tags;
+    } else if (p.tags && typeof p.tags === 'object') {
+      if (Array.isArray((p.tags as any).tags)) {
+        tagsArray = (p.tags as any).tags;
+      } else {
+        tagsArray = Object.values(p.tags).flat().filter(t => typeof t === 'string') as string[];
+      }
     } else if (typeof p.tags === 'string' && p.tags.trim() !== '') {
-      tagsArray = p.tags.split(',').map(t => t.trim());
+      try {
+        const parsed = JSON.parse(p.tags);
+        if (Array.isArray(parsed)) {
+          tagsArray = parsed;
+        } else if (parsed && typeof parsed === 'object') {
+          if (Array.isArray(parsed.tags)) {
+            tagsArray = parsed.tags;
+          } else {
+            tagsArray = Object.values(parsed).flat().filter(t => typeof t === 'string') as string[];
+          }
+        }
+      } catch (e) {
+        tagsArray = p.tags.split(',').map(t => t.trim());
+      }
     }
 
     // Handle sideImages (Strapi 5 returns array directly, Strapi 4 returns { data: [...] })
@@ -77,20 +96,20 @@ export default function Projects({ data }: { data?: ProjectData[] }) {
   if (displayProjects.length === 0) return null;
 
   return (
-    <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-[100px]">
-      <div className="max-w-[1600px] mx-auto">
+    <section className="w-full bg-white py-24 px-6 md:pl-[53px] md:pr-[53px]">
+      <div className="w-full">
         <ScrollStack
           useWindowScroll={true}
-          itemDistance={80}
+          itemDistance={350}
           itemScale={0.04}
           baseScale={0.88}
-          itemStackDistance={35}
-          stackPosition="15%"
-          scaleEndPosition="6%"
+          itemStackDistance={20}
+          stackPosition="0%"
+          scaleEndPosition="-50%"
           blurAmount={0}
         >
           {displayProjects.map((p, i) => (
-            <ScrollStackItem key={p.id} style={{ height: '80vh' }}>
+            <ScrollStackItem key={p.id} style={{ height: '850px', borderRadius: '0px 0px 40px 40px' }}>
               <ProjectCard project={p} index={i} />
             </ScrollStackItem>
           ))}
@@ -138,7 +157,7 @@ function ProjectCard({
       }}
     >
       {/* Full Bleed Whole Screen Mockup Image Container */}
-      <div className="absolute inset-0 w-full h-full p-4 md:p-6 pb-[160px] md:pb-[180px] pointer-events-none z-10">
+      <div className="absolute inset-0 w-full h-full p-4 md:p-6 pb-[160px] md:pb-[210px] pointer-events-none z-10">
         <div className="relative w-full h-full rounded-[24px] overflow-hidden">
           <Image
             src={imageSrc}
@@ -207,7 +226,7 @@ function ProjectCard({
       </AnimatePresence>
 
       <div
-        className={`flex-1 min-h-0 relative flex flex-col justify-end px-4 md:px-8 lg:px-12 pb-[140px] md:pb-[160px] overflow-hidden w-full z-20 ${hovering && !modal ? "cursor-none" : ""}`}
+        className={`flex-1 min-h-0 relative flex flex-col justify-end px-4 md:px-8 lg:px-12 pb-[140px] md:pb-[210px] overflow-hidden w-full z-20 ${hovering && !modal ? "cursor-none" : ""}`}
       >
         <AnimatePresence>
           {hovering && !modal && (
@@ -232,12 +251,11 @@ function ProjectCard({
         </AnimatePresence>
       </div>
 
-      {/* Glassmorphic Info Bar at the bottom of the card */}
+      {/* Bottom Info Bar styled to match Frame 2085663518 */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 py-5 md:py-8 min-h-[140px] md:min-h-[160px] border-t flex items-center justify-center backdrop-blur-md transition-all"
+        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 h-[140px] md:h-[173px] flex items-center justify-center rounded-t-[24px] transition-all"
         style={{
-          backgroundColor: project.barBg || "rgba(0, 0, 0, 0.4)",
-          borderColor: project.barBorder || "rgba(255, 255, 255, 0.1)",
+          backgroundColor: project.barBg || "#665EE3",
         }}
         onClick={(e) => e.stopPropagation()}
       >

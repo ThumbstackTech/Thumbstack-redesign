@@ -158,6 +158,29 @@ export interface CapabilitiesSectionData {
   viewWorkLink: string;
 }
 
+export interface CapabilitiesHeroDetailData {
+  id: number;
+  __component: "shared.capabilities-hero-detail";
+  label: string;
+  title: string;
+  description: string;
+  primaryCtaText: string;
+  primaryCtaLink: string;
+  secondaryCtaText: string;
+  secondaryCtaLink: string;
+}
+
+export interface CapabilitiesInfoData {
+  id: number;
+  __component: "shared.capabilities-info";
+  backgroundColor: string;
+  accentColor: string;
+  headingLine1: string;
+  headingLine2: string;
+  headingLine3: string;
+  paragraphs?: FeatureItem[];
+}
+
 export interface FeatureItem {
   id: number;
   text: string;
@@ -194,6 +217,43 @@ export interface InteractiveListData {
   ctaText: string;
   ctaLink: string;
   items: ListItem[];
+}
+
+export interface CapabilityItem {
+  id: number;
+  label: string;
+  title: string;
+  description: string;
+  tags?: string;
+  link: string;
+  linkText?: string;
+}
+
+export interface CapabilitiesListingData {
+  id: number;
+  __component: "shared.capabilities-listing";
+  heading: string;
+  subheading: string;
+  items: CapabilityItem[];
+}
+
+export interface ProcessStage {
+  id: number;
+  title: string;
+  tagline: string;
+  description: string;
+  icon: "lightbulb" | "paintroller" | "code-circle" | "sparkle";
+  features?: string;
+  link: string;
+  linkText?: string;
+}
+
+export interface HowWeWorkData {
+  id: number;
+  __component: "shared.how-we-work";
+  heading: string;
+  subheading: string;
+  stages: ProcessStage[];
 }
 
 export interface WorkInteractiveListData {
@@ -344,20 +404,19 @@ export interface SidebarData {
   links?: SidebarLink[];
 }
 
-export interface StrapiResponse<T> {
-  data: {
-    id: number;
-    attributes: T;
-  } | {
-    id: number;
-    attributes: T;
-  }[];
-  meta: {
-    pagination?: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
+export interface ServiceInfoItem {
+  id: number;
+  title: string;
+  description: string;
+  tags?: string;
+  outcomeTitle?: string;
+  outcomeDescription?: string;
 }
+
+export interface ServiceInfoData {
+  id: number;
+  __component: "shared.service-info";
+  tagline?: string;
+  items: ServiceInfoItem[];
+}
+

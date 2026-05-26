@@ -100,6 +100,10 @@ export function getPagesQueryString(slug: string): string {
     "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][heroImage]=true",
     "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][logo]=true",
     "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][galleryImages]=true",
+    "populate[content][on][shared.capabilities-listing][populate][items]=*",
+    "populate[content][on][shared.how-we-work][populate][stages]=*",
+    "populate[content][on][shared.capabilities-hero-detail][populate]=*",
+    "populate[content][on][shared.service-info][populate][items]=*",
   ];
   return params.join("&");
 }
@@ -501,5 +505,133 @@ export async function getNewsDetailedBySlug(slug: string): Promise<any | null> {
     console.error("Error fetching news-detailed:", error);
     return null;
   }
+}
+
+/**
+ * Fetch single capability detailed by slug.
+ */
+export async function getCapabilityDetailedBySlug(slug: string): Promise<any | null> {
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+  };
+
+  const params = [
+    `filters[slug][$eq]=${slug}`,
+    "populate[content][on][shared.about-hero][populate]=*",
+    "populate[content][on][shared.best-fit][populate]=*",
+    "populate[content][on][shared.build-your-stack][populate]=*",
+    "populate[content][on][shared.capabilities-features][populate][groups][populate][items]=*",
+    "populate[content][on][shared.capabilities-hero-detail][populate]=*",
+    "populate[content][on][shared.capabilities-hero][populate]=*",
+    "populate[content][on][shared.capabilities-listing][populate][items]=*",
+    "populate[content][on][shared.cta-section][populate]=*",
+    "populate[content][on][shared.faq-section][populate][faqs]=*",
+    "populate[content][on][shared.footer][populate]=*",
+    "populate[content][on][shared.hero-work][populate][card1Image]=true",
+    "populate[content][on][shared.hero-work][populate][card2Image]=true",
+    "populate[content][on][shared.hero][populate]=*",
+    "populate[content][on][shared.how-we-work][populate][stages]=*",
+    "populate[content][on][shared.info][populate]=*",
+    "populate[content][on][shared.interactive-list][populate][items][populate][image]=true",
+    "populate[content][on][shared.lets-talk][populate]=*",
+    "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][heroImage]=true",
+    "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][logo]=true",
+    "populate[content][on][shared.news-hero][populate]=*",
+    "populate[content][on][shared.partner-brands][populate][logos]=true",
+    "populate[content][on][shared.principles][populate]=*",
+    "populate[content][on][shared.product-driven][populate]=*",
+    "populate[content][on][shared.projects-section][populate]=*",
+    "populate[content][on][shared.service-hero-detail][populate]=*",
+    "populate[content][on][shared.service-hero][populate]=*",
+    "populate[content][on][shared.service-info][populate][items]=*",
+    "populate[content][on][shared.sidebar][populate][links][populate]=*",
+    "populate[content][on][shared.stack-item][populate][items][populate][image]=true",
+    "populate[content][on][shared.stack-item][populate][items][populate][logo]=true",
+    "populate[content][on][shared.team-section][populate][members][populate][image]=true",
+    "populate[content][on][shared.what-we-build][populate]=*",
+    "populate[content][on][shared.work-interactive-list][populate][items][populate][image]=true",
+    "populate[content][on][shared.work-item][populate][featuredImage]=true",
+    "populate[content][on][shared.work-item][populate][video]=true",
+  ].join("&");
+
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/capability-detaileds?${params}`, {
+      headers,
+      next: { revalidate: 60 },
+    });
+
+    if (res.ok) {
+      const result: StrapiResponseWrapper<any[]> = await res.json();
+      return result.data?.[0] || null;
+    }
+  } catch (error) {
+    console.warn("Capability-detailed fetch threw:", error);
+  }
+  return null;
+}
+
+/**
+ * Fetch single service detailed by slug.
+ */
+export async function getServiceDetailedBySlug(slug: string): Promise<any | null> {
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(STRAPI_TOKEN ? { "Authorization": `Bearer ${STRAPI_TOKEN}` } : {}),
+  };
+
+  const params = [
+    `filters[slug][$eq]=${slug}`,
+    "populate[content][on][shared.about-hero][populate]=*",
+    "populate[content][on][shared.best-fit][populate]=*",
+    "populate[content][on][shared.build-your-stack][populate]=*",
+    "populate[content][on][shared.capabilities-features][populate][groups][populate][items]=*",
+    "populate[content][on][shared.capabilities-hero-detail][populate]=*",
+    "populate[content][on][shared.capabilities-hero][populate]=*",
+    "populate[content][on][shared.capabilities-listing][populate][items]=*",
+    "populate[content][on][shared.cta-section][populate]=*",
+    "populate[content][on][shared.faq-section][populate][faqs]=*",
+    "populate[content][on][shared.footer][populate]=*",
+    "populate[content][on][shared.hero-work][populate][card1Image]=true",
+    "populate[content][on][shared.hero-work][populate][card2Image]=true",
+    "populate[content][on][shared.hero][populate]=*",
+    "populate[content][on][shared.how-we-work][populate][stages]=*",
+    "populate[content][on][shared.info][populate]=*",
+    "populate[content][on][shared.interactive-list][populate][items][populate][image]=true",
+    "populate[content][on][shared.lets-talk][populate]=*",
+    "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][heroImage]=true",
+    "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][logo]=true",
+    "populate[content][on][shared.news-hero][populate]=*",
+    "populate[content][on][shared.partner-brands][populate][logos]=true",
+    "populate[content][on][shared.principles][populate]=*",
+    "populate[content][on][shared.product-driven][populate]=*",
+    "populate[content][on][shared.projects-section][populate]=*",
+    "populate[content][on][shared.service-hero-detail][populate]=*",
+    "populate[content][on][shared.service-hero][populate]=*",
+    "populate[content][on][shared.service-info][populate][items]=*",
+    "populate[content][on][shared.sidebar][populate][links][populate]=*",
+    "populate[content][on][shared.stack-item][populate][items][populate][image]=true",
+    "populate[content][on][shared.stack-item][populate][items][populate][logo]=true",
+    "populate[content][on][shared.team-section][populate][members][populate][image]=true",
+    "populate[content][on][shared.what-we-build][populate]=*",
+    "populate[content][on][shared.work-interactive-list][populate][items][populate][image]=true",
+    "populate[content][on][shared.work-item][populate][featuredImage]=true",
+    "populate[content][on][shared.work-item][populate][video]=true",
+  ].join("&");
+
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/service-detaileds?${params}`, {
+      headers,
+      next: { revalidate: 60 },
+    });
+
+    if (res.ok) {
+      const result: StrapiResponseWrapper<any[]> = await res.json();
+      return result.data?.[0] || null;
+    }
+  } catch (error) {
+    console.warn("Service-detailed fetch threw:", error);
+  }
+  return null;
 }
 

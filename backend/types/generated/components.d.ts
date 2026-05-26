@@ -1,5 +1,22 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ElementsCapabilityItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_capability_items';
+  info: {
+    description: 'An item inside the Capabilities Listing section without mandatory images.';
+    displayName: 'Capability Item';
+    icon: 'list';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    link: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    linkText: Schema.Attribute.String;
+    tags: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElementsFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_elements_faq_items';
   info: {
@@ -96,6 +113,44 @@ export interface ElementsOfficeItem extends Struct.ComponentSchema {
     city: Schema.Attribute.String;
     email: Schema.Attribute.String;
     phone: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsProcessStage extends Struct.ComponentSchema {
+  collectionName: 'components_elements_process_stages';
+  info: {
+    description: "An individual stage inside the 'How we work' process section.";
+    displayName: 'Process Stage';
+    icon: 'step-forward';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    features: Schema.Attribute.Text;
+    icon: Schema.Attribute.Enumeration<
+      ['lightbulb', 'paintroller', 'code-circle', 'sparkle']
+    > &
+      Schema.Attribute.DefaultTo<'lightbulb'>;
+    link: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    linkText: Schema.Attribute.String;
+    tagline: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsServiceInfoItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_service_info_items';
+  info: {
+    description: 'An item inside the Service Info section containing title, description, tags and outcomes.';
+    displayName: 'Service Info Item';
+    icon: 'list';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    outcomeDescription: Schema.Attribute.Text;
+    outcomeTitle: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Outcome'>;
+    tags: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -223,6 +278,62 @@ export interface SharedCapabilitiesHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedCapabilitiesHeroDetail extends Struct.ComponentSchema {
+  collectionName: 'components_shared_capabilities_hero_details';
+  info: {
+    description: 'Hero section with heading details and an interactive form card on the right.';
+    displayName: 'Capabilities Hero Detail';
+    icon: 'heading';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    primaryCtaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    primaryCtaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Start A Website Project'>;
+    secondaryCtaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    secondaryCtaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'View Our Work'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedCapabilitiesInfo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_capabilities_infos';
+  info: {
+    description: 'Information section with headline and descriptive paragraphs';
+    displayName: 'Capabilities Info';
+    icon: 'lightbulb';
+  };
+  attributes: {
+    accentColor: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#3145DD'>;
+    backgroundColor: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#95E7D3'>;
+    headingLine1: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'A Good Website Is'>;
+    headingLine2: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Not Just Designed.'>;
+    headingLine3: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'It Is Structured Properly.'>;
+    paragraphs: Schema.Attribute.Component<'elements.feature-item', true>;
+  };
+}
+
+export interface SharedCapabilitiesListing extends Struct.ComponentSchema {
+  collectionName: 'components_shared_capabilities_listings';
+  info: {
+    description: 'Redesigned capabilities section with two-column layout and tag pills.';
+    displayName: 'Capabilities Listing';
+    icon: 'list-ul';
+  };
+  attributes: {
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    items: Schema.Attribute.Component<'elements.capability-item', true>;
+    subheading: Schema.Attribute.Text;
+  };
+}
+
 export interface SharedCtaSection extends Struct.ComponentSchema {
   collectionName: 'components_shared_cta_sections';
   info: {
@@ -336,6 +447,20 @@ export interface SharedHeroWork extends Struct.ComponentSchema {
     headingLine2: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Businesses Forward'>;
     textColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#FFFFFF'>;
+  };
+}
+
+export interface SharedHowWeWork extends Struct.ComponentSchema {
+  collectionName: 'components_shared_how_we_works';
+  info: {
+    description: 'How We Work (Four Stages. One Connected Process) process section.';
+    displayName: 'How We Work';
+    icon: 'sync';
+  };
+  attributes: {
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    stages: Schema.Attribute.Component<'elements.process-stage', true>;
+    subheading: Schema.Attribute.Text;
   };
 }
 
@@ -520,6 +645,42 @@ export interface SharedServiceHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedServiceHeroDetail extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_hero_details';
+  info: {
+    description: 'Hero section for service details with tagline, title, description and buttons.';
+    displayName: 'Service Hero Detail';
+    icon: 'align-left';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    primaryCtaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    primaryCtaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Start With Strategy'>;
+    secondaryCtaLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    secondaryCtaText: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'View Our Work'>;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Strategise'>;
+    title: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedServiceInfo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_infos';
+  info: {
+    description: 'Information block for services with customizable items, tags, and outcomes.';
+    displayName: 'Service Info';
+    icon: 'align-justify';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'elements.service-info-item', true>;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'What we help with'>;
+  };
+}
+
 export interface SharedSidebar extends Struct.ComponentSchema {
   collectionName: 'components_shared_sidebars';
   info: {
@@ -645,6 +806,7 @@ export interface SharedWorkItem extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'elements.capability-item': ElementsCapabilityItem;
       'elements.faq-item': ElementsFaqItem;
       'elements.feature-group': ElementsFeatureGroup;
       'elements.feature-item': ElementsFeatureItem;
@@ -652,6 +814,8 @@ declare module '@strapi/strapi' {
       'elements.list-item': ElementsListItem;
       'elements.nav-link': ElementsNavLink;
       'elements.office-item': ElementsOfficeItem;
+      'elements.process-stage': ElementsProcessStage;
+      'elements.service-info-item': ElementsServiceInfoItem;
       'elements.stack-card': ElementsStackCard;
       'elements.team-member': ElementsTeamMember;
       'shared.about-hero': SharedAboutHero;
@@ -659,11 +823,15 @@ declare module '@strapi/strapi' {
       'shared.build-your-stack': SharedBuildYourStack;
       'shared.capabilities-features': SharedCapabilitiesFeatures;
       'shared.capabilities-hero': SharedCapabilitiesHero;
+      'shared.capabilities-hero-detail': SharedCapabilitiesHeroDetail;
+      'shared.capabilities-info': SharedCapabilitiesInfo;
+      'shared.capabilities-listing': SharedCapabilitiesListing;
       'shared.cta-section': SharedCtaSection;
       'shared.faq-section': SharedFaqSection;
       'shared.footer': SharedFooter;
       'shared.hero': SharedHero;
       'shared.hero-work': SharedHeroWork;
+      'shared.how-we-work': SharedHowWeWork;
       'shared.info': SharedInfo;
       'shared.interactive-list': SharedInteractiveList;
       'shared.lets-talk': SharedLetsTalk;
@@ -674,6 +842,8 @@ declare module '@strapi/strapi' {
       'shared.product-driven': SharedProductDriven;
       'shared.projects-section': SharedProjectsSection;
       'shared.service-hero': SharedServiceHero;
+      'shared.service-hero-detail': SharedServiceHeroDetail;
+      'shared.service-info': SharedServiceInfo;
       'shared.sidebar': SharedSidebar;
       'shared.stack-item': SharedStackItem;
       'shared.tag': SharedTag;

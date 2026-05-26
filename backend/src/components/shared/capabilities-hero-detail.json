@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_shared_capabilities_hero_details",
+  "info": {
+    "displayName": "Capabilities Hero Detail",
+    "icon": "heading",
+    "description": "Hero section with heading details and an interactive form card on the right."
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "primaryCtaText": {
+      "type": "string",
+      "default": "Start A Website Project"
+    },
+    "primaryCtaLink": {
+      "type": "string",
+      "default": "#"
+    },
+    "secondaryCtaText": {
+      "type": "string",
+      "default": "View Our Work"
+    },
+    "secondaryCtaLink": {
+      "type": "string",
+      "default": "#"
+    }
+  }
+}

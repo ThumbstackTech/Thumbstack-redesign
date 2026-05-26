@@ -23,4 +23,5 @@ export interface CaseStudyData {
   projectUrl: string;
   accentColor?: string;
   backgroundColor?: string;
+  dynamicContent?: any[];
 }

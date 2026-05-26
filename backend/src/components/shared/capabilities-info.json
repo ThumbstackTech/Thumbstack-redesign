@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shared_capabilities_infos",
+  "info": {
+    "displayName": "Capabilities Info",
+    "icon": "lightbulb",
+    "description": "Information section with headline and descriptive paragraphs"
+  },
+  "options": {},
+  "attributes": {
+    "backgroundColor": {
+      "type": "string",
+      "default": "#95E7D3"
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#3145DD"
+    },
+    "headingLine1": {
+      "type": "string",
+      "default": "A Good Website Is"
+    },
+    "headingLine2": {
+      "type": "string",
+      "default": "Not Just Designed."
+    },
+    "headingLine3": {
+      "type": "string",
+      "default": "It Is Structured Properly."
+    },
+    "paragraphs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.feature-item"
+    }
+  }
+}

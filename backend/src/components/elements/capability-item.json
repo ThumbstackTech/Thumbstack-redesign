@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_elements_capability_items",
+  "info": {
+    "displayName": "Capability Item",
+    "icon": "list",
+    "description": "An item inside the Capabilities Listing section without mandatory images."
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Category label, e.g., 'What we build'"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Comma-separated list of tags/pills"
+    },
+    "link": {
+      "type": "string",
+      "default": "#"
+    },
+    "linkText": {
+      "type": "string",
+      "description": "Custom link label, e.g., 'Explore Custom Websites'"
+    }
+  }
+}

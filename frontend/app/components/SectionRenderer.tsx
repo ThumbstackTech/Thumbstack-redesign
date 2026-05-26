@@ -26,11 +26,20 @@ import FromTheStack from "./all/FromTheStack";
 import WorkItem from "./all/WorkItem";
 import NewsAndInsightsGrid from "./all/NewsAndInsightsGrid";
 import CapabilitiesHero from "./all/CapabilitiesHero";
+import CapabilitiesHeroDetail from "./all/CapabilitiesHeroDetail";
+import CapabilitiesInfo from "./all/capabilitiesinfo";
+import CapabilitiesListing from "./all/CapabilitiesListing";
+import HowWeWork from "./all/HowWeWork";
+import ServiceHeroDetail from "./all/ServiceHeroDetail";
+import ServiceInfo from "./all/serviceinfo";
 
 
 const componentMap: { [key: string]: any } = {
   "shared.hero": Hero,
   "shared.interactive-list": InteractiveList,
+  "shared.capabilities-listing": CapabilitiesListing,
+  "shared.capabilities-hero-detail": CapabilitiesHeroDetail,
+  "shared.how-we-work": HowWeWork,
   "shared.work-interactive-list": WorkInteractiveList,
   "shared.partner-brands": PartnerBrands,
   "shared.principles": Principles,
@@ -54,7 +63,10 @@ const componentMap: { [key: string]: any } = {
   "shared.stack-item": FromTheStack,
   "shared.work-item": WorkItem,
   "shared.news-and-insights-grid": NewsAndInsightsGrid,
-  "shared.capabilities-hero": CapabilitiesHero
+  "shared.capabilities-hero": CapabilitiesHero,
+  "shared.capabilities-info": CapabilitiesInfo,
+  "shared.service-hero-detail": ServiceHeroDetail,
+  "shared.service-info": ServiceInfo
 };
 
 export default function SectionRenderer({ sections, projects }: { sections: any[]; projects?: any[] }) {

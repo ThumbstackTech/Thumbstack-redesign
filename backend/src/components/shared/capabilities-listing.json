@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_capabilities_listings",
+  "info": {
+    "displayName": "Capabilities Listing",
+    "icon": "list-ul",
+    "description": "Redesigned capabilities section with two-column layout and tag pills."
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.capability-item"
+    }
+  }
+}

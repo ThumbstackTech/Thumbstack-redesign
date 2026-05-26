@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "capability_detaileds",
+  "info": {
+    "singularName": "capability-detailed",
+    "pluralName": "capability-detaileds",
+    "displayName": "Capability Detailed",
+    "description": "Dynamic detail pages for capabilities"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.about-hero",
+        "shared.best-fit",
+        "shared.build-your-stack",
+        "shared.capabilities-features",
+        "shared.capabilities-hero-detail",
+        "shared.capabilities-hero",
+        "shared.capabilities-info",
+        "shared.capabilities-listing",
+        "shared.cta-section",
+        "shared.faq-section",
+        "shared.footer",
+        "shared.hero-work",
+        "shared.hero",
+        "shared.how-we-work",
+        "shared.info",
+        "shared.interactive-list",
+        "shared.lets-talk",
+        "shared.news-and-insights-grid",
+        "shared.news-hero",
+        "shared.partner-brands",
+        "shared.principles",
+        "shared.product-driven",
+        "shared.projects-section",
+        "shared.service-hero",
+        "shared.sidebar",
+        "shared.stack-item",
+        "shared.team-section",
+        "shared.what-we-build",
+        "shared.work-interactive-list",
+        "shared.work-item",
+        "shared.service-hero-detail",
+        "shared.service-info"
+      ]
+    }
+  }
+}

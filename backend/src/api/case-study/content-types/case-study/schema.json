@@ -92,6 +92,42 @@
     },
     "backgroundColor": {
       "type": "string"
-    }
+    },
+    "content": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.about-hero",
+        "shared.best-fit",
+        "shared.build-your-stack",
+        "shared.capabilities-features",
+        "shared.capabilities-hero-detail",
+        "shared.capabilities-hero",
+        "shared.capabilities-listing",
+        "shared.cta-section",
+        "shared.faq-section",
+        "shared.footer",
+        "shared.hero-work",
+        "shared.hero",
+        "shared.how-we-work",
+        "shared.info",
+        "shared.interactive-list",
+        "shared.lets-talk",
+        "shared.news-and-insights-grid",
+        "shared.news-hero",
+        "shared.partner-brands",
+        "shared.principles",
+        "shared.product-driven",
+        "shared.projects-section",
+        "shared.service-hero",
+        "shared.sidebar",
+        "shared.stack-item",
+        "shared.team-section",
+        "shared.what-we-build",
+        "shared.work-interactive-list",
+        "shared.work-item",
+        "shared.service-hero-detail",
+        "shared.service-info"
+      ]
+    }  
   }
 }

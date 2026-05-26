@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import type { CaseStudyData } from "../../data/types";
+import SectionRenderer from "../SectionRenderer";
 
 interface CaseStudyTemplateProps {
   data: CaseStudyData;
@@ -483,6 +484,14 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
           </Link>
         </FadeUp>
       </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          6.5. DYNAMIC SECTIONS — Rendered from Strapi
+      ════════════════════════════════════════════════════════════════ */}
+      {data.dynamicContent && data.dynamicContent.length > 0 && (
+        <SectionRenderer sections={data.dynamicContent} />
+      )}
+      
     </main>
   );
 }
