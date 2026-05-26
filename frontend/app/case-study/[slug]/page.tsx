@@ -7,12 +7,21 @@ import CaseStudyTemplate from "../../components/all/CaseStudyTemplate";
 function parseArrayField(value: any): string[] {
   if (!value) return [];
   if (Array.isArray(value)) return value;
+  if (typeof value === "object") {
+    if (Array.isArray(value.tags)) return value.tags;
+    if (Array.isArray(value.data)) return value.data;
+    if (Array.isArray(value.value)) return value.value;
+  }
   if (typeof value === "string") {
     try {
       const parsed = JSON.parse(value);
       if (Array.isArray(parsed)) return parsed;
+      if (parsed && typeof parsed === "object") {
+        if (Array.isArray(parsed.tags)) return parsed.tags;
+        if (Array.isArray(parsed.data)) return parsed.data;
+      }
     } catch {
-      return value.split(",").map(t => t.trim());
+      return value.split(",").map((t: string) => t.trim());
     }
   }
   return [];
@@ -55,6 +64,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   // Fetch Project and Case Study data with deep population for repeatable components and media
   const queryString = `filters[slug][$eq]=${slug}` +
+    `&publicationState=preview` +
     `&populate[case_study][populate]=*` +
     `&populate[case_study][populate][approachPrinciples][populate]=*` +
     `&populate[case_study][populate][features][populate]=*` +
@@ -71,6 +81,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   const project = (projectRes?.data as any[])?.[0]?.attributes || (projectRes?.data as any[])?.[0];
   const caseStudy = project?.case_study?.data?.attributes || project?.case_study;
+
+  console.log("DEBUG: caseStudy fetched from Strapi:", JSON.stringify(caseStudy, null, 2));
 
   // Fallback to static case study if nothing matches in CMS
   if (!project && !staticCaseStudy) {
@@ -121,15 +133,21 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     approachBrandText: caseStudy?.approachBrandText || staticCaseStudy?.approachBrandText || "",
 
     // Map Repeatable elements.feature-item component for Principles
-    approachPrinciples: (caseStudy?.approachPrinciples && Array.isArray(caseStudy.approachPrinciples))
-      ? caseStudy.approachPrinciples.map((item: any) => item.text || item)
+    approachPrinciples: (caseStudy?.approachPrinciples && Array.isArray(caseStudy.approachPrinciples) && caseStudy.approachPrinciples.length > 0)
+      ? caseStudy.approachPrinciples.map((item: any) => {
+          const val = item.text || item;
+          return typeof val === "string" ? val.trim() : val;
+        })
       : parseArrayField(staticCaseStudy?.approachPrinciples),
 
     quote: caseStudy?.quote || staticCaseStudy?.quote || "",
 
     // Map Repeatable elements.feature-item component for Features
-    features: (caseStudy?.features && Array.isArray(caseStudy.features))
-      ? caseStudy.features.map((item: any) => item.text || item)
+    features: (caseStudy?.features && Array.isArray(caseStudy.features) && caseStudy.features.length > 0)
+      ? caseStudy.features.map((item: any) => {
+          const val = item.text || item;
+          return typeof val === "string" ? val.trim() : val;
+        })
       : parseArrayField(staticCaseStudy?.features),
 
     gallery: (() => {

@@ -64,8 +64,8 @@ export default function Projects({ data }: { data?: ProjectData[] }) {
     }
 
     // Handle sideImages (Strapi 5 returns array directly, Strapi 4 returns { data: [...] })
-    const sideImagesData = Array.isArray(p.sideImages) 
-      ? p.sideImages 
+    const sideImagesData = Array.isArray(p.sideImages)
+      ? p.sideImages
       : (p.sideImages as any)?.data?.map((item: any) => item.attributes) || [];
 
     return {
@@ -96,20 +96,21 @@ export default function Projects({ data }: { data?: ProjectData[] }) {
   if (displayProjects.length === 0) return null;
 
   return (
-    <section className="w-full bg-white py-24 px-6 md:pl-[53px] md:pr-[53px]">
+    <section className="w-full bg-white pt-0 pb-16 px-[10px] sm:pl-[63px] sm:pr-[10px]">
       <div className="w-full">
         <ScrollStack
           useWindowScroll={true}
-          itemDistance={350}
+          itemDistance={0}
           itemScale={0.04}
           baseScale={0.88}
           itemStackDistance={20}
           stackPosition="0%"
           scaleEndPosition="-50%"
           blurAmount={0}
+          maxWidth="none"
         >
           {displayProjects.map((p, i) => (
-            <ScrollStackItem key={p.id} style={{ height: '850px', borderRadius: '0px 0px 40px 40px' }}>
+            <ScrollStackItem key={p.id} style={{ height: 'min(92vh, 920px)', minHeight: '620px', borderRadius: '0px' }}>
               <ProjectCard project={p} index={i} />
             </ScrollStackItem>
           ))}
@@ -128,6 +129,7 @@ function ProjectCard({
 }) {
   const [hovering, setHovering] = useState(false);
   const [modal, setModal] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -138,6 +140,7 @@ function ProjectCard({
   const handleMouseMove = (e: MouseEvent) => {
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
+    if (!hasMoved) setHasMoved(true);
   };
 
   // Use the premium Squilio mock up if the main image is not loaded or for high fidelity fallback
@@ -150,21 +153,29 @@ function ProjectCard({
         backgroundColor: project.bg,
       }}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
+      onMouseEnter={(e) => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+        setHovering(true);
+      }}
+      onMouseLeave={() => {
+        setHovering(false);
+        setHasMoved(false);
+      }}
       onClick={() => {
         if (!modal) setModal(true);
       }}
     >
       {/* Full Bleed Whole Screen Mockup Image Container */}
-      <div className="absolute inset-0 w-full h-full p-4 md:p-6 pb-[160px] md:pb-[210px] pointer-events-none z-10">
-        <div className="relative w-full h-full rounded-[24px] overflow-hidden">
+      <div className="absolute inset-0 w-full h-full px-0 pb-[160px] pt-0 md:px-6 md:pb-[210px] md:pt-10 pointer-events-none z-10">
+        <div className="relative w-full h-full rounded-none md:rounded-[24px] overflow-hidden">
           <Image
             src={imageSrc}
             alt={project.images.mainAlt || project.name}
             fill
             priority
             unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1600px) calc(100vw - 63px), 1537px"
             className="object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
           />
         </div>
@@ -226,10 +237,10 @@ function ProjectCard({
       </AnimatePresence>
 
       <div
-        className={`flex-1 min-h-0 relative flex flex-col justify-end px-4 md:px-8 lg:px-12 pb-[140px] md:pb-[210px] overflow-hidden w-full z-20 ${hovering && !modal ? "cursor-none" : ""}`}
+        className={`flex-1 min-h-0 relative flex flex-col justify-end px-4 md:px-8 lg:px-12 pb-[140px] md:pb-[210px] overflow-hidden w-full z-20 ${hovering && hasMoved && !modal ? "cursor-none" : ""}`}
       >
         <AnimatePresence>
-          {hovering && !modal && (
+          {hovering && hasMoved && !modal && (
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -253,7 +264,7 @@ function ProjectCard({
 
       {/* Bottom Info Bar styled to match Frame 2085663518 */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 h-[140px] md:h-[173px] flex items-center justify-center rounded-t-[24px] transition-all"
+        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 min-h-[160px] py-4 md:min-h-[190px] md:py-6 flex items-center justify-center rounded-t-[24px] transition-all"
         style={{
           backgroundColor: project.barBg || "#665EE3",
         }}

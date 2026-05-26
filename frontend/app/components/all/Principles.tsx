@@ -120,9 +120,9 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
   return (
     <section
       ref={containerRef}
-      className="w-full flex flex-col items-center justify-start snap-start relative bg-[#0B1306] text-white overflow-hidden pt-20 sm:pt-24 pb-0"
+      className="w-full flex flex-col items-center justify-start snap-start relative bg-[#0F1D07] text-white overflow-hidden pt-20 sm:pt-24 pb-0 px-[10px] sm:pl-[63px] sm:pr-[10px]"
     >
-      <div className="w-full max-w-[1600px] px-6 md:px-12 lg:px-[100px] flex flex-col z-10 relative">
+      <div className="w-full max-w-[1407px] flex flex-col z-10 relative px-4 sm:px-6">
 
         {/* Label */}
         <motion.span
@@ -178,7 +178,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
           >
             <Link
               href={ctaLink}
-              className="w-[218px] h-[55px] bg-white border border-white rounded-[18px] text-[#0B1306] text-[16px] font-bold flex items-center justify-center transition-all hover:bg-white/95 hover:scale-[1.02] active:scale-[0.98] shadow-md"
+              className="w-[218px] h-[55px] bg-white border border-white rounded-[18px] text-[#0F1D07] text-[16px] font-bold flex items-center justify-center transition-all hover:bg-white/95 hover:scale-[1.02] active:scale-[0.98] shadow-md"
               style={{ fontFamily: "var(--font-satoshi)" }}
             >
               {ctaText}
@@ -200,17 +200,17 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
               variants={itemVariants}
               whileHover="hover"
               initial="initial"
-              className="flex flex-col items-start gap-4 p-0"
+              className="group flex flex-col items-start gap-4 p-0 w-full"
             >
               {/* Icon Container */}
-              <div className="w-[36px] h-[36px] flex items-center justify-center text-white mb-2">
+              <div className="w-[36px] h-[36px] flex items-center justify-center text-white/70 mb-2 transition-colors duration-300 group-hover:text-[#95E7D3]">
                 {getIcon(p.iconName, p.iconUrl)}
               </div>
               
               {/* Text Area */}
               <div className="flex flex-col gap-3 w-full">
                 <h3
-                  className="text-white"
+                  className="text-white transition-colors duration-300 group-hover:text-[#95E7D3]"
                   style={{
                     fontFamily: "var(--font-satoshi)",
                     fontWeight: 700,
@@ -222,7 +222,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
                 </h3>
                 
                 <p
-                  className="text-white opacity-60 font-medium"
+                  className="text-white opacity-60 font-medium transition-opacity duration-300 group-hover:opacity-95"
                   style={{
                     fontFamily: "var(--font-satoshi)",
                     fontSize: "14px",
@@ -236,7 +236,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
                 {/* Explore [Title] -> Link */}
                 <Link
                   href={p.linkUrl}
-                  className="flex items-center gap-2 text-white text-[14px] font-bold mt-4 group"
+                  className="flex items-center gap-2 text-white/70 text-[14px] font-bold mt-4 group/link transition-colors duration-300 group-hover:text-white"
                   style={{ fontFamily: "var(--font-satoshi)" }}
                 >
                   <span>{p.linkText}</span>
@@ -259,7 +259,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
       </div>
 
       {/* Marquee Banner */}
-      <div className="w-full py-6 bg-transparent border-t border-white/5 relative z-20 overflow-hidden">
+      <div className="w-full py-6 bg-transparent relative z-20 overflow-hidden">
         <div className="flex overflow-hidden w-full">
           <motion.div
             animate={{ x: ["0%", "-50%"] }}

@@ -112,9 +112,10 @@ export default function FromTheStack({ data }: FromTheStackProps) {
 
   return (
     <section
-      className="min-h-screen w-full flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-24 snap-start relative bg-white overflow-hidden"
+      className="min-h-screen w-full flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 snap-start relative bg-white overflow-hidden"
     >
-      <div className="w-full max-w-[1600px] flex flex-col mb-8 sm:mb-12">
+      {/* Header: respects sidebar on desktop */}
+      <div className="w-full px-4 sm:px-6 md:px-8 sm:pl-[70px] md:pl-[70px] lg:pl-[80px] max-w-[1700px] flex flex-col mb-8 sm:mb-12">
         <div className="flex flex-col md:flex-row justify-between items-start w-full gap-6 sm:gap-8">
           <div className="flex flex-col gap-3 sm:gap-4">
             <h2
@@ -158,16 +159,17 @@ export default function FromTheStack({ data }: FromTheStackProps) {
         </div>
       </div>
 
-      {/* Draggable Carousel */}
-      <div 
+      {/* Marquee: full-width, starts from sidebar edge, overflows to right screen edge */}
+      <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
-        className="w-full relative flex overflow-hidden group cursor-none py-4"
+        className="w-screen relative flex overflow-hidden group cursor-none py-4 sm:pl-[53px]"
+        style={{ marginLeft: 'calc(-50vw + 50%)', width: '100vw' }}
       >
         <div className="flex animate-[marquee-x_30s_linear_infinite] group-hover:[animation-play-state:paused]">
-          <motion.div 
+          <motion.div
             drag="x"
             dragConstraints={{ left: -1000, right: 1000 }}
             className="flex gap-4 sm:gap-6 md:gap-8 items-stretch w-max"

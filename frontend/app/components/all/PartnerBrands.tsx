@@ -43,8 +43,8 @@ export default function PartnerBrands({ data }: { data?: PartnerBrandsData }) {
     DEFAULT_BRAND_LOGOS.map(logo => `/TSP/${logo}`);
 
   return (
-    <section className="w-full flex flex-col items-center py-[100px] px-8 lg:px-24 snap-start relative bg-white overflow-hidden">
-      <div className="w-full max-w-[1602px] flex flex-col items-center">
+    <section className="w-full flex flex-col items-center py-[100px] px-6 sm:pl-[117px] sm:pr-[64px] snap-start relative bg-white overflow-hidden">
+      <div className="w-full max-w-[1400px] flex flex-col items-center">
 
         <h2
           className="text-center capitalize mb-[40px] md:mb-[64px]"

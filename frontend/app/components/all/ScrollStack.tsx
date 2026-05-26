@@ -11,7 +11,7 @@ export interface ScrollStackItemProps {
 }
 
 export const ScrollStackItem: React.FC<ScrollStackItemProps> = ({ children, itemClassName = '', style = {} }) => (
-  <div 
+  <div
     className={`scroll-stack-card ${itemClassName}`.trim()}
     style={{
       transformOrigin: 'top center',
@@ -46,6 +46,7 @@ interface ScrollStackProps {
   blurAmount?: number;
   useWindowScroll?: boolean;
   onStackComplete?: () => void;
+  maxWidth?: string;
 }
 
 const ScrollStack: React.FC<ScrollStackProps> = ({
@@ -61,7 +62,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   rotationAmount = 0,
   blurAmount = 0,
   useWindowScroll = false,
-  onStackComplete
+  onStackComplete,
+  maxWidth = '1600px'
 }) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const stackCompletedRef = useRef(false);
@@ -105,13 +107,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
   const measureStaticOffsets = useCallback((cards: HTMLElement[]) => {
     if (!cards.length) return;
-    
+
     // Save original styles temporarily
     const cachedStyles = cards.map(card => ({
       transform: card.style.transform,
       filter: card.style.filter
     }));
-    
+
     // Temporarily clear to measure true static page offsets
     cards.forEach(card => {
       card.style.transform = 'none';
@@ -131,7 +133,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     const endElement = useWindowScroll
       ? (document.querySelector('.scroll-stack-end') as HTMLElement)
       : (scrollerRef.current?.querySelector('.scroll-stack-end') as HTMLElement);
-      
+
     if (endElement) {
       if (useWindowScroll) {
         const rect = endElement.getBoundingClientRect();
@@ -368,8 +370,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   ]);
 
   return (
-    <div 
-      className={`scroll-stack-scroller ${className}`.trim()} 
+    <div
+      className={`scroll-stack-scroller ${className}`.trim()}
       ref={scrollerRef}
       style={{
         position: 'relative',
@@ -385,13 +387,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         willChange: 'scroll-position',
       }}
     >
-      <div 
+      <div
         className="scroll-stack-inner"
         style={{
-          padding: '10vh 0 100vh',
+          padding: '0 0 100vh',
           minHeight: '100vh',
           width: '100%',
-          maxWidth: '1600px',
+          maxWidth: maxWidth,
           margin: '0 auto',
           boxSizing: 'border-box',
           display: 'flex',

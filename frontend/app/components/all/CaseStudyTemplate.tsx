@@ -47,33 +47,33 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
           1. HERO — #141417 dark block
       ════════════════════════════════════════════════════════════════ */}
       <section
-        className="relative w-full overflow-hidden"
-        style={{ background: bg }}
+        className="relative w-full overflow-hidden min-h-[528px] flex flex-col justify-between"
+        style={{ background: "#141417" }}
       >
         {/* Inner container — centred 1400px */}
-        <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 pt-12 pb-16 md:pt-16 md:pb-20 flex flex-col gap-[54px]">
+        <div className="max-w-[1400px] w-full mx-auto px-6 md:px-16 lg:px-24 pt-[45px] pb-[40px] flex flex-col justify-between flex-grow gap-[54px]">
 
-          {/* ── Breadcrumbs ── */}
+          {/* ── Breadcrumbs (Frame 335) ── */}
           <FadeUp>
             <nav
               className="flex items-center gap-0 text-white"
               style={{
-                fontFamily: "var(--font-satoshi)",
+                fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
                 fontWeight: 400,
                 fontSize: "14px",
                 lineHeight: "24px",
               }}
             >
-              <Link href="/" className="px-2.5 py-2.5 hover:text-[#95E7D3] transition-colors">
+              <Link href="/" className="hover:text-[#95E7D3] transition-colors py-2" style={{ color: "#FFFFFF" }}>
                 Home
               </Link>
-              <span className="px-2.5 py-2.5 opacity-50">/</span>
-              <Link href="/our-work" className="px-2.5 py-2.5 hover:text-[#95E7D3] transition-colors">
+              <span className="px-2 py-2" style={{ color: "#FFFFFF" }}>/</span>
+              <Link href="/our-work" className="hover:text-[#95E7D3] transition-colors py-2" style={{ color: "#FFFFFF" }}>
                 Our Work
               </Link>
-              <span className="px-2.5 py-2.5 opacity-50">/</span>
+              <span className="px-2 py-2" style={{ color: "#FFFFFF" }}>/</span>
               <span
-                className="px-2.5 py-2.5"
+                className="py-2"
                 style={{ fontWeight: 700, color: "#95E7D3" }}
               >
                 {data.clientName}
@@ -81,78 +81,81 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
             </nav>
           </FadeUp>
 
-          {/* ── Title + Subtitle ── */}
-          <div className="flex flex-col gap-[15px] max-w-[1356px]">
-            <FadeUp delay={0.05}>
-              <h1
-                className="text-white capitalize"
-                style={{
-                  fontFamily: "var(--font-delight)",
-                  fontWeight: 500,
-                  fontSize: "clamp(32px, 5vw, 72px)",
-                  lineHeight: "clamp(42px, 6.4vw, 92px)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {data.title}{" "}
-                {data.clientName && !data.title.toLowerCase().includes(data.clientName.toLowerCase()) && (
-                  <span style={{ color: accent }}>{data.clientName}</span>
-                )}
-              </h1>
-            </FadeUp>
+          {/* Inner Content wrapper (Frame 2087326515 equivalent) */}
+          <div className="flex flex-col gap-[54px] w-full">
+            {/* ── Title + Subtitle (Frame 2085663518) ── */}
+            <div className="flex flex-col gap-[15px] max-w-[1384px] w-full">
+              <FadeUp delay={0.05}>
+                <h1
+                  className="text-white m-0 max-w-[1384px]"
+                  style={{
+                    fontFamily: "var(--font-delight), sans-serif",
+                    fontWeight: 500,
+                    fontSize: "clamp(32px, 4.2vw, 64px)",
+                    lineHeight: "clamp(42px, 5.2vw, 80px)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {data.title}{" "}
+                  {data.clientName && !data.title.toLowerCase().includes(data.clientName.toLowerCase()) && (
+                    <span style={{ textDecoration: "underline", textUnderlineOffset: "8px" }}>{data.clientName}</span>
+                  )}
+                </h1>
+              </FadeUp>
 
-            <FadeUp delay={0.1}>
-              <p
-                className="text-white max-w-[1356px]"
-                style={{
-                  fontFamily: "var(--font-satoshi)",
-                  fontWeight: 300,
-                  fontSize: "16px",
-                  lineHeight: "32px",
-                }}
-              >
-                {data.subtitle}
-              </p>
+              <FadeUp delay={0.1}>
+                <p
+                  className="text-white m-0 max-w-[1356px] w-full"
+                  style={{
+                    fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                    fontWeight: 300,
+                    fontSize: "16px",
+                    lineHeight: "32px",
+                  }}
+                >
+                  {data.subtitle}
+                </p>
+              </FadeUp>
+            </div>
+
+            {/* ── Tags row + Meta (Frame 2087326500) ── */}
+            <FadeUp delay={0.15}>
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 w-full">
+                {/* Tags (Frame 2087326499) */}
+                <div className="flex flex-wrap items-center gap-[10px]">
+                  {data.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-4 h-[37px] border border-white rounded-[12px] text-white flex items-center justify-center whitespace-nowrap"
+                      style={{
+                        fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                        fontWeight: 400,
+                        fontSize: "10px",
+                        lineHeight: "30px",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Read time + Date (Frame 2085662985) */}
+                <div
+                  className="flex items-center gap-[40px] text-white shrink-0"
+                  style={{
+                    fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                    fontWeight: 500,
+                    fontSize: "14px",
+                    lineHeight: "40px",
+                  }}
+                >
+                  <span>{data.readTime}</span>
+                  <span className="w-[5px] h-[5px] rounded-full bg-white shrink-0" />
+                  <span>{data.date}</span>
+                </div>
+              </div>
             </FadeUp>
           </div>
-
-          {/* ── Tags row + Meta ── */}
-          <FadeUp delay={0.15}>
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 max-w-[1400px]">
-              {/* Tags */}
-              <div className="flex flex-wrap items-center gap-2.5">
-                {data.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-2.5 border border-white rounded-xl text-white whitespace-nowrap"
-                    style={{
-                      fontFamily: "var(--font-satoshi)",
-                      fontWeight: 400,
-                      fontSize: "10px",
-                      lineHeight: "30px",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Read time + Date */}
-              <div
-                className="flex items-center gap-10 text-white shrink-0"
-                style={{
-                  fontFamily: "var(--font-satoshi)",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  lineHeight: "40px",
-                }}
-              >
-                <span>{data.readTime}</span>
-                <span className="w-[5px] h-[5px] rounded-full bg-white" />
-                <span>{data.date}</span>
-              </div>
-            </div>
-          </FadeUp>
         </div>
       </section>
 
@@ -247,59 +250,75 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
           4. OUR APPROACH — White section
       ════════════════════════════════════════════════════════════════ */}
       <section className="bg-white py-20 md:py-28 border-t border-black/5">
-        <div className="max-w-[1408px] mx-auto px-6 md:px-16 lg:px-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-[190px]">
             
-            {/* Left: Text & Principles */}
-            <div className="flex flex-col gap-10">
-              <FadeUp>
-                <h2
-                  className="text-[#0F1D07] mb-6"
-                  style={{
-                    fontFamily: "var(--font-delight)",
-                    fontWeight: 500,
-                    fontSize: "clamp(40px, 5.5vw, 64px)",
-                    lineHeight: "1.1",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  Our Approach
-                </h2>
-                <p
-                  className="text-[#0F1D07]"
-                  style={{
-                    fontFamily: "var(--font-satoshi)",
-                    fontWeight: 400,
-                    fontSize: "14px",
-                    lineHeight: "28px",
-                  }}
-                >
-                  {data.approachText}
-                </p>
-              </FadeUp>
+            {/* Left: Text & Principles (Frame 2087326510) */}
+            <div className="flex flex-col gap-[62px] w-full lg:max-w-[729px]">
+              {/* Frame 2087326504 */}
+              <div className="flex flex-col gap-[52px] w-full lg:max-w-[665px]">
+                <FadeUp>
+                  <h2
+                    className="text-[#0F1D07] m-0"
+                    style={{
+                      fontFamily: "var(--font-nohemi), 'Nohemi', sans-serif",
+                      fontWeight: 500,
+                      fontSize: "clamp(48px, 6vw, 80px)",
+                      lineHeight: "clamp(60px, 8vw, 102px)",
+                      letterSpacing: "-0.02em",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    Our Approach
+                  </h2>
+                </FadeUp>
+                <FadeUp delay={0.05}>
+                  <p
+                    className="text-[#0F1D07] m-0 lg:max-w-[670px]"
+                    style={{
+                      fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                      fontWeight: 400,
+                      fontSize: "16px",
+                      lineHeight: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {data.approachText}
+                  </p>
+                </FadeUp>
+              </div>
 
-              {/* Principles */}
+              {/* Principles (Frame 2087326509) */}
               {data.approachPrinciples && data.approachPrinciples.length > 0 && (
                 <FadeUp delay={0.1}>
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-[20px] w-full lg:max-w-[729px]">
                     <span 
-                      className="text-[#0F1D07] opacity-60"
+                      className="text-[#0F1D07]"
                       style={{
-                        fontFamily: "var(--font-satoshi)",
-                        fontSize: "14px",
+                        fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                        fontWeight: 400,
+                        fontSize: "16px",
+                        lineHeight: "30px",
+                        display: "flex",
+                        alignItems: "center",
                       }}
                     >
                       Key principles:
                     </span>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-[10px]">
                       {data.approachPrinciples.map((principle, idx) => (
                         <span
                           key={idx}
-                          className="px-4 py-2 rounded-lg bg-[#F5F5F5] text-[#0F1D07]"
+                          className="px-[18px] py-[10px] bg-[#F2F2F2] rounded-[12px] text-[#0F1D07]"
                           style={{
-                            fontFamily: "var(--font-satoshi)",
-                            fontSize: "12px",
-                            fontWeight: 500,
+                            fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
+                            fontSize: "16px",
+                            fontWeight: 400,
+                            lineHeight: "30px",
+                            display: "flex",
+                            alignItems: "center",
                           }}
                         >
                           {principle}
@@ -311,14 +330,20 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
               )}
             </div>
 
-            {/* Right: Brand logo block */}
+            {/* Right: Brand logo block (Frame 2087326508) */}
             {data.approachBrandText && (
-              <FadeUp delay={0.15}>
-                <div className="flex items-center justify-center rounded-xl aspect-square w-full max-w-[500px] ml-auto" style={{ background: bg }}>
+              <FadeUp delay={0.15} className="w-full lg:w-[481px] shrink-0">
+                <div 
+                  className="flex items-center justify-center w-full lg:w-[481px] h-[464px] rounded-[24px]" 
+                  style={{ 
+                    background: "#18181A",
+                    border: "1px solid rgba(110, 110, 110, 0.25)"
+                  }}
+                >
                   <span
                     className="tracking-[0.15em] uppercase"
                     style={{
-                      fontFamily: "var(--font-delight)",
+                      fontFamily: "var(--font-delight), sans-serif",
                       fontWeight: 600,
                       fontSize: "clamp(28px, 4vw, 48px)",
                       color: accent,
@@ -339,18 +364,20 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
       <section className="py-20 md:py-28" style={{ background: data.backgroundColor ? bg : "#F7F7F7" }}>
         <div className="max-w-[1408px] mx-auto px-6 md:px-16 lg:px-24">
           <FadeUp>
-            <span
-              className="block mb-2 leading-none select-none"
-              style={{
-                fontFamily: "var(--font-delight)",
-                fontSize: "clamp(64px, 8vw, 96px)",
-                fontWeight: 700,
-                color: data.backgroundColor ? "#FFFFFF" : accent,
-                opacity: 0.8,
-              }}
+            <svg
+              width="88"
+              height="60"
+              viewBox="0 0 88 60"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="block mb-8 select-none"
+              style={{ color: data.backgroundColor ? "#FFFFFF" : accent }}
             >
-              &ldquo;
-            </span>
+              <path
+                d="M24.4956 28.6633C32.5733 28.6633 37.7848 34.917 37.7848 42.9948C37.7848 51.8542 31.2705 59.1502 20.0659 59.1502C8.86134 59.1502 0.00191091 50.0302 0.00191091 35.9593C0.00191091 21.3673 9.38248 7.03591 32.5733 0.000474845V6.77534C17.9813 10.6839 9.90363 19.8039 9.90363 28.1422C9.90363 31.269 11.2065 33.0931 13.0305 33.0931C15.8968 33.0931 17.4602 28.6633 24.4956 28.6633ZM74.5253 28.6633C82.603 28.6633 87.8145 34.917 87.8145 42.9948C87.8145 51.8542 81.3002 59.1502 70.0956 59.1502C58.8911 59.1502 50.0316 50.0302 50.0316 35.9593C50.0316 21.3673 59.4122 7.03591 82.603 0.000474845V6.77534C68.0111 10.6839 59.9333 19.8039 59.9333 28.1422C59.9333 31.269 61.2362 33.0931 63.0602 33.0931C66.1871 33.0931 67.4899 28.6633 74.5253 28.6633Z"
+                fill="currentColor"
+              />
+            </svg>
           </FadeUp>
           <FadeUp delay={0.1}>
             <blockquote
