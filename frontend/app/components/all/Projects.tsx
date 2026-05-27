@@ -167,7 +167,7 @@ function ProjectCard({
       }}
     >
       {/* Full Bleed Whole Screen Mockup Image Container */}
-      <div className="absolute inset-0 w-full h-full px-4 pb-[158px] pt-4 md:px-6 md:pb-[188px] md:pt-10 min-[1600px]:pb-[173px] pointer-events-none z-10">
+      <div className="absolute inset-0 w-full h-full px-4 pb-[158px] pt-4 md:px-6 md:pb-[188px] md:pt-10 pointer-events-none z-10">
         <div className="relative w-full h-full rounded-[24px] overflow-hidden">
           <Image
             src={imageSrc}
@@ -264,7 +264,7 @@ function ProjectCard({
 
       {/* Bottom Info Bar styled to match Frame 2085663518 */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 min-h-[158px] py-4 md:min-h-[188px] md:py-6 min-[1600px]:left-[calc(50%-1497px/2)] min-[1600px]:right-auto min-[1600px]:w-[1497px] min-[1600px]:h-[173px] min-[1600px]:min-h-[173px] flex items-center justify-center rounded-t-[24px] transition-all"
+        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 min-h-[158px] py-4 md:min-h-[188px] md:py-6 flex items-center justify-center rounded-t-[24px] transition-all"
         style={{
           backgroundColor: project.barBg || "#665EE3",
         }}
