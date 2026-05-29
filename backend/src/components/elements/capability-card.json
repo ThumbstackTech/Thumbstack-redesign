@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_elements_capability_cards",
+  "info": {
+    "displayName": "Capability Card",
+    "icon": "layout",
+    "description": "Individual capability card for the capabilities section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Capability title"
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "description": "Capability description"
+    },
+    "iconType": {
+      "type": "enumeration",
+      "enum": [
+        "server-stack",
+        "globe",
+        "ai-brain",
+        "mobile",
+        "code-xml",
+        "computer-programming",
+        "web-design",
+        "shopify",
+        "shopping-cart",
+        "user-group",
+        "mentoring"
+      ],
+      "default": "server-stack",
+      "description": "Icon type to display"
+    },
+    "buttonText": {
+      "type": "string",
+      "required": true,
+      "description": "Button label"
+    },
+    "buttonLink": {
+      "type": "string",
+      "default": "#",
+      "description": "Button link/URL"
+    }
+  }
+}

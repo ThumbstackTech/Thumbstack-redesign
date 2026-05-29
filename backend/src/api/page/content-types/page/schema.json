@@ -54,7 +54,8 @@
         "shared.news-and-insights-grid",
         "shared.work-interactive-list",
         "shared.service-hero-detail",
-        "shared.service-info"
+        "shared.service-info",
+        "shared.capabilities"
       ]
     }
   }

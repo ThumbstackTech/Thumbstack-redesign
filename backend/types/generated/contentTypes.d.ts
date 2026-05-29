@@ -820,6 +820,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.work-interactive-list',
         'shared.service-hero-detail',
         'shared.service-info',
+        'shared.capabilities',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

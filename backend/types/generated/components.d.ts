@@ -1,5 +1,36 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ElementsCapabilityCard extends Struct.ComponentSchema {
+  collectionName: 'components_elements_capability_cards';
+  info: {
+    description: 'Individual capability card for the capabilities section';
+    displayName: 'Capability Card';
+    icon: 'layout';
+  };
+  attributes: {
+    buttonLink: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    buttonText: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    iconType: Schema.Attribute.Enumeration<
+      [
+        'server-stack',
+        'globe',
+        'ai-brain',
+        'mobile',
+        'code-xml',
+        'computer-programming',
+        'web-design',
+        'shopify',
+        'shopping-cart',
+        'user-group',
+        'mentoring',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'server-stack'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElementsCapabilityItem extends Struct.ComponentSchema {
   collectionName: 'components_elements_capability_items';
   info: {
@@ -241,6 +272,19 @@ export interface SharedBuildYourStack extends Struct.ComponentSchema {
     logo: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'Build Your Stack.'>;
+  };
+}
+
+export interface SharedCapabilities extends Struct.ComponentSchema {
+  collectionName: 'components_shared_capabilities';
+  info: {
+    description: 'Interactive horizontal scrolling capabilities showcase with glow hover effects';
+    displayName: 'Capabilities';
+    icon: 'grid';
+  };
+  attributes: {
+    capabilities: Schema.Attribute.Component<'elements.capability-card', true>;
+    enableSection: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -806,6 +850,7 @@ export interface SharedWorkItem extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'elements.capability-card': ElementsCapabilityCard;
       'elements.capability-item': ElementsCapabilityItem;
       'elements.faq-item': ElementsFaqItem;
       'elements.feature-group': ElementsFeatureGroup;
@@ -821,6 +866,7 @@ declare module '@strapi/strapi' {
       'shared.about-hero': SharedAboutHero;
       'shared.best-fit': SharedBestFit;
       'shared.build-your-stack': SharedBuildYourStack;
+      'shared.capabilities': SharedCapabilities;
       'shared.capabilities-features': SharedCapabilitiesFeatures;
       'shared.capabilities-hero': SharedCapabilitiesHero;
       'shared.capabilities-hero-detail': SharedCapabilitiesHeroDetail;

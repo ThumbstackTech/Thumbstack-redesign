@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_capabilities",
+  "info": {
+    "displayName": "Capabilities",
+    "icon": "grid",
+    "description": "Interactive horizontal scrolling capabilities showcase with glow hover effects"
+  },
+  "options": {},
+  "attributes": {
+    "enableSection": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable or disable this section"
+    },
+    "capabilities": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.capability-card"
+    }
+  }
+}
