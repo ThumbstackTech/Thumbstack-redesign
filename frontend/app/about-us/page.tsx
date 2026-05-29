@@ -5,6 +5,7 @@ import Footer from "../components/all/Footer";
 import Info from "../components/all/Info";
 import WorkInfo from "../components/all/WorkInfo";
 import Team from "../components/all/Team";
+import Capabilities from "../components/all/Capabilities";
 
 export default function AboutPage() {
   return (
@@ -13,6 +14,7 @@ export default function AboutPage() {
       <Info />
       <WorkInfo />
       <Team />
+      <Capabilities />
       <Footer />
     </div>
   );

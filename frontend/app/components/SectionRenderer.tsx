@@ -32,6 +32,7 @@ import CapabilitiesListing from "./all/CapabilitiesListing";
 import HowWeWork from "./all/HowWeWork";
 import ServiceHeroDetail from "./all/ServiceHeroDetail";
 import ServiceInfo from "./all/serviceinfo";
+import Capabilities from "./all/Capabilities";
 
 
 const componentMap: { [key: string]: any } = {
@@ -66,7 +67,8 @@ const componentMap: { [key: string]: any } = {
   "shared.capabilities-hero": CapabilitiesHero,
   "shared.capabilities-info": CapabilitiesInfo,
   "shared.service-hero-detail": ServiceHeroDetail,
-  "shared.service-info": ServiceInfo
+  "shared.service-info": ServiceInfo,
+  "shared.capabilities": Capabilities,
 };
 
 export default function SectionRenderer({ sections, projects }: { sections: any[]; projects?: any[] }) {

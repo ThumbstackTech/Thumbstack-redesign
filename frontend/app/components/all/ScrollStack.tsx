@@ -390,7 +390,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       <div
         className="scroll-stack-inner"
         style={{
-          padding: '0 0 100vh',
+          padding: '0 0 40vh',
           minHeight: '100vh',
           width: '100%',
           maxWidth: maxWidth,

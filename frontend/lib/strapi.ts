@@ -101,6 +101,7 @@ export function getPagesQueryString(slug: string): string {
     "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][logo]=true",
     "populate[content][on][shared.news-and-insights-grid][populate][news_detaileds][populate][galleryImages]=true",
     "populate[content][on][shared.capabilities-listing][populate][items]=*",
+    "populate[content][on][shared.capabilities][populate][capabilities]=*",
     "populate[content][on][shared.how-we-work][populate][stages]=*",
     "populate[content][on][shared.capabilities-hero-detail][populate]=*",
     "populate[content][on][shared.service-info][populate][items]=*",

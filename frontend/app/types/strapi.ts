@@ -158,6 +158,33 @@ export interface CapabilitiesSectionData {
   viewWorkLink: string;
 }
 
+export interface CapabilityCard {
+  id?: number;
+  title: string;
+  description: string;
+  iconType: 
+    | "server-stack"
+    | "globe"
+    | "ai-brain"
+    | "mobile"
+    | "code-xml"
+    | "computer-programming"
+    | "web-design"
+    | "shopify"
+    | "shopping-cart"
+    | "user-group"
+    | "mentoring";
+  buttonText: string;
+  buttonLink?: string;
+}
+
+export interface CapabilitiesComponentData {
+  id?: number;
+  __component: "shared.capabilities";
+  enableSection?: boolean;
+  capabilities?: CapabilityCard[];
+}
+
 export interface CapabilitiesHeroDetailData {
   id: number;
   __component: "shared.capabilities-hero-detail";

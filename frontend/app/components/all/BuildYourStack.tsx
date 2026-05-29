@@ -209,7 +209,7 @@ export default function BuildYourStack({ data }: BuildYourStackProps = {}) {
                   fontFamily: "var(--font-delight)",
                   fontWeight: 500,
                   fontSize: "clamp(48px, 5vw, 100.369px)",
-                  lineHeight: "134px",
+                  lineHeight: "1.05",
                 }}
               >
                 {title}

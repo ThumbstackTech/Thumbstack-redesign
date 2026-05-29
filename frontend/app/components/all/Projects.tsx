@@ -264,7 +264,7 @@ function ProjectCard({
 
       {/* Bottom Info Bar styled to match Frame 2085663518 */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 min-h-[158px] py-4 md:min-h-[188px] md:py-6 flex items-center justify-center rounded-t-[24px] transition-all"
+        className="absolute bottom-0 left-0 right-0 z-40 cursor-auto px-6 md:px-12 min-h-[156px] py-4 md:min-h-[186px] md:py-6 flex items-center justify-center rounded-t-[24px] transition-all"
         style={{
           backgroundColor: project.barBg || "#665EE3",
         }}
