@@ -93,6 +93,30 @@
       "type": "string",
       "default": "#3145DD"
     },
+    "subHeader1": {
+      "type": "string"
+    },
+    "subContent1": {
+      "type": "text"
+    },
+    "subHeader2": {
+      "type": "string"
+    },
+    "subContent2": {
+      "type": "text"
+    },
+    "col1Header": {
+      "type": "string"
+    },
+    "col1Content": {
+      "type": "text"
+    },
+    "col2Header": {
+      "type": "string"
+    },
+    "col2Content": {
+      "type": "text"
+    },
     "sections": {
       "type": "dynamiczone",
       "components": [
@@ -111,7 +135,9 @@
         "shared.info",
         "shared.what-we-build",
         "shared.work-interactive-list",
-        "shared.stack-item"
+        "shared.stack-item",
+        "shared.capabilities",
+        "shared.right-stack"
       ]
     }
   }

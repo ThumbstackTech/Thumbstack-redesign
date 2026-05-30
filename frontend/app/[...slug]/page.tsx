@@ -8,9 +8,9 @@ import { redirect } from "next/navigation";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug?.join("/") || "";
-  
+
   let pageData = null;
-  
+
   const pageRes = await fetchStrapi(
     "pages",
     `filters[slug][$eq]=${slug}&publicationState=preview`
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const capRes = await getCapabilityDetailedBySlug(slug);
     if (capRes) pageData = capRes.attributes || capRes;
   }
-  
+
   if (!pageData) {
     const servRes = await getServiceDetailedBySlug(slug);
     if (servRes) pageData = servRes.attributes || servRes;
@@ -77,7 +77,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
   const content: any[] = pageData.content || [];
   console.log("DEBUG: content zones for slug", slug, content.length, content.map((c: any) => c.__component));
 
-  const projectsRes = await fetchStrapi("projects", "populate=*&publicationState=preview").catch(() => null);
+  const projectsRes = await fetchStrapi("projects", "populate[case_study]=true&populate[mainImage]=true&populate[sideImages]=true").catch(() => null);
   const projectsData = (projectsRes?.data as any[])?.map(item => ({
     id: item.id,
     ...(item.attributes || item),

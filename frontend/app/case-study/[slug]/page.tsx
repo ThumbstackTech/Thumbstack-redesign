@@ -31,13 +31,9 @@ function parseArrayField(value: any): string[] {
 function getStrapiImageArray(imageField: any): any[] | null {
   if (!imageField) return null;
   let list = imageField;
-  if (imageField.data !== undefined) {
-    list = imageField.data;
-  }
+  if (imageField.data !== undefined) list = imageField.data;
   if (!list) return null;
-  if (!Array.isArray(list)) {
-    list = [list];
-  }
+  if (!Array.isArray(list)) list = [list];
   return list.filter(Boolean);
 }
 
@@ -46,14 +42,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const slug = resolvedParams.slug;
   const staticCaseStudy = caseStudies[slug];
 
-  const projectRes = await fetchStrapi("projects", `filters[slug][$eq]=${slug}&populate=*`).catch(() => null);
-  const project = (projectRes?.data as any[])?.[0]?.attributes || (projectRes?.data as any[])?.[0];
+  // Fetch case study directly by slug from case-studies endpoint
+  const csRes = await fetchStrapi("case-studies", `filters[slug][$eq]=${slug}&populate[project]=true`).catch(() => null);
+  const caseStudy = (csRes?.data as any[])?.[0]?.attributes || (csRes?.data as any[])?.[0];
+  const project = caseStudy?.project?.data?.attributes || caseStudy?.project;
 
-  if (!project && !staticCaseStudy) return {};
+  if (!caseStudy && !staticCaseStudy) return {};
 
   return {
-    title: `${project?.name || staticCaseStudy?.clientName} | Case Study | Thumbstack`,
-    description: project?.tagline || staticCaseStudy?.subtitle,
+    title: `${caseStudy?.clientName || project?.name || staticCaseStudy?.clientName} | Case Study | Thumbstack`,
+    description: caseStudy?.subtitle || caseStudy?.tagline || staticCaseStudy?.subtitle,
   };
 }
 
@@ -62,50 +60,52 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const slug = resolvedParams.slug;
   const staticCaseStudy = caseStudies[slug];
 
-  // Fetch Project and Case Study data with deep population for repeatable components and media
-  const queryString = `filters[slug][$eq]=${slug}` +
-    `&publicationState=preview` +
-    `&populate[case_study][populate]=*` +
-    `&populate[case_study][populate][approachPrinciples][populate]=*` +
-    `&populate[case_study][populate][features][populate]=*` +
-    `&populate[case_study][populate][challengeImages]=true` +
-    `&populate[case_study][populate][gallery]=true` +
-    `&populate[case_study][populate][mainImage]=true` +
-    `&populate[case_study][populate][content][populate]=*` +
-    `&populate[mainImage]=true`;
+  // ── 1. Fetch case study DIRECTLY by its own slug from case-studies endpoint ──
+  // This is the correct approach because the case study slug lives on the
+  // case-study record itself, not on the project record.
+  const csQueryString =
+    `filters[slug][$eq]=${slug}` +
+    `&populate[project][populate][mainImage]=true` +
+    `&populate[mainImage]=true` +
+    `&populate[challengeImages]=true` +
+    `&populate[gallery]=true` +
+    `&populate[approachPrinciples]=true` +
+    `&populate[features]=true` +
+    `&populate[content][populate]=*`;
 
-  const projectRes = await fetchStrapi("projects", queryString).catch((err) => {
-    console.error("DEBUG: Fetch error for case study", err);
+  const csRes = await fetchStrapi("case-studies", csQueryString).catch((err) => {
+    console.error("DEBUG: Fetch error for case-studies by slug:", err);
     return null;
   });
 
-  const project = (projectRes?.data as any[])?.[0]?.attributes || (projectRes?.data as any[])?.[0];
-  const caseStudy = project?.case_study?.data?.attributes || project?.case_study;
+  const caseStudy = (csRes?.data as any[])?.[0]?.attributes || (csRes?.data as any[])?.[0];
+  const project = caseStudy?.project?.data?.attributes || caseStudy?.project;
 
-  console.log("DEBUG: caseStudy fetched from Strapi:", JSON.stringify(caseStudy, null, 2));
+  console.log("DEBUG: caseStudy slug", slug, "→", caseStudy ? "FOUND" : "NOT FOUND");
 
-  // Fallback to static case study if nothing matches in CMS
-  if (!project && !staticCaseStudy) {
+  // ── 2. Fallback to static case study data if not found in CMS ──
+  if (!caseStudy && !staticCaseStudy) {
     return notFound();
   }
 
-  // Clean Client Name: Use Strapi clientName as the brand name, falling back to static or project name
+  // Clean Client Name
   const cleanClientName = caseStudy?.clientName || staticCaseStudy?.clientName || project?.name || "";
 
-  // Clean Title Fallback: Use Strapi heading as the main sentence title, falling back to static title
+  // Clean Title
   const cleanTitle = caseStudy?.heading || staticCaseStudy?.title || "";
 
-  // Clean Subtitle: Use Strapi subtitle/tagline, falling back to static subtitle or project tagline
+  // Clean Subtitle
   const cleanSubtitle = caseStudy?.subtitle || caseStudy?.tagline || staticCaseStudy?.subtitle || project?.tagline || "";
 
-  // Clean Hero Image: Use Strapi mainImage, falling back to project mainImage, then static
-  const cleanHeroImageUrl = getStrapiImageUrl(caseStudy?.mainImage || project?.mainImage) ||
+  // Clean Hero Image
+  const cleanHeroImageUrl =
+    getStrapiImageUrl(caseStudy?.mainImage || project?.mainImage) ||
     staticCaseStudy?.heroImage?.url ||
     "/siorai.png";
 
-  // Map Strapi CMS fields into CaseStudyData structure, falling back to static template data
+  // Map CMS fields into CaseStudyData, falling back to static data
   const mappedData = {
-    slug: slug,
+    slug,
     title: cleanTitle,
     subtitle: cleanSubtitle,
     clientName: cleanClientName,
@@ -115,7 +115,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
     heroImage: {
       url: cleanHeroImageUrl,
-      alt: cleanTitle || cleanClientName
+      alt: cleanTitle || cleanClientName,
     },
 
     challengeText: caseStudy?.challengeText || staticCaseStudy?.challengeText || "",
@@ -125,45 +125,45 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       if (!list || list.length === 0) return staticCaseStudy?.challengeImages || [];
       return list.map((img: any) => ({
         url: getStrapiImageUrl(img) || "/placeholder.png",
-        alt: img.attributes?.alternativeText || img.alternativeText || ""
+        alt: img.attributes?.alternativeText || img.alternativeText || "",
       }));
     })(),
 
     approachText: caseStudy?.approachText || staticCaseStudy?.approachText || "",
     approachBrandText: caseStudy?.approachBrandText || staticCaseStudy?.approachBrandText || "",
 
-    // Map Repeatable elements.feature-item component for Principles
-    approachPrinciples: (caseStudy?.approachPrinciples && Array.isArray(caseStudy.approachPrinciples) && caseStudy.approachPrinciples.length > 0)
-      ? caseStudy.approachPrinciples.map((item: any) => {
-          const val = item.text || item;
-          return typeof val === "string" ? val.trim() : val;
-        })
-      : parseArrayField(staticCaseStudy?.approachPrinciples),
+    approachPrinciples:
+      caseStudy?.approachPrinciples?.length > 0
+        ? caseStudy.approachPrinciples.map((item: any) => {
+            const val = item.text || item;
+            return typeof val === "string" ? val.trim() : val;
+          })
+        : parseArrayField(staticCaseStudy?.approachPrinciples),
 
     quote: caseStudy?.quote || staticCaseStudy?.quote || "",
 
-    // Map Repeatable elements.feature-item component for Features
-    features: (caseStudy?.features && Array.isArray(caseStudy.features) && caseStudy.features.length > 0)
-      ? caseStudy.features.map((item: any) => {
-          const val = item.text || item;
-          return typeof val === "string" ? val.trim() : val;
-        })
-      : parseArrayField(staticCaseStudy?.features),
+    features:
+      caseStudy?.features?.length > 0
+        ? caseStudy.features.map((item: any) => {
+            const val = item.text || item;
+            return typeof val === "string" ? val.trim() : val;
+          })
+        : parseArrayField(staticCaseStudy?.features),
 
     gallery: (() => {
       const list = getStrapiImageArray(caseStudy?.gallery);
       if (!list || list.length === 0) return staticCaseStudy?.gallery || [];
       return list.map((img: any) => ({
         url: getStrapiImageUrl(img) || "/placeholder.png",
-        alt: img.attributes?.alternativeText || img.alternativeText || ""
+        alt: img.attributes?.alternativeText || img.alternativeText || "",
       }));
     })(),
 
     projectUrl: caseStudy?.projectUrl || project?.websiteUrl || staticCaseStudy?.projectUrl || "#",
     accentColor: caseStudy?.accentColor || project?.accentColor || staticCaseStudy?.accentColor || "#95E7D3",
     backgroundColor: caseStudy?.backgroundColor || project?.bg || staticCaseStudy?.backgroundColor || "#141417",
-    
-    dynamicContent: caseStudy?.content || []
+
+    dynamicContent: caseStudy?.content || [],
   };
 
   return <CaseStudyTemplate data={mappedData} />;

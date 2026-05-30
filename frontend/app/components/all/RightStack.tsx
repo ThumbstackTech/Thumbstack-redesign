@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { RightStackData } from "../../types/strapi";
 
 const stackData = [
   {
@@ -32,7 +33,21 @@ const stackData = [
   }
 ];
 
-export default function RightStack() {
+interface RightStackProps {
+  data?: RightStackData;
+}
+
+export default function RightStack({ data }: RightStackProps) {
+  const title = data?.title || "Built on the right stack for the website.";
+  const description = data?.description || "We choose the technology based on the project. A simple marketing website, a content heavy website, and a multi region CMS website do not need the same build approach.";
+  
+  // Unpack dynamic columns, falling back to static schema if empty
+  const displayColumns = data?.columns && data.columns.length > 0
+    ? data.columns.map((col) => ({
+        items: col.items?.map((item) => item.text) || []
+      }))
+    : stackData;
+
   return (
     <section className="w-full bg-white py-[100px] px-6 md:px-[100px]">
       <div className="max-w-[1401px] mx-auto flex flex-col gap-[80px] md:gap-[104px]">
@@ -53,7 +68,7 @@ export default function RightStack() {
               letterSpacing: "-0.01em"
             }}
           >
-            Built on the right stack for the website.
+            {title}
           </motion.h2>
 
           <motion.p 
@@ -70,13 +85,13 @@ export default function RightStack() {
               letterSpacing: "-0.01em"
             }}
           >
-            We choose the technology based on the project. A simple marketing website, a content heavy website, and a multi region CMS website do not need the same build approach.
+            {description}
           </motion.p>
         </div>
 
         {/* Stack Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {stackData.map((column, colIndex) => (
+          {displayColumns.map((column, colIndex) => (
             <motion.div 
               key={colIndex}
               initial={{ opacity: 0, y: 30 }}

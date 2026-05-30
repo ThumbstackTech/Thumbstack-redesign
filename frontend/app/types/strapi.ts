@@ -69,6 +69,26 @@ export interface StackItemComponent {
   logo: StrapiImage | null;
   tag: "Blog" | "Article" | "Case Study" | "News" | "Tutorial";
   link?: string;
+  news_detailed?: {
+    data?: {
+      id?: number;
+      attributes?: {
+        slug?: string;
+      };
+      slug?: string;
+    };
+    slug?: string;
+  } | null;
+  case_study?: {
+    data?: {
+      id?: number;
+      attributes?: {
+        slug?: string;
+      };
+      slug?: string;
+    };
+    slug?: string;
+  } | null;
 }
 
 export interface FromTheStackData {
@@ -146,6 +166,14 @@ export interface ProjectData {
   slug: string;
   mainImage: StrapiImage | null;
   sideImages: { data: { attributes: StrapiImage }[] } | null;
+  // Populated relation from Strapi — present when populate[case_study]=true
+  case_study?: {
+    id?: number;
+    documentId?: string;
+    slug?: string;
+    clientName?: string;
+    data?: { attributes?: { slug?: string; clientName?: string } };
+  } | null;
 }
 
 export interface CapabilitiesSectionData {
@@ -162,18 +190,18 @@ export interface CapabilityCard {
   id?: number;
   title: string;
   description: string;
-  iconType: 
-    | "server-stack"
-    | "globe"
-    | "ai-brain"
-    | "mobile"
-    | "code-xml"
-    | "computer-programming"
-    | "web-design"
-    | "shopify"
-    | "shopping-cart"
-    | "user-group"
-    | "mentoring";
+  iconType:
+  | "server-stack"
+  | "globe"
+  | "ai-brain"
+  | "mobile"
+  | "code-xml"
+  | "computer-programming"
+  | "web-design"
+  | "shopify"
+  | "shopping-cart"
+  | "user-group"
+  | "mentoring";
   buttonText: string;
   buttonLink?: string;
 }
@@ -445,5 +473,18 @@ export interface ServiceInfoData {
   __component: "shared.service-info";
   tagline?: string;
   items: ServiceInfoItem[];
+}
+
+export interface StackColumnComponent {
+  id: number;
+  items: Array<{ id: number; text: string }>;
+}
+
+export interface RightStackData {
+  id: number;
+  __component: "shared.right-stack";
+  title?: string;
+  description?: string;
+  columns?: StackColumnComponent[];
 }
 

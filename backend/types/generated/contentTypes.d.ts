@@ -545,6 +545,7 @@ export interface ApiCapabilityDetailedCapabilityDetailed
         'shared.work-item',
         'shared.service-hero-detail',
         'shared.service-info',
+        'shared.right-stack',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -713,6 +714,10 @@ export interface ApiNewsDetailedNewsDetailed
       ['Project Launches', 'Inside Thumbstack', 'Perspectives']
     > &
       Schema.Attribute.DefaultTo<'Inside Thumbstack'>;
+    col1Content: Schema.Attribute.Text;
+    col1Header: Schema.Attribute.String;
+    col2Content: Schema.Attribute.Text;
+    col2Header: Schema.Attribute.String;
     content: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -751,9 +756,15 @@ export interface ApiNewsDetailedNewsDetailed
         'shared.what-we-build',
         'shared.work-interactive-list',
         'shared.stack-item',
+        'shared.capabilities',
+        'shared.right-stack',
       ]
     >;
     slug: Schema.Attribute.UID<'title'>;
+    subContent1: Schema.Attribute.Text;
+    subContent2: Schema.Attribute.Text;
+    subHeader1: Schema.Attribute.String;
+    subHeader2: Schema.Attribute.String;
     subtitle: Schema.Attribute.Text;
     tag: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Article'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -821,6 +832,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.service-hero-detail',
         'shared.service-info',
         'shared.capabilities',
+        'shared.right-stack',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -935,6 +947,7 @@ export interface ApiServiceDetailedServiceDetailed
         'shared.work-item',
         'shared.service-hero-detail',
         'shared.service-info',
+        'shared.right-stack',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

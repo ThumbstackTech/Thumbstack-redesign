@@ -89,11 +89,15 @@ export function getPagesQueryString(slug: string): string {
     "populate[content][on][shared.best-fit][populate]=*",
     "populate[content][on][shared.sidebar][populate][links][populate]=*",
     "populate[content][on][shared.capabilities-hero][populate]=*",
+    "populate[content][on][shared.capabilities-info][populate]=*",
+    "populate[content][on][shared.right-stack][populate][columns][populate][items]=*",
     // Explicit populate for the 4 newly added components if placed directly in dynamic zone
     "populate[content][on][shared.cta-section][populate]=*",
     "populate[content][on][shared.service-hero][populate]=*",
     "populate[content][on][shared.stack-item][populate][items][populate][image]=true",
     "populate[content][on][shared.stack-item][populate][items][populate][logo]=true",
+    "populate[content][on][shared.stack-item][populate][items][populate][news_detailed][fields][0]=slug",
+    "populate[content][on][shared.stack-item][populate][items][populate][case_study][fields][0]=slug",
     "populate[content][on][shared.work-item][populate][featuredImage]=true",
     "populate[content][on][shared.work-item][populate][video]=true",
     "populate[content][on][shared.work-item][populate][tags]=true",
@@ -449,9 +453,13 @@ export async function getNewsDetailedBySlug(slug: string): Promise<any | null> {
     "populate[sections][on][shared.build-your-stack][populate]=*",
     "populate[sections][on][shared.lets-talk][populate]=*",
     "populate[sections][on][shared.footer][populate]=*",
+    "populate[sections][on][shared.capabilities-info][populate]=*",
+    "populate[sections][on][shared.right-stack][populate][columns][populate][items]=*",
     "populate[sections][on][shared.work-interactive-list][populate][items][populate][image]=true",
     "populate[sections][on][shared.stack-item][populate][items][populate][image]=true",
     "populate[sections][on][shared.stack-item][populate][items][populate][logo]=true",
+    "populate[sections][on][shared.stack-item][populate][items][populate][news_detailed][fields][0]=slug",
+    "populate[sections][on][shared.stack-item][populate][items][populate][case_study][fields][0]=slug",
     "populate[sections][on][shared.cta-section][populate]=*",
     "populate[sections][on][shared.news-and-insights-grid][populate][news_detaileds][populate][heroImage]=true",
     "populate[sections][on][shared.news-and-insights-grid][populate][news_detaileds][populate][logo]=true",
@@ -464,6 +472,7 @@ export async function getNewsDetailedBySlug(slug: string): Promise<any | null> {
     "populate[sections][on][shared.best-fit][populate]=*",
     "populate[sections][on][shared.info][populate]=*",
     "populate[sections][on][shared.what-we-build][populate]=*",
+    "populate[sections][on][shared.capabilities][populate][capabilities]=*",
   ].join("&");
 
   try {
@@ -525,6 +534,8 @@ export async function getCapabilityDetailedBySlug(slug: string): Promise<any | n
     "populate[content][on][shared.capabilities-features][populate][groups][populate][items]=*",
     "populate[content][on][shared.capabilities-hero-detail][populate]=*",
     "populate[content][on][shared.capabilities-hero][populate]=*",
+    "populate[content][on][shared.capabilities-info][populate]=*",
+    "populate[content][on][shared.right-stack][populate][columns][populate][items]=*",
     "populate[content][on][shared.capabilities-listing][populate][items]=*",
     "populate[content][on][shared.cta-section][populate]=*",
     "populate[content][on][shared.faq-section][populate][faqs]=*",
@@ -549,11 +560,14 @@ export async function getCapabilityDetailedBySlug(slug: string): Promise<any | n
     "populate[content][on][shared.sidebar][populate][links][populate]=*",
     "populate[content][on][shared.stack-item][populate][items][populate][image]=true",
     "populate[content][on][shared.stack-item][populate][items][populate][logo]=true",
+    "populate[content][on][shared.stack-item][populate][items][populate][news_detailed][fields][0]=slug",
+    "populate[content][on][shared.stack-item][populate][items][populate][case_study][fields][0]=slug",
     "populate[content][on][shared.team-section][populate][members][populate][image]=true",
     "populate[content][on][shared.what-we-build][populate]=*",
     "populate[content][on][shared.work-interactive-list][populate][items][populate][image]=true",
     "populate[content][on][shared.work-item][populate][featuredImage]=true",
     "populate[content][on][shared.work-item][populate][video]=true",
+    "populate[content][on][shared.capabilities][populate][capabilities]=*",
   ].join("&");
 
   try {
@@ -589,6 +603,8 @@ export async function getServiceDetailedBySlug(slug: string): Promise<any | null
     "populate[content][on][shared.capabilities-features][populate][groups][populate][items]=*",
     "populate[content][on][shared.capabilities-hero-detail][populate]=*",
     "populate[content][on][shared.capabilities-hero][populate]=*",
+    "populate[content][on][shared.capabilities-info][populate]=*",
+    "populate[content][on][shared.right-stack][populate][columns][populate][items]=*",
     "populate[content][on][shared.capabilities-listing][populate][items]=*",
     "populate[content][on][shared.cta-section][populate]=*",
     "populate[content][on][shared.faq-section][populate][faqs]=*",
@@ -613,11 +629,14 @@ export async function getServiceDetailedBySlug(slug: string): Promise<any | null
     "populate[content][on][shared.sidebar][populate][links][populate]=*",
     "populate[content][on][shared.stack-item][populate][items][populate][image]=true",
     "populate[content][on][shared.stack-item][populate][items][populate][logo]=true",
+    "populate[content][on][shared.stack-item][populate][items][populate][news_detailed][fields][0]=slug",
+    "populate[content][on][shared.stack-item][populate][items][populate][case_study][fields][0]=slug",
     "populate[content][on][shared.team-section][populate][members][populate][image]=true",
     "populate[content][on][shared.what-we-build][populate]=*",
     "populate[content][on][shared.work-interactive-list][populate][items][populate][image]=true",
     "populate[content][on][shared.work-item][populate][featuredImage]=true",
     "populate[content][on][shared.work-item][populate][video]=true",
+    "populate[content][on][shared.capabilities][populate][capabilities]=*",
   ].join("&");
 
   try {

@@ -1,7 +1,8 @@
-import { getNewsDetailedBySlug, getStrapiImageUrl } from "@/lib/strapi";
+import { getNewsDetailedBySlug, getStrapiImageUrl, fetchStrapi } from "@/lib/strapi";
 import { notFound } from "next/navigation";
 import NewsAndInsightsArticle from "../../components/all/NewsAndInsightsArticle";
 import SectionRenderer from "../../components/SectionRenderer";
+import { ProjectData } from "../../types/strapi";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -45,10 +46,26 @@ export default async function NewsAndInsightsArticleSlugPage({ params }: { param
     content: attrs.content || undefined,
     bgColor: attrs.bgColor || "#FFFFFF",
     accentColor: attrs.accentColor || "#3145DD",
+    galleryImages: attrs.galleryImages || [],
+    subHeader1: attrs.subHeader1,
+    subContent1: attrs.subContent1,
+    subHeader2: attrs.subHeader2,
+    subContent2: attrs.subContent2,
+    col1Header: attrs.col1Header,
+    col1Content: attrs.col1Content,
+    col2Header: attrs.col2Header,
+    col2Content: attrs.col2Content,
   };
 
   // Sections dynamic zone — added via Strapi CMS for full editorial control
   const sections: any[] = attrs.sections || [];
+
+  // Fetch projects in case projects section is added in the sections array
+  const projectsRes = await fetchStrapi("projects", "populate[case_study]=true&populate[mainImage]=true&populate[sideImages]=true").catch(() => null);
+  const projectsData = (projectsRes?.data as any[])?.map(item => ({
+    id: item.id,
+    ...(item.attributes || item),
+  })) as ProjectData[];
 
   return (
     <div className="w-full relative">
@@ -56,7 +73,7 @@ export default async function NewsAndInsightsArticleSlugPage({ params }: { param
 
       {/* Dynamic sections added via Strapi — add Footer, LetsTalk, CTASection, etc. here */}
       {sections.length > 0 && (
-        <SectionRenderer sections={sections} />
+        <SectionRenderer sections={sections} projects={projectsData} />
       )}
     </div>
   );

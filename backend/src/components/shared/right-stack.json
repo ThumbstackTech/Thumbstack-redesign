@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_right_stacks",
+  "info": {
+    "displayName": "Right Stack",
+    "icon": "layer-group",
+    "description": "Built on the right stack section with dynamic column lists"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Built on the right stack for the website."
+    },
+    "description": {
+      "type": "text",
+      "default": "We choose the technology based on the project. A simple marketing website, a content heavy website, and a multi region CMS website do not need the same build approach."
+    },
+    "columns": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.stack-column"
+    }
+  }
+}

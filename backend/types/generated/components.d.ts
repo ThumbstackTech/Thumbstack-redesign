@@ -193,15 +193,35 @@ export interface ElementsStackCard extends Struct.ComponentSchema {
     icon: 'list';
   };
   attributes: {
+    case_study: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::case-study.case-study'
+    >;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    link: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    link: Schema.Attribute.String;
     logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    news_detailed: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::news-detailed.news-detailed'
+    >;
     tag: Schema.Attribute.Enumeration<
       ['Blog', 'Article', 'Case Study', 'News', 'Tutorial']
     > &
       Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsStackColumn extends Struct.ComponentSchema {
+  collectionName: 'components_elements_stack_columns';
+  info: {
+    description: 'A column containing a list of stack items';
+    displayName: 'Stack Column';
+    icon: 'list';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'elements.feature-item', true>;
   };
 }
 
@@ -666,6 +686,22 @@ export interface SharedProjectsSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedRightStack extends Struct.ComponentSchema {
+  collectionName: 'components_shared_right_stacks';
+  info: {
+    description: 'Built on the right stack section with dynamic column lists';
+    displayName: 'Right Stack';
+    icon: 'layer-group';
+  };
+  attributes: {
+    columns: Schema.Attribute.Component<'elements.stack-column', true>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'We choose the technology based on the project. A simple marketing website, a content heavy website, and a multi region CMS website do not need the same build approach.'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Built on the right stack for the website.'>;
+  };
+}
+
 export interface SharedServiceHero extends Struct.ComponentSchema {
   collectionName: 'components_shared_service_heroes';
   info: {
@@ -862,6 +898,7 @@ declare module '@strapi/strapi' {
       'elements.process-stage': ElementsProcessStage;
       'elements.service-info-item': ElementsServiceInfoItem;
       'elements.stack-card': ElementsStackCard;
+      'elements.stack-column': ElementsStackColumn;
       'elements.team-member': ElementsTeamMember;
       'shared.about-hero': SharedAboutHero;
       'shared.best-fit': SharedBestFit;
@@ -887,6 +924,7 @@ declare module '@strapi/strapi' {
       'shared.principles': SharedPrinciples;
       'shared.product-driven': SharedProductDriven;
       'shared.projects-section': SharedProjectsSection;
+      'shared.right-stack': SharedRightStack;
       'shared.service-hero': SharedServiceHero;
       'shared.service-hero-detail': SharedServiceHeroDetail;
       'shared.service-info': SharedServiceInfo;

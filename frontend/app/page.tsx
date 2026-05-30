@@ -35,7 +35,7 @@ export default async function Home() {
     );
   }
 
-  const projectsRes = await fetchStrapi("projects", "populate=*&publicationState=preview").catch(() => null);
+  const projectsRes = await fetchStrapi("projects", "populate[case_study]=true&populate[mainImage]=true&populate[sideImages]=true").catch(() => null);
   const projectsData = (projectsRes?.data as any[])?.map(item => ({
     id: item.id,
     ...(item.attributes || item)

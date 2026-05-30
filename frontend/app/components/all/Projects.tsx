@@ -68,6 +68,19 @@ export default function Projects({ data }: { data?: ProjectData[] }) {
       ? p.sideImages
       : (p.sideImages as any)?.data?.map((item: any) => item.attributes) || [];
 
+    // Guard against the literal string "null" stored in DB
+    const isValidStr = (val: any) => val && val !== "null" && val !== "undefined";
+
+    // Priority: use linked case_study relation slug → project slug → caseStudyUrl field → "#"
+    const caseStudySlug = p.case_study?.slug || p.case_study?.data?.attributes?.slug;
+    const projectSlug = isValidStr(p.slug) ? p.slug : null;
+    const legacyCaseStudyUrl = isValidStr(p.caseStudyUrl) ? p.caseStudyUrl : null;
+    const caseStudyUrl = caseStudySlug
+      ? `/case-study/${caseStudySlug}`
+      : projectSlug
+        ? `/case-study/${projectSlug}`
+        : legacyCaseStudyUrl || "#";
+
     return {
       id: p.id,
       name: p.name,
@@ -79,8 +92,8 @@ export default function Projects({ data }: { data?: ProjectData[] }) {
       barBorder: p.barBorder,
       accentColor: p.accentColor || "#FFFFFF",
       cursorColor: p.cursorColor || "#95E7D3",
-      websiteUrl: p.websiteUrl || "#",
-      caseStudyUrl: p.slug ? `/case-study/${p.slug}` : (p.caseStudyUrl || "#"),
+      websiteUrl: isValidStr(p.websiteUrl) ? p.websiteUrl : "#",
+      caseStudyUrl,
       layout: p.layout || "desktop",
       images: {
         main: getStrapiImageUrl(p.mainImage) || "",

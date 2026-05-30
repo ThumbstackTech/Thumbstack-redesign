@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Sidebar from '../layout/Sidebar';
+import { getStrapiImageUrl } from '@/lib/strapi';
 
 // Helper to render Strapi 5 dynamic Block Content
 function renderContentBlocks(content: any) {
@@ -64,6 +65,24 @@ export default function NewsAndInsightsArticle({ data }: { data?: any }) {
   const heroImage = data?.heroImage || "/grid1.jpg";
   const logo = data?.logo;
   const content = data?.content;
+
+  // Extract new dynamic sub-sections and images
+  const subHeader1 = data?.subHeader1;
+  const subContent1 = data?.subContent1;
+  const subHeader2 = data?.subHeader2;
+  const subContent2 = data?.subContent2;
+  const col1Header = data?.col1Header;
+  const col1Content = data?.col1Content;
+  const col2Header = data?.col2Header;
+  const col2Content = data?.col2Content;
+  
+  const galleryImages = data?.galleryImages || [];
+  const galleryImagesData = Array.isArray(galleryImages)
+    ? galleryImages
+    : (galleryImages as any)?.data?.map((item: any) => item.attributes || item) || [];
+  
+  const midImage1 = galleryImagesData[0] ? getStrapiImageUrl(galleryImagesData[0]) : null;
+  const midImage2 = galleryImagesData[1] ? getStrapiImageUrl(galleryImagesData[1]) : null;
 
   return (
     <div className="w-full bg-[#FFFFFF] relative pb-20 z-10">
@@ -163,6 +182,38 @@ export default function NewsAndInsightsArticle({ data }: { data?: any }) {
               )}
             </div>
           </div>
+
+          {hasData && (subHeader1 || subContent1) && (
+            <div className="w-full max-w-[1044px] flex flex-col items-start gap-[20px] mt-12">
+              {subHeader1 && (
+                <h2 
+                  className="text-[#0F1D07] w-full"
+                  style={{ 
+                    fontFamily: 'var(--font-delight)', 
+                    fontWeight: 500, 
+                    fontSize: '42px', 
+                    lineHeight: '70px', 
+                    letterSpacing: '-0.02em' 
+                  }}
+                >
+                  {subHeader1}
+                </h2>
+              )}
+              {subContent1 && (
+                <p 
+                  className="text-[#0F1D07] w-full max-w-[700px]"
+                  style={{ 
+                    fontFamily: 'var(--font-satoshi)', 
+                    fontWeight: 400, 
+                    fontSize: '20px', 
+                    lineHeight: '32px' 
+                  }}
+                >
+                  {subContent1}
+                </p>
+              )}
+            </div>
+          )}
 
           {!hasData && (
             // Only show hardcoded multi-sections if using the static demo fallback
@@ -336,6 +387,178 @@ export default function NewsAndInsightsArticle({ data }: { data?: any }) {
               </div>
             </div>
           </div>
+        </>
+      )}
+
+      {hasData && (
+        <>
+          {/* Middle Image 1 - Full Width */}
+          {midImage1 && (
+            <div className="w-full h-[738px] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.2)] z-10 pointer-events-none"></div>
+              <Image 
+                src={midImage1}
+                alt="Article Mid Image 1"
+                fill
+                className="object-cover"
+                sizes="100vw"
+                unoptimized
+              />
+              
+              {/* Centered Logo Card for consistency */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-[204px] md:h-[185.79px] bg-white rounded-2xl md:rounded-[32.7857px] shadow-[0px_48px_80px_-16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20">
+                <div className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center">
+                  {logo ? (
+                    <Image src={logo} alt="brand logo" width={112} height={112} className="object-contain" />
+                  ) : (
+                    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
+                      <path d="M16 4L26 22H6L16 4Z" fill="#3145DD" />
+                      <circle cx="16" cy="22" r="4" fill="#A8F2D1" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Sub Section 2 */}
+          {(subHeader2 || subContent2) && (
+            <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-[100px] md:pl-[190px] flex flex-col items-start mb-16 md:mb-[100px]">
+              <div className="w-full max-w-[1248px] flex flex-col items-start">
+                <div className="w-full max-w-[1044px] flex flex-col items-start gap-[20px]">
+                  {subHeader2 && (
+                    <h2 
+                      className="text-[#0F1D07] w-full"
+                      style={{ 
+                        fontFamily: 'var(--font-delight)', 
+                        fontWeight: 500, 
+                        fontSize: '42px', 
+                        lineHeight: '70px', 
+                        letterSpacing: '-0.02em' 
+                      }}
+                    >
+                      {subHeader2}
+                    </h2>
+                  )}
+                  {subContent2 && (
+                    <p 
+                      className="text-[#0F1D07] w-full max-w-[700px]"
+                      style={{ 
+                        fontFamily: 'var(--font-satoshi)', 
+                        fontWeight: 400, 
+                        fontSize: '20px', 
+                        lineHeight: '32px' 
+                      }}
+                    >
+                      {subContent2}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Middle Image 2 - Full Width */}
+          {midImage2 && (
+            <div className="w-full h-[738px] relative overflow-hidden mb-16 md:mb-[100px] shrink-0 bg-[#BDBDBD]">
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.2)] to-[rgba(0,0,0,0.2)] z-10 pointer-events-none"></div>
+              <Image 
+                src={midImage2}
+                alt="Article Mid Image 2"
+                fill
+                className="object-cover"
+                sizes="100vw"
+                unoptimized
+              />
+              
+              {/* Centered Logo Card for consistency */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-[204px] md:h-[185.79px] bg-white rounded-2xl md:rounded-[32.7857px] shadow-[0px_48px_80px_-16px_rgba(0,0,0,0.15)] flex items-center justify-center z-20">
+                <div className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center">
+                  {logo ? (
+                    <Image src={logo} alt="brand logo" width={112} height={112} className="object-contain" />
+                  ) : (
+                    <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
+                      <path d="M16 4L26 22H6L16 4Z" fill="#3145DD" />
+                      <circle cx="16" cy="22" r="4" fill="#A8F2D1" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Two Column Section */}
+          {(col1Header || col1Content || col2Header || col2Content) && (
+            <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-[100px] md:pl-[190px] flex flex-col items-start">
+              <div className="w-full max-w-[1044px] flex flex-col md:flex-row items-start gap-10 md:gap-[40px] mb-20 md:mb-[100px]">
+                {/* Column 1 */}
+                {(col1Header || col1Content) && (
+                  <div className="flex-1 flex flex-col items-start gap-5 max-w-[502px]">
+                    {col1Header && (
+                      <h2 
+                        className="text-[#0F1D07] w-full"
+                        style={{ 
+                          fontFamily: 'var(--font-delight)', 
+                          fontWeight: 500, 
+                          fontSize: '42px', 
+                          lineHeight: '60px', 
+                          letterSpacing: '-0.02em' 
+                        }}
+                      >
+                        {col1Header}
+                      </h2>
+                    )}
+                    {col1Content && (
+                      <p 
+                        className="text-[#0F1D07] w-full"
+                        style={{ 
+                          fontFamily: 'var(--font-satoshi)', 
+                          fontWeight: 400, 
+                          fontSize: '20px', 
+                          lineHeight: '32px' 
+                        }}
+                      >
+                        {col1Content}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* Column 2 */}
+                {(col2Header || col2Content) && (
+                  <div className="flex-1 flex flex-col items-start gap-5 max-w-[502px]">
+                    {col2Header && (
+                      <h2 
+                        className="text-[#0F1D07] w-full"
+                        style={{ 
+                          fontFamily: 'var(--font-delight)', 
+                          fontWeight: 500, 
+                          fontSize: '42px', 
+                          lineHeight: '60px', 
+                          letterSpacing: '-0.02em' 
+                        }}
+                      >
+                        {col2Header}
+                      </h2>
+                    )}
+                    {col2Content && (
+                      <p 
+                        className="text-[#0F1D07] w-full"
+                        style={{ 
+                          fontFamily: 'var(--font-satoshi)', 
+                          fontWeight: 400, 
+                          fontSize: '20px', 
+                          lineHeight: '32px' 
+                        }}
+                      >
+                        {col2Content}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>

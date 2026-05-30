@@ -42,9 +42,20 @@
       ],
       "required": true
     },
+    "news_detailed": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::news-detailed.news-detailed"
+    },
+    "case_study": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::case-study.case-study"
+    },
     "link": {
       "type": "string",
-      "default": "#"
+      "description": "Optional fallback URL if no relation is linked above"
     }
   }
 }
+

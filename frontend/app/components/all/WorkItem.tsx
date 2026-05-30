@@ -12,10 +12,10 @@ export default function WorkItem({ data }: WorkItemProps) {
   if (!data) return null;
 
   return (
-    <section className="w-full bg-white overflow-hidden py-12 lg:py-0 lg:pl-[53px]">
-      <div className="w-full max-w-[1502px] mx-auto flex flex-col lg:flex-row items-center lg:gap-[50px]">
+    <section className="w-full bg-white overflow-hidden py-8 md:py-16 lg:py-0 lg:pl-[53px]">
+      <div className="w-full max-w-[1502px] mx-auto flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-[50px] px-4 md:px-8 lg:px-0">
         {/* Left Side: Featured Image (Frame 2085663066) */}
-        <div className="relative w-full lg:w-[788px] h-[400px] md:h-[600px] lg:h-[967px] flex-shrink-0 rounded-none overflow-hidden">
+        <div className="relative w-full lg:w-[42%] xl:w-[640px] h-[300px] sm:h-[450px] md:h-[600px] lg:h-auto flex-shrink rounded-2xl lg:rounded-none overflow-hidden">
           <Image
             src={getStrapiImageUrl(data.featuredImage) || "/stack2.jpg"}
             alt="Case study featured project"
@@ -29,18 +29,18 @@ export default function WorkItem({ data }: WorkItemProps) {
 
           {/* Play Button (Frame 2085663067) - Centered */}
           <div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[72.95px] h-[72.95px] rounded-full flex items-center justify-center cursor-pointer transition-transform hover:scale-105 shadow-xl"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[55px] h-[55px] sm:w-[72.95px] sm:h-[72.95px] rounded-full flex items-center justify-center cursor-pointer transition-transform hover:scale-105 shadow-xl"
             style={{ backgroundColor: data.playButtonColor || "#FDEBEB" }}
           >
-            <svg width="33" height="33" viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" className="sm:w-[33px] sm:h-[33px]" viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 5V19L19 12L8 5Z" />
             </svg>
           </div>
         </div>
 
         {/* Right Side: Content (Frame 2087326363) */}
-        <div className="flex flex-col flex-1 items-start justify-center px-8 lg:px-0 py-12 lg:py-0 lg:w-[664px]">
-          <div className="flex flex-col max-w-[664px] gap-[60px] lg:gap-[104px]">
+        <div className="flex flex-col flex-1 items-start justify-center py-6 lg:py-12 lg:pr-8 xl:pr-0 w-full lg:w-[58%] xl:w-[812px]">
+          <div className="flex flex-col w-full max-w-[664px] gap-8 sm:gap-12 lg:gap-[60px] xl:gap-[104px]">
 
             {/* Top Content (Frame 2087326716) */}
             <div className="flex flex-col gap-[20px]">
@@ -62,21 +62,17 @@ export default function WorkItem({ data }: WorkItemProps) {
 
               {/* Main Heading */}
               <h2
-                className="font-medium capitalize"
+                className="font-medium capitalize text-[28px] leading-[36px] sm:text-[44px] sm:leading-[54px] lg:text-[56px] lg:leading-[72px]"
                 style={{
                   fontFamily: "var(--font-nohemi)",
                   fontWeight: 500,
-                  fontSize: "56px",
-                  lineHeight: "72px",
                   color: "#0F1D07",
                   maxWidth: "623px",
                   width: "100%",
-                  display: "flex",
-                  alignItems: "center"
                 }}
               >
                 {data.subtitle.split('\n').map((line: string, i: number) => (
-                  <span key={i}>
+                  <span key={i} className="block lg:inline">
                     {line}
                     {i < data.subtitle.split('\n').length - 1 && <br className="hidden lg:block" />}
                   </span>
@@ -85,11 +81,11 @@ export default function WorkItem({ data }: WorkItemProps) {
             </div>
 
             {/* Bottom Content (Frame 2087326651) */}
-            <div className="flex flex-col gap-[32px]">
+            <div className="flex flex-col gap-[32px] w-full">
               <div className="flex flex-col gap-[20px]">
                 {/* Quote */}
                 <p
-                  className="text-[28px] leading-[42px] font-medium capitalize"
+                  className="text-[20px] leading-[30px] sm:text-[24px] sm:leading-[36px] lg:text-[28px] lg:leading-[42px] font-medium capitalize"
                   style={{ fontFamily: "var(--font-delight)", color: "#0F1D07" }}
                 >
                   &ldquo;{data.quote}&rdquo;
@@ -107,7 +103,7 @@ export default function WorkItem({ data }: WorkItemProps) {
 
                 {/* Red Logo Text */}
                 <div
-                  className="text-[32px] font-bold tracking-[0.05em]"
+                  className="text-[24px] sm:text-[28px] lg:text-[32px] font-bold tracking-[0.05em]"
                   style={{ fontFamily: "var(--font-nohemi)", color: data.companyLogoColor || "#D9443E" }}
                 >
                   {data.companyLogo}
@@ -117,7 +113,7 @@ export default function WorkItem({ data }: WorkItemProps) {
               {/* CTA Button (Component 44) */}
               <Link
                 href={data.ctaLink || "#"}
-                className="flex items-center justify-center gap-[10px] px-6 py-[10px] w-[239px] h-[59px] rounded-[18px] transition-opacity hover:opacity-90"
+                className="flex items-center justify-center gap-[10px] px-6 py-[10px] w-full sm:w-[239px] h-[59px] rounded-[18px] transition-opacity hover:opacity-90"
                 style={{ backgroundColor: "#0F1D07" }}
               >
                 <span className="text-[21px] leading-[54px] font-bold text-white" style={{ fontFamily: "var(--font-satoshi)" }}>

@@ -192,7 +192,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-16 lg:gap-x-24 gap-y-12 lg:gap-y-16 mb-20"
+          className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-20"
         >
           {finalPrinciples.map((p, i) => (
             <motion.div
@@ -200,7 +200,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
               variants={itemVariants}
               whileHover="hover"
               initial="initial"
-              className="group flex flex-col items-start gap-4 p-0 w-full"
+              className="group flex flex-col items-start gap-4 p-6 sm:p-8 rounded-none border border-transparent bg-transparent transition-all duration-300 hover:bg-white/[0.05] w-full"
             >
               {/* Icon Container */}
               <div className="w-[36px] h-[36px] flex items-center justify-center text-white/70 mb-2 transition-colors duration-300 group-hover:text-[#95E7D3]">

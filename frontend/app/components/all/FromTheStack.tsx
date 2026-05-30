@@ -8,6 +8,21 @@ import { FromTheStackData, StackItemComponent } from "../../types/strapi";
 import { getStrapiImageUrl } from "@/lib/strapi";
 
 function StackCard({ item }: { item: StackItemComponent }) {
+  // Derive URL from relations or fallback to item.link
+  const newsSlug = item.news_detailed?.data?.attributes?.slug || item.news_detailed?.slug || item.news_detailed?.data?.slug;
+  const caseSlug = item.case_study?.data?.attributes?.slug || item.case_study?.slug || item.case_study?.data?.slug;
+  
+  let href = item.link || "#";
+  let ctaLabel = "Read Case Study";
+
+  if (caseSlug) {
+    href = `/case-study/${caseSlug}`;
+    ctaLabel = "Read Case Study";
+  } else if (newsSlug) {
+    href = `/news-detailed/${newsSlug}`;
+    ctaLabel = "Read Article";
+  }
+
   return (
     <div
       className="flex flex-col gap-4 sm:gap-6 shrink-0 relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group/item w-[280px] sm:w-[400px] md:w-[639px]"
@@ -60,8 +75,8 @@ function StackCard({ item }: { item: StackItemComponent }) {
         >
           {item.description}
         </p>
-        <Link href={item.link || "#"} className="flex items-center gap-1 sm:gap-2 text-black font-medium text-[14px] hover:underline w-fit mt-1">
-          Read Case Study
+        <Link href={href} className="flex items-center gap-1 sm:gap-2 text-black font-medium text-[14px] hover:underline w-fit mt-1">
+          {ctaLabel}
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_6227_81831)">
               <path d="M5 15L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
