@@ -126,25 +126,27 @@ export default function LetsTalk({ data }: LetsTalkProps = {}) {
           {/* Row 1: First Name + Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             <div className="flex flex-col gap-3">
-              <label className="text-white text-[10px] font-medium uppercase tracking-wider">First Name *</label>
+              <label className="text-white text-[12px] font-medium uppercase tracking-wider">First Name *</label>
               <input
                 type="text"
                 placeholder="Anna"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                className="bg-transparent border-b border-gray-600 text-white text-sm md:text-base pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                className="bg-transparent border-b border-gray-600 text-white text-[18px] font-bold pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                style={{ fontWeight: "700" }}
                 suppressHydrationWarning
               />
             </div>
             <div className="flex flex-col gap-3">
-              <label className="text-white text-[10px] font-medium uppercase tracking-wider">Last Name</label>
+              <label className="text-white text-[12px] font-medium uppercase tracking-wider">Last Name</label>
               <input
                 type="text"
                 placeholder="Louis"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="bg-transparent border-b border-gray-600 text-white text-sm md:text-base pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                className="bg-transparent border-b border-gray-600 text-white text-[18px] font-bold pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                style={{ fontWeight: "700" }}
                 suppressHydrationWarning
               />
             </div>
@@ -153,25 +155,27 @@ export default function LetsTalk({ data }: LetsTalkProps = {}) {
           {/* Row 2: Email + Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             <div className="flex flex-col gap-3">
-              <label className="text-white text-[10px] font-medium uppercase tracking-wider">Email Address *</label>
+              <label className="text-white text-[12px] font-medium uppercase tracking-wider">Email Address *</label>
               <input
                 type="email"
                 placeholder="Anna.Louis@Email.Com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-transparent border-b border-gray-600 text-white text-sm md:text-base pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                className="bg-transparent border-b border-gray-600 text-white text-[18px] font-bold pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                style={{ fontWeight: "700" }}
                 suppressHydrationWarning
               />
             </div>
             <div className="flex flex-col gap-3">
-              <label className="text-white text-[10px] font-medium uppercase tracking-wider">Phone Number</label>
+              <label className="text-white text-[12px] font-medium uppercase tracking-wider">Phone Number</label>
               <input
                 type="tel"
                 placeholder="+91"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="bg-transparent border-b border-gray-600 text-white text-sm md:text-base pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                className="bg-transparent border-b border-gray-600 text-white text-[18px] font-bold pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+                style={{ fontWeight: "700" }}
                 suppressHydrationWarning
               />
             </div>
@@ -179,13 +183,14 @@ export default function LetsTalk({ data }: LetsTalkProps = {}) {
 
           {/* Row 3: Project Details */}
           <div className="flex flex-col gap-3">
-            <label className="text-white text-[10px] font-medium uppercase tracking-wider">Project Details</label>
+            <label className="text-white text-[12px] font-medium uppercase tracking-wider">Project Details</label>
             <input
               type="text"
               placeholder="Tell Us About Your Project..."
               value={projectDetails}
               onChange={(e) => setProjectDetails(e.target.value)}
-              className="bg-transparent border-b border-gray-600 text-white text-sm md:text-base pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+              className="bg-transparent border-b border-gray-600 text-white text-[18px] font-bold pb-2 md:pb-3 focus:outline-none focus:border-white transition-colors placeholder:text-gray-500"
+              style={{ fontWeight: "700" }}
               suppressHydrationWarning
             />
           </div>
@@ -195,21 +200,44 @@ export default function LetsTalk({ data }: LetsTalkProps = {}) {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="self-start px-8 py-3.5 bg-[#3145DD] hover:bg-[#3145DD]/90 text-white rounded-full font-semibold flex items-center gap-3 transition-all hover:scale-105 shadow-lg text-sm disabled:opacity-50 disabled:hover:scale-100 disabled:scale-100"
+              style={{
+                boxSizing: "border-box",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "10px 24px",
+                gap: "10px",
+                width: "207px",
+                height: "59px",
+                backgroundColor: "#3145DD",
+                borderRadius: "18px",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+              }}
+              className="hover:bg-[#3145DD]/90 hover:scale-[1.03] active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
               suppressHydrationWarning
             >
-              {status === "loading" ? "Sending..." : "Talk to us"}
+              <span
+                style={{
+                  fontFamily: "var(--font-satoshi), sans-serif",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  fontSize: "16px",
+                  color: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  lineHeight: "1",
+                }}
+              >
+                {status === "loading" ? "Sending..." : "Talk to us"}
+              </span>
               {status !== "loading" && (
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_6227_81996)">
-                    <path d="M5 15L15 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M6.875 5H15V13.125" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_6227_81996">
-                      <rect width="20" height="20" fill="white"/>
-                    </clipPath>
-                  </defs>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+                  <path d="M5 15L15 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M6.875 5H15V13.125" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               )}
             </button>

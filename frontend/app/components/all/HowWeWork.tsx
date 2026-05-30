@@ -60,6 +60,9 @@ export default function HowWeWork({ data }: HowWeWorkProps) {
 
   return (
     <section className="w-full flex flex-col items-center bg-white py-16 px-6 md:px-[104px] pt-24 lg:pt-32">
+      {/* Top Separator Line */}
+      <div className="w-full max-w-[1400px] border-t-[0.5px] border-[#969696] mb-10 lg:mb-14" />
+
       {/* Header Section (Frame 2087326579) */}
       <div className="w-full max-w-[1400px] flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 lg:gap-[24px]">
         {/* Left column (Label & Headline) */}

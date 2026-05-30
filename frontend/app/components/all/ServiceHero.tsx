@@ -7,11 +7,43 @@ import { ServiceHeroComponent } from "@/lib/strapi";
 export default function ServiceHero({ data }: { data?: ServiceHeroComponent }) {
   // Extract Dynamic fields with Fallbacks
   const mainHeading = data?.mainHeading || "Strategise. Design. Build. Grow.";
-  const description = data?.description || "We document what we learn — from design sprints to engineering breakthroughs, new project launches, experiments, and small discoveries that move our work forward.";
+  const description = data?.description || "We help brands, founders, and teams turn digital ideas into clear, usable, and scalable products.\nFrom websites and e-commerce platforms to mobile apps, CMS systems, AI led tools, and long term support,\nwe work across the full lifecycle of digital experience.";
   const primaryButtonText = data?.primaryButtonText || "Start Building";
   const primaryButtonLink = data?.primaryButtonLink || "/contact";
   const secondaryButtonText = data?.secondaryButtonText || "View Our Work";
   const secondaryButtonLink = data?.secondaryButtonLink || "/work";
+
+  // Format description into exactly 3 lines on desktop if it contains the targets
+  let formattedDescription: React.ReactNode = description;
+  if (typeof description === "string") {
+    // Normalise spaces to ensure easy matching
+    const cleanDesc = description.replace(/\s+/g, " ").trim();
+    const target1 = "scalable products.";
+    const target2 = "long term support,";
+    
+    if (cleanDesc.includes(target1) && cleanDesc.includes(target2)) {
+      const idx1 = cleanDesc.indexOf(target1) + target1.length;
+      const part1 = cleanDesc.substring(0, idx1).trim();
+      const rest1 = cleanDesc.substring(idx1).trim();
+      
+      const idx2 = rest1.indexOf(target2) + target2.length;
+      if (idx2 > target2.length) {
+        const part2 = rest1.substring(0, idx2).trim();
+        const part3 = rest1.substring(idx2).trim();
+        
+        formattedDescription = (
+          <>
+            {part1}
+            <br className="hidden md:inline" />
+            {part2}
+            <br className="hidden md:inline" />
+            {part3}
+          </>
+        );
+      }
+    }
+  }
+
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center pt-24 pb-16 px-6 md:px-12 lg:px-20 xl:px-24 md:pl-[100px] md:pr-[100px]">
       {/* 
@@ -38,17 +70,18 @@ export default function ServiceHero({ data }: { data?: ServiceHeroComponent }) {
             {mainHeading}
           </h1>
 
-          {/* Description Paragraph - Updated to match Figma 24px/40px */}
+          {/* Description Paragraph - Updated to match Figma 18px */}
           <p 
             className="text-[#0D1C06] max-w-[1048px] opacity-90"
             style={{
               fontFamily: "var(--font-satoshi)",
               fontWeight: 500,
-              fontSize: "clamp(16px, 2vw, 24px)",
-              lineHeight: "clamp(26px, 3vw, 40px)",
+              fontSize: "18px",
+              lineHeight: "32px",
+              whiteSpace: "pre-line",
             }}
           >
-            {description}
+            {formattedDescription}
           </p>
         </div>
 
@@ -57,8 +90,8 @@ export default function ServiceHero({ data }: { data?: ServiceHeroComponent }) {
           {/* Primary Button: Start Building */}
           <Link
             href={primaryButtonLink}
-            className="w-full sm:w-auto bg-[#0D1C06] text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-[16px] md:text-[18px] font-medium hover:bg-black transition-all duration-300 active:scale-95 shadow-sm text-center"
-            style={{ fontFamily: "var(--font-satoshi)" }}
+            className="w-full sm:w-auto bg-[#0D1C06] text-white px-8 md:px-10 py-4 md:py-5 rounded-[18px] text-[16px] md:text-[18px] font-medium hover:bg-black transition-all duration-300 active:scale-95 shadow-sm text-center"
+            style={{ fontFamily: "var(--font-satoshi)", borderRadius: "18px" }}
           >
             {primaryButtonText}
           </Link>
