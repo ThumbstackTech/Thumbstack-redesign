@@ -158,7 +158,7 @@ export default function HowWeWork({ data }: HowWeWorkProps) {
                     {getIconSvg(stage.icon)}
                   </div>
                   <h3
-                    className="text-[#0F1D07] font-medium tracking-[0.01em] uppercase"
+                    className="text-[#0F1D07] font-medium tracking-[0.01em]"
                     style={{
                       fontFamily: "var(--font-delight)",
                       fontSize: "clamp(28px, 4vw, 42px)",

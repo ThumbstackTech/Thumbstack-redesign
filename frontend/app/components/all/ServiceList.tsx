@@ -38,7 +38,7 @@ export default function ServiceList({ data }: { data?: ServiceListData }) {
     >
       <div className="max-w-[1401px] mx-auto flex flex-col gap-16 lg:gap-[104px]">
         {/* Top Row: Heading and Description */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-[88px] items-start justify-between">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-[88px] items-center justify-between">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

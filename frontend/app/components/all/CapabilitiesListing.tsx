@@ -21,7 +21,7 @@ function getRowLabel(title: string, index: number): string {
   if (t.includes("digital experience") || t.includes("interactive")) return "Interactive Web";
   if (t.includes("product team")) return "Product Team";
   if (t.includes("support team") || t.includes("maintenance")) return "Web Support";
-  
+
   // Fallback to index-based defaults matching the Figma design order
   const defaults = [
     "What we build",
@@ -54,9 +54,9 @@ export default function CapabilitiesListing({ data }: CapabilitiesListingProps) 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-start gap-4 max-w-[668px] pr-4 lg:pr-12"
+          className="flex flex-col items-start gap-4 max-w-[668px]"
         >
-          <span 
+          <span
             className="text-[#0F1D07] font-medium text-lg lg:text-[24px] leading-[36px]"
             style={{ fontFamily: "var(--font-satoshi)" }}
           >
@@ -100,8 +100,8 @@ export default function CapabilitiesListing({ data }: CapabilitiesListingProps) 
       <div className="w-full max-w-[1400px] flex flex-col gap-20 lg:gap-[104px]">
         {items.map((item, index) => {
           const rowLabel = getRowLabel(item.title, index);
-          const tagsArray = item.tags 
-            ? item.tags.split(",").map(t => t.trim()).filter(Boolean) 
+          const tagsArray = item.tags
+            ? item.tags.split(",").map(t => t.trim()).filter(Boolean)
             : [];
 
           return (
@@ -122,15 +122,15 @@ export default function CapabilitiesListing({ data }: CapabilitiesListingProps) 
               </motion.span>
 
               {/* Row Content (Frame 2087326751) */}
-              <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-[154px] w-full">
-                
+              <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-[60px] w-full">
+
                 {/* Left Column: Title, Description, Explore Link (Frame 2087326595) */}
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="flex flex-col items-start gap-4 lg:gap-6 max-w-[736px] w-full"
+                  className="flex flex-col items-start gap-4 lg:gap-6 max-w-[850px] w-full"
                 >
                   <h3
                     className="text-[#0F1D07] font-medium tracking-[-0.01em]"
@@ -167,12 +167,12 @@ export default function CapabilitiesListing({ data }: CapabilitiesListingProps) 
                       className="transition-transform duration-300 group-hover/link:translate-x-[6px]"
                     >
                       <g clipPath="url(#clip-capabilities-listing)">
-                        <path d="M10.6082 21.214H31.8214" stroke="#3145DD" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M23.2031 12.5957L31.821 21.2136L23.2031 29.8314" stroke="#3145DD" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M10.6082 21.214H31.8214" stroke="#3145DD" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M23.2031 12.5957L31.821 21.2136L23.2031 29.8314" stroke="#3145DD" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                       </g>
                       <defs>
                         <clipPath id="clip-capabilities-listing">
-                          <rect width="30" height="30" fill="white" transform="translate(21.2148) rotate(45)"/>
+                          <rect width="30" height="30" fill="white" transform="translate(21.2148) rotate(45)" />
                         </clipPath>
                       </defs>
                     </svg>

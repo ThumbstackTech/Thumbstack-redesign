@@ -42,13 +42,13 @@ export default function ServiceInfo({ data }: ServiceInfoProps) {
 
   return (
     <section className="w-full flex flex-col items-center justify-center bg-white px-6 md:px-[100px] py-16 md:py-[100px]">
-      <div className="w-full max-w-[1400px] flex flex-col items-start gap-[57px] relative">
+      <div className="w-full max-w-[1400px] flex flex-col items-start gap-[24px] relative">
         
         {/* Section Header Tagline */}
         <div className="w-full flex flex-col items-start gap-4">
           <span 
-            className="font-medium text-[16px] md:text-[18px] uppercase tracking-[0.05em] text-[#0F1D07]"
-            style={{ fontFamily: "var(--font-satoshi)" }}
+            className="font-medium text-[#0F1D07]"
+            style={{ fontFamily: "var(--font-satoshi)", fontSize: "24px", lineHeight: "36px", letterSpacing: "0%" }}
           >
             {tagline}
           </span>
@@ -77,8 +77,8 @@ export default function ServiceInfo({ data }: ServiceInfoProps) {
                       className="font-normal text-[#0F1D07] tracking-[-0.01em] max-w-[580px]"
                       style={{
                         fontFamily: "var(--font-delight)",
-                        fontSize: "clamp(28px, 4vw, 48px)",
-                        lineHeight: "clamp(36px, 5vw, 60px)",
+                        fontSize: "clamp(22px, 3vw, 36px)",
+                        lineHeight: "clamp(30px, 4vw, 48px)",
                         fontWeight: 500,
                       }}
                     >
@@ -103,7 +103,7 @@ export default function ServiceInfo({ data }: ServiceInfoProps) {
                     {tagList.length > 0 && (
                       <div className="flex flex-col items-start gap-4 w-full">
                         <span 
-                          className="text-[12px] md:text-[14px] font-bold uppercase tracking-[0.05em] text-[#0F1D07]"
+                          className="text-[12px] md:text-[13px] font-bold tracking-[0.03em] text-[#0F1D07]"
                           style={{ fontFamily: "var(--font-satoshi)" }}
                         >
                           What we cover
@@ -112,7 +112,7 @@ export default function ServiceInfo({ data }: ServiceInfoProps) {
                           {tagList.map((tag, tagIdx) => (
                             <div
                               key={tagIdx}
-                              className="px-4 py-2 bg-[#F5F5F5] rounded-[18px] text-[13px] md:text-[15px] text-[#0F1D07] font-medium transition-all duration-300 hover:bg-[#EAEAEA] cursor-default"
+                              className="flex flex-row justify-center items-center px-[18px] py-[10px] gap-[10px] bg-[#F2F2F2] rounded-[12px] text-[13px] md:text-[15px] text-[#0F1D07] font-medium cursor-default"
                               style={{ fontFamily: "var(--font-satoshi)" }}
                             >
                               {tag}
@@ -126,7 +126,7 @@ export default function ServiceInfo({ data }: ServiceInfoProps) {
                     {(item.outcomeTitle || item.outcomeDescription) && (
                       <div className="flex flex-col items-start gap-3 w-full mt-2">
                         <span
-                          className="text-[12px] md:text-[14px] font-bold uppercase tracking-[0.05em] text-[#0F1D07]"
+                          className="text-[12px] md:text-[13px] font-bold tracking-[0.03em] text-[#0F1D07]"
                           style={{ fontFamily: "var(--font-satoshi)" }}
                         >
                           {item.outcomeTitle || "Outcome"}

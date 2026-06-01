@@ -51,7 +51,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
         style={{ background: "#141417" }}
       >
         {/* Inner container — centred 1400px */}
-        <div className="max-w-[1400px] w-full mx-auto px-6 md:px-16 lg:px-24 pt-[45px] pb-[40px] flex flex-col justify-between flex-grow gap-[54px]">
+        <div className="max-w-[1400px] w-full mx-auto px-6 md:px-16 lg:px-24 pt-[45px] pb-[40px] flex flex-col justify-end flex-grow gap-[20px]">
 
           {/* ── Breadcrumbs (Frame 335) ── */}
           <FadeUp>
@@ -252,7 +252,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
       <section className="bg-white py-20 md:py-28 border-t border-black/5">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-[190px]">
-            
+
             {/* Left: Text & Principles (Frame 2087326510) */}
             <div className="flex flex-col gap-[62px] w-full lg:max-w-[729px]">
               {/* Frame 2087326504 */}
@@ -261,7 +261,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
                   <h2
                     className="text-[#0F1D07] m-0"
                     style={{
-                      fontFamily: "var(--font-nohemi), 'Nohemi', sans-serif",
+                      fontFamily: "var(--font-delight)",
                       fontWeight: 500,
                       fontSize: "clamp(48px, 6vw, 80px)",
                       lineHeight: "clamp(60px, 8vw, 102px)",
@@ -294,7 +294,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
               {data.approachPrinciples && data.approachPrinciples.length > 0 && (
                 <FadeUp delay={0.1}>
                   <div className="flex flex-col gap-[20px] w-full lg:max-w-[729px]">
-                    <span 
+                    <span
                       className="text-[#0F1D07]"
                       style={{
                         fontFamily: "'Satoshi Variable', 'Satoshi', sans-serif",
@@ -333,9 +333,9 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
             {/* Right: Brand logo block (Frame 2087326508) */}
             {data.approachBrandText && (
               <FadeUp delay={0.15} className="w-full lg:w-[481px] shrink-0">
-                <div 
-                  className="flex items-center justify-center w-full lg:w-[481px] h-[464px] rounded-[24px]" 
-                  style={{ 
+                <div
+                  className="flex items-center justify-center w-full lg:w-[481px] h-[464px] rounded-[24px]"
+                  style={{
                     background: "#18181A",
                     border: "1px solid rgba(110, 110, 110, 0.25)"
                   }}
@@ -518,7 +518,7 @@ export default function CaseStudyTemplate({ data }: CaseStudyTemplateProps) {
       {data.dynamicContent && data.dynamicContent.length > 0 && (
         <SectionRenderer sections={data.dynamicContent} />
       )}
-      
+
     </main>
   );
 }
