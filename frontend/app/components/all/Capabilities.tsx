@@ -50,15 +50,16 @@ function CapabilitiesInner({ capabilities }: { capabilities: CapabilityCardData[
   return (
     <div className="w-full bg-white overflow-hidden">
       {/* ── Outer frame: 1600 × 1004 per Figma ─────────────────────── */}
-      <div className="relative w-full max-w-[1600px] mx-auto min-h-[600px] md:min-h-[1004px]">
+      <div className="relative w-full max-w-[1600px] mx-auto flex flex-col md:block pt-16 pb-12 md:py-0 md:min-h-[1004px]">
 
         {/* ── Header block (top: 132px, left: 100px) ─────────────────── */}
         <div
           className="
-            absolute
-            top-8 md:top-[132px]
-            left-4 md:left-[100px]
-            w-[calc(100%-32px)] md:w-[1400px]
+            relative md:absolute
+            top-0 md:top-[132px]
+            left-0 md:left-[100px]
+            w-full md:w-[1400px]
+            px-6 md:px-0
             flex flex-col
           "
         >
@@ -124,15 +125,18 @@ function CapabilitiesInner({ capabilities }: { capabilities: CapabilityCardData[
           </div>
         </div>
 
-        {/* ── Draggable cards track (top: 290px, left: 100px) ────────── */}
+        {/* ── Draggable/Scrollable cards track (top: 290px, left: 100px) ────────── */}
         <div
           className="
-            absolute
-            top-[220px] md:top-[290px]
-            left-4 md:left-[100px]
-            w-[calc(100%-32px)] md:w-[1498px]
+            relative md:absolute
+            mt-10 md:mt-0
+            top-0 md:top-[290px]
+            left-0 md:left-[100px]
+            w-full md:w-[1498px]
+            pl-6 md:pl-0
             h-[580px] md:h-[560px]
-            overflow-hidden
+            overflow-x-auto md:overflow-hidden
+            scrollbar-hide
           "
         >
           <motion.div
@@ -177,8 +181,7 @@ function CapabilityCard({ capability, isHovered, onHover, onHoverEnd }: CardProp
 
   return (
     <div
-      className="relative flex-shrink-0 flex flex-col items-center select-none"
-      style={{ width: `${CARD_WIDTH}px`, height: "542.43px" }}
+      className="relative flex-shrink-0 flex flex-col items-center select-none w-[317px] md:w-[407px] h-[542.43px]"
       onMouseEnter={onHover}
       onMouseLeave={onHoverEnd}
     >
@@ -269,23 +272,18 @@ function CapabilityCard({ capability, isHovered, onHover, onHoverEnd }: CardProp
       </div>
 
       {/* Divider line + centre dot */}
-      <div className="absolute" style={{ bottom: "10px", left: 0, width: "100%", height: "10px" }}>
+      <div className="absolute bottom-[10px] left-0 w-full h-[10px]">
         <div
+          className="absolute left-0 top-0 w-full transition-colors duration-300"
           style={{
-            position: "absolute",
-            width: "407px",
-            left: 0,
-            top: 0,
             borderTop: `1px solid ${darkBg ? "rgba(255,255,255,0.15)" : "#D0D0D0"}`,
           }}
         />
         <div
-          className="absolute rounded-full transition-colors duration-300"
+          className="absolute rounded-full transition-colors duration-300 left-1/2 -translate-x-1/2 top-[-5px]"
           style={{
             width: "10px",
             height: "10px",
-            left: "199px",
-            top: "-5px",
             backgroundColor: darkBg ? "#ffffff" : "#0F1D07",
           }}
         />

@@ -40,15 +40,15 @@ export default function CapabilitiesHeroDetail({ data }: CapabilitiesHeroDetailP
   };
 
   return (
-    <section className="w-full min-h-screen bg-white py-16 lg:py-24 px-6 md:px-[100px] flex items-center justify-center">
-      <div className="w-full max-w-[1400px] flex flex-col xl:flex-row items-center justify-between gap-12 xl:gap-[80px]">
+    <section className="w-full min-h-screen bg-white pt-[160px] pb-16 lg:py-24 px-6 md:px-[100px] flex items-center justify-center">
+      <div className="w-full max-w-[1400px] flex flex-col xl:flex-row items-start justify-between gap-12 xl:gap-[80px]">
         
         {/* Left Column: Heading & Content (Frame 2087326579 / 2087326411) */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-start gap-8 max-w-[690px] w-full"
+          className="flex flex-col items-start gap-8 max-w-[690px] w-full mt-0 xl:mt-24"
         >
           <div className="flex flex-col items-start gap-4 w-full">
             <span
@@ -121,15 +121,15 @@ export default function CapabilitiesHeroDetail({ data }: CapabilitiesHeroDetailP
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-          className="w-full max-w-[688px] bg-white rounded-[16px] shadow-[0px_4px_29px_rgba(0,0,0,0.09)] p-8 md:p-[52px_40px] flex flex-col justify-between items-stretch gap-8 min-h-[737px] border border-[#f0f0f0]"
+          className="w-full max-w-[688px] bg-white rounded-[16px] shadow-[0px_4px_16px_rgba(0,0,0,0.04)] p-8 md:p-[52px_40px] flex flex-col justify-between items-stretch gap-8 min-h-[737px] border border-[#f0f0f0]"
         >
           <AnimatePresence mode="wait">
             {!submitted ? (
               <form onSubmit={handleSubmit} className="flex flex-col justify-between h-full w-full gap-8">
                 {/* Form fields grid */}
-                <div className="flex flex-col gap-8 md:gap-10">
+                <div className="flex flex-col gap-6 md:gap-8">
                   {/* Row 1: First Name & Last Name */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-[60px]">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-[40px]">
                     {/* First Name */}
                     <div className="flex flex-col items-start gap-2 w-full">
                       <label
@@ -170,7 +170,7 @@ export default function CapabilitiesHeroDetail({ data }: CapabilitiesHeroDetailP
                   </div>
 
                   {/* Row 2: Email & Phone Number */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-[60px]">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-[40px]">
                     {/* Email */}
                     <div className="flex flex-col items-start gap-2 w-full">
                       <label

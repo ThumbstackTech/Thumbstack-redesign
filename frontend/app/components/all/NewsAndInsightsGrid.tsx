@@ -182,7 +182,7 @@ function Card({ card }: { card: CardType }) {
       className="flex flex-col gap-6 flex-1"
       style={{ minWidth: 0 }}
     >
-      <div className="relative w-full rounded-xl overflow-hidden flex-shrink-0 h-[240px] md:h-[445px]">
+      <div className="relative w-full rounded-xl overflow-hidden flex-shrink-0 h-[220px] sm:h-[320px] md:h-[445px]">
         {card.visual === "red-design" && <RedDesignVisual />}
         {card.visual === "purple-clarity" && <PurpleClarityVisual />}
         {card.visual === "blue-speed" && <BlueSpeedVisual />}
@@ -259,6 +259,7 @@ function Card({ card }: { card: CardType }) {
 // ── Main Grid Component ────────────────────────────────
 export default function NewsAndInsightsGrid({ data }: { data?: any }) {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [activeTag, setActiveTag] = useState<string | null>(null);
   const [dbCards, setDbCards] = useState<CardType[]>([]);
 
   useEffect(() => {
@@ -323,6 +324,15 @@ export default function NewsAndInsightsGrid({ data }: { data?: any }) {
     ? cardsToRender
     : cardsToRender.filter((c) => c.category === activeCategory);
 
+  if (activeTag) {
+    filtered = filtered.filter(
+      (c) =>
+        c.tag?.toLowerCase().includes(activeTag.toLowerCase()) ||
+        c.title?.toLowerCase().includes(activeTag.toLowerCase()) ||
+        c.description?.toLowerCase().includes(activeTag.toLowerCase())
+    );
+  }
+
   if (typeof data?.limit === "number" && data.limit > 0) {
     filtered = filtered.slice(0, data.limit);
   }
@@ -332,8 +342,8 @@ export default function NewsAndInsightsGrid({ data }: { data?: any }) {
   }
 
   return (
-    <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-[105px]">
-      <div className="max-w-[1600px] mx-auto flex flex-col gap-[68px]">
+    <section className="w-full bg-white py-16 md:py-24 px-6 md:px-12 lg:px-[105px]">
+      <div className="max-w-[1600px] mx-auto flex flex-col gap-8 md:gap-[68px]">
         
         {/* Header Block */}
         {(data?.title || data?.subtitle) && (
@@ -368,39 +378,86 @@ export default function NewsAndInsightsGrid({ data }: { data?: any }) {
           </div>
         )}
 
-        {/* Filter Tabs */}
+        {/* Filter Tabs & Sub-filters Container */}
         {data?.showFilters !== false && categories.length > 1 && (
-          <div className="flex flex-col gap-[45px]">
-            <div className="flex flex-row items-center gap-6 md:gap-[47px] overflow-x-auto scrollbar-hide pb-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  suppressHydrationWarning
-                  className="transition-opacity whitespace-nowrap"
-                  style={{
-                    fontFamily: "var(--font-nohemi)",
-                    fontWeight: 500,
-                    fontSize: "clamp(20px, 4vw, 30px)",
-                    lineHeight: "1",
-                    letterSpacing: "-0.02em",
-                    color: "#0F1D07",
-                    opacity: activeCategory === cat ? 1 : 0.4,
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: 0,
-                  }}
-                >
-                  {cat}
-                </button>
-              ))}
+          <div className="flex flex-col gap-6 md:gap-[45px]">
+            <div className="relative flex flex-row items-center justify-between w-full">
+              <div className="flex flex-row items-center gap-6 md:gap-[47px] overflow-x-auto scrollbar-hide pb-2 w-full pr-12 md:pr-0">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    suppressHydrationWarning
+                    className="transition-opacity whitespace-nowrap"
+                    style={{
+                      fontFamily: "var(--font-nohemi)",
+                      fontWeight: 500,
+                      fontSize: "clamp(20px, 4vw, 30px)",
+                      lineHeight: "1",
+                      letterSpacing: "-0.02em",
+                      color: "#0F1D07",
+                      opacity: activeCategory === cat ? 1 : 0.4,
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Scroll caret indicator for mobile */}
+              <div className="flex md:hidden absolute right-0 top-1/2 -translate-y-1/2 bg-white pl-4 pr-1 z-10 pointer-events-none">
+                <div className="w-[32px] h-[32px] rounded-full bg-black flex items-center justify-center pointer-events-auto cursor-pointer shadow-md">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Sub-filters (Tags) */}
+            <div className="flex md:hidden flex-row items-center gap-2 overflow-x-auto scrollbar-hide pb-1">
+              {["Design", "Product", "Technology"].map((t) => {
+                const isActive = activeTag === t;
+                return (
+                  <button
+                    key={t}
+                    onClick={() => setActiveTag(activeTag === t ? null : t)}
+                    className={`px-5 py-2 rounded-full border text-[14px] font-medium font-satoshi transition-all duration-300 ${
+                      isActive
+                        ? "bg-[#0F1D07] text-white border-[#0F1D07]"
+                        : "bg-white text-[#0F1D07] border-[#0F1D07]/20 hover:border-[#0F1D07]/50"
+                    }`}
+                  >
+                    {t}
+                  </button>
+                );
+              })}
+              
+              {/* Filter button with adjustment sliders */}
+              <button className="flex items-center gap-2 px-5 py-2 rounded-full border border-[#0F1D07]/20 text-[14px] font-medium font-satoshi text-[#0F1D07] ml-auto shrink-0">
+                Filter
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70">
+                  <line x1="4" y1="21" x2="4" y2="14" />
+                  <line x1="4" y1="10" x2="4" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12" y2="3" />
+                  <line x1="20" y1="21" x2="20" y2="16" />
+                  <line x1="20" y1="12" x2="20" y2="3" />
+                  <line x1="1" y1="14" x2="7" y2="14" />
+                  <line x1="9" y1="8" x2="15" y2="8" />
+                  <line x1="17" y1="16" x2="23" y2="16" />
+                </svg>
+              </button>
             </div>
           </div>
         )}
 
         {/* Cards Grid */}
-        <motion.div layout className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-12 md:gap-y-[80px]">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-12 md:gap-y-[80px]">
           <AnimatePresence>
             {filtered.map((card) => (
               <Card key={card.id} card={card} />

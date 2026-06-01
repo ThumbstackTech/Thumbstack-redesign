@@ -52,10 +52,10 @@ export default function CapabilitiesFeatures({ data }: { data?: CapabilitiesFeat
 
   return (
     <section className="w-full bg-white py-[80px] md:py-[120px] px-6 md:px-[100px]">
-      <div className="max-w-[1400px] mx-auto flex flex-col gap-[60px] md:gap-[104px]">
+      <div className="max-w-[1400px] mx-auto flex flex-col gap-[40px] md:gap-[60px]">
 
         {/* Header Text Block */}
-        <div className="flex flex-col gap-6 max-w-[1108px]">
+        <div className="flex flex-col gap-6 max-w-[1108px] pr-4 lg:pr-12">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -54,7 +54,7 @@ export default function CapabilitiesListing({ data }: CapabilitiesListingProps) 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-start gap-4 max-w-[668px]"
+          className="flex flex-col items-start gap-4 max-w-[668px] pr-4 lg:pr-12"
         >
           <span 
             className="text-[#0F1D07] font-medium text-lg lg:text-[24px] leading-[36px]"

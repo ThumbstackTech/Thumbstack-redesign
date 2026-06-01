@@ -18,7 +18,7 @@ export default function CapabilitiesHero({ data }: CapabilitiesHeroProps) {
   const viewWorkLink = data?.viewWorkLink || "/our-work";
 
   return (
-    <section className="w-full min-h-screen bg-[#3145DD] relative flex flex-col justify-start pt-[200px] md:pt-[280px] pb-12 px-4 sm:px-6 md:px-8 lg:px-[100px] xl:px-[120px] snap-start">
+    <section className="w-full min-h-[100svh] md:min-h-[957px] bg-[#3145DD] relative flex flex-col justify-start pt-[120px] md:pt-[280px] pb-24 md:pb-[140px] px-6 sm:px-6 md:px-8 lg:px-[100px] xl:px-[120px] snap-start">
       {/* Container for content, aligned to the left */}
       <div className="flex flex-col items-start gap-10 md:gap-[50px] w-full max-w-[1048px] z-10 relative">
         
@@ -55,7 +55,7 @@ export default function CapabilitiesHero({ data }: CapabilitiesHeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="text-white font-medium text-[16px] md:text-[24px] leading-relaxed md:leading-[40px] max-w-[859px] mt-2 md:mt-0"
+            className="text-white font-medium text-[16px] md:text-[18px] leading-relaxed md:leading-[32px] max-w-[859px] mt-2 md:mt-0"
             style={{ fontFamily: "var(--font-satoshi)" }}
           >
             {description}
@@ -72,7 +72,7 @@ export default function CapabilitiesHero({ data }: CapabilitiesHeroProps) {
           {/* Start Building Button */}
           <Link 
             href={ctaLink} 
-            className="bg-white rounded-[18px] px-6 h-[59px] flex items-center justify-center hover:scale-105 transition-transform duration-300"
+            className="bg-white rounded-[18px] px-8 md:px-[42px] h-[59px] flex items-center justify-center hover:scale-105 transition-transform duration-300"
           >
             <span 
               className="text-[#0F1D07] font-bold text-[16px]"
@@ -93,10 +93,9 @@ export default function CapabilitiesHero({ data }: CapabilitiesHeroProps) {
             >
               {viewWorkText}
             </span>
-            <div className="w-[30px] h-[30px] relative flex items-center justify-center group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
+            <div className="w-[30px] h-[30px] relative flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 19L19 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M7 5H19V17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
           </Link>

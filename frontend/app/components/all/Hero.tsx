@@ -21,6 +21,19 @@ export default function Hero({ data }: HeroProps) {
   return (
     <section className="min-h-screen w-full flex flex-col justify-center pt-[70px] md:pt-[86px] lg:pt-[102px] pb-10 md:pb-12 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-24 snap-start relative bg-white md:pl-[90px] md:pr-[90px] overflow-x-clip gap-4 md:gap-6">
 
+      {/* Mobile-only Spinning Logo */}
+      <div className="lg:hidden flex justify-start w-full max-w-[1600px] mx-auto pt-4 pb-2">
+        <div className="relative w-20 h-20">
+          <Image
+            src="/circle.png"
+            alt="Decorative spinning circle"
+            fill
+            sizes="80px"
+            className="object-contain animate-[spin_20s_linear_infinite]"
+          />
+        </div>
+      </div>
+
       {/* Top row */}
       <div className="flex justify-between items-start w-full max-w-[1600px] mx-auto pt-0.5 md:pt-[22px] pb-1 relative z-10">
         <Link

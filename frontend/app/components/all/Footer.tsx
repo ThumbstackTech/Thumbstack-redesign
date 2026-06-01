@@ -77,7 +77,7 @@ export default function Footer({ data }: FooterProps) {
       <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-24 md:pl-[90px] md:pr-[90px] pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 md:pb-12 flex flex-col gap-12 md:gap-16">
 
         {/* Main 3-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_0.8fr] gap-12 md:gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_0.8fr_1fr] gap-12 md:gap-16 lg:gap-24">
 
           {/* Column 1 - Say Hi + Socials + Newsletter */}
           <div className="flex flex-col gap-8">
@@ -180,7 +180,23 @@ export default function Footer({ data }: FooterProps) {
             </div>
           </div>
 
-          {/* Column 2 - Contact Details */}
+          {/* Column 2 - Quick Links */}
+          <div className="flex flex-col gap-8" style={{ fontFamily: "var(--font-satoshi)" }}>
+            <h3 className="text-white text-lg font-bold mb-2">Quick Links</h3>
+            <div className="flex flex-col gap-5">
+              {quickLinks.map((link, idx) => (
+                <Link
+                  key={link.id ?? idx}
+                  href={link.url || "#"}
+                  className="text-white text-[14px] font-bold hover:text-mint transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 3 - Contact Details */}
           <div className="flex flex-col gap-10" style={{ fontFamily: "var(--font-satoshi)" }}>
             <h3 className="text-white text-lg font-bold mb-2">Contact</h3>
             {offices.map((office, idx) => (
@@ -200,21 +216,6 @@ export default function Footer({ data }: FooterProps) {
             ))}
           </div>
 
-          {/* Column 3 - Quick Links */}
-          <div className="flex flex-col gap-8" style={{ fontFamily: "var(--font-satoshi)" }}>
-            <h3 className="text-white text-lg font-bold mb-2">Quick Links</h3>
-            <div className="flex flex-col gap-5">
-              {quickLinks.map((link, idx) => (
-                <Link
-                  key={link.id ?? idx}
-                  href={link.url || "#"}
-                  className="text-white text-[14px] font-bold hover:text-mint transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
 
         </div>
       </div>

@@ -45,7 +45,7 @@ export default function ServiceHero({ data }: { data?: ServiceHeroComponent }) {
   }
 
   return (
-    <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center pt-24 pb-16 px-6 md:px-12 lg:px-20 xl:px-24 md:pl-[100px] md:pr-[100px]">
+    <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center pt-[160px] pb-16 md:pt-24 px-6 md:px-12 lg:px-20 xl:px-24 md:pl-[100px] md:pr-[100px]">
       {/* 
         Main Hero Content Container
         Responsive layout: Clean flex alignment, avoiding absolute offset issues.

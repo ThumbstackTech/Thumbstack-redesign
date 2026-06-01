@@ -25,7 +25,7 @@ export default function ServiceHeroDetail({ data }: ServiceHeroDetailProps) {
   const titleLines = title.split(/\r?\n|\\n/);
 
   return (
-    <section className="w-full flex items-center justify-center bg-white min-h-screen px-6 md:px-[100px] pt-28 pb-20 md:pt-32 md:pb-28">
+    <section className="w-full flex items-center justify-center bg-white min-h-screen px-6 md:px-[100px] pt-[160px] pb-20 md:pt-32 md:pb-28">
       <div className="w-full max-w-[1400px] flex flex-col items-start gap-8 relative">
         <div className="flex flex-col items-start gap-4 w-full">
           <span

@@ -13,7 +13,7 @@ export default function CTASection({ data }: { data?: CtaSectionComponent }) {
   const secondaryButtonLink = data?.secondaryButtonLink || "/build";
 
   return (
-    <section className="w-full bg-[#0F1D07] py-[150px] px-6 flex flex-col items-center justify-center text-center relative overflow-hidden min-h-[750px]">
+    <section className="w-full bg-[#0F1D07] py-20 md:py-[150px] px-6 flex flex-col items-center justify-center text-center relative overflow-hidden min-h-[550px] md:min-h-[750px]">
 
       {/* Ellipse 455 - Specific Greenish Glow from CSS */}
       <div
@@ -56,8 +56,8 @@ export default function CTASection({ data }: { data?: CtaSectionComponent }) {
             style={{
               fontFamily: "var(--font-delight)",
               fontWeight: 500,
-              fontSize: "80px",
-              lineHeight: "120px", // 150% as per your CSS
+              fontSize: "clamp(34px, 8vw, 80px)",
+              lineHeight: "clamp(44px, 8vw, 120px)", // 150% as per your CSS
               width: '100%',
               maxWidth: '1302px'
             }}
@@ -67,15 +67,13 @@ export default function CTASection({ data }: { data?: CtaSectionComponent }) {
         </div>
 
         {/* Frame 2087326472 - Buttons Wrapper */}
-        <div className="flex flex-row justify-center items-center gap-[24px]">
+        <div className="flex flex-col md:flex-row justify-center items-stretch md:items-center gap-[16px] md:gap-[24px] w-full max-w-[327px] md:max-w-none px-4 md:px-0">
 
           {/* Get In Touch - Component 144 */}
           <Link
             href={primaryButtonLink}
-            className="flex flex-row justify-center items-center gap-[10px] border border-white hover:bg-white/5 transition-colors"
+            className="w-full md:w-[175px] h-[58px] flex flex-row justify-center items-center gap-[10px] border border-white hover:bg-white/5 transition-colors"
             style={{
-              width: '175px',
-              height: '58px',
               borderRadius: '18px',
               boxSizing: 'border-box'
             }}
@@ -96,10 +94,8 @@ export default function CTASection({ data }: { data?: CtaSectionComponent }) {
           {/* Let's Build Together - Component 143 */}
           <Link
             href={secondaryButtonLink}
-            className="flex flex-row justify-center items-center gap-[10px] bg-white border border-white hover:bg-opacity-90 transition-opacity"
+            className="w-full md:w-[226px] h-[58px] flex flex-row justify-center items-center gap-[10px] bg-white border border-white hover:bg-opacity-90 transition-opacity"
             style={{
-              width: '226px',
-              height: '58px',
               borderRadius: '18px',
               boxSizing: 'border-box'
             }}
@@ -108,12 +104,12 @@ export default function CTASection({ data }: { data?: CtaSectionComponent }) {
               fontFamily: "var(--font-satoshi)",
               fontWeight: 700,
               fontSize: "16px",
-              color: "#120321"
+              color: "#0F1D07"
             }}>
               {secondaryButtonText}
             </span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#120321" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#0F1D07" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
         </div>

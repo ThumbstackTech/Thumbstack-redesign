@@ -138,7 +138,7 @@ export default function FromTheStack({ data }: FromTheStackProps) {
               style={{
                 fontFamily: "var(--font-delight)",
                 fontSize: "clamp(48px, 8vw, 100.369px)",
-                lineHeight: "134px",
+                lineHeight: "1.1",
                 letterSpacing: "-2%",
                 textTransform: "capitalize",
               }}

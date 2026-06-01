@@ -192,7 +192,7 @@ export default function Principles({ data }: { data?: PrinciplesData }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-20"
+          className="w-full grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 mb-20"
         >
           {finalPrinciples.map((p, i) => (
             <motion.div

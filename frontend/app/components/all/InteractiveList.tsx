@@ -155,17 +155,16 @@ export default function InteractiveList({ data }: InteractiveListProps) {
           style={{ left: "959px", width: "545px" }}
         />
 
-        <div className="absolute left-[859px] top-[222px]">
+        <div className="absolute left-[859px] right-[60px] lg:right-[90px] top-[222px]">
           <h2
             className="text-[#0F1D07] capitalize font-delight"
             style={{
               fontFamily: "var(--font-delight)",
               fontStyle: "normal",
               fontWeight: 500,
-              fontSize: "100.369px",
+              fontSize: "98px",
               lineHeight: "147px",
-              width: "538px",
-              height: "148px",
+              minHeight: "148px",
               display: "flex",
               alignItems: "center",
               textTransform: "capitalize",

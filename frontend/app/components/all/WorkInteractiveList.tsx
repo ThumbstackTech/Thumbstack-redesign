@@ -58,9 +58,9 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
     : [];
 
   return (
-    <section 
-      id="work-insights-list" 
-      onMouseLeave={() => setActiveItem(null)} 
+    <section
+      id="work-insights-list"
+      onMouseLeave={() => setActiveItem(null)}
       className="min-h-fit lg:min-h-[1257px] w-full flex flex-col items-center bg-white overflow-hidden relative py-12 md:py-20 lg:py-0"
     >
       {/* ==========================================
@@ -79,7 +79,7 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
 
         {/* Header Block */}
         <div className="mb-8 flex flex-col gap-6">
-          <h2 className="text-[#0F1D07] font-medium text-[40px] md:text-[60px] leading-[1.2] font-delight text-left">
+          <h2 className="text-[#0F1D07] font-medium text-[40px] md:text-[60px] leading-[1.2] font-delight text-left pr-8 lg:pr-0">
             {heading}
           </h2>
 
@@ -100,7 +100,7 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
         <div className="flex flex-col">
           {items.map((item) => (
             <Link key={item.id} href={item.link || "#"} className="w-full py-8 border-b border-black/10 relative flex flex-col gap-2 group">
-              <h3 className="text-[#0F1D07] font-semibold text-[24px] tracking-[-0.01em] leading-tight font-delight group-hover:text-blue-600 transition-colors duration-200">
+              <h3 className="text-[#0F1D07] font-semibold text-[24px] tracking-[-0.01em] leading-tight font-delight group-hover:text-blue-600 transition-colors duration-200 pr-12">
                 {item.title}
               </h3>
               <p className="text-black/60 text-[14px] leading-relaxed font-satoshi pr-10">
@@ -132,10 +132,10 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
         </div>
 
         {/* Right Heading */}
-        <div className="absolute left-[754px] top-[148px] w-[743px] text-right">
+        <div className="absolute left-[754px] right-[104px] top-[148px] text-right">
           <h2
             className="text-[#0F1D07] font-medium font-delight text-[80px] leading-[104px] text-right capitalize select-none"
-            style={{ letterSpacing: "-0.02em" }}
+            style={{ letterSpacing: "-0.02em", whiteSpace: "normal" }}
           >
             {heading}
           </h2>
@@ -143,8 +143,8 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
 
         {/* CTA Button Component 143 */}
         <div className="absolute left-[939px] top-[294px]">
-          <Link 
-            href={ctaLink} 
+          <Link
+            href={ctaLink}
             className="flex flex-row items-center justify-center py-[10px] px-0 gap-[10px] w-[129px] h-[58px] rounded-[18px] hover:opacity-60 transition-opacity"
           >
             <span
@@ -169,18 +169,18 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
         />
 
         {/* List Frame 627064 */}
-        <div 
+        <div
           className="absolute left-1/2 -translate-x-1/2 top-[420px] w-[1391px] flex flex-col isolation-isolate"
           style={{ gap: "33px" }}
         >
           {items.map((item, index) => {
             const isActive = activeItem === item.id;
-            
+
             return (
               <div key={item.id} className="relative w-full">
                 {/* Horizontal Divider Line */}
                 <div className={`w-full h-0 border-t transition-colors duration-300 ${isActive ? "border-transparent" : "border-black"}`} />
-                
+
                 <motion.div
                   onMouseEnter={() => handleMouseEnter(item.id)}
                   onMouseLeave={handleMouseLeave}
@@ -188,11 +188,10 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
                     height: isActive ? "187px" : "77px",
                   }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className={`w-full group cursor-pointer relative flex items-center overflow-hidden transition-all duration-300 ${
-                    isActive 
-                      ? 'before:content-[""] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] z-20' 
-                      : 'bg-transparent'
-                  }`}
+                  className={`w-full group cursor-pointer relative flex items-center overflow-hidden transition-all duration-300 ${isActive
+                    ? 'before:content-[""] before:absolute before:inset-0 before:bg-[#0F1D07] before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:z-[-1] z-20'
+                    : 'bg-transparent'
+                    }`}
                 >
                   <div className="flex flex-col justify-center w-[50%] h-full pl-[5px]">
                     <h3
@@ -225,7 +224,7 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
               </div>
             );
           })}
-          
+
           {/* Bottom line of the entire list */}
           <div className="w-full h-0 border-t border-black" />
 
@@ -251,21 +250,21 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
                 onMouseLeave={() => setHoveringImage(false)}
               >
                 {/* Hover Reveal Image */}
-                <Image 
-                  src={activeImageUrl} 
-                  alt={activeListItem?.title || "Work Preview"} 
-                  fill 
+                <Image
+                  src={activeImageUrl}
+                  alt={activeListItem?.title || "Work Preview"}
+                  fill
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  priority 
+                  priority
                   unoptimized
                 />
-                
+
                 {/* Visual Dark Overlay (Matches Figma V2 gradients) */}
                 <div className="absolute inset-0 bg-black/40 z-10 transition-opacity duration-300" />
-                
+
                 {/* Centered Glassmorphic Text Card (Frame 626980) */}
                 <div className="absolute left-1/2 -translate-x-1/2 top-[177px] w-[342px] height-[368px] flex flex-col justify-between items-center z-20 text-center gap-[118px]">
-                  
+
                   {/* Title & Description Container (Frame 626978) */}
                   <div className="flex flex-col items-center w-[240px] gap-2">
                     <h4 className="text-white font-medium font-delight text-[82px] leading-[82px] tracking-[-0.02em]">
@@ -279,7 +278,7 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
                   {/* Badges/Tags Container (Frame 626943) */}
                   <div className="flex flex-row items-center justify-center gap-[8.29px] w-[342px] h-[33px]">
                     {activeTags.map((tagText, idx) => (
-                      <div 
+                      <div
                         key={idx}
                         className="box-sizing flex flex-row justify-center items-center py-[5.9px] px-[11.8px] bg-white/28 backdrop-blur-[8px] rounded-[118.38px] border border-white/10"
                       >
@@ -300,14 +299,14 @@ export default function WorkInteractiveList({ data }: WorkInteractiveListProps) 
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.5 }}
                       className="absolute w-[89px] h-[89px] bg-[#95E7D3]/87 rounded-full flex items-center justify-center pointer-events-none z-45"
-                      style={{ 
-                        x: smoothX, 
-                        y: smoothY, 
-                        left: 0, 
-                        top: 0, 
-                        translateX: "-50%", 
-                        translateY: "-50%", 
-                        fontFamily: "var(--font-nohemi)", 
+                      style={{
+                        x: smoothX,
+                        y: smoothY,
+                        left: 0,
+                        top: 0,
+                        translateX: "-50%",
+                        translateY: "-50%",
+                        fontFamily: "var(--font-nohemi)",
                         color: "#0F1D07",
                         boxShadow: "-32px -22px 16px rgba(0, 0, 0, 0.01), -18px -13px 13px rgba(0, 0, 0, 0.03), -8px -6px 10px rgba(0, 0, 0, 0.06), -2px -1px 5px rgba(0, 0, 0, 0.06)"
                       }}

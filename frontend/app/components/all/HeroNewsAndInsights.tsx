@@ -13,7 +13,7 @@ export default function HeroNewsAndInsights({ data }: { data?: NewsHeroData }) {
 
   return (
     <section
-      className="min-h-[100svh] w-full flex flex-col justify-start items-center pt-[200px] md:pt-[350px] pb-20 md:pb-32 px-8 lg:px-24 snap-start relative md:pl-[90px] md:pr-[90px] overflow-hidden transition-colors duration-500"
+      className="min-h-[100svh] w-full flex flex-col justify-start items-center pt-[200px] md:pt-[350px] pb-16 md:pb-32 px-6 md:px-12 lg:px-24 snap-start relative md:pl-[90px] md:pr-[90px] overflow-hidden transition-colors duration-500"
       style={{ backgroundColor: bgColor, color: textColor }}
     >
 
@@ -45,7 +45,7 @@ export default function HeroNewsAndInsights({ data }: { data?: NewsHeroData }) {
                   <path d="M6.875 5H15V13.125" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </g>
                 <defs>
-                  <clipPath id="clip0_6227_88259">
+                  <clipPath id="clip0_6227_88259)">
                     <rect width="20" height="20" fill="white" />
                   </clipPath>
                 </defs>
@@ -61,8 +61,8 @@ export default function HeroNewsAndInsights({ data }: { data?: NewsHeroData }) {
                 color: textColor,
                 fontFamily: "var(--font-delight)",
                 fontWeight: 600,
-                fontSize: "clamp(48px, 8vw, 114.45px)",
-                lineHeight: "clamp(60px, 10vw, 143.07px)",
+                fontSize: "clamp(36px, 8vw, 114.45px)",
+                lineHeight: "clamp(46px, 9vw, 143.07px)",
                 letterSpacing: "-0.02em",
                 verticalAlign: "middle",
                 whiteSpace: "pre-line"
@@ -76,9 +76,9 @@ export default function HeroNewsAndInsights({ data }: { data?: NewsHeroData }) {
                 color: textColor,
                 opacity: 0.9,
                 fontFamily: "var(--font-satoshi)",
-                fontWeight: 700,
+                fontWeight: 400,
                 fontSize: "14px",
-                lineHeight: "28px",
+                lineHeight: "24px",
                 letterSpacing: "0%",
                 maxWidth: "600px"
               }}

@@ -108,7 +108,7 @@ export default function LetsTalk({ data }: LetsTalkProps = {}) {
             style={{
               fontFamily: "Nohemi, sans-serif",
               fontSize: "clamp(2.5rem, 8vw, 100.37px)",
-              lineHeight: "102px",
+              lineHeight: "clamp(46px, 10vw, 102px)",
               letterSpacing: "0%"
             }}
             dangerouslySetInnerHTML={{ __html: title.replace("\n", "<br />").replace("Lets ", "Lets<br />") }}
@@ -124,7 +124,7 @@ export default function LetsTalk({ data }: LetsTalkProps = {}) {
         {/* Right Side - Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-10 md:gap-12 w-full lg:w-3/5 pt-4 sm:pt-6 md:pt-8">
           {/* Row 1: First Name + Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+          <div className="grid grid-cols-2 gap-6 md:gap-12">
             <div className="flex flex-col gap-3">
               <label className="text-white text-[12px] font-medium uppercase tracking-wider">First Name *</label>
               <input
@@ -153,7 +153,7 @@ export default function LetsTalk({ data }: LetsTalkProps = {}) {
           </div>
 
           {/* Row 2: Email + Phone */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+          <div className="grid grid-cols-2 gap-6 md:gap-12">
             <div className="flex flex-col gap-3">
               <label className="text-white text-[12px] font-medium uppercase tracking-wider">Email Address *</label>
               <input
