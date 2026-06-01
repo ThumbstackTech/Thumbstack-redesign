@@ -137,7 +137,8 @@
         "shared.work-interactive-list",
         "shared.stack-item",
         "shared.capabilities",
-        "shared.right-stack"
+        "shared.right-stack",
+        "shared.service-list"
       ]
     }
   }

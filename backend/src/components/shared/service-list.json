@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_service_lists",
+  "info": {
+    "displayName": "Service List",
+    "icon": "list",
+    "description": "A section with a title, description, and grid list of items."
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "bgColor": {
+      "type": "string",
+      "default": "#3145DD"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.service-list-item"
+    }
+  }
+}

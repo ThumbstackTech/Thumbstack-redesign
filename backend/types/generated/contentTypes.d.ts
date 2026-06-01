@@ -546,6 +546,7 @@ export interface ApiCapabilityDetailedCapabilityDetailed
         'shared.service-hero-detail',
         'shared.service-info',
         'shared.right-stack',
+        'shared.service-list',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -623,6 +624,7 @@ export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
         'shared.work-item',
         'shared.service-hero-detail',
         'shared.service-info',
+        'shared.service-list',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -758,6 +760,7 @@ export interface ApiNewsDetailedNewsDetailed
         'shared.stack-item',
         'shared.capabilities',
         'shared.right-stack',
+        'shared.service-list',
       ]
     >;
     slug: Schema.Attribute.UID<'title'>;
@@ -833,6 +836,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'shared.service-info',
         'shared.capabilities',
         'shared.right-stack',
+        'shared.service-list',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -948,6 +952,7 @@ export interface ApiServiceDetailedServiceDetailed
         'shared.service-hero-detail',
         'shared.service-info',
         'shared.right-stack',
+        'shared.service-list',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

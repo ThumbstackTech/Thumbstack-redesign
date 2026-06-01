@@ -159,20 +159,22 @@ export default function CapabilitiesListing({ data }: CapabilitiesListingProps) 
                       {item.linkText || `Explore ${item.title.split(" ").slice(0, 2).join(" ")}`}
                     </span>
                     <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 24 24"
+                      width="43"
+                      height="43"
+                      viewBox="0 0 43 43"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="transition-transform duration-300 group-hover/link:translate-x-[4px] group-hover/link:-translate-y-[4px]"
+                      className="transition-transform duration-300 group-hover/link:translate-x-[6px]"
                     >
-                      <path
-                        d="M7 17L17 7M17 7H9M17 7V15"
-                        stroke="#3145DD"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
+                      <g clipPath="url(#clip-capabilities-listing)">
+                        <path d="M10.6082 21.214H31.8214" stroke="#3145DD" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M23.2031 12.5957L31.821 21.2136L23.2031 29.8314" stroke="#3145DD" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                      </g>
+                      <defs>
+                        <clipPath id="clip-capabilities-listing">
+                          <rect width="30" height="30" fill="white" transform="translate(21.2148) rotate(45)"/>
+                        </clipPath>
+                      </defs>
                     </svg>
                   </Link>
                 </motion.div>

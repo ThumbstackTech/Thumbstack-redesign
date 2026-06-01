@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_elements_scenario_items",
+  "info": {
+    "displayName": "Scenario Item",
+    "icon": "list",
+    "description": "A single scenario or question item used in the Best Fit section."
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

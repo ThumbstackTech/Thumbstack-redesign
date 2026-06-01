@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_elements_service_list_items",
+  "info": {
+    "displayName": "Service List Item",
+    "icon": "bulletList",
+    "description": "A single item in the Service List"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

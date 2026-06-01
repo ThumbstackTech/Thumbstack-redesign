@@ -427,6 +427,11 @@ export interface HeroWorkData {
   card2BgColor?: string;
 }
 
+export interface ScenarioItem {
+  id: number;
+  text: string;
+}
+
 export interface BestFitData {
   id: number;
   __component: "shared.best-fit";
@@ -434,7 +439,22 @@ export interface BestFitData {
   description: string;
   bgColor?: string;
   textColor?: string;
-  scenarios?: string;
+  scenarios?: ScenarioItem[];
+}
+
+export interface ServiceListItem {
+  id: number;
+  text: string;
+}
+
+export interface ServiceListData {
+  id: number;
+  __component: "shared.service-list";
+  heading: string;
+  description?: string;
+  bgColor?: string;
+  textColor?: string;
+  items?: ServiceListItem[];
 }
 
 export interface SidebarLink {

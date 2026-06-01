@@ -59,7 +59,8 @@
         "shared.work-item",
         "shared.service-hero-detail",
         "shared.service-info",
-        "shared.right-stack"
+        "shared.right-stack",
+        "shared.service-list"
       ]
     }
   }

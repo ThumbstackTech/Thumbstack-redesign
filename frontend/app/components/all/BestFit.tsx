@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BestFitData } from "../../types/strapi";
+import { BestFitData, ScenarioItem } from "../../types/strapi";
 
 export default function BestFit({ data }: { data?: BestFitData }) {
   // Extract Dynamic fields with Fallbacks
@@ -11,20 +11,21 @@ export default function BestFit({ data }: { data?: BestFitData }) {
   const textColor = data?.textColor || "#0F1D07";
 
   // Parse list of scenarios split by newlines
-  const defaultScenarios = [
-    "A brand website that needs to look more premium",
-    "A corporate website that needs clearer structure",
-    "A website redesign for a business that has outgrown its old site",
-    "A CMS website where internal teams need content control",
-    "A multi region or international website",
-    "A real estate or luxury website that needs stronger storytelling",
-    "A lead generation website with better forms and conversion paths",
-    "A content heavy website with blogs, insights, or resources"
+  const defaultScenarios: ScenarioItem[] = [
+    { id: 1, text: "A brand website that needs to look more premium" },
+    { id: 2, text: "A corporate website that needs clearer structure" },
+    { id: 3, text: "A website redesign for a business that has outgrown its old site" },
+    { id: 4, text: "A CMS website where internal teams need content control" },
+    { id: 5, text: "A multi region or international website" },
+    { id: 6, text: "A real estate or luxury website that needs stronger storytelling" },
+    { id: 7, text: "A lead generation website with better forms and conversion paths" },
+    { id: 8, text: "A content heavy website with blogs, insights, or resources" }
   ];
 
-  const scenariosList = data?.scenarios
-    ? data.scenarios.split("\n").map(s => s.trim()).filter(Boolean)
-    : defaultScenarios;
+  const scenariosList: ScenarioItem[] =
+    Array.isArray(data?.scenarios) && data.scenarios.length > 0
+      ? data.scenarios
+      : defaultScenarios;
 
   return (
     <section
@@ -75,7 +76,7 @@ export default function BestFit({ data }: { data?: BestFitData }) {
           <div className="w-full lg:w-[631px] flex flex-col">
             {scenariosList.map((scenario, index) => (
               <motion.div
-                key={index}
+                key={scenario.id || index}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -93,7 +94,7 @@ export default function BestFit({ data }: { data?: BestFitData }) {
                     color: textColor
                   }}
                 >
-                  {scenario}
+                  {scenario.text}
                 </div>
                 {/* Vector Separator */}
                 <div className="w-full h-[0.5px] bg-[#929292] opacity-30" />

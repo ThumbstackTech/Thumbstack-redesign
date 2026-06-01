@@ -34,6 +34,7 @@ import ServiceHeroDetail from "./all/ServiceHeroDetail";
 import ServiceInfo from "./all/serviceinfo";
 import Capabilities from "./all/Capabilities";
 import RightStack from "./all/RightStack";
+import ServiceList from "./all/ServiceList";
 
 
 const componentMap: { [key: string]: any } = {
@@ -71,6 +72,7 @@ const componentMap: { [key: string]: any } = {
   "shared.service-info": ServiceInfo,
   "shared.capabilities": Capabilities,
   "shared.right-stack": RightStack,
+  "shared.service-list": ServiceList,
 };
 
 export default function SectionRenderer({ sections, projects }: { sections: any[]; projects?: any[] }) {

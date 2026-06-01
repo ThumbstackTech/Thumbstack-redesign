@@ -168,6 +168,18 @@ export interface ElementsProcessStage extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsScenarioItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_scenario_items';
+  info: {
+    description: 'A single scenario or question item used in the Best Fit section.';
+    displayName: 'Scenario Item';
+    icon: 'list';
+  };
+  attributes: {
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElementsServiceInfoItem extends Struct.ComponentSchema {
   collectionName: 'components_elements_service_info_items';
   info: {
@@ -182,6 +194,18 @@ export interface ElementsServiceInfoItem extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'Outcome'>;
     tags: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsServiceListItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_service_list_items';
+  info: {
+    description: 'A single item in the Service List';
+    displayName: 'Service List Item';
+    icon: 'bulletList';
+  };
+  attributes: {
+    text: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -274,7 +298,7 @@ export interface SharedBestFit extends Struct.ComponentSchema {
     heading: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Best fit for businesses that need more than a basic website.'>;
-    scenarios: Schema.Attribute.Text;
+    scenarios: Schema.Attribute.Component<'elements.scenario-item', true>;
     textColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#0F1D07'>;
   };
 }
@@ -761,6 +785,22 @@ export interface SharedServiceInfo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedServiceList extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_lists';
+  info: {
+    description: 'A section with a title, description, and grid list of items.';
+    displayName: 'Service List';
+    icon: 'list';
+  };
+  attributes: {
+    bgColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#3145DD'>;
+    description: Schema.Attribute.Text;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    items: Schema.Attribute.Component<'elements.service-list-item', true>;
+    textColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#FFFFFF'>;
+  };
+}
+
 export interface SharedSidebar extends Struct.ComponentSchema {
   collectionName: 'components_shared_sidebars';
   info: {
@@ -896,7 +936,9 @@ declare module '@strapi/strapi' {
       'elements.nav-link': ElementsNavLink;
       'elements.office-item': ElementsOfficeItem;
       'elements.process-stage': ElementsProcessStage;
+      'elements.scenario-item': ElementsScenarioItem;
       'elements.service-info-item': ElementsServiceInfoItem;
+      'elements.service-list-item': ElementsServiceListItem;
       'elements.stack-card': ElementsStackCard;
       'elements.stack-column': ElementsStackColumn;
       'elements.team-member': ElementsTeamMember;
@@ -928,6 +970,7 @@ declare module '@strapi/strapi' {
       'shared.service-hero': SharedServiceHero;
       'shared.service-hero-detail': SharedServiceHeroDetail;
       'shared.service-info': SharedServiceInfo;
+      'shared.service-list': SharedServiceList;
       'shared.sidebar': SharedSidebar;
       'shared.stack-item': SharedStackItem;
       'shared.tag': SharedTag;
